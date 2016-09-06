@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  fromdate: 2016-09-01 12:53:42
+  todate: 2016-09-01 12:53:42
+  reason: MyText
+  status: false
+  no_of_days: 1
+  leavetype_id: 1
+
+two:
+  user_id: 1
+  fromdate: 2016-09-01 12:53:42
+  todate: 2016-09-01 12:53:42
+  reason: MyText
+  status: false
+  no_of_days: 1
+  leavetype_id: 1
