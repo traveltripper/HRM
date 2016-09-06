@@ -1,6 +1,6 @@
 ActiveAdmin.register Employee do
 
-	permit_params :email, :password, :password_confirmation, :first_name, :last_name, :manager_id, :role_id
+	permit_params :email, :password, :password_confirmation, :first_name, :last_name, :manager_id, :role_id, :phone
 
 	index do
 	  id_column
@@ -15,6 +15,7 @@ ActiveAdmin.register Employee do
 	  end
 	  column :role_id
 	  column :email
+	  column :phone
 	  actions
 	end
 
@@ -25,6 +26,7 @@ ActiveAdmin.register Employee do
 		  f.input :manager_id
 		  f.input :role_id
 		  f.input :email
+		  f.input :phone
 		  if f.object.new_record?
 		  	f.input :password
 		  	f.input :password_confirmation
