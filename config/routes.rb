@@ -1,8 +1,26 @@
 Rails.application.routes.draw do
+  get 'employees/index'
+
+  get 'employees/show'
+
+  get 'reports/index'
+
+  get 'dashboard/index'
+
+  #get 'leaves/index'
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  devise_for :employees
+  #devise_for :employees
   root  'static_pages#home'
+  get '/dashboard' => 'dashboard#index'
+  get '/reports' => 'reports#index'
+  get 'profile' => 'employees#show'
+  devise_for :employees, :skip => [:registrations]                                          
+  as :employee do
+    get 'employees/edit' => 'devise/registrations#edit', :as => 'edit_employee_registration'    
+    put 'employees' => 'devise/registrations#update', :as => 'employee_registration'            
+  end
   #get 'employees/sign_up' => redirect('/404.html')
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -19,12 +19,23 @@ ActiveAdmin.register Employee do
 	  actions
 	end
 
+	show do
+	    attributes_table do
+	      row :first_name
+	      row :last_name
+	      row :manager_id
+	      row :role_id
+	      row :email
+	      row :phone
+	    end
+    end
+
 	form do |f|
-		f.inputs "Admin Details" do
+		f.inputs "Employee Details" do
 		  f.input :first_name
 		  f.input :last_name
-		  f.input :manager_id
-		  f.input :role_id
+		  f.input :manager_id, label: "Manager id", as: :select, collection: Employee.where(manager_id: nil).map{|u| [u.first_name, u.id]}, prompt: "Select Manager" 
+		  f.input :role_id, label: "Role id", as: :select, collection: Role.all.map{|u| [u.name, u.id]}, prompt: "Select Role"
 		  f.input :email
 		  f.input :phone
 		  if f.object.new_record?
@@ -33,5 +44,9 @@ ActiveAdmin.register Employee do
 		  end
 		end
 		f.actions
+	end
+
+	def self.mangerlist
+		Employee.where(manager_id: nil).first_name
 	end
 end

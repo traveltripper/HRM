@@ -1,1 +1,6 @@
-<h2>Human Resource Management</h2>
+
+<% if signed_in? %>	
+<p>signed in as <%=current_employee.role.name%></p>
+<%else%>
+<p>sign in to to continue</p>
+<%end%>

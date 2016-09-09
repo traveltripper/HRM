@@ -14,4 +14,17 @@ ActiveAdmin.register Leavetype do
 # end
 
 permit_params :name
+
+index do
+	  id_column
+	  column :name
+	  actions
+end
+
+show do
+    attributes_table do
+      row :name	      
+    end
+end
+
 end
