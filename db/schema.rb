@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160909075429) do
+ActiveRecord::Schema.define(version: 20160912045416) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -87,6 +87,9 @@ ActiveRecord::Schema.define(version: 20160909075429) do
     t.string   "pancard_no",             limit: 255
     t.string   "passport_no",            limit: 255
     t.integer  "department_id",          limit: 4
+    t.string   "status",                 limit: 255
+    t.datetime "lwd"
+    t.datetime "date_of_resignation"
   end
 
   add_index "employees", ["email"], name: "index_employees_on_email", unique: true, using: :btree

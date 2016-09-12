@@ -1,7 +1,7 @@
 class Employee < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :timeoutable
   has_many :leave
   belongs_to :role
   has_many :subordinates, class_name: "Employee", foreign_key: "manager_id" 
