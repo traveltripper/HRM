@@ -1,7 +1,11 @@
+<div class="form-background-image">
 <div class="form-position-from-top">
 <div class="panel panel-yellow">
 <div class="panel-heading">Login</div>
 <div class="panel-body pan">
+  <%- flash.each do |name, msg| -%>
+    <%= content_tag :div, msg, :id => "flash_#{name}", :class=>"alert alert-danger" if msg.is_a?(String) %>
+  <%- end -%>  
   <%= form_for(resource, as: resource_name, url: session_path(resource_name), :class=>"form-horizontal") do |f| %>
     <div class="form-body pal">
     
@@ -60,4 +64,5 @@
 </div>
 </div>
 
+</div>
 </div>

@@ -1,0 +1,119 @@
+<% title "Profile" %>
+<div class="panel panel-yellow">
+<div class="panel-heading">Profile: <%=@employee.fullname.capitalize%></div>
+<div class="panel-body">
+
+<table class="table table-hover-color table-bordered">
+<tbody>
+<tr>
+    <td>Employee ID :</td>
+    <td><%=@employee.ttid%></td>
+</tr>
+<tr>
+    <td>Employee Name :</td>
+    <td><%=@employee.fullname%></td>
+</tr>
+<tr>
+    <td>Manager :</td>
+    <%if @employee.manager_id%>
+        <td><%Employee.find(@employee.manager_id).first_name%></td>
+    <%else%>
+        <td>Nil</td>
+    <%end%>    
+</tr>
+
+<tr>
+    <td>Role :</td>
+    <td><%=@employee.role.name%></td>
+</tr>
+<tr>
+    <td>Department ID :</td>
+    <%if @employee.department_id%>
+        <td><%=Department.find(@employee.department_id).name%></td>
+    <%else%>
+        <td>Nil</td>
+    <%end%>
+</tr>
+<tr>
+    <td>Email :</td>
+    <td><%=@employee.email%></td>
+</tr>
+<tr>
+    <td>Personal Email :</td>
+    <td><%=@employee.personal_email%></td>
+</tr>
+<tr>
+    <td>Address :</td>
+    <td><%=@employee.address%></td>
+</tr>
+<tr>
+    <td>Status :</td>
+    <td><span class="label label-success"><%=@employee.status%></span></td>
+</tr>
+<tr>
+    <td>Contact No. :</td>
+    <td><%=@employee.contact_no%></td>
+</tr>
+<tr>
+    <td>Actual Date of birth :</td>
+    <td><%=@employee.actual_dob%></td>
+</tr>
+<tr>
+    <td>Certificate Date of birth :</td>
+    <td><%=@employee.certificate_dob%></td>
+</tr>
+<tr>
+    <td>Emergency Name :</td>
+    <td><%=@employee.emergency_name%></td>
+</tr>
+<tr>
+    <td>Emergency Contact No. :</td>
+    <td><%=@employee.emergency_contact_no%></td>
+</tr>
+<tr>
+    <td>Date of Joining :</td>
+    <td><%=@employee.doj%></td>
+</tr>
+<tr>
+    <td>Previous Years of Emperience :</td>
+    <td><%=@employee.prev_years_of_exp%></td>
+</tr>
+<tr>
+    <td>PG :</td>
+    <td><%=@employee.pg%></td>
+</tr>
+<tr>
+    <td>Graduation :</td>
+    <td><%=@employee.graduation%></td>
+</tr>
+<tr>
+    <td>Address :</td>
+    <td><%=@employee.address%></td>
+</tr>
+<tr>
+    <td>source_of_hire :</td>
+    <td><%=@employee.source_of_hire%></td>
+</tr>
+<tr>
+    <td>PAN Card No. :</td>
+    <td><%=@employee.pancard_no%></td>
+</tr>
+<tr>
+    <td>Passport No. :</td>
+    <td><%=@employee.passport_no%></td>
+</tr>
+
+<tr>
+    <td>Last Working Day :</td>
+    <td><%=@employee.lwd%></td>
+</tr>
+<tr>
+    <td>Last Working Day :</td>
+    <td><%=@employee.date_of_resignation%></td>
+</tr>
+
+</tbody>
+</table>
+
+</div>
+</div>

@@ -34,6 +34,10 @@ gem 'devise'
 #twitter bootstrap gem for responsive design
 gem 'bootstrap-sass', '~> 3.3.6'
 
+#Breadcrums
+gem "breadcrumbs_on_rails"
+#gem "gretel"
+
 #gem 'jquery-turbolinks'
 
 

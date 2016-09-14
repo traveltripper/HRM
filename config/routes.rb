@@ -1,12 +1,9 @@
 Rails.application.routes.draw do
-  get 'employees/index'
+  
+  #resources :employees
+  get '/employees' => 'employees#index'
 
-  get 'employees/show'
-
-  get 'reports/index'
-
-  get 'dashboard/index'
-
+  
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -15,26 +12,19 @@ Rails.application.routes.draw do
 
   get '/reports' => 'employees#reports'
 
-  get 'profile' => 'employees#show'
+  get 'profile' => 'employees#profile'
 
-  get 'login' => redirect("/employees/sign_in")
+  devise_scope :employee do
+   get "login", to: "devise/sessions#new"
+   get "logout", to: "devise/sessions#destroy"
+  end
 
   root :to => 'employees#dashboard'
-
-  # devise_scope :employees do
-  #   authenticated :employees do
-  #     root 'static_pages#home', as: :authenticated_root
-  #   end
-
-  #   unauthenticated do
-  #     root :to => redirect("/employees/sign_in")
-  #   end
-  # end
 
   devise_for :employees, :skip => [:registrations]                                          
   as :employee do
     get 'employees/edit' => 'devise/registrations#edit', :as => 'edit_employee_registration'    
     put 'employees' => 'devise/registrations#update', :as => 'employee_registration'            
   end
-
+ get '/employees/:id', to: 'employees#show'
 end

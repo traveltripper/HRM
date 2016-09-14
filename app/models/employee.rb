@@ -9,4 +9,8 @@ class Employee < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :role_id, :email
   belongs_to :department
 
+  def fullname
+  	first_name + " " + last_name
+  end
+
 end
