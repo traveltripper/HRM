@@ -1,0 +1,224 @@
+<div class="panel panel-black" style="background:#fff;">
+  <div class="panel-heading">Employee Form</div>
+  <div class="panel-body pan">
+  <%= form_for(@employee) do |f| %>
+  <div class="form-body pal">
+  <% if @employee.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+
+      <ul>
+      <% @employee.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :first_name %><br>
+        <%= f.text_field :first_name, :class=>"form-control" %>
+      </div>
+    </div>    
+    <div class="col-md-4">
+     <div class="form-group">
+      <%= f.label :middle_name %><br>
+      <%= f.text_field :middle_name, :class=>"form-control" %>
+     </div>
+    </div>
+    <div class="col-md-4">
+       <div class="form-group">
+        <%= f.label :last_name %><br>
+        <%= f.text_field :last_name, :class=>"form-control" %>
+       </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :manager_id %><br>
+        <%=f.collection_select :manager_id, Employee.where(:manager_id=>nil), :id, :fullname, {:prompt => 'Select Manager'}, :class=>"form-control"%>
+      </div>
+    </div>    
+    <div class="col-md-4">
+     <div class="form-group">
+      <%= f.label :role_id %><br>
+      <%=f.collection_select :role_id, Role.all, :id, :name, {:prompt => 'Select Role'}, :class=>"form-control"%>
+     </div>
+    </div>
+    <div class="col-md-4">
+       <div class="form-group">
+        <%= f.label :department_id %><br>
+        <%=f.collection_select :department_id, Department.all, :id, :name, {:prompt => 'Select Department'}, :class=>"form-control"%>
+       </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :ttid %><br>
+        <%= f.number_field :ttid, :class=>"form-control" %>
+      </div>
+    </div>    
+    <div class="col-md-4">
+     <div class="form-group">
+      <%= f.label :email %><br>
+      <%= f.email_field :email, :class=>"form-control" %>
+     </div>
+    </div>
+    <div class="col-md-4">
+       <div class="form-group">
+        <%= f.label :personal_email %><br>
+        <%= f.email_field :personal_email, :class=>"form-control" %>
+       </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :contact_no %><br>
+        <%= f.text_field :contact_no, :class=>"form-control" %>
+      </div>
+    </div>    
+    <div class="col-md-4">
+     <div class="form-group">
+      <%= f.label :emergency_name %><br>
+      <%= f.text_field :emergency_name, :class=>"form-control" %>
+     </div>
+    </div>
+    <div class="col-md-4">
+       <div class="form-group">
+        <%= f.label :emergency_contact_no %><br>
+        <%= f.text_field :emergency_contact_no, :class=>"form-control" %>
+       </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :actual_dob %><br>
+        <%= f.date_field :actual_dob, :class=>"form-control" %>
+      </div>
+    </div>    
+    <div class="col-md-4">
+     <div class="form-group">
+      <%= f.label :certificate_dob %><br>
+      <%= f.date_field :certificate_dob, :class=>"form-control" %>
+     </div>
+    </div>
+    <div class="col-md-4">
+       <div class="form-group">
+        <%= f.label :doj %><br>
+        <%= f.date_field :doj, :class=>"form-control" %>
+       </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :prev_years_of_exp %><br>
+        <%= f.number_field :prev_years_of_exp, :class=>"form-control" %>
+      </div>
+    </div>    
+    <div class="col-md-4">
+     <div class="form-group">
+      <%= f.label :pg %><br>
+      <%= f.text_field :pg, :class=>"form-control" %>
+     </div>
+    </div>
+    <div class="col-md-4">
+       <div class="form-group">
+        <%= f.label :graduation %><br>
+        <%= f.text_field :graduation, :class=>"form-control" %>
+       </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :source_of_hire %><br>
+        <%= f.text_field :source_of_hire, :class=>"form-control" %>
+      </div>
+    </div>    
+    <div class="col-md-4">
+     <div class="form-group">
+      <%= f.label :pancard_no %><br>
+      <%= f.text_field :pancard_no, :class=>"form-control" %>
+     </div>
+    </div>
+    <div class="col-md-4">
+       <div class="form-group">
+        <%= f.label :passport_no %><br>
+        <%= f.text_field :passport_no, :class=>"form-control" %>
+       </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :status %><br>
+        <%#= f.text_field :status, :class=>"form-control" %>
+        <%= f.select :status, options_for_select(["Active", "Resigned", "Exited"]), {}, {:class=>"form-control"} %>
+      </div>
+    </div>    
+    <div class="col-md-4">
+     <div class="form-group">
+      <%= f.label :lwd %><br>
+      <%= f.date_field :lwd, :class=>"form-control" %>
+     </div>
+    </div>
+    <div class="col-md-4">
+       <div class="form-group">
+        <%= f.label :date_of_resignation %><br>
+        <%= f.date_field :date_of_resignation, :class=>"form-control" %>
+       </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :address %><br>
+        <%= f.text_field :address, :class=>"form-control" %>
+      </div>
+    </div>
+    <% if f.object.new_record?%>
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= f.label :password %><br>
+          <%= f.password_field :password, :class=>"form-control" %>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= f.label :password_confirmation %><br>
+          <%= f.password_field :password_confirmation, :class=>"form-control" %>
+        </div>
+      </div>
+    <%end%>
+  </div>
+
+  <div class="form-actions text-right pal">
+    <%= f.submit "submit", :class=>"btn btn-default" %>
+  </div>
+
+  </div>
+  <% end %>
+  </div>
+</div>
+
+
+
+
+
+
+
+

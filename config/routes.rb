@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
-  
-  #resources :employees
   get '/employees' => 'employees#index'
-
   
-
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -23,8 +19,12 @@ Rails.application.routes.draw do
 
   devise_for :employees, :skip => [:registrations]                                          
   as :employee do
-    get 'employees/edit' => 'devise/registrations#edit', :as => 'edit_employee_registration'    
+    get 'password/edit' => 'devise/registrations#edit', :as => 'edit_employee_registration'    
     put 'employees' => 'devise/registrations#update', :as => 'employee_registration'            
   end
- get '/employees/:id', to: 'employees#show'
+
+  resources :employees
+  resources :roles
+  resources :departments
+  resources :leavetypes
 end

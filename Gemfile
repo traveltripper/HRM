@@ -36,7 +36,8 @@ gem 'bootstrap-sass', '~> 3.3.6'
 
 #Breadcrums
 gem "breadcrumbs_on_rails"
-#gem "gretel"
+#cancancan is for Authorisation 
+gem 'cancancan', '~> 1.10'
 
 #gem 'jquery-turbolinks'
 

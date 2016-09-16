@@ -12,3 +12,19 @@
 	background-image: url("/images/bg/1.jpg");
 	height: 100%;
 }
+
+
+.panel.panel-black {
+    border-color: #6f6b6a;
+}
+
+.panel.panel-black > .panel-heading {
+    color: #FFFFFF;
+    background: #6f6b6a;
+    border-color: #6f6b6a !important;
+}
+
+.new-employee-link{
+    float: right;
+    color: #fff;
+}

@@ -1,0 +1,1 @@
+json.array! @leavetypes, partial: 'leavetypes/leavetype', as: :leavetype
