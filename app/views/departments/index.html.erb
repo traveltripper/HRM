@@ -1,7 +1,11 @@
 <p id="notice"><%= notice %></p>
 <% title "Departments" %>
 <div class="panel panel-black">
-<div class="panel-heading">Listing Departments</div>
+<div class="panel-heading">Listing Departments
+<% if can? :create, @department %>
+<%= link_to 'New Department', new_department_path, :class=>"add-edit-links" %>
+<%end%>
+</div>
 <div class="panel-body">
 <table class="table table-hover-color table-bordered">
   <thead>
@@ -27,6 +31,5 @@
 
 <br>
 
-<%= link_to 'New Department', new_department_path %>
 </div>
 </div>

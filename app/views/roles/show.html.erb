@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
-<h2><%=@role.name%></h2>
+<%title 'Employee Role'%>
+<h2>Role: <%=@role.name%></h2>
 
-<%= link_to 'Edit', edit_role_path(@role) %> |
-<%= link_to 'Back', roles_path %>
+<%= link_to 'Edit', edit_role_path(@role), :class=>"btn btn-default" %> |
+<%= link_to 'Back', roles_path, :class=>"btn btn-default" %>

@@ -6,7 +6,10 @@ class Ability
     if employee.role.name == "HR"
         can :manage, :all        
     else
-        can :read, :all
+        cannot :read, Role
+        cannot :read, Department
+        cannot :read, Leavetype
+        can :read, Employee
     end
     # Define abilities for the passed in user here. For example:
     #

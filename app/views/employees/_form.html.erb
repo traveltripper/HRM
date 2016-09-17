@@ -144,7 +144,7 @@
     <div class="col-md-4">
       <div class="form-group">
         <%= f.label :source_of_hire %><br>
-        <%= f.text_field :source_of_hire, :class=>"form-control" %>
+        <%= f.select :source_of_hire, options_for_select(["Direct", "Consultancy", "Campus", "Referral"]), {}, {:class=>"form-control"}  %>
       </div>
     </div>    
     <div class="col-md-4">

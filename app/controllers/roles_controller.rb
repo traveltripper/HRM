@@ -9,7 +9,7 @@ class RolesController < ApplicationController
   # GET /roles
   # GET /roles.json
   def index
-    @roles = Role.all
+    #@roles = Role.all
     add_breadcrumb "Roles", :roles_path
   end
 

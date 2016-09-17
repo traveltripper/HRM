@@ -1,5 +1,7 @@
 class EmployeesController < ApplicationController
   before_action :authenticate_employee!
+  #before_filter(:only => [:index, :show]) { unauthorized! if cannot? :read, :Employee }
+  before_filter :require_permission, :only => [:index, :show, :new, :edit, :create, :update, :destroy]
   layout 'dashboard'
   add_breadcrumb "Home", :root_path
   def index
@@ -58,6 +60,13 @@ class EmployeesController < ApplicationController
   def profile
     @employee = current_employee
     add_breadcrumb "Profile", profile_path
+  end
+
+  def require_permission
+  if current_employee.role.name != "HR" 
+    redirect_to dashboard_path
+    #Or do something else here
+  end
   end
 
   private

@@ -2,7 +2,9 @@
 <div class="panel panel-black">
 <div class="panel-heading">
 Profile: <%=@employee.fullname.capitalize%>
-<%=link_to 'Edit Employee', edit_employee_path(@employee)%>
+<%if can? :update, @employee%>
+<%=link_to 'Edit Employee', edit_employee_path(@employee), :class=>"add-edit-links"%>
+<%end%>
 </div>
 <div class="panel-body">
 
@@ -19,7 +21,7 @@ Profile: <%=@employee.fullname.capitalize%>
 <tr>
     <td>Manager :</td>
     <%if @employee.manager_id?%>
-        <td><%Employee.find(@employee.manager_id).first_name%></td>
+        <td><%=Employee.find(@employee.manager_id).first_name%></td>
     <%else%>
         <td>Nil</td>
     <%end%>    
@@ -59,11 +61,11 @@ Profile: <%=@employee.fullname.capitalize%>
 </tr>
 <tr>
     <td>Actual Date of birth :</td>
-    <td><%=@employee.actual_dob%></td>
+    <td><%=@employee.actual_dob.strftime('%d-%b-%Y')%></td>
 </tr>
 <tr>
     <td>Certificate Date of birth :</td>
-    <td><%=@employee.certificate_dob%></td>
+    <td><%=@employee.certificate_dob.strftime('%d-%b-%Y')%></td>
 </tr>
 <tr>
     <td>Emergency Name :</td>
@@ -75,7 +77,7 @@ Profile: <%=@employee.fullname.capitalize%>
 </tr>
 <tr>
     <td>Date of Joining :</td>
-    <td><%=@employee.doj%></td>
+    <td><%=@employee.doj.strftime('%d-%b-%Y')%></td>
 </tr>
 <tr>
     <td>Previous Years of Emperience :</td>
@@ -108,11 +110,11 @@ Profile: <%=@employee.fullname.capitalize%>
 
 <tr>
     <td>Last Working Day :</td>
-    <td><%=@employee.lwd%></td>
+    <td><%=@employee.lwd.strftime('%d-%b-%Y')%></td>
 </tr>
 <tr>
     <td>Last Working Day :</td>
-    <td><%=@employee.date_of_resignation%></td>
+    <td><%=@employee.date_of_resignation.strftime('%d-%b-%Y')%></td>
 </tr>
 
 </tbody>

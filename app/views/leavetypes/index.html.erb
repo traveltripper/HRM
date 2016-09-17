@@ -1,7 +1,11 @@
 <p id="notice"><%= notice %></p>
 <% title "Leavetypes" %>
 <div class="panel panel-black">
-<div class="panel-heading">Listing Leave Types</div>
+<div class="panel-heading">Listing Leave Types
+<% if can? :create, @leavetype %>
+<%= link_to 'New Leavetype', new_leavetype_path, :class=>"add-edit-links" %>
+<%end%>
+</div>
 <div class="panel-body">
 <table class="table table-hover-color table-bordered">
   <thead>
@@ -27,6 +31,5 @@
 
 <br>
 
-<%= link_to 'New Leavetype', new_leavetype_path %>
 </div>
 </div>

@@ -1,7 +1,8 @@
 class Leave < ActiveRecord::Base
+	self.table_name = "leaves"
 	belongs_to :employee
 	belongs_to :leavetype
-	validates_presence_of :employee_id, :fromdate, :todate, :reason, :no_of_days, :leavetype_id
+	validates_presence_of :employee_id, :fromdate, :todate, :reason, :leavetype_id
 	validate :fromdate_must_be_lessthan_todate
 	
 	

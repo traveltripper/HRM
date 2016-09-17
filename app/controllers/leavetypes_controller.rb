@@ -1,5 +1,6 @@
 class LeavetypesController < ApplicationController
   before_action :authenticate_employee!
+  load_and_authorize_resource
   layout 'dashboard'
   add_breadcrumb "Home", :root_path
   before_action :set_leavetype, only: [:show, :edit, :update, :destroy]

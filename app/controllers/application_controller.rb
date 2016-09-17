@@ -7,6 +7,11 @@ class ApplicationController < ActionController::Base
     @current_ability ||= Ability.new(current_employee)
   end
 
+  rescue_from CanCan::AccessDenied do |exception|
+  flash[:error] = "Access denied."
+  redirect_to root_url
+  end
+
   protected
   def authenticate_employee!(options={})
     if employee_signed_in?
