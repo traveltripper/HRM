@@ -10,13 +10,13 @@ class Leave < ActiveRecord::Base
   		return if fromdate.blank? || todate.blank?
 
 	  	if todate < fromdate
-	    	errors.add(:todate, "cannot be before the from date") 
+	  		errors.add(:todate, "cannot be before the from date")
+	  	else
+	    	 p "testing"
 	  	end 
 	end
 
-	def caliculate_no_of_days
-		#p fromdate = fromdate.beginning_of_day
-		#p todate = todate.end_of_day
-		#((todate - fromdate)/86400).to_i
-	end
+	# def no_of_days
+	# 	("#{fromdate.to_date} - #{todate.to_date}").to_i + 1
+	# end	
 end

@@ -17,9 +17,9 @@
   </thead>
 
   <tbody>
-    <% @leavetypes.each do |leavetype| %>
+    <% @leavetypes.each_with_index do |leavetype, index| %>
       <tr>
-        <td><%=leavetype.id%></td>
+        <td><%= index+1 %></td>
         <td><%=leavetype.name%></td>
         <td><%= link_to 'Show', leavetype %></td>
         <td><%= link_to 'Edit', edit_leavetype_path(leavetype) %></td>

@@ -1,52 +1,20 @@
-<div class="btn">
-  <%= link_to 'Back', root_url %>
-</div>
-<div class= "text-center">
-<table class ="table leave-detail">
-<thead>
-    <tr> 
-      <th colpsan="1"> <h1>Leave Details </h1> </th>
-    </tr>
-</thead>
-<tbody>
-  <tr>
-      <td width="50%">Leave Type:</td>
-      <td width="50%"><%#= @leave.leave_type %></td>
-  </tr>
-  <tr>
-    <td>Employee:</td>
-    <td><%#= User.find(@leave.user_id).name %></td>
-  </tr>
-  <tr>
-    <td>Approver:</td>
-    <td><%#= User.find(@leave.approver_id).name %></td>
-  </tr>
-  <tr>
-    <td>Start date:</td>
-    <td><%#= @leave.start_date %></td>
-  </tr>
-  <tr>
-    <td>End date:</td>
-    <td><%#= @leave.end_date %></td>
-  </tr>
-  <tr>
-    <td>Reason:</td>
-    <td><%#= @leave.reason%></td>
-  </tr>
-  <tr>
-    <td>Status:</td>
-    <td class="<%#= leave_status_text(@leave) %>"><b><%#= @leave.status%></b></td>
-  </tr>
-</tbody>
-</table>
+<%title "Leave Details" %>
+<p>id: <%=@leave.id%></p>
+<p>Employee Name: <%=@leave.employee.fullname%></p>
+<p>From:<%=@leave.fromdate.strftime("%d-%b-%Y")%></p>
+<p>To: <%=@leave.todate.strftime("%d-%b-%Y")%></p>
+<p>No of days: <%=@leave.no_of_days%></p>
+<p>Status: <%=@leave.status%></p>
 
-<%# if current_user.id ==@leave.approver_id %>
-<%# if @leave.status== "Pending" %>
- <%#= link_to "Approve", {controller: "leave", action: "approve", id: @leave.id},
-                                class: "btn btn-success" %>  
+<%=form_for @leave do |f|%>
+	<%= f.radio_button :status, 'approve' %> 
+	<%= label :status, 'approve' %>
+	<%= f.radio_button :status, 'reject', :checked => true %>
+	<%= label :status, 'reject' %>
+	<%= f.submit "submit"%>
+<%end%>
 
-<%#= link_to "Reject", {controller: "leave", action: "reject", id: @leave.id},
-                                class: "btn btn-danger" %>
-  <%#end %>
-<%# end %>
-</div>
+<br/>
+<%=link_to 'back', root_path%>
+
+

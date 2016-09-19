@@ -17,7 +17,9 @@ permit_params :employee_id, :fromdate, :todate, :reason, :status, :no_of_days, :
 index do
   id_column
   column :employee_id do |f|
-  	Employee.find(f.employee_id).first_name
+    if Employee.find_by_id(f.employee_id)
+  	  Employee.find_by_id(f.employee_id).first_name
+    end
   end
   column :fromdate do |r|
 	r.fromdate.strftime('%Y-%b-%d')
@@ -35,7 +37,9 @@ end
 show do
     attributes_table do
       row :employee_id do |f|
-  		Employee.find(f.employee_id).first_name
+        if Employee.find_by_id(f.employee_id)
+  		    Employee.find(f.employee_id).first_name
+        end
   	  end
 	  row :fromdate do |r|
     	r.fromdate.strftime('%Y-%b-%d')

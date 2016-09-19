@@ -14,35 +14,41 @@ class LeaveController < ApplicationController
 
   def create
      @leave = current_employee.leave.build(leave_params)
-     #@leave.approver_id= current_user.manager_id
+     p "..........."
+     p @fromdate = leave_params[:fromdate].to_date
+     p @todate = leave_params[:todate].to_date           
+     p @no_of_days = (@todate - @fromdate) + 1
+     p "..........."
+     @leave.no_of_days = @no_of_days
     if @leave.save
-      flash[:success] = "Leave Applied"
+      flash[:success] = "Your leave has applied successfully and an e-mail will be sent to HR and Manager. Waiting for approval."
       redirect_to root_url
     else
       render 'new'
     end
   end
 
-  def destroy
+  def update
+    @leave = Leave.find(params[:id])
+    p "........"
+    if params[:leave][:status] == "approve"
+      @leave.update_attribute(:status, true)
+    else
+      @leave.update_attribute(:status, false)
+    end
+    p "........."
+
+    redirect_to dashboard_path
+   
   end
 
-  def approve
-    set_status("Approved")
-  end
 
-  def reject
-    set_status("Rejected")
-  end
-    private
+
+  
+  private
   def leave_params
       params.require(:leave).permit(:employee_id, :status, :leavetype_id, :fromdate, :todate, :reason)
   end
 
-  def set_status(status)
-    @leave= Leave.find(params[:id])
-      @leave.status=status
-      if @leave.save
-        redirect_to root_url
-      end
-  end
+  
 end

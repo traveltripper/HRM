@@ -1,2 +1,118 @@
 <% title "Dashboard" %>
-<h2>welcome to dashboard</h2>
+
+<%if @emp.role.name == "HR"%>
+  <div class="panel panel-black">
+    <div class="panel-heading">Leaves applied by all employees</div>
+    <div class="panel-body">
+
+      <table class="table table-hover-color table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Emp. Name</th>      
+            <th>Leave type</th>
+            <th>From date</th>
+            <th>To date</th>
+            <th>No of days</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @leaves.each_with_index do |leave, index| %>
+            <tr>
+              <td><%= index+1 %></td>
+              <td><%=link_to leave.employee.fullname, leave%></td>
+              <td><%=link_to Leavetype.find(leave.leavetype_id).name, leave%></td>
+              <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
+              <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
+              <td><%=leave.no_of_days%></td>
+              <td>
+                <%if leave.status == true%>
+                Approved
+                <%else%>
+                Rejected
+                <%end%>
+              </td>         
+            </tr>
+          <% end %>
+        </tbody>
+    </table>
+    </div>
+  </div>
+<%end%>
+
+<div class="panel panel-black">
+<div class="panel-heading">Leaves waiting for approval</div>
+<div class="panel-body">
+
+<table class="table table-hover-color table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>      
+      <th>Leave type</th>
+      <th>From date</th>
+      <th>To date</th>
+      <th>No of days</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @leave_waiting_for_approve.each_with_index do |leave, index| %>
+      <tr>
+        <td><%= index+1 %></td>
+        <td><%=Leavetype.find(leave.leavetype_id).name%></td>
+        <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
+        <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
+        <td><%=leave.no_of_days%></td>
+        <td>
+                <%if leave.status == true%>
+                Approved
+                <%else%>
+                Rejected
+                <%end%>
+              </td>         
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+
+<div class="panel panel-black">
+<div class="panel-heading">Leaves applied recently</div>
+<div class="panel-body">
+
+<table class="table table-hover-color table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>      
+      <th>Leave type</th>
+      <th>From date</th>
+      <th>To date</th>
+      <th>No of days</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @leave_approved.each_with_index do |leave, index| %>
+      <tr>
+        <td><%= index+1 %></td>
+        <td><%=Leavetype.find(leave.leavetype_id).name%></td>
+        <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
+        <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
+        <td><%=leave.no_of_days%></td>
+        <td>
+        <%if leave.status == true%>
+          Approved
+        <%end%>
+        	
+        </td>         
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>

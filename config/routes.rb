@@ -28,4 +28,6 @@ Rails.application.routes.draw do
   resources :departments
   resources :leavetypes
   resources :leave
+  get '/team' => 'employees#team'
+  get '/leave-applied-by-team' => 'employees#leave_applied_by_team'
 end

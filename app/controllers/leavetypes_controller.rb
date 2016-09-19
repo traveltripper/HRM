@@ -73,6 +73,6 @@ class LeavetypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def leavetype_params
-      params.fetch(:leavetype, {})
+      params.require(:leavetype).permit(:name)
     end
 end

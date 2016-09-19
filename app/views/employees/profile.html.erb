@@ -61,11 +61,11 @@ Profile: <%=@employee.fullname.capitalize%>
 </tr>
 <tr>
     <td>Actual Date of birth :</td>
-    <td><%=@employee.actual_dob.strftime('%d-%b-%Y')%></td>
+    <td><%=@employee.actual_dob.strftime('%d-%b-%Y') if @employee.actual_dob%></td>
 </tr>
 <tr>
     <td>Certificate Date of birth :</td>
-    <td><%=@employee.certificate_dob.strftime('%d-%b-%Y')%></td>
+    <td><%=@employee.certificate_dob.strftime('%d-%b-%Y') if @employee.certificate_dob%></td>
 </tr>
 <tr>
     <td>Emergency Name :</td>
@@ -77,7 +77,7 @@ Profile: <%=@employee.fullname.capitalize%>
 </tr>
 <tr>
     <td>Date of Joining :</td>
-    <td><%=@employee.doj.strftime('%d-%b-%Y')%></td>
+    <td><%=@employee.doj.strftime('%d-%b-%Y') if @employee.doj%></td>
 </tr>
 <tr>
     <td>Previous Years of Emperience :</td>
@@ -110,11 +110,11 @@ Profile: <%=@employee.fullname.capitalize%>
 
 <tr>
     <td>Last Working Day :</td>
-    <td><%=@employee.lwd.strftime('%d-%b-%Y')%></td>
+    <td><%=@employee.lwd.strftime('%d-%b-%Y') if @employee.lwd%></td>
 </tr>
 <tr>
     <td>Last Working Day :</td>
-    <td><%=@employee.date_of_resignation.strftime('%d-%b-%Y')%></td>
+    <td><%=@employee.date_of_resignation.strftime('%d-%b-%Y') if @employee.date_of_resignation %></td>
 </tr>
 
 </tbody>

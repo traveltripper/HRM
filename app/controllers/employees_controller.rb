@@ -1,7 +1,7 @@
 class EmployeesController < ApplicationController
   before_action :authenticate_employee!
   #before_filter(:only => [:index, :show]) { unauthorized! if cannot? :read, :Employee }
-  before_filter :require_permission, :only => [:index, :show, :new, :edit, :create, :update, :destroy]
+  before_filter :require_permission, :only => [:index, :new, :edit, :create, :update, :destroy]
   layout 'dashboard'
   add_breadcrumb "Home", :root_path
   def index
@@ -50,6 +50,14 @@ class EmployeesController < ApplicationController
   end
 
   def dashboard
+    @emp = current_employee
+    if @emp.role.name == "HR"
+      @leaves = Leave.all
+    end
+    #@all_employee_leaves = Leave.limit(10)
+    @leave_approved = @emp.leave.where(status: true).limit(5)    
+    @leave_waiting_for_approve = @emp.leave.where(status: false).limit(5)  
+    #@leaves = @emp.leave.limit(5)    
     add_breadcrumb "Dashboard", dashboard_path
   end
 
@@ -65,8 +73,20 @@ class EmployeesController < ApplicationController
   def require_permission
   if current_employee.role.name != "HR" 
     redirect_to dashboard_path
-    #Or do something else here
   end
+  end
+
+  def leave_applied_by_team
+    @emp = current_employee
+    @subordinates = @emp.subordinates    
+  end
+  
+  def team
+    @emp = current_employee
+    if current_employee.role.name != "Manager"
+      redirect_to dashboard_path
+    end
+    add_breadcrumb "Team", team_path
   end
 
   private

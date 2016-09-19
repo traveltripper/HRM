@@ -7,8 +7,8 @@ ActiveAdmin.register Employee do
 	  column :first_name
 	  column :last_name
 	  column :manager_id do |e|     
-	    if e.manager_id
-        Employee.find(e.manager_id).first_name
+	    if Employee.find_by_id(e.manager_id) 
+         Employee.find(e.manager_id).first_name
     	else
     		p "nil"
     	end    	
