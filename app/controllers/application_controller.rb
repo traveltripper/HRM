@@ -17,7 +17,8 @@ class ApplicationController < ActionController::Base
     if employee_signed_in?
       super(options)
     else
-      redirect_to login_path, :notice => 'Please Login to continue'
+      #redirect_to login_path, :notice => 'Please Login to continue'
+      redirect_to login_path
     end
   end
 end

@@ -4,6 +4,7 @@
 <p>From:<%=@leave.fromdate.strftime("%d-%b-%Y")%></p>
 <p>To: <%=@leave.todate.strftime("%d-%b-%Y")%></p>
 <p>No of days: <%=@leave.no_of_days%></p>
+<p>Reason: <%=@leave.reason.html_safe%></p>
 <p>Status: <%=@leave.status%></p>
 
 <%=form_for @leave do |f|%>
@@ -11,7 +12,7 @@
 	<%= label :status, 'approve' %>
 	<%= f.radio_button :status, 'reject', :checked => true %>
 	<%= label :status, 'reject' %>
-	<%= f.submit "submit"%>
+	<%= f.submit "submit", :class=>"btn btn-primary"%>
 <%end%>
 
 <br/>

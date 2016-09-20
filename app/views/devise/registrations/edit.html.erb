@@ -1,5 +1,8 @@
-<h2><%#= resource_name.to_s.humanize %></h2>
-<div class="panel panel-black">
+<%#= resource_name.to_s.humanize %>
+<div class="row">
+<div class="col-md-6">
+<div class="form-position-from-top">
+<div class="panel panel-cblue">
 <div class="panel-heading">Forgot your password?</div>
 <div class="panel-body pan">
 
@@ -31,7 +34,8 @@
   </div>  
 
   <div class="actions">
-    <%= f.submit "Update", :class=>"btn btn-default" %>
+    <%= f.submit "Update", :class=>"btn btn-primary" %>
+    <%= link_to "Back", :back, :class=>"btn btn-primary" %>
   </div>
 
   </div>
@@ -41,7 +45,10 @@
 
 <p>Unhappy? <%= button_to "Cancel my account", employee_registration_path, data: { confirm: "Are you sure?" }, method: :delete %></p>
 -->
-<%= link_to "Back", :back %>
 
+
+</div>
+</div>
+</div>
 </div>
 </div>

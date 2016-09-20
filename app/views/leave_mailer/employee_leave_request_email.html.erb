@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h3>Your leave has applied successfully and an e-mail will be sent to HR and Manager. Waiting for approval.</h3>
+    <h5>Leave Details:</h5>
+    <p><b>From:</b> <%=@leave.fromdate.strftime('%d-%b-%Y')%></p>
+    <p><b>To:</b> <%=@leave.todate.strftime('%d-%b-%Y')%></p>
+    <p><b>No of days:</b> <%=@leave.no_of_days%></p>
+    <p><b>Reason:</b> <%=@leave.reason.html_safe%></p>    
+  </body>
+</html>

@@ -1,8 +1,8 @@
 .form-position-from-top{    
     position: fixed;
-    top: 50%;
+    top: 42%;
     left: 40%;
-    width: 50em;
+    width: 46em;
     height: 18em;
     margin-top: -9em;
     margin-left: -15em;
@@ -14,17 +14,39 @@
 }
 
 
-.panel.panel-black {
-    border-color: #6f6b6a;
+.panel.panel-cblue {
+    border-color: #3A6F9F;
 }
 
-.panel.panel-black > .panel-heading {
+.panel.panel-cblue > .panel-heading {
     color: #FFFFFF;
-    background: #6f6b6a;
-    border-color: #6f6b6a !important;
+    background: #3A6F9F;
+    border-color: #3A6F9F !important;
 }
 
 .add-edit-links{
     float: right;
     color: #fff;
+}
+
+
+th, td, a, .page-header, label{
+    color: #3A6F9F;
+}
+
+input, textarea, select{
+    border-color: #66afe9 !important;
+}
+
+.link-color{
+    color: #3A6F9F !important;
+}
+
+.dropdown.show-options{
+    float: right;
+    margin-bottom: 15px;
+}
+
+.dropdown.show-options a{
+    color: #3A6F9F;
 }

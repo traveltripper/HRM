@@ -1,7 +1,7 @@
 <h2>Change your password</h2>
 <div class="form-background-image">
 <div class="form-position-from-top">
-<div class="panel panel-black">
+<div class="panel panel-cblue">
 <div class="panel-heading">Login</div>
 <div class="panel-body pan">
   <%- flash.each do |name, msg| -%>
@@ -26,7 +26,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Change my password" %>
+    <%= f.submit "Change my password", :class=>"btn btn-primary" %>
   </div>
 <% end %>
 

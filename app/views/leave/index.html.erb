@@ -1,5 +1,16 @@
-<% title "Dashboard" %>
+<% title "Leave Management" %>
 
+<div class="row">
+<div class="dropdown show-options">
+  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Show options
+  <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+    <li><%=link_to ' Apply leave', new_leave_path, :class=>"fa fa-pencil-square-o fa-fw" %></li>
+  </ul>
+</div>
+</div>
+
+<div class="row">
 <%if @emp.role.name == "HR"%>
   <div class="panel panel-cblue">
     <div class="panel-heading">Leaves applied by all employees</div>
@@ -114,5 +125,6 @@
     <% end %>
   </tbody>
 </table>
+</div>
 </div>
 </div>

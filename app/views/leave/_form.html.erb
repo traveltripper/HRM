@@ -1,55 +1,103 @@
-<div class="panel panel-black" style="background:#fff;">
+<%= tinymce %>
+<div class="row">
+<div class="col-md-6">
+<div class="panel panel-cblue" style="background:#fff;">
   <div class="panel-heading">Apply Leave</div>
   <div class="panel-body pan">
     <%= form_for @leave do |f| %>
       <div class="form-body pal">
-      <% if @leave.errors.any? %>
-      <div class="alert alert-error">
-        <strong><%= pluralize(@leave.errors.count, "error") %>    prohibited
-          this leave from being saved:</strong>
-        <ul>
-        <% @leave.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
+        <% if @leave.errors.any? %>
+        <div class="alert alert-error">
+          <strong><%= pluralize(@leave.errors.count, "error") %>    prohibited
+            this leave from being saved:</strong>
+          <ul>
+          <% @leave.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
         <% end %>
-        </ul>
-      </div>
-      <% end %>
-
-      <div class="row">
-        <div class="col-md-4">
+        
         <div class="form-group">
         <%=f.label :leave_type%>
-        <%=f.collection_select :leavetype_id, Leavetype.all, :id, :name, {:prompt => 'Select Role'}, :class=>"form-control"%>
-        </div>
-        </div>
-        <div class="col-md-4">
+        <%=f.collection_select :leavetype_id, Leavetype.all, :id, :name, {:prompt => 'Select Leavetype'}, :class=>"form-control"%>
+        </div>       
+        
         <div class="form-group">
         <%=f.label :fromdate%>
-        <%=f.date_field :fromdate, class: 'form-control'%>
-        </div>
-        </div>
-        <div class="col-md-4">
+        <%=f.text_field :fromdate, class: 'form-control datepicker', :id=>"dt1"%>
+        </div>        
+        
         <div class="form-group">
         <%=f.label :todate%>
-        <%=f.date_field :todate, class: 'form-control'%>
+        <%=f.text_field :todate, class: 'form-control', :id=>"dt2"%>
+        </div>        
+        <div class="form-group">
+        <%=f.label :no_of_days%>
+        <%=f.text_field :no_of_days, class: 'form-control', :id=>"dt3", :readonly => true%>
         </div>
+        <div class="form-group">
+        <%=f.label :reason%>
+        <%=f.text_area :reason, class: 'form-control tinymce', cols: "30", rows: "5"%>
+        </div>
+
+        <div class="text-right pal">
+          <%= f.submit "Create Leave" ,class: "btn btn-primary"%>
         </div>
       </div>
-
-      <div class="form-group">
-        <%#=f.label :status%>
-        <%=f.hidden_field :status, class: 'form-control', value: false%>
-      </div>
-
-      <div class="form-group">
-      <%=f.label :reason%>
-      <%=f.text_area :reason, class: 'form-control', cols: "30", rows: "5"%>
-      </div>
-
-     <div class="text-right pal">
-      <%= f.submit "Create Leave" ,class: "btn btn-default"%>
-     </div>
-    </div>
     <% end %>
-    </div>
-    </div>
+  </div>
+</div>
+</div>
+</div>
+
+
+
+<!-- <input type="text" id="dt1"/>
+<input type="text" id="dt2"/> -->
+<script>
+
+    // $('#dt2').datepicker({
+    //     dateFormat: "dd-mm-yy" 
+    // });
+
+    // $("#dt1").datepicker({
+    //     dateFormat: "dd-mm-yy", 
+    //     minDate:  0,
+    //     onSelect: function(date){            
+    //         var date1 = $('#dt1').datepicker('getDate');           
+    //         var date = new Date( Date.parse( date1 ) ); 
+    //         date.setDate( date.getDate() );        
+    //         var newDate = date.toDateString(); 
+    //         newDate = new Date( Date.parse( newDate ) );                      
+    //         $('#dt2').datepicker("option","minDate",newDate);            
+    //     }
+    // });
+
+
+$("#dt1").datepicker({
+    minDate: 0,
+    dateFormat: "dd-mm-yy",
+    maxDate: '+1Y+6M',
+    onSelect: function (dateStr) {
+        var min = $(this).datepicker('getDate'); // Get selected date
+        $("#dt2").datepicker('option', 'minDate', min || '0'); // Set other min, default to today
+    }
+});
+
+$("#dt2").datepicker({
+    minDate: '0',
+    dateFormat: "dd-mm-yy",
+    maxDate: '+1Y+6M',
+    onSelect: function (dateStr) {
+        var max = $(this).datepicker('getDate'); // Get selected date
+        $('#datepicker').datepicker('option', 'maxDate', max || '+1Y+6M'); // Set other max, default to +18 months
+        var start = $("#dt1").datepicker("getDate");
+        var end = $("#dt2").datepicker("getDate");
+        var days = (end - start) / (1000 * 60 * 60 * 24);
+        days = days+1;
+        $("#dt3").val(days);
+    }
+});
+
+</script>

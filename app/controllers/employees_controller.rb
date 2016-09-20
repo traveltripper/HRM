@@ -55,8 +55,8 @@ class EmployeesController < ApplicationController
       @leaves = Leave.all
     end
     #@all_employee_leaves = Leave.limit(10)
-    @leave_approved = @emp.leave.where(status: true).limit(5)    
-    @leave_waiting_for_approve = @emp.leave.where(status: false).limit(5)  
+    @leave_approved = @emp.leave.where(status: !nil).limit(5)    
+    @leave_waiting_for_approve = @emp.leave.where(status: nil).limit(5)  
     #@leaves = @emp.leave.limit(5)    
     add_breadcrumb "Dashboard", dashboard_path
   end
