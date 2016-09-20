@@ -89,6 +89,10 @@ class EmployeesController < ApplicationController
     add_breadcrumb "Team", team_path
   end
 
+  def birthdays
+    add_breadcrumb "birthdays", :birthdays_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     

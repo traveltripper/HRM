@@ -13,4 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require tinymce-jquery
+//= require moment 
+//= require fullcalendar
 //= require_tree .
+
+$('#calendar').fullCalendar({});
