@@ -4,45 +4,21 @@
 <script src="http://arshaw.com/js/fullcalendar-1.5.3/fullcalendar/fullcalendar.min.js"></script>
 
 <div id="calendar"></div>
-<script type="text/javascript">
-  // $('#calendar').fullCalendar({});
 
-  $(document).ready(function() {
+<script type="text/javascript">
+  $('#calendar').fullCalendar({});
+
+//   $(document).ready(function() {
     
-   $("#calendar").fullCalendar({
-     header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'month,agendaWeek,agendaDay'
-      }
-  });
-});
+//    $("#calendar").fullCalendar({
+//      header: {
+//         left: 'prev,next today',
+//         center: 'title',
+//         right: 'month,agendaWeek,agendaDay'
+//       }
+//   });
+// });
 
 </script>
-<!-- <div class="panel panel-black">
-<div class="panel-heading">Employee Birthdays
-</div>
-<div class="panel-body">
 
-<table class="table table-hover-color table-bordered">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Full Name</th>
-      <th>Birthday</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @emp.each_with_index do |emp, index| %>
-      <tr>
-        <td><%= index+1 %></td>
-        <td><%= link_to emp.fullname, emp  %></td>
-        <td><%=emp.actual_dob.strftime("%d-%b")%></td>  
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-</div>
-</div> -->
 
