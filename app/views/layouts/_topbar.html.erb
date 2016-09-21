@@ -6,9 +6,19 @@
                 <a id="logo" href="/" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">TravelTripper</span><span style="display: none" class="logo-text-icon">µ</span></a></div>
             <div class="topbar-main"><a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
                 
-                <form id="topbar-search" action="" method="" class="hidden-sm hidden-xs">
+                <!-- <form id="topbar-search" action="" method="" class="hidden-sm hidden-xs">
                     <div class="input-icon right text-white"><a href="#"><i class="fa fa-search"></i></a><input type="text" placeholder="Search here..." class="form-control text-white"/></div>
-                </form>
+                </form> -->
+
+                <%= form_tag search_path, :method => 'get', :id=>"topbar-search" do %>
+                <div class="input-icon right text-white">
+                <a href="#" id="custom-submit-link"><i class="fa fa-search"></i></a>                
+                <%= text_field_tag :search, params[:search], :class=>"form-control text-white", :placeholder=>"Search here..." %>
+                <%#= submit_tag "search", :name => nil %>
+                
+                </div>
+                <% end %>
+
                 <ul class="nav navbar navbar-top-links navbar-right mbn">
                     
                     <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="/images/avatar/48.jpg" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs"><%=current_employee.first_name %></span>&nbsp;<span class="caret"></span></a>

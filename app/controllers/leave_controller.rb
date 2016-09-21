@@ -15,6 +15,13 @@ class LeaveController < ApplicationController
   
   def show
     @leave= Leave.find(params[:id])
+    @manager = @leave.employee.manager
+    
+    if ((current_employee.role.name =="HR") || (current_employee== @manager))
+      @leave= Leave.find(params[:id])
+    else 
+      redirect_to root_path
+    end
   end
 
   def new
@@ -37,16 +44,17 @@ class LeaveController < ApplicationController
 
   def update
     @leave = Leave.find(params[:id])
-    p "........"
+    @emp = @leave.employee    
     if params[:leave][:status] == "approve"
       @leave.update_attribute(:status, true)
+      flash[:success] = "Employee leave is approved"
     else
       @leave.update_attribute(:status, false)
+      flash[:success] = "Employee leave is rejected"
     end
-    p "........."
-
+    LeaveMailer.employee_leave_status(@emp, @leave).deliver_later
     redirect_to dashboard_path
-   
+    
   end
 
 

@@ -1,2 +1,82 @@
 <%title 'Leave applied by Team'%>
 
+<div class="panel panel-cblue">
+<div class="panel-heading">Team Leave waiting for approval</div>
+<div class="panel-body">
+
+<table class="table table-hover-color table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Employee</th>      
+      <th>Leave type</th>
+      <th>From date</th>
+      <th>To date</th>
+      <th>No of days</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @leave_waiting_for_approve.each_with_index do |leave, index| %>
+      <tr>
+        <td><%= index+1 %></td>
+        <td><%=link_to leave.employee.fullname, leave%></td>
+        <td><%=Leavetype.find(leave.leavetype_id).name%></td>
+        <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
+        <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
+        <td><%=leave.no_of_days%></td>
+        <td>
+                <%if leave.status == true%>
+                Approved
+                <%elsif leave.status ==nil%>
+                Waiting for approval
+                <%end%>
+              </td>         
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+
+
+<div class="panel panel-cblue">
+<div class="panel-heading">Recent Team Leave</div>
+<div class="panel-body">
+
+<table class="table table-hover-color table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Employee</th>      
+      <th>Leave type</th>
+      <th>From date</th>
+      <th>To date</th>
+      <th>No of days</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @leave_approved_recently.each_with_index do |leave, index| %>
+      <tr>
+        <td><%= index+1 %></td>
+        <td><%=link_to leave.employee.fullname, leave%></td>
+        <td><%=Leavetype.find(leave.leavetype_id).name%></td>
+        <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
+        <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
+        <td><%=leave.no_of_days%></td>
+        <td>
+                <%if leave.status == true%>
+                Approved
+                <%elsif leave.status ==false%>
+                Rejected
+                <%end%>
+              </td>         
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>

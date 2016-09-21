@@ -8,8 +8,9 @@ $(document).ready(function() {
      defaultView: "month",
      height: 500,
      slotMinutes: 15,
-     //events: "/dashboard/get_events",
+     events: "/birthdays",
      timeFormat: "h:mm t{ - h:mm t} ",
      dragOpacity: "0.5"
   });
 });
+

@@ -4,9 +4,20 @@ class EmployeesController < ApplicationController
   before_filter :require_permission, :only => [:index, :new, :edit, :create, :update, :destroy]
   layout 'dashboard'
   add_breadcrumb "Home", :root_path
+  respond_to :json
   def index
   	@employee = current_employee
     @employees = Employee.all
+  end
+
+  def search
+    @employees = Employee.all
+    if params[:search]
+      first_name =  params[:search]
+      p @employees = Employee.where("first_name LIKE ?", "%#{first_name}%")
+    else
+      @employees = Employee.all.order('created_at DESC')
+    end 
   end
 
   def show
@@ -51,13 +62,21 @@ class EmployeesController < ApplicationController
 
   def dashboard
     @emp = current_employee
+
     if @emp.role.name == "HR"
       @leaves = Leave.all
     end
-    #@all_employee_leaves = Leave.limit(10)
+
+    if @emp.role.name == "Manager"
+      @subordinates = @emp.subordinates 
+      @emp_ids = @subordinates.all.map(&:id)
+      @team_leave = Leave.where(employee_id: @emp_ids).order('created_at ASC')
+      @leave_approved_recently = @team_leave.where(:status => [true, false]).limit(20)
+      @team_leave_waiting_for_approve = @team_leave.where(status: nil)
+    end
+    
     @leave_approved = @emp.leave.where(status: !nil).limit(5)    
-    @leave_waiting_for_approve = @emp.leave.where(status: nil).limit(5)  
-    #@leaves = @emp.leave.limit(5)    
+    @leave_waiting_for_approve = @emp.leave.where(status: nil).limit(5)
     add_breadcrumb "Dashboard", dashboard_path
   end
 
@@ -78,7 +97,12 @@ class EmployeesController < ApplicationController
 
   def leave_applied_by_team
     @emp = current_employee
-    @subordinates = @emp.subordinates    
+    @subordinates = @emp.subordinates 
+    @emp_ids = @subordinates.all.map(&:id)
+    @team_leave = Leave.where(employee_id: @emp_ids).order('created_at ASC')
+    @leave_approved_recently = @team_leave.where(:status => [true, false]).limit(20)
+    @leave_waiting_for_approve = @team_leave.where(status: nil)
+    add_breadcrumb "Leave applied by team", leave_applied_by_team_path
   end
   
   def team
@@ -90,8 +114,15 @@ class EmployeesController < ApplicationController
   end
 
   def birthdays
+    @emp = Employee.all
+    events = []
+    @emp.each do |e|
+      events << {:id => e.id }
+    end
+    #render :text => events.to_json    
     add_breadcrumb "birthdays", :birthdays_path
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

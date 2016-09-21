@@ -23,7 +23,9 @@ Rails.application.routes.draw do
     put 'employees' => 'devise/registrations#update', :as => 'employee_registration'            
   end
 
-  resources :employees
+  resources :employees do
+    get :birthdays, on: :collection
+  end
   resources :roles
   resources :departments
   resources :leavetypes
@@ -31,4 +33,5 @@ Rails.application.routes.draw do
   get '/team' => 'employees#team'
   get '/leave-applied-by-team' => 'employees#leave_applied_by_team'
   get '/birthdays' => 'employees#birthdays'
+  get 'search' => 'employees#search'
 end

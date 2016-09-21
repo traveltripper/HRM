@@ -17,4 +17,3 @@
 //= require fullcalendar
 //= require_tree .
 
-$('#calendar').fullCalendar({});
