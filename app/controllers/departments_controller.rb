@@ -12,6 +12,11 @@ class DepartmentsController < ApplicationController
     add_breadcrumb "Departments", :departments_path
   end
 
+  def employees    
+    @department = Department.find(params[:id])
+   @employees = @department.employees
+  end
+
   # GET /departments/1
   # GET /departments/1.json
   def show

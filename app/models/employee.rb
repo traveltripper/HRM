@@ -9,11 +9,24 @@ class Employee < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :role_id, :department_id, :ttid, :personal_email, :contact_no, :emergency_name, :emergency_contact_no, :actual_dob, :certificate_dob, :doj 
   validates_presence_of :graduation, :source_of_hire, :pancard_no, :passport_no, :status, :address
   belongs_to :department
-
+  # acts_as_birthday :crated_at
+  acts_as_birthday :actual_dob
   def fullname
   	first_name.to_s + " " + middle_name.to_s + " " + last_name.to_s
   end
 
- 
+  def self.employ_birthday(employee)
+    if Date.today.strftime('%m%d') == employee.actual_dob.strftime('%m%d')
+       p "birthday"
+     else
+       p "not a birthday"
+    end
+  end
+
+  def self.emp_birthday(bstart, bend)
+    p bstart
+    p bend
+    
+  end
 
 end

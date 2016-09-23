@@ -13,6 +13,11 @@ class RolesController < ApplicationController
     add_breadcrumb "Roles", :roles_path
   end
 
+  def employees
+    @role = Role.find(params[:id])
+    @employees = @role.employees
+  end
+
   # GET /roles/1
   # GET /roles/1.json
   def show

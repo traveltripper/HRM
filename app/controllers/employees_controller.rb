@@ -8,6 +8,7 @@ class EmployeesController < ApplicationController
   def index
   	@employee = current_employee
     @employees = Employee.all
+    add_breadcrumb "Employee Manager", :employees_path
   end
 
   def search
@@ -102,8 +103,9 @@ class EmployeesController < ApplicationController
     @team_leave = Leave.where(employee_id: @emp_ids).order('created_at ASC')
     @leave_approved_recently = @team_leave.where(:status => [true, false]).limit(20)
     @leave_waiting_for_approve = @team_leave.where(status: nil)
+    add_breadcrumb "Leave Management", :leave_index_path
     add_breadcrumb "Leave applied by team", leave_applied_by_team_path
-  end
+  end  
   
   def team
     @emp = current_employee
@@ -113,13 +115,14 @@ class EmployeesController < ApplicationController
     add_breadcrumb "Team", team_path
   end
 
-  def birthdays
+  def birthdays   
+  
     @emp = Employee.all
-    events = []
-    @emp.each do |e|
-      events << {:id => e.id }
-    end
-    #render :text => events.to_json    
+    p startmonth = params[:start]
+    p endmonth =  params[:end]
+    
+    #render json: @events.to_json
+    # render :text => events.to_json    
     add_breadcrumb "birthdays", :birthdays_path
   end
 

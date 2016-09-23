@@ -6,6 +6,9 @@
   <span class="caret"></span></button>
   <ul class="dropdown-menu">
     <li><%=link_to ' Apply leave', new_leave_path, :class=>"fa fa-pencil-square-o fa-fw" %></li>
+    <%if @emp.role.name == "Manager"%>
+    <li><%=link_to ' Team leave', leave_applied_by_team_path, :class=>"fa fa-pencil-square-o fa-fw" %></li>
+    <%end%>
   </ul>
 </div>
 </div>

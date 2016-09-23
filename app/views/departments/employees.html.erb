@@ -1,7 +1,7 @@
 <% title "Employees" %>
 <div class="panel panel-cblue">
-<div class="panel-heading">Total Employees: <%=@employees.count%>
-<%=link_to "Add Employee", new_employee_path, :class=>'add-edit-links'%>
+<div class="panel-heading">Total Employees in <%=@department.name%> department : <%=@employees.count%>
+<%#=link_to "Add Employee", new_employee_path, :class=>'add-edit-links'%>
 </div>
 <div class="panel-body">
 
@@ -20,11 +20,11 @@
     <% @employees.each_with_index do |emp, index| %>
       <tr>
         <td><%= index+1 %></td>
-        <td><%= link_to emp.ttid, emp%></td>
+        <td><%= emp.ttid %></td>
         <td><%= link_to emp.fullname, emp  %></td>
-        <td><%= link_to emp.role.name, employees_role_path(emp.role_id)  %></td>
+        <td><%= emp.role.name   %></td>
         <%if emp.department_id%>
-          <td><%=link_to emp.department.name, employees_department_path(emp.department_id) %></td>
+          <td><%=Department.find(emp.department_id).name%></td>
         <%else%>
           <td>Nil</td>
         <%end%>  
@@ -34,5 +34,3 @@
 </table>
 </div>
 </div>
-
-

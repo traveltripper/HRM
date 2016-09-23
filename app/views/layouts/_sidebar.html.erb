@@ -18,55 +18,55 @@
                     </i><span class="menu-title">Reports</span></a>
                        
                     </li>
-                    <li><a href="/leave"><i class="fa fa-edit fa-fw">
+                    <li class="<%= 'active' if current_page?(leave_index_path) %>"><a href="/leave"><i class="fa fa-edit fa-fw">
                         <div class="icon-bg bg-violet"></div>
                     </i><span class="menu-title">Leave Management</span></a>
                       
                     </li>
                     
                     <%if current_employee.role.name == "Manager"%>
-                    <li><a href="/team"><i class="fa fa-users fa-fw">
+                    <li class="<%= 'active' if current_page?(team_path) %>"><a href="/team"><i class="fa fa-users fa-fw">
                         <div class="icon-bg bg-blue"></div>
                     </i><span class="menu-title">Team</span></a>
                           
                     </li>
-                    <li><a href="/leave-applied-by-team"><i class="fa fa-pencil-square-o fa-fw">
+                    <!-- <li><a href="/leave-applied-by-team"><i class="fa fa-pencil-square-o fa-fw">
                         <div class="icon-bg bg-red"></div>
                     </i><span class="menu-title">Leave applied by team</span></a>
                       
-                    </li>
+                    </li> -->
                     <%end%>
                     <%if current_employee.role.name == "HR"%>
                     
-                    <li><a href="/employees"><i class="fa fa-users fa-fw">
+                    <li class="<%= 'active' if current_page?(employees_path) %>"><a href="/employees"><i class="fa fa-users fa-fw">
                         <div class="icon-bg bg-yellow"></div>
                     </i><span class="menu-title">Employee Management</span></a>
                        
                     </li>
-                    <li><a href="/leavetypes"><i class="fa fa-slack fa-fw">
+                    <li class="<%= 'active' if current_page?(leavetypes_path) %>"><a href="/leavetypes"><i class="fa fa-slack fa-fw">
                         <div class="icon-bg bg-grey"></div>
                     </i><span class="menu-title">Leave Types</span></a>
                       
                     </li>
-                    <li><a href="/roles"><i class="fa fa-users fa-fw">
+                    <li class="<%= 'active' if current_page?(roles_path) %>"><a href="/roles"><i class="fa fa-users fa-fw">
                         <div class="icon-bg bg-yellow"></div>
                     </i><span class="menu-title">Roles</span></a>
                        
                     </li>
-                    <li><a href="/departments"><i class="fa fa-users fa-fw">
+                    <li class="<%= 'active' if current_page?(departments_path) %>"><a href="/departments"><i class="fa fa-users fa-fw">
                         <div class="icon-bg bg-yellow"></div>
                     </i><span class="menu-title">Departments</span></a>
                        
                     </li>
-                    <li><a href="#"><i class="fa fa-calendar fa-fw">
+                    <!-- <li><a href="#"><i class="fa fa-calendar fa-fw">
                         <div class="icon-bg bg-dark"></div>
                     </i><span class="menu-title">Event Management</span></a>
                       
-                    </li>
+                    </li> -->
 
                     
                     <%end%>
-                    <li><a href="/birthdays"><i class="fa fa-gift fa-fw">
+                    <li class="<%= 'active' if current_page?(birthdays_path) %>"><a href="/birthdays"><i class="fa fa-gift fa-fw">
                         <div class="icon-bg bg-dark"></div>
                     </i><span class="menu-title">Birthdays</span></a>
                       
