@@ -1,0 +1,40 @@
+<% title "Conference Rooms" %>
+<div class="row">
+<div class="col-lg-12">
+<div class="dropdown show-options">
+  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Show options
+  <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+    <li><%=link_to 'Book', conference_rooms_path, :class=>"fa fa-pencil-square-o fa-fw" %></li>    
+  </ul>
+</div>
+</div>
+</div>
+<div class="panel panel-cblue">
+<div class="panel-heading">Conference Rooms
+<%=link_to 'New Conferenceroom', new_conference_room_path, :class=>'add-edit-links'%>
+</div>
+<div class="panel-body">
+
+<table class="table table-hover-color table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Available</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @conference_rooms.each do |conferenceroom| %>
+      <tr>
+        <td><%= link_to conferenceroom.name, conferenceroom %></td>
+        <td><%= conferenceroom.available %></td>
+        <!-- <td><%#= link_to 'Show', conferenceroom %></td>
+        <td><%#= link_to 'Edit', edit_conferenceroom_path(conferenceroom) %></td>
+        <td><%#= link_to 'Destroy', conferenceroom, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>

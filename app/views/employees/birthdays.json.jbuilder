@@ -1,9 +1,12 @@
-json.array! @emp do |event|
+json.array! @employees do |employee|
 
-  json.id event.id
-  json.title event.fullname
-  json.start event.actual_dob.beginning_of_day
-  json.end event.actual_dob.end_of_day
+  json.id employee.id
+  json.fullname employee.fullname
+  json.ttid employee.ttid
+  json.department employee.department.name
+  json.role employee.role.name
+  json.start employee.emp_birthday
+  json.end employee.emp_birthday
 end
 
 

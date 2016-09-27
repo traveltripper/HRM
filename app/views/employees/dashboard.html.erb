@@ -23,7 +23,7 @@
             <tr>
               <td><%= index+1 %></td>
               <td><%=link_to leave.employee.fullname, leave%></td>
-              <td><%=link_to Leavetype.find(leave.leavetype_id).name, leave%></td>
+              <td><%=leave.leavetype.name %></td>
               <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
               <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
               <td><%=leave.no_of_days%></td>

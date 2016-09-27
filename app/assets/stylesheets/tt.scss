@@ -26,7 +26,11 @@
 
 .add-edit-links{
     float: right;
-    color: #fff;
+    color: #fff !important;
+}
+
+a.add-edit-links:hover{
+    background-color: transparent;
 }
 
 
@@ -64,3 +68,40 @@ input, textarea, select{
     /* overflow: visible !important; */
 }
 
+.fc-event {
+   background: url('/images/birthdayicon.jpg') no-repeat;
+   min-height: 49px;
+   min-width: 64px;
+}
+
+.modal-content{
+    color: #000 !important;
+}
+
+
+@media (min-width: 768px)
+{
+    #calendarModal .modal-dialog {
+        width: 400px;
+        margin: 30px auto;
+    }
+}
+
+.fc-center h2{
+    color: #3A6F9F;
+}
+
+#calendarModal .modal-header {
+    background: #3A6F9F;
+    color: white;
+    font-size: 18px;
+}
+
+#calendar .fc-today-button{
+    background: #3A6F9F;
+    color: white;
+}
+
+#calendar .fc-prev-button, #calendar .fc-next-button, .leave_details{
+    color: #3A6F9F;
+}

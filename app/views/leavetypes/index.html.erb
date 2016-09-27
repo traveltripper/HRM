@@ -12,7 +12,6 @@
     <tr>
     <th>ID</th>
     <th>Name</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
@@ -20,10 +19,10 @@
     <% @leavetypes.each_with_index do |leavetype, index| %>
       <tr>
         <td><%= index+1 %></td>
-        <td><%=leavetype.name%></td>
-        <td><%= link_to 'Show', leavetype %></td>
+        <td><%=link_to leavetype.name, leavetype%></td>
+        <!-- <td><%= link_to 'Show', leavetype %></td>
         <td><%= link_to 'Edit', edit_leavetype_path(leavetype) %></td>
-        <td><%= link_to 'Destroy', leavetype, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', leavetype, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
       </tr>
     <% end %>
   </tbody>

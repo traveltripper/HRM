@@ -22,6 +22,7 @@ class LeaveController < ApplicationController
     else 
       redirect_to root_path
     end
+    add_breadcrumb "Leave Details"
   end
 
   def new

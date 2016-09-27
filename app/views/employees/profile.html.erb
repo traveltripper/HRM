@@ -21,20 +21,19 @@ Profile: <%=@employee.fullname.capitalize%>
 <tr>
     <td>Manager :</td>
     <%if @employee.manager_id?%>
-        <td><%=Employee.find(@employee.manager_id).first_name%></td>
+        <td><%=@employee.manager.first_name %></td>
     <%else%>
         <td>Nil</td>
     <%end%>    
 </tr>
-
 <tr>
     <td>Role :</td>
     <td><%=@employee.role.name%></td>
 </tr>
 <tr>
-    <td>Department ID :</td>
+    <td>Department Name :</td>
     <%if @employee.department_id%>
-        <td><%=Department.find(@employee.department_id).name%></td>
+        <td><%=@employee.department.name%></td>
     <%else%>
         <td>Nil</td>
     <%end%>

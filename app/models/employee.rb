@@ -11,21 +11,16 @@ class Employee < ActiveRecord::Base
   belongs_to :department
   # acts_as_birthday :crated_at
   acts_as_birthday :actual_dob
+
   def fullname
   	first_name.to_s + " " + middle_name.to_s + " " + last_name.to_s
   end
 
-  def self.employ_birthday(employee)
-    if Date.today.strftime('%m%d') == employee.actual_dob.strftime('%m%d')
-       p "birthday"
-     else
-       p "not a birthday"
-    end
-  end
-
-  def self.emp_birthday(bstart, bend)
-    p bstart
-    p bend
+  
+  def emp_birthday
+    
+    custom_date = actual_dob.strftime("%d-%b-") + Time.now.strftime("%y")
+    p Date.strptime(custom_date, "%d-%b-%y")
     
   end
 

@@ -17,13 +17,15 @@ class EmployeesController < ApplicationController
       first_name =  params[:search]
       p @employees = Employee.where("first_name LIKE ?", "%#{first_name}%")
     else
-      @employees = Employee.all.order('created_at DESC')
+      @employees = Employee.order('created_at DESC')
     end 
   end
 
   def show
     @employee = Employee.find_by_id(params[:id])
+    add_breadcrumb "Employee Profile"
     render :template => 'employees/profile'
+
   end
 
   def new
@@ -117,13 +119,13 @@ class EmployeesController < ApplicationController
 
   def birthdays   
   
-    @emp = Employee.all
+    @employees = Employee.all
     p startmonth = params[:start]
     p endmonth =  params[:end]
     
     #render json: @events.to_json
     # render :text => events.to_json    
-    add_breadcrumb "birthdays", :birthdays_path
+    add_breadcrumb "Employees Birthday Calendar", :birthdays_path
   end
 
 

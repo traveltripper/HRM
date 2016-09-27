@@ -1,12 +1,49 @@
 <%title "Leave Details" %>
-<p>id: <%=@leave.id%></p>
-<p>Employee Name: <%=@leave.employee.fullname%></p>
-<p>From:<%=@leave.fromdate.strftime("%d-%b-%Y")%></p>
-<p>To: <%=@leave.todate.strftime("%d-%b-%Y")%></p>
-<p>No of days: <%=@leave.no_of_days%></p>
-<p>Reason: <%=@leave.reason.html_safe%></p>
-<p>Status: <%=@leave.status%></p>
+<div class="leave_details">
+<div class="panel panel-cblue">
+<div class="panel-heading">Leave Details</div>
+<table class="table table-hover-color table-bordered">
+<tbody>
 
+<tr>
+<td>Employee Name:</td>
+<td> <%=@leave.employee.fullname.to_s.capitalize%></td>
+</tr>
+
+<tr>
+<td>From:</td>
+<td><%=@leave.fromdate.strftime("%d-%b-%Y")%></td>
+</tr>
+
+<tr>
+<td>To:</td>
+<td><%=@leave.todate.strftime("%d-%b-%Y")%></td>
+</tr>
+
+<tr>
+<td>No of days: </td>
+<td><%=@leave.no_of_days%></td>
+</tr>
+
+<tr>
+<td>Reason: </td>
+<td><%=@leave.reason.html_safe%></td>
+</tr>
+
+<tr>
+<td>Status: </td>
+<%if @leave.status == true%>
+<td>Approved</td>
+<%elsif @leave.status == false%>
+<td>Rejected</td>
+<%elsif @leave.status == nil%>
+<td>Waiting for Approval</td>
+<%end%>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <%=form_for @leave do |f|%>
 	<%= f.radio_button :status, 'approve' %> 
 	<%= label :status, 'approve' %>

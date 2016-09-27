@@ -1,0 +1,36 @@
+<div class="row">
+<div class="col-md-6">
+<div class="panel panel-cblue">
+  <div class="panel-heading">Conference Form</div>
+  <div class="panel-body pan">
+    <%= form_for(@conference_room) do |f| %>
+      <div class="form-body pal">
+        <% if @conference_room.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@conference_room.errors.count, "error") %> prohibited this conference_room from being saved:</h2>
+
+            <ul>
+            <% @conference_room.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+        
+        <div class="form-group">
+          <%= f.label :name %><br>
+          <%= f.text_field :name, :class=>"form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :available %><br>
+          <%= f.check_box :available %>
+        </div>
+        <div class="actions">
+          <%= f.submit :class=>"btn btn-primary" %>
+        </div>
+        </div>
+    <% end %>
+  </div>
+</div>
+</div>
+</div>

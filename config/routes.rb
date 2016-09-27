@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :conference_rooms
   get '/employees' => 'employees#index'
   
   devise_for :admin_users, ActiveAdmin::Devise.config
