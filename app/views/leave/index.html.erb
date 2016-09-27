@@ -1,17 +1,17 @@
 <% title "Leave Management" %>
 
 <div class="row">
-<div class="dropdown show-options">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Show options
-  <span class="caret"></span></button>
-  <ul class="dropdown-menu">
-    <li><%=link_to ' Apply leave', new_leave_path, :class=>"fa fa-pencil-square-o fa-fw" %></li>
-    <%if @emp.role.name == "Manager"%>
-    <li><%=link_to ' Team leave', leave_applied_by_team_path, :class=>"fa fa-pencil-square-o fa-fw" %></li>
-    <%end%>
-  </ul>
+<div class="show-options">
+<%=link_to ' Apply leave', new_leave_path, :class=>"fa fa-pencil-square-o btn btn-primary" %>
+<%if @emp.role.name == "Manager"%>
+  <%=link_to ' Team leave', leave_applied_by_team_path, :class=>"fa fa-users btn btn-primary" %>
+<%end%>
 </div>
 </div>
+
+
+
+
 
 <div class="row">
 <%if @emp.role.name == "HR"%>
