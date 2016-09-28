@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :events
+  resources :events
   resources :conference_rooms
   get '/employees' => 'employees#index'
   

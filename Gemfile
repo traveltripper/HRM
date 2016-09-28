@@ -34,7 +34,7 @@ gem 'devise'
 
 #twitter bootstrap gem for responsive design
 #gem 'bootstrap-sass', '~> 3.3.6'
-
+gem 'bootstrap-sass'
 #Breadcrums
 gem "breadcrumbs_on_rails"
 #cancancan is for Authorisation 
@@ -60,6 +60,8 @@ gem 'birthday', '~> 0.3.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'simple_form'
+gem 'faker'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -1,3 +1,9 @@
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+
+
 <%= tinymce %>
 <div class="row">
 <div class="col-md-6">
@@ -52,34 +58,15 @@
 </div>
 
 
-
-<!-- <input type="text" id="dt1"/>
-<input type="text" id="dt2"/> -->
 <script>
 
-    // $('#dt2').datepicker({
-    //     dateFormat: "dd-mm-yy" 
-    // });
-
-    // $("#dt1").datepicker({
-    //     dateFormat: "dd-mm-yy", 
-    //     minDate:  0,
-    //     onSelect: function(date){            
-    //         var date1 = $('#dt1').datepicker('getDate');           
-    //         var date = new Date( Date.parse( date1 ) ); 
-    //         date.setDate( date.getDate() );        
-    //         var newDate = date.toDateString(); 
-    //         newDate = new Date( Date.parse( newDate ) );                      
-    //         $('#dt2').datepicker("option","minDate",newDate);            
-    //     }
-    // });
-
-
 $("#dt1").datepicker({
+
     minDate: 0,
     dateFormat: "dd-mm-yy",
     maxDate: '+1Y+6M',
     onSelect: function (dateStr) {
+        
         var min = $(this).datepicker('getDate'); // Get selected date
         $("#dt2").datepicker('option', 'minDate', min || '0'); // Set other min, default to today
     }
@@ -101,3 +88,5 @@ $("#dt2").datepicker({
 });
 
 </script>
+
+

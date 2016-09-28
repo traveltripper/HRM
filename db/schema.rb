@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160927053857) do
+ActiveRecord::Schema.define(version: 20160927091729) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -108,6 +108,14 @@ ActiveRecord::Schema.define(version: 20160927053857) do
 
   add_index "employees", ["email"], name: "index_employees_on_email", unique: true, using: :btree
   add_index "employees", ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true, using: :btree
+
+  create_table "events", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.datetime "start"
+    t.datetime "end"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "leaves", force: :cascade do |t|
     t.integer  "employee_id",   limit: 4
