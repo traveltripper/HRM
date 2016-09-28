@@ -1,74 +1,60 @@
-<%title "Employee Birthdays"%>
+<%title "Events"%>
+<script src="https://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<link rel="stylesheet" media="all" href="https://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 
 <script>
-    $(document).ready(function() {
-        $('#calendar').fullCalendar({
-        	header: {
-        	left: 'prev,next today',
-        	center: 'title'
-      		},
-            selectable: true,
-      		selectHelper: true,
-      		editable: true,
-      		eventLimit: true,
-      		eventColor: '#FFF',
-      		events: '/events.json',
-      		select: function(start, end) {
-	        $.getScript('/events/new', function() {
-	          $('#event_date_range').val(moment(start).format("MM/DD/YYYY HH:mm") + ' - ' + moment(end).format("MM/DD/YYYY HH:mm"))
-	          date_range_picker();
-	          $('.start_hidden').val(moment(start).format('YYYY-MM-DD HH:mm'));
-	          $('.end_hidden').val(moment(end).format('YYYY-MM-DD HH:mm'));
-	        });
-
-	        //calendar.fullCalendar('unselect');
-	      },
-
-	      eventDrop: function(event, delta, revertFunc) {
-	        event_data = { 
-	          event: {
-	            id: event.id,
-	            start: event.start.format(),
-	            end: event.end.format()
-	          }
-	        };
-	        $.ajax({
-	            url: event.update_url,
-	            data: event_data,
-	            type: 'PATCH'
-	        });
-	      },
-      
-	      eventClick: function(event, jsEvent, view) {
-	      	//alert("djdfjadj");
-	      	//$('#calendarModal').modal();
-	        $.getScript(event.edit_url, function() {	          
-	          $('.start_hidden').val(moment(event.start).format('YYYY-MM-DD HH:mm'));
-	          $('.end_hidden').val(moment(event.end).format('YYYY-MM-DD HH:mm'));
-	        });
-
-	      }
-            
-            //editable: true,
-            //eventLimit: true, // allow "more" link when too many events
-        });
-    });
-
-    $('.date-range-picker').each(function(){
-    $(this).daterangepicker({
-        timePicker: true,
-        timePickerIncrement: 30,
-        alwaysShowCalendars: true
-    }, function(start, end, label) {
-      $('.start_hidden').val(start.format('YYYY-MM-DD HH:mm'));
-      $('.end_hidden').val(end.format('YYYY-MM-DD HH:mm'));
-    });
-    });
+$(document).ready(function(){
+initialize_calendar();
+date_range_picker();
+});
 </script>
 
-<div id='calendar'></div>
+<div class='calendar'></div>
 
 <div id='remote_container'></div>
 
 
+<div id="calendarModal" class="modal fade">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+            <span id="modalTitle" class="modal-title"></span>            
+        </div>
+        <div id="modalBody" class="modal-body col-md-8">
+            <p>Name: <span class="cal-name"></span></p>
+            <p>Department: <span class="cal-dept"></span></p>
+            <p>Role: <span class="cal-role"></span></p>
+        </div>
+        <div class="col-md-2">
+        <img src="images/birthday-cake.png" width="100px" height="100px">
+        </div>
+        <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+        </div>
+    </div>
+</div>
+</div>
 
+
+<div id="EventModal" class="modal fade">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+            <span id="modalTitle" class="modal-title"></span>            
+        </div>
+        <div id="modalBody" class="modal-body col-md-8">            
+            <p>Title: <span class="event-title"></span></p>
+            <p>From: <span class="event-from"></span></p>
+            <p>To: <span class="event-to"></span></p>
+        </div>
+        <div class="col-md-2">
+        <img src="images/event.jpg" width="100px" height="100px">
+        </div>
+        <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+        </div>
+    </div>
+</div>
+</div>

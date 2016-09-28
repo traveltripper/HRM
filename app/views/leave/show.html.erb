@@ -26,12 +26,32 @@
 </tr>
 
 <tr>
+<td>LeaveType: </td>
+<td><%=@leave.leavetype.name%></td>
+</tr>
+
+<tr>
 <td>Reason: </td>
 <td><%=@leave.reason.html_safe%></td>
 </tr>
 
 <tr>
 <td>Status: </td>
+<td>
+<%=form_for @leave do |f|%>
+	<%= f.radio_button :status, 'approve', :id=>"chkYes", :name=>'chkNo' %> 
+	<%= label :status, 'approve' %>
+	<%= f.radio_button :status, 'reject', :checked => true, :id=>"chkNo", :name=>'chkNo' %>
+	<%= label :status, 'reject' %>
+	<br/>
+	<div id="reject_reason">
+	<%=f.label :reject_reason%><br/>
+	<%=f.text_area :reject_reason, size: "40x5"%>	
+	</div>
+	<%= f.submit "submit", :class=>"btn btn-primary"%>
+<%end%>
+</td>
+<!--
 <%if @leave.status == true%>
 <td>Approved</td>
 <%elsif @leave.status == false%>
@@ -39,20 +59,16 @@
 <%elsif @leave.status == nil%>
 <td>Waiting for Approval</td>
 <%end%>
+-->
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<%=form_for @leave do |f|%>
-	<%= f.radio_button :status, 'approve' %> 
-	<%= label :status, 'approve' %>
-	<%= f.radio_button :status, 'reject', :checked => true %>
-	<%= label :status, 'reject' %>
-	<%= f.submit "submit", :class=>"btn btn-primary"%>
-<%end%>
+
 
 <br/>
-<%=link_to 'back', root_path%>
+<%=link_to 'back', leave_index_path%>
+
 
 

@@ -68,6 +68,8 @@ class EmployeesController < ApplicationController
 
     if @emp.role.name == "HR"
       @leaves = Leave.all
+      @emp_leaves_waiting_for_approval = Leave.where(:status => nil)
+      @emp_leaves_approved_recently = Leave.where(:status => [true, false])
     end
 
     if @emp.role.name == "Manager"
@@ -126,6 +128,10 @@ class EmployeesController < ApplicationController
     #render json: @events.to_json
     # render :text => events.to_json    
     add_breadcrumb "Employees Birthday Calendar", :birthdays_path
+  end
+
+  def get_current_employee_role
+    render json: {role: current_employee.role.name}
   end
 
 

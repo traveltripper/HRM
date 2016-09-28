@@ -2,7 +2,42 @@
 
 <%if @emp.role.name == "HR"%>
   <div class="panel panel-cblue">
-    <div class="panel-heading">Leaves applied by all employees</div>
+    <div class="panel-heading">Employees leave waiting for approval</div>
+    <div class="panel-body">
+
+      <table class="table table-hover-color table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Emp. Name</th>      
+            <th>Leave type</th>
+            <th>From date</th>
+            <th>To date</th>
+            <th>No of days</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @emp_leaves_waiting_for_approval.each_with_index do |leave, index| %>
+            <tr>
+              <td><%= index+1 %></td>
+              <td><%=link_to leave.employee.fullname, leave.employee%></td>
+              <td><%=leave.leavetype.name %></td>
+              <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
+              <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
+              <td><%=leave.no_of_days%></td>
+              <td>
+                <%=link_to 'view', leave, :class=>"view_btnbtn btn-primary"%>
+              </td>         
+            </tr>
+          <% end %>
+        </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="panel panel-cblue">
+    <div class="panel-heading">Employees leave approved recently</div>
     <div class="panel-body">
 
       <table class="table table-hover-color table-bordered">
@@ -19,10 +54,10 @@
         </thead>
 
         <tbody>
-          <% @leaves.each_with_index do |leave, index| %>
+          <% @emp_leaves_approved_recently.each_with_index do |leave, index| %>
             <tr>
               <td><%= index+1 %></td>
-              <td><%=link_to leave.employee.fullname, leave%></td>
+              <td><%=link_to leave.employee.fullname, leave.employee%></td>
               <td><%=leave.leavetype.name %></td>
               <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
               <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
@@ -30,10 +65,10 @@
               <td>
                 <%if leave.status == true%>
                 Approved
-                <%else%>
+                <%elsif leave.status ==false%>
                 Rejected
                 <%end%>
-              </td>         
+              </td>          
             </tr>
           <% end %>
         </tbody>
@@ -58,7 +93,7 @@
       <th>From date</th>
       <th>To date</th>
       <th>No of days</th>
-      <th>Status</th>
+      <th colspan="1"></th>
     </tr>
   </thead>
 
@@ -66,18 +101,13 @@
     <% @team_leave_waiting_for_approve.each_with_index do |leave, index| %>
       <tr>
         <td><%= index+1 %></td>
-        <td><%=link_to leave.employee.fullname, leave%></td>
+        <td><%=link_to leave.employee.fullname, leave.employee%></td>
         <td><%=Leavetype.find(leave.leavetype_id).name%></td>
         <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
         <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
         <td><%=leave.no_of_days%></td>
         <td>
-                <%if leave.status == true%>
-                Approved
-                <%elsif leave.status ==nil%>
-                Waiting for approval
-                <%end%>
-              </td>         
+            <%=link_to 'view', leave, :class=>"view_btnbtn btn-primary"%>            
       </tr>
     <% end %>
   </tbody>

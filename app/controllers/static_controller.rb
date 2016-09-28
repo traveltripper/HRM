@@ -1,4 +1,4 @@
-class StaticPagesController < ApplicationController
+class StaticController < ApplicationController
   before_action :authenticate_employee!
   layout 'dashboard'
   def home

@@ -66,14 +66,19 @@
 
                     
                     <%end%>
-                    <li class="<%= 'active' if current_page?(birthdays_path) %>"><a href="/birthdays"><i class="fa fa-gift fa-fw">
+                    <li class="<%= 'active' if current_page?(birthdays_path) %>"><a href="/events"><i class="fa fa-gift fa-fw">
                         <div class="icon-bg bg-dark"></div>
-                    </i><span class="menu-title">Birthdays</span></a>
+                    </i><span class="menu-title">Event Management</span></a>
                       
                     </li>
                     <li class="<%= 'active' if current_page?(conference_rooms_path) %>"><a href="/conference_rooms"><i class="fa fa-building fa-fw">
                         <div class="icon-bg bg-dark"></div>
-                    </i><span class="menu-title">Conference Rooms</span></a>
+                    </i><span class="menu-title">Conference Rooms</span></a>                     
+                    </li>
+
+                    <li><a href="#"><i class="fa fa-file-pdf-o fa-fw">
+                        <div class="icon-bg bg-dark"></div>
+                    </i><span class="menu-title">Download Forms</span></a>
                       
                     </li>
                 </ul>

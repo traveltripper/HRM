@@ -1,4 +1,5 @@
 class ConferenceRoomsController < ApplicationController
+  before_action :authenticate_employee!
   before_action :set_conference_room, only: [:show, :edit, :update, :destroy]
   layout 'dashboard'
   add_breadcrumb "Home", :root_path

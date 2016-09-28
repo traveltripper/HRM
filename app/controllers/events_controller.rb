@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  before_action :authenticate_employee!
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   # layout 'dashboard'
   layout 'dashboard'

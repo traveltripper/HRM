@@ -7,6 +7,7 @@ json.array! @employees do |employee|
   json.role employee.role.name
   json.start employee.emp_birthday
   json.end employee.emp_birthday
+  json.type "birthday"
 end
 
 

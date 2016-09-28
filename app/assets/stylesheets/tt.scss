@@ -69,7 +69,7 @@ input, textarea, select{
 }
 
 .fc-event {
-   background: url('/images/birthdayicon.jpg') no-repeat; 
+   background: url('/images/cal.jpg') no-repeat; 
    min-height: 49px;
    min-width: 64px;
 }
@@ -81,7 +81,7 @@ input, textarea, select{
 
 @media (min-width: 768px)
 {
-    #calendarModal .modal-dialog {
+    #calendarModal .modal-dialog, #EventModal .modal-dialog {
         width: 400px;
         margin: 30px auto;
     }
@@ -109,4 +109,12 @@ input, textarea, select{
 .show-options {
     float: right;
     margin-bottom: 10px;
+}
+
+a.view_btnbtn.btn-primary {
+    padding: 4px 10px;
+}
+
+#leave_reject_reason{
+    color: #3A6F9F;
 }

@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   resources :events
   resources :events
   resources :conference_rooms
+  get 'static' => 'static#home'
   get '/employees' => 'employees#index'
+  get 'get_current_employee_role' => "employees#get_current_employee_role"
   
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
