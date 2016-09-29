@@ -13,15 +13,12 @@ class Employee < ActiveRecord::Base
   acts_as_birthday :actual_dob
 
   def fullname
-  	first_name.to_s + " " + middle_name.to_s + " " + last_name.to_s
+  	first_name.capitalize.to_s + " " + middle_name.capitalize.to_s + " " + last_name.capitalize.to_s
   end
-
   
-  def emp_birthday
-    
+  def emp_birthday    
     custom_date = actual_dob.strftime("%d-%b-") + Time.now.strftime("%y")
-    p Date.strptime(custom_date, "%d-%b-%y")
-    
+    p Date.strptime(custom_date, "%d-%b-%y")    
   end
 
 end

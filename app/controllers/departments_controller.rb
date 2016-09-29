@@ -2,14 +2,14 @@ class DepartmentsController < ApplicationController
   before_action :authenticate_employee!
   load_and_authorize_resource
   layout 'dashboard'
-  add_breadcrumb "Home", :root_path
   before_action :set_department, only: [:show, :edit, :update, :destroy]
+  add_breadcrumb "Home", :root_path
+  add_breadcrumb "Departments", :departments_path
 
   # GET /departments
   # GET /departments.json
   def index
     @departments = Department.all
-    add_breadcrumb "Departments", :departments_path
   end
 
   def employees    
@@ -20,15 +20,18 @@ class DepartmentsController < ApplicationController
   # GET /departments/1
   # GET /departments/1.json
   def show
+    add_breadcrumb "Department"
   end
 
   # GET /departments/new
   def new
     @department = Department.new
+    add_breadcrumb "Add Department"
   end
 
   # GET /departments/1/edit
   def edit
+    add_breadcrumb "Edit Department"
   end
 
   # POST /departments

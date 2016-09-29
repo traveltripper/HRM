@@ -10,6 +10,7 @@ class Ability
         cannot :read, Department
         cannot :read, Leavetype
         can :read, Employee
+        #cannot :create, Employee
     end
     # Define abilities for the passed in user here. For example:
     #

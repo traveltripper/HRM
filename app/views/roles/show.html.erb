@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 <%title 'Employee Role'%>
-<h2>Role: <%=@role.name%></h2>
+<h2 class="link-color">Role: <%=@role.name%></h2>
 
-<%= link_to 'Edit', edit_role_path(@role), :class=>"btn btn-primary" %> 
-<%= link_to 'Back', roles_path, :class=>"btn btn-primary" %> 
-<%= link_to 'Destroy', @role, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-primary" %>
+<%= link_to ' Edit', edit_role_path(@role), :class=>"fa fa-pencil-square-o btn btn-primary" %> 
+<%= link_to ' Back', roles_path, :class=>"fa fa-arrow-left btn btn-primary" %> 
+<%#= link_to 'Destroy', @role, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-primary" %>

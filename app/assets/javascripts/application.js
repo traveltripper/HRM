@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require moment
 //= require fullcalendar
+//= require bootstrap-datepicker
 //= require tinymce
 //= require_tree .
 

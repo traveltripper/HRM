@@ -3,6 +3,7 @@ class LeavetypesController < ApplicationController
   load_and_authorize_resource
   layout 'dashboard'
   add_breadcrumb "Home", :root_path
+  add_breadcrumb "Leavetypes", :leavetypes_path
   before_action :set_leavetype, only: [:show, :edit, :update, :destroy]
 
   # GET /leavetypes
@@ -14,15 +15,18 @@ class LeavetypesController < ApplicationController
   # GET /leavetypes/1
   # GET /leavetypes/1.json
   def show
+    add_breadcrumb "Leavetype"
   end
 
   # GET /leavetypes/new
   def new
     @leavetype = Leavetype.new
+    add_breadcrumb "Add Leavetype"
   end
 
   # GET /leavetypes/1/edit
   def edit
+    add_breadcrumb "Edit Leavetype"
   end
 
   # POST /leavetypes

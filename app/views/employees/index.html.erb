@@ -1,10 +1,15 @@
 <% title "Employees" %>
-<div class="panel panel-cblue">
-<div class="panel-heading">Total Employees: <%=@employees.count%>
-<%=link_to "Add Employee", new_employee_path, :class=>'add-edit-links'%>
-</div>
-<div class="panel-body">
 
+<div class="row">
+<div class="col-md-12">
+<% if can? :create, @employee %>
+<%=link_to " Add", new_employee_path, :class=>"fa fa-plus btn btn-primary bottom-margin-10 link-float-right"%>
+<%end%>
+</div>
+</div>
+
+<div class="panel panel-cblue">
+<div class="panel-body">
 <table class="table table-hover-color table-bordered">
   <thead>
     <tr>
@@ -13,6 +18,7 @@
       <th>Full Name</th>
       <th>Role</th>
       <th>Department</th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
@@ -20,19 +26,20 @@
     <% @employees.each_with_index do |emp, index| %>
       <tr>
         <td><%= index+1 %></td>
-        <td><%= link_to emp.ttid, emp%></td>
+        <td><%= emp.ttid %></td>
         <td><%= link_to emp.fullname, emp  %></td>
-        <td><%= link_to emp.role.name, employees_role_path(emp.role_id)  %></td>
+        <td><%= emp.role.name %></td>
         <%if emp.department_id%>
           <td><%=link_to emp.department.name, employees_department_path(emp.department_id) %></td>
         <%else%>
           <td>Nil</td>
-        <%end%>  
+        <%end%>
+        <td><%= link_to '', emp, :class=>"fa fa-eye btn" %></td>
+        <td><%= link_to '', edit_employee_path(emp), :class=>"fa fa-pencil-square-o btn " %></td>  
       </tr>
     <% end %>
   </tbody>
 </table>
 </div>
 </div>
-
 
