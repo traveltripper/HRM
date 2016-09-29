@@ -7,10 +7,12 @@ initialize_calendar = function() {
         left: 'prev,next today',
         center: 'title'
       },
+      aspectRatio: 1.8,
       selectable: true,
       selectHelper: true,
       editable: true,
       eventLimit: true,
+      timeFormat: 'HH:mm' ,
       //eventColor: '#3A6F9F',
       //events: '/events.json',
       eventSources: [
@@ -21,7 +23,8 @@ initialize_calendar = function() {
         url: '/birthdays.json'
       }
       ],
-      
+
+            
       select: function(start, end) {
         $.get('/get_current_employee_role', function(result){
           if (result.role == "HR")
@@ -71,6 +74,7 @@ initialize_calendar = function() {
         } 
         else if (event.type == "event") 
         {
+          //alert(event.start);
           $.get('/get_current_employee_role', function(result){
             if (result.role == "HR"){
                   //$('#calendarModal').modal();
@@ -83,10 +87,12 @@ initialize_calendar = function() {
             } 
             else
             {
+                //start = event.start.toString();
+                //alert(start);
                 $('#EventModal #modalTitle').html("Event!!!");
                 $('#EventModal #modalBody .event-title').html(event.title);
-                $('#EventModal #modalBody .event-from').html(event.start);
-                $('#EventModal #modalBody .event-to').html(event.end);
+                $('#EventModal #modalBody .event-from').html(event.start.toString().substr(0, 25));
+                $('#EventModal #modalBody .event-to').html(event.end.toString().substr(0, 25));
                 $('#EventModal').modal();
             }
           });     

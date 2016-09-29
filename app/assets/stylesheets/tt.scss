@@ -91,18 +91,18 @@ input, textarea, select{
     color: #3A6F9F;
 }
 
-#calendarModal .modal-header {
+.calendarModal .modal-header {
     background: #3A6F9F;
     color: white;
     font-size: 18px;
 }
 
-#calendar .fc-today-button{
+.calendar .fc-today-button{
     background: #3A6F9F;
     color: white;
 }
 
-#calendar .fc-prev-button, #calendar .fc-next-button, .leave_details{
+.calendar .fc-prev-button, .calendar .fc-next-button, .leave_details{
     color: #3A6F9F;
 }
 
@@ -118,3 +118,15 @@ a.view_btnbtn.btn-primary {
 #leave_reject_reason{
     color: #3A6F9F;
 }
+
+.modal-dialog .modal-header{
+    background: #3A6F9F;
+    color: white;
+    font-size: 18px;
+}
+
+div#modalBody {
+    color: #3A6F9F;
+    font-size: 15px;
+}
+
