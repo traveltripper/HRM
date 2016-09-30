@@ -16,7 +16,7 @@ $(document).on("click", "#custom-submit-link", function(){
  });
 
 $(document).ready(function(){
-  $('input.btn.btn-primary').click(function(e){
+  $('#new_employee input.btn.btn-primary').click(function(e){
 
     e.preventDefault();
 
