@@ -10,7 +10,10 @@ class Employee < ActiveRecord::Base
   validates_presence_of :graduation, :source_of_hire, :pancard_no, :passport_no, :status, :address
   belongs_to :department
   # acts_as_birthday :crated_at
-  acts_as_birthday :actual_dob
+  #acts_as_birthday :actual_dob
+
+  validates :email, format: { with: /\b[A-Z0-9._%a-z\-]+@traveltripper\.com\z/,
+                  message: "must be a traveltripper.com account" }
 
   def fullname
   	first_name.capitalize.to_s + " " + middle_name.capitalize.to_s + " " + last_name.capitalize.to_s
