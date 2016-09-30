@@ -58,23 +58,18 @@
                     </i><span class="menu-title">Departments</span></a>
                        
                     </li>
-                    <!-- <li><a href="#"><i class="fa fa-calendar fa-fw">
+                                        
+                    <li class="<%= 'active' if current_page?(conference_rooms_path) %>"><a href="/conference_rooms"><i class="fa fa-building fa-fw">
                         <div class="icon-bg bg-dark"></div>
-                    </i><span class="menu-title">Event Management</span></a>
-                      
-                    </li> -->
-
+                    </i><span class="menu-title">Conference Rooms</span></a>                     
+                    </li>
                     
                     <%end%>
                     <li class="<%= 'active' if current_page?(events_path) %>"><a href="/events"><i class="fa fa-gift fa-fw">
                         <div class="icon-bg bg-dark"></div>
                     </i><span class="menu-title">Event Management</span></a>
                       
-                    </li>
-                    <li class="<%= 'active' if current_page?(conference_rooms_path) %>"><a href="/conference_rooms"><i class="fa fa-building fa-fw">
-                        <div class="icon-bg bg-dark"></div>
-                    </i><span class="menu-title">Conference Rooms</span></a>                     
-                    </li>
+                    </li>                    
 
                     <!-- <li><a href="#"><i class="fa fa-file-pdf-o fa-fw">
                         <div class="icon-bg bg-dark"></div>
