@@ -3,28 +3,22 @@ class LeaveController < ApplicationController
   layout 'dashboard'
   add_breadcrumb "Home", :root_path
   add_breadcrumb "Leave Management", :leave_index_path
+  
   def index
     @emp = current_employee
+    
     if @emp.role.name == "HR"
       @leaves = Leave.all
       @emp_leaves_waiting_for_approval = Leave.where(:status => nil)
       @emp_leaves_approved_recently = Leave.where(:status => [true, false])
     end
-    #@all_employee_leaves = Leave.limit(10)
+    
     @leave_approved = @emp.leave.where(status: !nil).limit(5)    
-    @leave_waiting_for_approve = @emp.leave.where(status: nil).limit(5)  
-    #@leaves = @emp.leave.limit(5) 
+    @leave_waiting_for_approve = @emp.leave.where(status: nil).limit(5)
   end
   
   def show
-    @leave= Leave.find(params[:id])
-    @manager = @leave.employee.manager
-    
-    if ((current_employee.role.name =="HR") || (current_employee== @manager))
-      @leave= Leave.find(params[:id])
-    else 
-      redirect_to root_path
-    end
+    @leave= Leave.find(params[:id])    
     add_breadcrumb "Leave Details"
   end
 
@@ -32,6 +26,10 @@ class LeaveController < ApplicationController
     @employee = current_employee
     @leave = @employee.leave.new
     add_breadcrumb "Apply Leave", new_leave_path
+  end
+
+  def edit
+    @leave= Leave.find(params[:id])
   end
 
   def create
@@ -47,18 +45,26 @@ class LeaveController < ApplicationController
   end
 
   def update
-    
+
     @leave = Leave.find(params[:id])
-    @emp = @leave.employee    
-    if params[:chkNo] == "approve"
-      @leave.update_attribute(:status, true)
-      flash[:success] = "Employee leave is approved"
+    if @leave.update_attributes(leave_params)
+        respond_to do |format|
+          format.html { redirect_to leave_path, notice: 'Leave was successfully updated.' }        
+        end
     else
-      @leave.update_attributes(:status => false, :reject_reason => params[:leave][:reject_reason])      
-      flash[:success] = "Employee leave is rejected"
+       render :edit         
     end
+    
+    # @emp = @leave.employee    
+    # if params[:chkNo] == "approve"
+    #   @leave.update_attribute(:status, true)
+    #   flash[:success] = "Employee leave is approved"
+    # else
+    #   @leave.update_attributes(:status => false, :reject_reason => params[:leave][:reject_reason])      
+    #   flash[:success] = "Employee leave is rejected"
+    # end
     #LeaveMailer.employee_leave_status(@emp, @leave).deliver_later
-    redirect_to dashboard_path
+    #redirect_to dashboard_path
     
   end
   

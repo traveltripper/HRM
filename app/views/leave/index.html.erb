@@ -10,9 +10,6 @@
 </div>
 
 
-
-
-
 <div class="row">
 <%if @emp.role.name == "HR"%>
     <div class="panel panel-cblue">
@@ -22,9 +19,9 @@
       <table class="table table-hover-color table-bordered">
         <thead>
           <tr>
-            <th>ID</th>
+            <th>S.No</th>
             <th>Emp. Name</th>      
-            <th>Leave type</th>
+            <th>Type of Leave</th>
             <th>From date</th>
             <th>To date</th>
             <th>No of days</th>
@@ -58,9 +55,9 @@
       <table class="table table-hover-color table-bordered">
         <thead>
           <tr>
-            <th>ID</th>
+            <th>S.No</th>
             <th>Emp. Name</th>      
-            <th>Leave type</th>
+            <th>Type of Leave</th>
             <th>From date</th>
             <th>To date</th>
             <th>No of days</th>
@@ -99,12 +96,14 @@
 <table class="table table-hover-color table-bordered">
   <thead>
     <tr>
-      <th>ID</th>      
-      <th>Leave type</th>
+      <th>S.No</th>      
+      <th>Type of Leave</th>
       <th>From date</th>
       <th>To date</th>
       <th>No of days</th>
+      <th>Reason</th>
       <th>Status</th>
+      <th colspan="3"></th>
     </tr>
   </thead>
 
@@ -116,13 +115,15 @@
         <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
         <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
         <td><%=leave.no_of_days%></td>
-        <td>
-                <%if leave.status == true%>
-                Approved
-                <%elsif leave.status ==nil%>
-                Waiting for approval
-                <%end%>
-              </td>         
+        <td><%=truncate(leave.reason, :escape => false, :length => 30, :omission => '...')%></td>        
+        <%if leave.status == true%>
+          <td>Approved</td>
+        <%elsif leave.status ==nil%>
+          <td>Waiting for approval</td>
+        <%end%>
+        <td><%=link_to '', leave, :class=>"fa fa-eye btn"%></td> 
+        <td><%=link_to '', edit_leave_path(leave), :class=>"fa fa-pencil-square-o btn"%></td>
+        <td><%= link_to '', leave, method: :delete, data: { confirm: 'Are you sure?' }, class: "fa fa-times btn" %></td> 
       </tr>
     <% end %>
   </tbody>
@@ -137,8 +138,8 @@
 <table class="table table-hover-color table-bordered">
   <thead>
     <tr>
-      <th>ID</th>      
-      <th>Leave type</th>
+      <th>S.No</th>      
+      <th>Type of Leave</th>
       <th>From date</th>
       <th>To date</th>
       <th>No of days</th>

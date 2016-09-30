@@ -5,77 +5,58 @@
                 <ul id="side-menu" class="nav">
                     
                      <div class="clearfix"></div>
+
                     <li class="<%= 'active' if current_page?(dashboard_path) %>"><a href="/dashboard"><i class="fa fa-tachometer fa-fw">
                         <div class="icon-bg bg-orange"></div>
                     </i><span class="menu-title">Dashboard</span></a></li>
-                    <li class="<%= 'active' if current_page?(profile_path) %>"><a href="/profile"><i class="fa fa-user fa-fw">
-                        <div class="icon-bg bg-pink"></div>
-                    </i><span class="menu-title">Profile</span></a>
-                       
-                    </li>
-                    <!-- <li class="<%= 'active' if current_page?(reports_path) %>"><a href="/reports"><i class="fa fa-bar-chart-o fa-fw">
-                        <div class="icon-bg bg-green"></div>
-                    </i><span class="menu-title">Reports</span></a> -->
-                       
-                    </li>
+
+                    <%if current_employee.role.name.in?(['Employee', 'Manager'])%>
+                    <li class="<%= 'active' if current_page?(team_path) %>"><a href="/team"><i class="fa fa-users fa-fw">
+                        <div class="icon-bg bg-blue"></div>
+                    </i><span class="menu-title">Team</span></a>                          
+                    </li>                    
+                    <%end%>
+                                        
                     <li class="<%= 'active' if current_page?(leave_index_path) %>"><a href="/leave"><i class="fa fa-edit fa-fw">
                         <div class="icon-bg bg-violet"></div>
                     </i><span class="menu-title">Leave Management</span></a>
-                      
-                    </li>
+                    </li>                   
                     
-                    <%if current_employee.role.name == "Manager"%>
-                    <li class="<%= 'active' if current_page?(team_path) %>"><a href="/team"><i class="fa fa-users fa-fw">
-                        <div class="icon-bg bg-blue"></div>
-                    </i><span class="menu-title">Team</span></a>
-                          
-                    </li>
-                    <!-- <li><a href="/leave-applied-by-team"><i class="fa fa-pencil-square-o fa-fw">
-                        <div class="icon-bg bg-red"></div>
-                    </i><span class="menu-title">Leave applied by team</span></a>
-                      
-                    </li> -->
-                    <%end%>
+
                     <%if current_employee.role.name == "HR"%>
                     
                     <li class="<%= 'active' if current_page?(employees_path) %>"><a href="/employees"><i class="fa fa-users fa-fw">
                         <div class="icon-bg bg-yellow"></div>
                     </i><span class="menu-title">Employee Management</span></a>
-                       
                     </li>
+
                     <li class="<%= 'active' if current_page?(leavetypes_path) %>"><a href="/leavetypes"><i class="fa fa-slack fa-fw">
                         <div class="icon-bg bg-grey"></div>
-                    </i><span class="menu-title">Leave Types</span></a>
-                      
+                    </i><span class="menu-title">Leave Types</span></a
                     </li>
+
                     <li class="<%= 'active' if current_page?(roles_path) %>"><a href="/roles"><i class="fa fa-users fa-fw">
                         <div class="icon-bg bg-yellow"></div>
                     </i><span class="menu-title">Roles</span></a>
-                       
                     </li>
+
                     <li class="<%= 'active' if current_page?(departments_path) %>"><a href="/departments"><i class="fa fa-users fa-fw">
                         <div class="icon-bg bg-yellow"></div>
                     </i><span class="menu-title">Departments</span></a>
-                       
                     </li>
                                         
                     <li class="<%= 'active' if current_page?(conference_rooms_path) %>"><a href="/conference_rooms"><i class="fa fa-building fa-fw">
                         <div class="icon-bg bg-dark"></div>
-                    </i><span class="menu-title">Conference Rooms</span></a>                     
+                    </i><span class="menu-title">Conference Rooms</span></a>
                     </li>
                     
                     <%end%>
+
                     <li class="<%= 'active' if current_page?(events_path) %>"><a href="/events"><i class="fa fa-gift fa-fw">
                         <div class="icon-bg bg-dark"></div>
                     </i><span class="menu-title">Event Management</span></a>
-                      
-                    </li>                    
+                    </li>
 
-                    <!-- <li><a href="#"><i class="fa fa-file-pdf-o fa-fw">
-                        <div class="icon-bg bg-dark"></div>
-                    </i><span class="menu-title">Download Forms</span></a>
-                      
-                    </li> -->
                 </ul>
             </div>
         </nav>

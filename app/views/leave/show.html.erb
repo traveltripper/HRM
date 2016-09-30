@@ -1,7 +1,14 @@
 <%title "Leave Details" %>
+<div class="row">
+<div class="col-md-8">
+<div class="row">
+	<div class="col-md-12">	 
+	<%=link_to ' Edit', edit_leave_path(@leave), :class=>"fa fa-pencil-square-o btn btn-primary bottom-margin-10 link-float-right"%>
+	</div>
+</div>
+
 <div class="leave_details">
 <div class="panel panel-cblue">
-<div class="panel-heading">Leave Details</div>
 <table class="table table-bordered">
 <tbody>
 
@@ -36,6 +43,7 @@
 </tr>
 
 <tr>
+<%if (current_employee == @leave.employee.manager) || (current_employee.role.name =="HR")%>
 <td>Status: </td>
 <td>
 <%=form_for @leave do |f|%>
@@ -46,11 +54,12 @@
 	<br/>
 	<div id="reject_reason">
 	<%=f.label :reject_reason%><br/>
-	<%=f.text_area :reject_reason, size: "40x5"%>	
+	<%=f.text_area :reject_reason, size: "20x4"%>	
 	</div>
 	<%= f.submit "submit", :class=>"btn btn-primary"%>
 <%end%>
 </td>
+<%end%>
 <!--
 <%if @leave.status == true%>
 <td>Approved</td>
@@ -68,7 +77,9 @@
 
 
 <br/>
-<%=link_to 'back', leave_index_path%>
+<%=link_to ' Back', leave_index_path, :class=>"fa fa-arrow-left btn btn-primary"%>
+</div>
+</div>
 
 
 

@@ -12,8 +12,8 @@
       
       <ul class="nav navbar-nav navbar-right">
 	      <% if employee_signed_in? %>
-        <li><%= link_to(' Logout', destroy_employee_session_path, :method => :delete, :class=>"glyphicon glyphicon-log-in") %></li>
         <li><%= link_to "Change your password", edit_employee_registration_path %></li>
+        <li><%= link_to(' Logout', destroy_employee_session_path, :method => :delete, :class=>"glyphicon glyphicon-log-in") %></li>        
 		  <% else %>
 	  		<li><%= link_to(' Login', new_employee_session_path, :class=>"glyphicon glyphicon-log-in")%></li>
 		  <% end %>

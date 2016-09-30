@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'dashboard/index'
+
   resources :events
   resources :events
   resources :conference_rooms
@@ -9,7 +11,7 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  get '/dashboard' => 'employees#dashboard'
+  get '/dashboard' => 'dashboard#index'
 
   get '/reports' => 'employees#reports'
 
@@ -20,7 +22,7 @@ Rails.application.routes.draw do
    get "logout", to: "devise/sessions#destroy"
   end
 
-  root :to => 'employees#dashboard'
+  root :to => 'dashboard#index'
 
   devise_for :employees, :skip => [:registrations]                                          
   as :employee do

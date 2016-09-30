@@ -23,9 +23,14 @@
                 <ul class="nav navbar navbar-top-links navbar-right mbn">
                     
                     <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="/images/profilepic.png" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs"><%=current_employee.first_name %></span>&nbsp;<span class="caret"></span></a>
-                         <ul class="dropdown-menu dropdown-user pull-right">                        
-                            <li><%= link_to(' Logout', destroy_employee_session_path, :method => :delete, :class=>"fa fa-power-off link-color") %></li>
+                         <ul class="dropdown-menu dropdown-user pull-right">
+
+                            <li><%= link_to " Profile", profile_path, :class=>"fa fa-user link-color" %></li>
+
                             <li><%= link_to " Change your password", edit_employee_registration_path, :class=>"fa fa-pencil link-color" %></li>
+
+                            <li><%= link_to(' Logout', destroy_employee_session_path, :method => :delete, :class=>"fa fa-power-off link-color") %></li>
+                            
                         </ul>
                     </li>
                 </ul>
