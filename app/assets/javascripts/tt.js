@@ -30,3 +30,29 @@ $(document).ready(function(){
     
   });
 });
+
+
+// jQuery(function() {
+//   var states;
+//   //$('#person_state_id').parent().hide();
+//   states = $('#employee_manager_id').html();
+//   return $('#employee_department_id').change(function() {
+//     var country, escaped_country, options;
+//     country = $('#employee_department_id :selected').text();
+//     escaped_country = country.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1');
+//     options = $(states).filter("optgroup[label='" + escaped_country + "']").html();
+//     if (options) {
+//       $('#employee_manager_id').html(options);
+//       //return $('#person_state_id').parent().show();
+//     } else {
+//       $('#employee_manager_id').empty();
+//       //return $('#person_state_id').parent().hide();
+//     }
+//   });
+// });
+
+
+//[['Group 1',["Item 1"]], ['Group 2',["Item 2"]]]
+
+
+

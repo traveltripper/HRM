@@ -1,7 +1,5 @@
 <div class="panel panel-cblue" style="background:#fff;">  
   <div class="panel-body pan">
-  <%# @bars = [['ROR',["Item 1"]], ['JAVA',["Item 2"]]]%>
-
   <%= form_for(@employee) do |f| %>
   <div class="form-body pal">
   <% if @employee.errors.any? %>
@@ -34,18 +32,12 @@
        </div>
     </div>
   </div>
-  
-  <%#= managers.each {|e| e.email} %>
+
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
-        <%= f.label :manager %><br>
-        <%=f.collection_select :manager_id, Employee.where(:manager_id=>nil), :id, :fullname, {:include_blank => 'Select manager'}, :class=>"form-control"%>        
-        <%#=f.grouped_collection_select :manager_id, Employee.where(:manager_id=>nil), :id, :fullname, {:include_blank => 'Select manager'}, :class=>"form-control"%>
-        <%#=f.grouped_collection_select :manager_id, Department.all, :employees, :name, :id, :fullname, {:include_blank => 'Select manager'}, :class=>"form-control"%>
-       
-        <%#= f.text_field :manager_id, :as => :grouped_select, :collection => [['Authors', ['Jose', 'Carlos']], ['General', ['Bob', 'John']]], :group_method => :last %>
-        <%#= f.select :manager_id, grouped_options_for_select(@bars) %>
+        <%= f.label :manager %><br>        
+        <%=f.collection_select :manager_id, Employee.where(:manager_id=>nil), :id, :fullname, {:include_blank => 'Select manager'}, :class=>"form-control"%>
       </div>
     </div>    
     <div class="col-md-4">
@@ -79,27 +71,6 @@
        <div class="form-group">
         <%= f.label :personal_email, 'Personal E-mail' %><br>
         <%= f.email_field :personal_email, :class=>"form-control" %>
-       </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-4">
-      <div class="form-group">
-        <%= f.label :blood_group, 'Blood Group' %><br>
-        <%= f.number_field :blood_group, :class=>"form-control" %>
-      </div>
-    </div>    
-    <div class="col-md-4">
-     <div class="form-group">
-      <%= f.label :father_or_spouse, 'Father or Spouse' %><br>
-      <%= f.email_field :father_or_spouse, :class=>"form-control" %>
-     </div>
-    </div>
-    <div class="col-md-4">
-       <div class="form-group">
-        <%= f.label :marital_status, 'Marital Status' %><br>
-        <%= f.email_field :marital_status, :class=>"form-control" %>
        </div>
     </div>
   </div>
@@ -170,44 +141,6 @@
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
-        <%= f.label :graduation_institution, 'Graduation Institution' %><br>
-        <%= f.number_field :graduation_institution, :class=>"form-control" %>
-      </div>
-    </div>    
-    <div class="col-md-4">
-     <div class="form-group">
-      <%= f.label :graduation_university, 'Graduation University' %><br>
-      <%= f.text_field :graduation_university, :class=>"form-control" %>
-     </div>
-    </div>
-    <div class="col-md-4">
-       <div class="form-group">
-        <%= f.label :pg_university, 'PG University' %><br>
-        <%= f.text_field :pg_university, :class=>"form-control" %>
-       </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-4">
-      <div class="form-group">
-        <%= f.label :pg_institution, 'PG Institution' %><br>
-        <%= f.number_field :pg_institution, :class=>"form-control" %>
-      </div>
-    </div>    
-    <div class="col-md-4">
-    
-    </div>
-    <div class="col-md-4">
-       
-    </div>
-  </div>
-
-
-
-  <div class="row">
-    <div class="col-md-4">
-      <div class="form-group">
         <%= f.label :source_of_hire, 'Source of Hire' %><br>
         <%= f.select :source_of_hire, options_for_select(["Direct", "Consultancy", "Campus", "Referral"]), {}, {:class=>"form-control"}  %>
       </div>
@@ -247,56 +180,12 @@
        </div>
     </div>
   </div>
-    
-    <div class="row">
-    <div class="col-md-4">
-      <div class="form-group">
-        <%= f.label :pf_no, 'PF Number' %><br>
-        <%= f.text_field :pf_no, :class=>"form-control" %>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <%= f.label :aadhar_no, 'Aadhar Number' %><br>
-        <%= f.text_field :aadhar_no, :class=>"form-control" %>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <%= f.label :health_insurance_card_no, 'Health Insurance Card Number' %><br>
-        <%= f.text_field :health_insurance_card_no, :class=>"form-control" %>
-      </div>
-    </div>    
-  </div>
-
-    <div class="row">
-    <div class="col-md-4">
-      <div class="form-group">
-        <%= f.label :nationality, 'Nationality' %><br>
-        <%= f.text_field :nationality, :class=>"form-control" %>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <%= f.label :blood_group, 'Blood Group' %><br>
-        <%= f.text_field :blood_group, :class=>"form-control" %>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <%= f.label :current_address, 'Current Address' %><br>
-        <%= f.text_area :current_address, :class=>"form-control" %>
-      </div>
-    </div>    
-  </div>
-
-
 
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
-        <%= f.label :address, 'Permanent Address' %><br>
-        <%= f.text_area :address, :class=>"form-control" %>
+        <%= f.label :address %><br>
+        <%= f.text_field :address, :class=>"form-control" %>
       </div>
     </div>
     <% if f.object.new_record?%>
