@@ -77,27 +77,18 @@ class EmployeesController < ApplicationController
   if current_employee.role.name != "HR" 
     redirect_to dashboard_path
   end
-  end
-
-  def leave_applied_by_team
-    @emp = current_employee
-    @subordinates = @emp.subordinates 
-    @emp_ids = @subordinates.all.map(&:id)
-    @team_leave = Leave.where(employee_id: @emp_ids).order('created_at ASC')
-    @leave_approved_recently = @team_leave.where(:status => [true, false]).limit(20)
-    @leave_waiting_for_approve = @team_leave.where(status: nil)
-    add_breadcrumb "Leave Management", :leave_index_path
-    add_breadcrumb "Leave applied by team", leave_applied_by_team_path
-  end  
+  end    
   
   def team
-    @emp = current_employee
-    if current_employee.role.name == "Manager"
-    @team = @emp.subordinates
-    else
-    @team = @emp.manager.subordinates      
-    end
+    #@emp = current_employee
+    @team = Employee.where(:department_id=> current_employee.department_id)
+    # if current_employee.role.name == "Manager"
+    # @team = @emp.subordinates
+    # else
+    # @team = @emp.manager.subordinates      
+    # end
     add_breadcrumb "Team", team_path
+
   end
 
   def birthdays   

@@ -10,6 +10,11 @@
                         <div class="icon-bg bg-orange"></div>
                     </i><span class="menu-title">Dashboard</span></a></li>
 
+                    <li class="<%= 'active' if current_page?(profile_path) %>"><a href="/profile"><i class="fa fa-user fa-fw">
+                        <div class="icon-bg bg-blue"></div>
+                    </i><span class="menu-title">Profile</span></a>                          
+                    </li>  
+
                     <%if current_employee.role.name.in?(['Employee', 'Manager'])%>
                     <li class="<%= 'active' if current_page?(team_path) %>"><a href="/team"><i class="fa fa-users fa-fw">
                         <div class="icon-bg bg-blue"></div>

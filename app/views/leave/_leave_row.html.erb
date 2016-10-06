@@ -1,0 +1,18 @@
+<tr>
+    
+    <td><%=Leavetype.find(leave.leavetype_id).name%></td>
+    <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
+    <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
+    <td><%=leave.no_of_days%></td>
+    <td><%=truncate(leave.reason, :escape => false, :length => 30, :omission => '...')%></td>        
+    <%if leave.status == true%>
+    <td>Approved</td>
+    <%elsif leave.status ==false%>
+    <td>Rejected</td>
+    <%elsif leave.status ==nil%>
+    <td>Waiting for Approval</td>
+    <%end%>
+    <td><%=link_to '', leave, :class=>"fa fa-eye btn"%></td> 
+    <td><%=link_to '', edit_leave_path(leave), :class=>"fa fa-pencil-square-o btn"%></td>
+    <td><%= link_to '', leave, method: :delete, data: { confirm: 'Are you sure?' }, class: "fa fa-times btn" %></td> 
+</tr>

@@ -3,8 +3,8 @@ class Leave < ActiveRecord::Base
 	belongs_to :employee
 	belongs_to :leavetype
 	validates_presence_of :employee_id, :fromdate, :todate, :reason, :leavetype_id
-	# validate :fromdate_must_be_lessthan_todate
-	
+	validate :fromdate_must_be_lessthan_todate
+	default_scope { order('created_at DESC') }
 	
 	def fromdate_must_be_lessthan_todate
   		return if fromdate.blank? || todate.blank?

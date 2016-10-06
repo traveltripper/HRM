@@ -1,7 +1,7 @@
 <%title 'Leave applied by Team'%>
 
 <div class="panel panel-cblue">
-<div class="panel-heading">Team Leave waiting for approval</div>
+<div class="panel-heading">Team Leave waiting for approval from <%=@leave_from_date.strftime("%d-%b-%y")%> to <%=@leave_to_date.strftime("%d-%b-%y")%></div>
 <div class="panel-body">
 
 <table class="table table-hover-color table-bordered">
@@ -12,6 +12,7 @@
       <th>Leave type</th>
       <th>From date</th>
       <th>To date</th>
+      <th>Reason</th>
       <th>No of days</th>
       <th colspan="1"></th>
     </tr>
@@ -25,8 +26,9 @@
         <td><%=Leavetype.find(leave.leavetype_id).name%></td>
         <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
         <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
+        <td><%=truncate(leave.reason, :escape => false, :length => 30, :omission => '...')%></td>
         <td><%=leave.no_of_days%></td>
-        <td><%=link_to ' view', leave, :class=>"fa fa-eye btn btn-primary"%></td>         
+        <td><%=link_to '', leave, :class=>"fa fa-eye btn"%></td>         
       </tr>
     <% end %>
   </tbody>
@@ -36,7 +38,7 @@
 
 
 <div class="panel panel-cblue">
-<div class="panel-heading">Recent Team Leave</div>
+<div class="panel-heading">Team Leave from <%=@leave_from_date.strftime("%d-%b-%y")%> to <%=@leave_to_date.strftime("%d-%b-%y")%></div>
 <div class="panel-body">
 
 <table class="table table-hover-color table-bordered">
@@ -47,8 +49,10 @@
       <th>Leave type</th>
       <th>From date</th>
       <th>To date</th>
+      <th>Reason</th>
       <th>No of days</th>
       <th>Status</th>
+      <th></th>
     </tr>
   </thead>
 
@@ -60,14 +64,15 @@
         <td><%=Leavetype.find(leave.leavetype_id).name%></td>
         <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
         <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
-        <td><%=leave.no_of_days%></td>
-        <td>
-                <%if leave.status == true%>
-                Approved
-                <%elsif leave.status ==false%>
-                Rejected
-                <%end%>
-              </td>         
+        <td><%=truncate(leave.reason, :escape => false, :length => 30, :omission => '...')%></td>
+        <td><%=leave.no_of_days%></td>        
+        <%if leave.status == true%>
+        <td>Approved</td>
+        <%elsif leave.status ==false%>
+        <td>Rejected</td>
+        <%end%>
+               
+        <td><%=link_to '', leave, :class=>"fa fa-eye btn "%></td>        
       </tr>
     <% end %>
   </tbody>

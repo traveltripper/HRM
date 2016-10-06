@@ -1,8 +1,9 @@
 <% title "Leave Management" %>
-
+<div id="leave-notice"></div>
+<%#= link_to "Apply Leave", new_leave_path, remote: true, class: "btn btn-primary" %>
 <div class="row">
 <div class="show-options">
-<%=link_to ' Apply leave', new_leave_path, :class=>"fa fa-pencil-square-o btn btn-primary" %>
+<%=link_to ' Apply leave', new_leave_path, remote: true, :class=>"fa fa-pencil-square-o btn btn-primary" %>
 <%if @emp.role.name == "Manager"%>
   <%=link_to ' Team leave', leave_applied_by_team_path, :class=>"fa fa-users btn btn-primary" %>
 <%end%>
@@ -13,7 +14,7 @@
 <div class="row">
 <%if @emp.role.name == "HR"%>
     <div class="panel panel-cblue">
-    <div class="panel-heading">Employees leave waiting for approval</div>
+    <div class="panel-heading">Employees leave waiting for approval from <%=@leave_from_date.strftime("%d-%b-%y")%> to <%=@leave_to_date.strftime("%d-%b-%y")%></div>
     <div class="panel-body">
 
       <table class="table table-hover-color table-bordered">
@@ -24,6 +25,7 @@
             <th>Type of Leave</th>
             <th>From date</th>
             <th>To date</th>
+            <th>Reason</th>
             <th>No of days</th>
             <th colspan="1"></th>
           </tr>
@@ -37,9 +39,10 @@
               <td><%=leave.leavetype.name %></td>
               <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
               <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
+              <td><%=truncate(leave.reason, :escape => false, :length => 30, :omission => '...')%></td>
               <td><%=leave.no_of_days%></td>
               <td>
-                <%=link_to ' view', leave, :class=>"fa fa-eye btn btn-primary"%>
+                <%=link_to '', leave, :class=>"fa fa-eye btn"%>
               </td>         
             </tr>
           <% end %>
@@ -49,7 +52,7 @@
   </div>
 
   <div class="panel panel-cblue">
-    <div class="panel-heading">Employees leave approved recently</div>
+    <div class="panel-heading">Employees recent leave from <%=@leave_from_date.strftime("%d-%b-%y")%> to <%=@leave_to_date.strftime("%d-%b-%y")%></div>
     <div class="panel-body">
 
       <table class="table table-hover-color table-bordered">
@@ -60,8 +63,10 @@
             <th>Type of Leave</th>
             <th>From date</th>
             <th>To date</th>
+            <th>Reason</th>
             <th>No of days</th>
             <th>Status</th>
+            <th></th>
           </tr>
         </thead>
 
@@ -73,14 +78,14 @@
               <td><%=leave.leavetype.name %></td>
               <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
               <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
-              <td><%=leave.no_of_days%></td>
-              <td>
-                <%if leave.status == true%>
-                Approved
-                <%elsif leave.status ==false%>
-                Rejected
-                <%end%>
-              </td>          
+              <td><%=truncate(leave.reason, :escape => false, :length => 30, :omission => '...')%></td>
+              <td><%=leave.no_of_days%></td>              
+              <%if leave.status == true%>
+              <td>Approved</td>
+              <%elsif leave.status ==false%>
+              <td>Rejected</td>
+              <%end%>
+              <td><%=link_to '', leave, :class=>"fa fa-eye btn"%></td>       
             </tr>
           <% end %>
         </tbody>
@@ -93,10 +98,9 @@
 <div class="panel-heading">Leaves waiting for approval</div>
 <div class="panel-body">
 
-<table class="table table-hover-color table-bordered">
+<table class="table table-hover-color table-bordered waiting-for-approval">
   <thead>
-    <tr>
-      <th>S.No</th>      
+    <tr>    
       <th>Type of Leave</th>
       <th>From date</th>
       <th>To date</th>
@@ -109,22 +113,7 @@
 
   <tbody>
     <% @leave_waiting_for_approve.each_with_index do |leave, index| %>
-      <tr>
-        <td><%= index+1 %></td>
-        <td><%=Leavetype.find(leave.leavetype_id).name%></td>
-        <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
-        <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
-        <td><%=leave.no_of_days%></td>
-        <td><%=truncate(leave.reason, :escape => false, :length => 30, :omission => '...')%></td>        
-        <%if leave.status == true%>
-          <td>Approved</td>
-        <%elsif leave.status ==nil%>
-          <td>Waiting for approval</td>
-        <%end%>
-        <td><%=link_to '', leave, :class=>"fa fa-eye btn"%></td> 
-        <td><%=link_to '', edit_leave_path(leave), :class=>"fa fa-pencil-square-o btn"%></td>
-        <td><%= link_to '', leave, method: :delete, data: { confirm: 'Are you sure?' }, class: "fa fa-times btn" %></td> 
-      </tr>
+      <%= render 'leave_row', leave: leave %>      
     <% end %>
   </tbody>
 </table>
@@ -143,7 +132,9 @@
       <th>From date</th>
       <th>To date</th>
       <th>No of days</th>
+      <th>Reason</th>
       <th>Status</th>
+      <th></th>
     </tr>
   </thead>
 
@@ -155,12 +146,14 @@
         <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
         <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
         <td><%=leave.no_of_days%></td>
-        <td>
+        <td><%=truncate(leave.reason, :escape => false, :length => 30, :omission => '...')%></td>        
         <%if leave.status == true%>
-          Approved
+          <td>Approved</td>
+          <%else%>
+          <td>Rejected</td>
         <%end%>
-        	
-        </td>         
+        <td><%=link_to '', leave, :class=>"fa fa-eye btn"%></td>      	
+                 
       </tr>
     <% end %>
   </tbody>
@@ -168,3 +161,6 @@
 </div>
 </div>
 </div>
+
+
+

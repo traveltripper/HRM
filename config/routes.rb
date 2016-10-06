@@ -48,7 +48,7 @@ Rails.application.routes.draw do
   resources :leavetypes
   resources :leave
   get '/team' => 'employees#team'
-  get '/leave-applied-by-team' => 'employees#leave_applied_by_team'
+  get '/leave-applied-by-team' => 'leave#leave_applied_by_team'
   # match '/departments/:id/employees' => 'departments#employees', via: [:get, :post]
   
   get '/birthdays' => 'employees#birthdays'

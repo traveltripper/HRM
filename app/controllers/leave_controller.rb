@@ -6,14 +6,16 @@ class LeaveController < ApplicationController
   
   def index
     @emp = current_employee
+    @leave_from_date = 1.month.ago.beginning_of_month
+    @leave_to_date = Time.now
+    @leaves = Leave.all.where(:created_at => @leave_from_date..@leave_to_date)
     
-    if @emp.role.name == "HR"
-      @leaves = Leave.all
-      @emp_leaves_waiting_for_approval = Leave.where(:status => nil)
-      @emp_leaves_approved_recently = Leave.where(:status => [true, false])
+    if @emp.role.name == "HR"      
+      @emp_leaves_waiting_for_approval = @leaves.where(:status => nil).limit(15) 
+      @emp_leaves_approved_recently = @leaves.where(:status => [true, false]).limit(15) 
     end
     
-    @leave_approved = @emp.leave.where(status: !nil).limit(5)    
+    @leave_approved = @emp.leave.where(:status => [true, false]).limit(5)    
     @leave_waiting_for_approve = @emp.leave.where(status: nil).limit(5)
   end
   
@@ -33,39 +35,46 @@ class LeaveController < ApplicationController
   end
 
   def create
+    p "..create beginning....."
      @emp = current_employee
-     @leave = current_employee.leave.build(leave_params)
-    if @leave.save
-      #LeaveMailer.employee_leave_request_email(@emp, @leave).deliver_later
-      flash[:success] = "You have applied leave successfully and an e-mail will be sent to HR and Manager. Waiting for approval."
-      redirect_to root_url
-    else
-      render 'new'
-    end
+     @leave = current_employee.leave.create(leave_params)    
+     p ".......create end........."  
+    # if @leave.save
+    #   #LeaveMailer.employee_leave_request_email(@emp, @leave).deliver_later
+    #   flash[:success] = "You have applied leave successfully and an e-mail will be sent to HR and Manager. Waiting for approval."
+    #   redirect_to root_url
+    # else
+    #   render 'new'
+    # end
   end
 
-  def update
-
+  def update     
     @leave = Leave.find(params[:id])
-    if @leave.update_attributes(leave_params)
-        respond_to do |format|
-          format.html { redirect_to leave_path, notice: 'Leave was successfully updated.' }        
-        end
+    if params[:chkNo] == "approve"
+      @leave.update_attribute(:status, true)
+      respond_to do |format|
+        format.html { redirect_to root_path, notice: 'Employee leave is approved' }
+      end
     else
-       render :edit         
-    end
-    
-    # @emp = @leave.employee    
-    # if params[:chkNo] == "approve"
-    #   @leave.update_attribute(:status, true)
-    #   flash[:success] = "Employee leave is approved"
-    # else
-    #   @leave.update_attributes(:status => false, :reject_reason => params[:leave][:reject_reason])      
-    #   flash[:success] = "Employee leave is rejected"
-    # end
-    #LeaveMailer.employee_leave_status(@emp, @leave).deliver_later
-    #redirect_to dashboard_path
-    
+      @leave.update_attributes(:status => false, :reject_reason => params[:leave][:reject_reason])      
+      respond_to do |format|
+        format.html { redirect_to root_path, notice: 'Employee leave is rejected' }
+      end
+    end    
+  end
+
+  def leave_applied_by_team
+    @emp = current_employee
+    @subordinates = @emp.subordinates 
+    @emp_ids = @subordinates.all.map(&:id)
+    @leave_from_date = 1.month.ago.beginning_of_month
+    @leave_to_date = Time.now
+    @leaves = Leave.all.where(:created_at => @leave_from_date..@leave_to_date)    
+    @team_leave = @leaves.where(employee_id: @emp_ids)
+    @leave_approved_recently = @team_leave.where(:status => [true, false]).limit(10)
+    @leave_waiting_for_approve = @team_leave.where(status: nil)
+    add_breadcrumb "Leave Management", :leave_index_path
+    add_breadcrumb "Leave applied by team", leave_applied_by_team_path
   end
   
   private
