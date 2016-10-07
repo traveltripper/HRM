@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161006142844) do
+ActiveRecord::Schema.define(version: 20161007100145) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 20161006142844) do
     t.datetime "date_of_resignation"
     t.string   "nationality",              limit: 255
     t.string   "blood_group",              limit: 255
-    t.boolean  "marital_status"
+    t.string   "marital_status",           limit: 255
     t.string   "graduation_institution",   limit: 255
     t.string   "graduation_university",    limit: 255
     t.string   "pg_university",            limit: 255

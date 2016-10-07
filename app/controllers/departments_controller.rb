@@ -33,7 +33,19 @@ class DepartmentsController < ApplicationController
   def edit
     add_breadcrumb "Edit Department"
   end
-
+  
+  def manager
+    p "........."   
+    p params    
+    p "........."       
+    @emp = Employee.where(:manager_id => nil, :department_id=>params[:id]).first
+    if @emp.nil?
+      render json: {employee_id: '', employee_name: '' }
+    else
+      render json: {employee_id: @emp.id, employee_name: @emp.fullname }
+    end
+    
+  end
   # POST /departments
   # POST /departments.json
   def create

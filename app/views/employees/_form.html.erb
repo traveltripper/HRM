@@ -1,6 +1,6 @@
 <div class="panel panel-cblue" style="background:#fff;">  
   <div class="panel-body pan">
-  <%# @bars = [['ROR',["Item 1"]], ['JAVA',["Item 2"]]]%>
+  <% @rand = (0...15).map { ('a'..'z').to_a[rand(26)] }.join%>
 
   <%= form_for(@employee) do |f| %>
   <div class="form-body pal">
@@ -17,67 +17,62 @@
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
-        <%= f.label :first_name %><br>
+        <%= f.label :first_name, 'First Name*'%><br>
         <%= f.text_field :first_name, :class=>"form-control" %>
       </div>
-    </div>    
-    <div class="col-md-4">
-     <div class="form-group">
-      <%= f.label :middle_name %><br>
-      <%= f.text_field :middle_name, :class=>"form-control" %>
-     </div>
     </div>
     <div class="col-md-4">
        <div class="form-group">
-        <%= f.label :last_name %><br>
+        <%= f.label :last_name, 'Last Name*' %><br>
         <%= f.text_field :last_name, :class=>"form-control" %>
        </div>
-    </div>
+    </div>    
+    <div class="col-md-4">
+     <div class="form-group">
+      <%= f.label :middle_name, 'Middle Name*' %><br>
+      <%= f.text_field :middle_name, :class=>"form-control" %>
+     </div>
+    </div>    
   </div>
   
   <%#= managers.each {|e| e.email} %>
   <div class="row">
     <div class="col-md-4">
+     <div class="form-group">
+      <%= f.label :department_id, 'Department*' %><br>
+      <%=f.collection_select :department_id, Department.all, :id, :name, {:prompt => 'Select Department'}, :class=>"form-control"%>
+     </div>
+    </div>
+    <div class="col-md-4">
       <div class="form-group">
-        <%= f.label :manager %><br>
-        <%=f.collection_select :manager_id, Employee.where(:manager_id=>nil), :id, :fullname, {:include_blank => 'Select manager'}, :class=>"form-control"%>        
-        <%#=f.grouped_collection_select :manager_id, Employee.where(:manager_id=>nil), :id, :fullname, {:include_blank => 'Select manager'}, :class=>"form-control"%>
-        <%#=f.grouped_collection_select :manager_id, Department.all, :employees, :name, :id, :fullname, {:include_blank => 'Select manager'}, :class=>"form-control"%>
-       
-        <%#= f.text_field :manager_id, :as => :grouped_select, :collection => [['Authors', ['Jose', 'Carlos']], ['General', ['Bob', 'John']]], :group_method => :last %>
-        <%#= f.select :manager_id, grouped_options_for_select(@bars) %>
+        <%= f.label :manager_id %><br>
+        <%= f.select(:manager_id, [], {}, {:class => 'form-control'})  %>              
       </div>
     </div>    
     <div class="col-md-4">
      <div class="form-group">
-      <%= f.label :role_id %><br>
+      <%= f.label :role_id, 'Role*' %><br>
       <%=f.collection_select :role_id, Role.all, :id, :name, {:prompt => 'Select Role'}, :class=>"form-control"%>
      </div>
-    </div>
-    <div class="col-md-4">
-       <div class="form-group">
-        <%= f.label :department_id %><br>
-        <%=f.collection_select :department_id, Department.all, :id, :name, {:prompt => 'Select Department'}, :class=>"form-control"%>
-       </div>
-    </div>
+    </div>    
   </div>
 
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
-        <%= f.label :ttid, 'Company ID' %><br>
+        <%= f.label :ttid, 'TT ID*' %><br>
         <%= f.number_field :ttid, :class=>"form-control" %>
       </div>
     </div>    
     <div class="col-md-4">
      <div class="form-group">
-      <%= f.label :email, 'Company E-mail' %><br>
+      <%= f.label :email, 'Company E-mail*' %><br>
       <%= f.email_field :email, :class=>"form-control" %>
      </div>
     </div>
     <div class="col-md-4">
        <div class="form-group">
-        <%= f.label :personal_email, 'Personal E-mail' %><br>
+        <%= f.label :personal_email, 'Personal E-mail*' %><br>
         <%= f.email_field :personal_email, :class=>"form-control" %>
        </div>
     </div>
@@ -86,20 +81,20 @@
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
-        <%= f.label :blood_group, 'Blood Group' %><br>
-        <%= f.number_field :blood_group, :class=>"form-control" %>
+        <%= f.label :blood_group, 'Blood Group*' %><br>
+        <%= f.text_field :blood_group, :class=>"form-control" %>
       </div>
     </div>    
     <div class="col-md-4">
      <div class="form-group">
-      <%= f.label :father_or_spouse, 'Father or Spouse' %><br>
-      <%= f.email_field :father_or_spouse, :class=>"form-control" %>
+      <%= f.label :father_or_spouse, 'Father or Spouse*' %><br>
+      <%= f.text_field :father_or_spouse, :class=>"form-control" %>
      </div>
     </div>
     <div class="col-md-4">
        <div class="form-group">
-        <%= f.label :marital_status, 'Marital Status' %><br>
-        <%= f.email_field :marital_status, :class=>"form-control" %>
+        <%= f.label :marital_status, 'Marital Status*' %><br>
+        <%= f.select :marital_status, options_for_select(["Married", "Single", "Divorced", "Widowed"]), {}, {:class=>"form-control"} %>
        </div>
     </div>
   </div>
@@ -148,38 +143,18 @@
 
   <div class="row">
     <div class="col-md-4">
-      <div class="form-group">
-        <%= f.label :prev_years_of_exp, 'Previous Years of Experience' %><br>
-        <%= f.number_field :prev_years_of_exp, :class=>"form-control" %>
-      </div>
-    </div>    
-    <div class="col-md-4">
      <div class="form-group">
       <%= f.label :pg, 'PG' %><br>
       <%= f.text_field :pg, :class=>"form-control" %>
      </div>
     </div>
-    <div class="col-md-4">
-       <div class="form-group">
-        <%= f.label :graduation, 'Graduation' %><br>
-        <%= f.text_field :graduation, :class=>"form-control" %>
-       </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4">      
       <div class="form-group">
-        <%= f.label :graduation_institution, 'Graduation Institution' %><br>
-        <%= f.number_field :graduation_institution, :class=>"form-control" %>
+        <%= f.label :pg_institution, 'PG Institution' %><br>
+        <%= f.text_field :pg_institution, :class=>"form-control" %>
       </div>
-    </div>    
-    <div class="col-md-4">
-     <div class="form-group">
-      <%= f.label :graduation_university, 'Graduation University' %><br>
-      <%= f.text_field :graduation_university, :class=>"form-control" %>
-     </div>
-    </div>
+    </div> 
+    
     <div class="col-md-4">
        <div class="form-group">
         <%= f.label :pg_university, 'PG University' %><br>
@@ -190,16 +165,43 @@
 
   <div class="row">
     <div class="col-md-4">
+       <div class="form-group">
+        <%= f.label :graduation, 'Graduation' %><br>
+        <%= f.text_field :graduation, :class=>"form-control" %>
+       </div>
+    </div>
+    <div class="col-md-4">
       <div class="form-group">
-        <%= f.label :pg_institution, 'PG Institution' %><br>
-        <%= f.number_field :pg_institution, :class=>"form-control" %>
+        <%= f.label :graduation_institution, 'Graduation Institution' %><br>
+        <%= f.text_field :graduation_institution, :class=>"form-control" %>
       </div>
     </div>    
     <div class="col-md-4">
-    
+     <div class="form-group">
+      <%= f.label :graduation_university, 'Graduation University' %><br>
+      <%= f.text_field :graduation_university, :class=>"form-control" %>
+     </div>
+    </div>    
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :prev_years_of_exp, 'Previous Years of Experience' %><br>
+        <%= f.text_field :prev_years_of_exp, :class=>"form-control" %>
+      </div>
+    </div>    
+    <div class="col-md-4">
+      <div class="form-group">
+      <%= f.label :lwd, 'Last Working Day' %><br>
+      <%= f.text_field :lwd, :class=>"form-control datepicker" %>
+     </div>
     </div>
     <div class="col-md-4">
-       
+       <div class="form-group">
+        <%= f.label :date_of_resignation, 'Date of Resignation' %><br>
+        <%= f.text_field :date_of_resignation, :class=>"form-control datepicker" %>
+       </div>
     </div>
   </div>
 
@@ -235,21 +237,6 @@
       </div>
     </div>    
     <div class="col-md-4">
-     <div class="form-group">
-      <%= f.label :lwd, 'Last Working Day' %><br>
-      <%= f.text_field :lwd, :class=>"form-control datepicker" %>
-     </div>
-    </div>
-    <div class="col-md-4">
-       <div class="form-group">
-        <%= f.label :date_of_resignation, 'Date of Resignation' %><br>
-        <%= f.text_field :date_of_resignation, :class=>"form-control datepicker" %>
-       </div>
-    </div>
-  </div>
-    
-    <div class="row">
-    <div class="col-md-4">
       <div class="form-group">
         <%= f.label :pf_no, 'PF Number' %><br>
         <%= f.text_field :pf_no, :class=>"form-control" %>
@@ -261,25 +248,19 @@
         <%= f.text_field :aadhar_no, :class=>"form-control" %>
       </div>
     </div>
+  </div>
+    
+    <div class="row">
     <div class="col-md-4">
       <div class="form-group">
         <%= f.label :health_insurance_card_no, 'Health Insurance Card Number' %><br>
         <%= f.text_field :health_insurance_card_no, :class=>"form-control" %>
       </div>
-    </div>    
-  </div>
-
-    <div class="row">
-    <div class="col-md-4">
-      <div class="form-group">
-        <%= f.label :nationality, 'Nationality' %><br>
-        <%= f.text_field :nationality, :class=>"form-control" %>
-      </div>
     </div>
     <div class="col-md-4">
       <div class="form-group">
-        <%= f.label :blood_group, 'Blood Group' %><br>
-        <%= f.text_field :blood_group, :class=>"form-control" %>
+        <%= f.label :nationality, 'Nationality*' %><br>
+        <%= f.text_field :nationality, :class=>"form-control" %>
       </div>
     </div>
     <div class="col-md-4">
@@ -288,28 +269,26 @@
         <%= f.text_area :current_address, :class=>"form-control" %>
       </div>
     </div>    
-  </div>
-
-
+  </div>      
 
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
-        <%= f.label :address, 'Permanent Address' %><br>
+        <%= f.label :address, 'Permanent Address*' %><br>
         <%= f.text_area :address, :class=>"form-control" %>
       </div>
-    </div>
+    </div>    
     <% if f.object.new_record?%>
       <div class="col-md-4">
         <div class="form-group">
           <%= f.label :password %><br>
-          <%= f.password_field :password, :class=>"form-control" %>
+          <%= f.text_field :password, :class=>"form-control", :value => @rand %>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <%= f.label :password_confirmation %><br>
-          <%= f.password_field :password_confirmation, :class=>"form-control" %>
+          <%= f.text_field :password_confirmation, :class=>"form-control", :value => @rand %>
         </div>
       </div>
     <%end%>
@@ -330,4 +309,21 @@
   $('.datepicker').datepicker({
     dateFormat: "dd-mm-yy"
   });
+
+  $(document).ready(function(){    
+    $("#employee_department_id").change(function(){
+      $("#employee_manager_id").empty();
+      $.ajax({url: "/departments/" + encodeURIComponent($(this).attr('value')) + '/manager.json',
+      success: function(result){
+          var option = new Option(result.employee_name, result.employee_id);
+          $("#employee_manager_id").append($(option));
+      },
+      error: function(result){
+          $("#employee_manager_id").empty();
+      }
+      });
+    });
+  });
+  
 </script>
+

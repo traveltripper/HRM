@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   resources :departments do 
     member do
       get :employees
+      get :manager
     end
   end
 
