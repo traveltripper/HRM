@@ -54,5 +54,44 @@ $(document).ready(function(){
 
 
 
+  $(document).ready(function(){   
+
+    $('.datepicker').datepicker({
+    dateFormat: "dd-mm-yy",
+    changeMonth: true,
+    changeYear: true
+    });
+
+    $("#employee_department_id").change(function(){
+      $("#employee_manager_id").empty();
+      $.ajax({url: "/departments/" + encodeURIComponent($(this).attr('value')) + '/manager.json',
+      success: function(result){
+          if(result.employee_name != null ){
+            var option = new Option(result.employee_name, result.employee_id);
+            $("#employee_manager_id").append($(option));
+            $("#notice-no-manager").css("display","none");
+            if(result.employee_name == '' ){$("#notice-no-manager").css("display","inline");};
+          };
+          
+          
+          //$('.tag-tooltip').tooltip();
+      },
+      error: function(result){
+          //$("#employee_manager_id").empty();
+          //alert();
+          //$('.tag-tooltip').tooltip();
+      }
+      });
+    });
+  });
 
 
+ $(function() {
+   $("input[name='alert']").click(function() {
+     if ($("#alert_particular").is(":checked")) {
+       $("#emails_list").show();
+     } else {
+       $("#emails_list").hide();
+     }
+   });
+ });

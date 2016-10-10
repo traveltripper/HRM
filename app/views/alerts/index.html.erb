@@ -1,0 +1,19 @@
+<%title 'Alerts'%>
+
+<%= form_tag '/alerts' do %>
+	<%= radio_button_tag :alert, 'team' %> 
+	<%= label_tag :alert, 'Team' %>
+	<%= radio_button_tag :alert, 'particular', :checked => true %>
+	<%= label_tag :alert, 'particular' %>
+	<br/>
+	<div id="emails_list">
+	<%=label_tag :emails_list, 'Enter emails'%><br/>
+	<%=text_area_tag :emails_list%>
+	</div>
+	<div id="alert-message">
+	<%=label_tag :message %><br/>
+	<%=text_area_tag :message%>
+	</div>
+	<%= submit_tag "submit", :class=>"btn btn-primary"%>
+<%end%>
+

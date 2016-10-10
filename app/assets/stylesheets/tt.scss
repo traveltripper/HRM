@@ -68,10 +68,9 @@ input, textarea, select{
     /* overflow: visible !important; */
 }
 
-.fc-event {
-   background: url('/images/cal.jpg') no-repeat; 
-   min-height: 49px;
-   min-width: 64px;
+.fc-event{
+    background-color: transparent;
+    
 }
 
 .modal-content{
@@ -172,4 +171,13 @@ input.input-mini.form-control.active, input.input-mini.form-control{
 
 .required{
     color: red;
+}
+
+select.ui-datepicker-month, select.ui-datepicker-year{
+    color: #3A6F9F;
+}
+
+#notice-no-manager{
+    color :red;
+    display :none;
 }

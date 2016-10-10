@@ -9,8 +9,9 @@ class Employee < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :middle_name, :role_id, :department_id, :ttid, :personal_email, :contact_no, :emergency_name, :emergency_contact_no, :actual_dob, :certificate_dob, :doj 
   validates_presence_of :graduation, :pg, :source_of_hire, :address, :blood_group
   validates_presence_of :health_insurance_card_no, :pf_no, :aadhar_no, :pancard_no, :passport_no
-  validates_presence_of :previous_employer, :prev_years_of_exp, :father_or_spouse, :nationality, :date_of_resignation, :lwd
+  validates_presence_of :prev_years_of_exp, :father_or_spouse, :nationality, :date_of_resignation, :lwd
   belongs_to :department
+  validates_uniqueness_of :ttid
   # acts_as_birthday :crated_at
   #acts_as_birthday :actual_dob
   

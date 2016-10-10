@@ -15,8 +15,8 @@ class LeaveController < ApplicationController
       @emp_leaves_approved_recently = @leaves.where(:status => [true, false]).limit(15) 
     end
     
-    @leave_approved = @emp.leave.where(:status => [true, false]).limit(5)    
-    @leave_waiting_for_approve = @emp.leave.where(status: nil).limit(5)
+    @leave_approved = @emp.leave.where(:status => [true, false], :created_at => @leave_from_date..@leave_to_date).limit(15)    
+    @leave_waiting_for_approve = @emp.leave.where(status: nil, :created_at => @leave_from_date..@leave_to_date).limit(15)
   end
   
   def show

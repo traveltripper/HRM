@@ -20,7 +20,8 @@ initialize_calendar = function() {
         url: '/events.json'
       },
       {
-        url: '/birthdays.json'
+        url: '/birthdays.json',
+        imageurl:'/images/birthdayicon.jpg'
       }
       ],
 
@@ -41,6 +42,18 @@ initialize_calendar = function() {
 
         calendar.fullCalendar('unselect');
       },
+
+      eventRender: function(event, eventElement) {
+        //alert();
+    if (event.type == "birthday") {
+        
+        eventElement.find("div.fc-content").prepend("<img src='images/birthdayicon.jpg' width='35' height='30'>");
+        eventElement.find("a.fc-event").css('border', 'red');
+    }else
+    {
+      eventElement.find("div.fc-content").prepend("<img src='images/cal.jpg' width='35' height='30'>");
+    }
+    },
 
       eventDrop: function(event, delta, revertFunc) {
         $.get('/get_current_employee_role', function(result){
@@ -63,7 +76,7 @@ initialize_calendar = function() {
       },
       
       eventClick: function(event, jsEvent, view) {
-        //alert(event.start);
+        
         if (event.type == "birthday")
         {
             $('#modalTitle').html("Happy Birthday!!!");
@@ -74,7 +87,7 @@ initialize_calendar = function() {
         } 
         else if (event.type == "event") 
         {
-          //alert(event.start);
+          
           $.get('/get_current_employee_role', function(result){
             if (result.role == "HR"){
                   //$('#calendarModal').modal();
@@ -88,7 +101,7 @@ initialize_calendar = function() {
             else
             {
                 //start = event.start.toString();
-                //alert(start);
+                
                 $('#EventModal #modalTitle').html("Event!!!");
                 $('#EventModal #modalBody .event-title').html(event.title);
                 $('#EventModal #modalBody .event-from').html(event.start.toString().substr(0, 25));

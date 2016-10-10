@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'alerts/index'
+
   get 'dashboard/index'
 
   resources :events
@@ -54,4 +56,7 @@ Rails.application.routes.draw do
   
   get '/birthdays' => 'employees#birthdays'
   get 'search' => 'employees#search'
+  get '/alerts' => 'alerts#index'
+  post '/alerts' => 'alerts#index'
+  #post '/sendmail' => 'alerts#sendmail'
 end
