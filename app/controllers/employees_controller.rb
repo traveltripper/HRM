@@ -1,7 +1,7 @@
 class EmployeesController < ApplicationController
   before_action :authenticate_employee!
   #before_filter(:only => [:index, :show]) { unauthorized! if cannot? :read, :Employee }
-  before_filter :require_permission, :only => [:index, :new, :edit, :create, :update, :destroy]
+  before_filter :require_permission, :only => [:index, :new, :create, :destroy]
   layout 'dashboard'
   add_breadcrumb "Home", :root_path
   respond_to :json
@@ -73,6 +73,22 @@ class EmployeesController < ApplicationController
     add_breadcrumb "Profile", profile_path
   end
 
+  def edit_profile
+    @employee = current_employee    
+    add_breadcrumb "Edit Profile"
+  end
+
+  def update_profile
+    @employee = current_employee
+    respond_to do |format|
+      if @employee.update(profile_params)
+        format.html { redirect_to profile_path, :notice => "Your profile has updated successfully"}
+      else
+        format.html { redirect_to edit_profile_path }
+      end
+    end
+  end
+
   def require_permission
   if current_employee.role.name != "HR" 
     redirect_to dashboard_path
@@ -111,6 +127,10 @@ class EmployeesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     
     # Never trust parameters from the scary internet, only allow the white list through.
+    def profile_params
+      params.require(:employee).permit( :current_address, :marital_status, :contact_no, :emergency_contact_no, :emergency_name )
+    end
+
     def employee_params
       params.require(:employee).permit(:first_name, :middle_name, :last_name, :manager_id, :role_id, :department_id, :ttid, :email, :personal_email, :contact_no, :emergency_name, :emergency_contact_no, :actual_dob, :certificate_dob, :doj, :prev_years_of_exp, :pg, :graduation, :source_of_hire, :pancard_no, :passport_no, :status, :lwd, :date_of_resignation, :address, :password, :password_confirmation, :blood_group, :father_or_spouse, :marital_status, :graduation_institution, :graduation_university, :pg_university, :pg_institution, :pf_no, :aadhar_no, :health_insurance_card_no, :nationality, :current_address )
     end

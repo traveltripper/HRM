@@ -4,31 +4,29 @@ class ConferenceRoomsController < ApplicationController
   layout 'dashboard'
   add_breadcrumb "Home", :root_path
   add_breadcrumb "Conference Rooms", :conference_rooms_path
-  # GET /conference_rooms
-  # GET /conference_rooms.json
+  
+
   def index
     @conference_rooms = ConferenceRoom.all
   end
 
-  # GET /conference_rooms/1
-  # GET /conference_rooms/1.json
+  
   def show
     add_breadcrumb "Room"
   end
 
-  # GET /conference_rooms/new
+  
   def new
     add_breadcrumb "Add Conference Room"
     @conference_room = ConferenceRoom.new
   end
 
-  # GET /conference_rooms/1/edit
+  
   def edit
     add_breadcrumb "Edit Conference Room"
   end
 
-  # POST /conference_rooms
-  # POST /conference_rooms.json
+  
   def create
     @conference_room = ConferenceRoom.new(conference_room_params)
 
@@ -43,8 +41,7 @@ class ConferenceRoomsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /conference_rooms/1
-  # PATCH/PUT /conference_rooms/1.json
+  
   def update
     respond_to do |format|
       if @conference_room.update(conference_room_params)
@@ -57,8 +54,7 @@ class ConferenceRoomsController < ApplicationController
     end
   end
 
-  # DELETE /conference_rooms/1
-  # DELETE /conference_rooms/1.json
+  
   def destroy
     @conference_room.destroy
     respond_to do |format|

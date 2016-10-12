@@ -58,5 +58,7 @@ Rails.application.routes.draw do
   get 'search' => 'employees#search'
   get '/alerts' => 'alerts#index'
   post '/alerts' => 'alerts#index'
-  #post '/sendmail' => 'alerts#sendmail'
+  post '/sendmail' => 'alerts#sendmail'
+  get '/edit_profile' => 'employees#edit_profile'
+  patch '/update_profile' => 'employees#update_profile'
 end

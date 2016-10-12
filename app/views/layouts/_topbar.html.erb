@@ -25,7 +25,7 @@
                     <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="/images/profilepic.png" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs"><%=current_employee.first_name %></span>&nbsp;<span class="caret"></span></a>
                          <ul class="dropdown-menu dropdown-user pull-right">
 
-                            <li><%= link_to " Edit Profile", profile_path, :class=>"fa fa-user link-color" %></li>
+                            <li><%= link_to " Edit Profile", edit_profile_path, :class=>"fa fa-user link-color" %></li>
 
                             <li><%= link_to " Change your password", edit_employee_registration_path, :class=>"fa fa-pencil link-color" %></li>
 

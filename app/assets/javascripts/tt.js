@@ -89,9 +89,9 @@ $(document).ready(function(){
  $(function() {
    $("input[name='alert']").click(function() {
      if ($("#alert_particular").is(":checked")) {
-       $("#emails_list").show();
+       $("#emails_list").show(1000);
      } else {
-       $("#emails_list").hide();
+       $("#emails_list").hide(1000);
      }
    });
  });

@@ -62,6 +62,13 @@
                     </i><span class="menu-title">Event Management</span></a>
                     </li>
 
+                    <%if current_employee.role.name.in?(['HR', 'Manager'])%>
+                    <li class="<%= 'active' if current_page?(alerts_path) %>"><a href="/alerts"><i class="fa fa-envelope fa-fw">
+                        <div class="icon-bg bg-yellow"></div>
+                    </i><span class="menu-title">Alerts</span></a>
+                    </li>
+                    <%end%>
+
                 </ul>
             </div>
         </nav>

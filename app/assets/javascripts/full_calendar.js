@@ -48,7 +48,7 @@ initialize_calendar = function() {
     if (event.type == "birthday") {
         
         eventElement.find("div.fc-content").prepend("<img src='images/birthdayicon.jpg' width='35' height='30'>");
-        eventElement.find("a.fc-event").css('border', 'red');
+        eventElement.css('border', 'white');
     }else
     {
       eventElement.find("div.fc-content").prepend("<img src='images/cal.jpg' width='35' height='30'>");

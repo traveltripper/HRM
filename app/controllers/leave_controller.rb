@@ -20,7 +20,11 @@ class LeaveController < ApplicationController
   end
   
   def show
-    @leave= Leave.find(params[:id])    
+    @leave= Leave.find(params[:id])
+    unless (([@leave.employee , @leave.employee.manager].include? current_employee) || current_employee.role.name == "HR")
+      redirect_to root_path
+    end
+
     add_breadcrumb "Leave Details"
   end
 
@@ -32,13 +36,16 @@ class LeaveController < ApplicationController
 
   def edit
     @leave= Leave.find(params[:id])
+    unless (([@leave.employee , @leave.employee.manager].include? current_employee) || current_employee.role.name == "HR")
+      redirect_to root_path
+    end
   end
 
   def create
-    p "..create beginning....."
+    
      @emp = current_employee
      @leave = current_employee.leave.create(leave_params)    
-     p ".......create end........."  
+     
     # if @leave.save
     #   #LeaveMailer.employee_leave_request_email(@emp, @leave).deliver_later
     #   flash[:success] = "You have applied leave successfully and an e-mail will be sent to HR and Manager. Waiting for approval."
@@ -81,6 +88,5 @@ class LeaveController < ApplicationController
   def leave_params
       params.require(:leave).permit(:employee_id, :no_of_days, :status, :leavetype_id, :fromdate, :todate, :reason, :reject_reason)
   end
-
   
 end
