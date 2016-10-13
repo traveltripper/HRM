@@ -1,12 +1,12 @@
 class AlertsController < ApplicationController
-	#before_action :authenticate_employee!
+	before_action :authenticate_employee!
 	layout 'dashboard'
 	add_breadcrumb "Home", :root_path
 
   def index
-    # unless ['HR', 'Manager'].include? current_employee.role.name
-    #   redirect_to root_path
-    # end 
+    unless ['HR', 'Manager'].include? current_employee.role.name
+       redirect_to root_path
+     end 
   	add_breadcrumb "Alerts"
   end
 
