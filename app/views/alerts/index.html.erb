@@ -2,7 +2,7 @@
 <%= tinymce %>
 <div class='row'>
 <div class="col-md-6">
-	<div class="panel panel-cblue" style="background:#fff;">  
+	<div class="panel panel-cblue">  
 	  	<div class="panel-body pan">
 			<%= form_tag '/sendmail' do %>
 				<div class="form-body pal">
@@ -12,16 +12,21 @@
 					<%= radio_button_tag :alert, 'particular' %>
 					<%= label_tag :alert, 'particular', :for=>'alert_particular' %>
 				</div>
+        <p class="email-errors">Please enter valid e-mail</p>
 
-				<div id="emails_list" class="form-group">
-				<%=label_tag :enter_emails, 'Enter emails seperated by commas:'%><br/>
-				<%=text_area_tag :enter_emails, '', :class=>"form-control", :require=>true %>
+        <%=label_tag :enter_emails, 'Enter emails seperated by commas:'%><br/>
+				<div id="emails_list" class="form-group">				
+				<%=text_field_tag :enter_emails, '', :class=>"form-control", :require=>true %>       
 				</div>
+        
+        <div id="get_email" class="form-group">        
+        <%=text_area_tag :get_email, '', :class=>"form-control", :require=>true %>
+        </div>
 
-                <div class="form-group">
-                <%=label_tag :subject , 'Subject:'%>
-                <%=text_field_tag :subject, '', class:"form-control", :require=>true%>
-                </div>
+        <div class="form-group">
+        <%=label_tag :subject , 'Subject:'%>
+        <%=text_field_tag :subject, '', class:"form-control", :require=>true%>
+        </div>
 
 				<div id="alert-message" class="form-group">
 				<%=label_tag :message, 'Message:' %><br/>
@@ -40,64 +45,5 @@
 
 
 
-<!-- <script type="text/javascript">
-	$(function(){ // DOM ready
 
-  // ::: TAGS BOX
-
-  $("#enter_emails").on({
-    focusout : function() {
-      var txt = this.value.replace(/[^a-z0-9\+\-\.\#]/ig,''); // allowed characters
-      if(txt) $("<span/>", {text:txt.toLowerCase(), insertAfter:this});
-      this.value = "";
-    },
-    keyup : function(ev) {
-      // if: comma|enter (delimit more keyCodes with | pipe)
-      if(/(188|13)/.test(ev.which)) $(this).focusout(); 
-    }
-  });
-  $('#emails_list').on('click', 'span', function() {
-    if(confirm("Remove "+ $(this).text() +"?")) $(this).remove(); 
-  });
-
-});
-</script> -->
-
-<!-- <style type="text/css">
-	#emails_list{
-  /* float:left; */
-  border:1px solid #ccc;
-  padding:5px;
-  font-family:Arial;
-}
-#emails_list > span{
-  cursor:pointer;
-  display:block;
-  float:left;
-  color:#fff;
-  background:#3A6F9F;
-  padding:5px;
-  padding-right:25px;
-  margin:4px;
-}
-#emails_list > span:hover{
-  opacity:0.7;
-}
-#emails_list > span:after{
- position:absolute;
- content:"×";
- border:1px solid;
- padding:2px 5px;
- margin-left:3px;
- font-size:11px;
-}
-#emails_list > textarea{
-  background:#eee;
-  border:0;
-  margin:4px;
-  padding:7px;
-  width:auto;
-}
-
-</style> -->
 

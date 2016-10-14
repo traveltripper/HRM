@@ -1,6 +1,7 @@
+<%title 'Search Results'%>
 <% if @employees.present? %>  
-<div class="panel panel-black">
-<div class="panel-heading">Total Employees: <%=@employees.count%>
+<div class="panel panel-cblue">
+<div class="panel-heading">Total Employees by your search: <%=@employees.count%>
 <%=link_to "Add Employee", new_employee_path, :class=>'add-edit-links'%>
 </div>
 <div class="panel-body">

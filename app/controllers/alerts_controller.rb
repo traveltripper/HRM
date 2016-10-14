@@ -13,7 +13,7 @@ class AlertsController < ApplicationController
   def sendmail
   	
   	if params[:alert] == "particular"
-  		@emails = params[:enter_emails].split(/\s*,\s*/)
+  		@emails = params[:get_email].split(/\s*,\s*/)
   		@message = params[:message]
       @subject = params[:subject]
       AlertMailer.alert_to_particular_emails(@emails, @subject, @message).deliver_later
@@ -33,5 +33,8 @@ class AlertsController < ApplicationController
 
 
   	redirect_to alerts_path, :notice=> "Mail alerts are successfully sent"
+  end
+
+  def search    
   end
 end

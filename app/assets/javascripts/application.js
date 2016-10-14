@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui/autocomplete
+//= require autocomplete-rails
 //= require moment
 //= require fullcalendar
 //= require bootstrap-datepicker

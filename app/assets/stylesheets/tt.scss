@@ -185,3 +185,50 @@ select.ui-datepicker-month, select.ui-datepicker-year{
 #emails_list{
     display: none;
 }
+
+
+/* ............alertbox css................ */
+
+    #emails_list{
+  /* float:left; 
+  border:1px solid #ccc;
+  padding:5px;
+  font-family:Arial;*/
+}
+#emails_list > span{
+  cursor:pointer;
+  display:block;
+  float:left;
+  color:#fff;
+  background:#3A6F9F;
+  padding:5px;
+  padding-right:25px;
+  margin:4px;
+}
+#emails_list > span:hover{
+  opacity:0.7;
+}
+#emails_list > span:after{
+ position:absolute;
+ content:"×";
+ border:1px solid;
+ padding:2px 5px;
+ margin-left:3px;
+ font-size:11px;
+}
+#emails_list > textarea{
+  background:#eee;
+  border:0;
+  margin:4px;
+  padding:7px;
+  width:auto;
+}
+
+.email-errors{
+  color: red;
+  display: none;
+}
+
+div#get_email{
+  display: none;
+}

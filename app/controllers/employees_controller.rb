@@ -118,6 +118,11 @@ class EmployeesController < ApplicationController
     add_breadcrumb "Employees Birthday Calendar", :birthdays_path
   end
 
+  def get_emails_and_name
+    @emp = Employee.all.pluck :email, :first_name
+    render json: @emp
+  end
+
   def get_current_employee_role
     render json: {role: current_employee.role.name}
   end

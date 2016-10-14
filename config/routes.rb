@@ -61,4 +61,7 @@ Rails.application.routes.draw do
   post '/sendmail' => 'alerts#sendmail'
   get '/edit_profile' => 'employees#edit_profile'
   patch '/update_profile' => 'employees#update_profile'
+
+  get 'alerts/search' => 'alerts#search'
+  get '/get_emails' => 'employees#get_emails_and_name'
 end

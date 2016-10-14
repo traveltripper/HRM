@@ -6,7 +6,7 @@ gem 'rails', '4.2.6'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
 # Use mysql2 as the database for Active Record
-#gem 'mysql2'
+# gem 'mysql2'
 gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -64,6 +64,8 @@ gem 'bootstrap-datepicker-rails'
 # gem 'capistrano-rails', group: :development
 gem 'simple_form'
 gem 'faker'
+
+gem 'rails-jquery-autocomplete'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
