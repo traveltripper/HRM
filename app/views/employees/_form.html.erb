@@ -2,7 +2,7 @@
   <div class="panel-body pan">
   <% @rand = (0...15).map { ('a'..'z').to_a[rand(26)] }.join%>
 
-  <%= form_for(@employee) do |f| %>
+  <%= form_for @employee, html: { multipart: true } do |f| %>
   <div class="form-body pal">
   <% if @employee.errors.any? %>
     <div id="error_explanation">
@@ -288,7 +288,14 @@
     </div>    
   </div>      
 
-  <div class="row">       
+  <div class="row">
+
+    <div class="col-md-4">
+        <div class="form-group">
+          <%= f.label :profile_picture %><br>
+          <%= f.file_field :profile_picture, :class=>"btn btn-primary" %>
+        </div>
+    </div>       
     <% if f.object.new_record?%>
       <div class="col-md-4">
         <div class="form-group">

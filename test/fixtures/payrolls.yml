@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  employee_id: 1
+  attachment: MyString
+  pay_date: 2016-10-17 10:16:58
+
+two:
+  employee_id: 1
+  attachment: MyString
+  pay_date: 2016-10-17 10:16:58

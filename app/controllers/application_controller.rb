@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery with: :exception
   protect_from_forgery with: :null_session
   helper :all
+  require 'carrierwave'
+  require 'carrierwave/orm/activerecord'
   
   def current_ability
     @current_ability ||= Ability.new(current_employee)

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :payrolls
   get 'alerts/index'
 
   get 'dashboard/index'

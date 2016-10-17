@@ -87,7 +87,7 @@ initialize_calendar = function() {
         } 
         else if (event.type == "event") 
         {
-          
+          //alert();
           $.get('/get_current_employee_role', function(result){
             if (result.role == "HR"){
                   //$('#calendarModal').modal();

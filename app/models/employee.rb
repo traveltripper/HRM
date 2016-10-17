@@ -6,6 +6,7 @@ class Employee < ActiveRecord::Base
   belongs_to :role
   has_many :subordinates, class_name: "Employee", foreign_key: "manager_id" 
   belongs_to :manager, class_name: "Employee"
+  has_many :payrolls
   validates_presence_of :first_name, :last_name, :role_id, :department_id, :personal_email, :contact_no, :actual_dob, :certificate_dob, :doj 
   validates_presence_of :graduation, :source_of_hire, :address
   #validates_presence_of :ttid, :emergency_name, :emergency_contact_no, :health_insurance_card_no, :pf_no, :aadhar_no, :pancard_no, :passport_no
@@ -15,6 +16,9 @@ class Employee < ActiveRecord::Base
   
   validates :email, format: { with: /\b[A-Z0-9._%a-z\-]+@traveltripper\.com\z/,
                   message: "must be a traveltripper.com account" }
+
+  has_attached_file :profile_picture, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/profilepic.png"
+  validates_attachment_content_type :profile_picture, content_type: /\Aimage\/.*\z/
   
   def fullname
   	first_name.capitalize.to_s + " " + middle_name.capitalize.to_s + " " + last_name.capitalize.to_s
