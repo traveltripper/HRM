@@ -1,0 +1,21 @@
+<div class="col-md-12">	
+	<h4>Leave Management</h4> 
+	<div class="col-md-12 bg-color-white">
+    <div class="leave-management">
+		<ul >
+        <li><span class="span-title-color">Available</span>
+        <h3><%=@available_leave%></h3>
+        
+        <!-- <button class="btn-primary">Apply Leave</button> -->
+        <%=link_to 'Apply leave', new_leave_path, remote: true, :class=>"btn btn-primary" %>
+        </li>
+        <li><span class="span-title-color">Used</span>
+         <h3><%= @leave_used%></h3>
+        </li>
+        <li><span class="span-title-color">Request Pending</span>
+        <h3 class="req" id = "leave_request_pending" ><%=@request_pending%></h3>
+        </li>
+        </ul>
+    </div>		
+	</div>
+</div>

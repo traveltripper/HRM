@@ -6,8 +6,8 @@ $(document).on("click", "#custom-submit-link", function(){
 
 
  $(function() {
-   $("input[name='chkNo']").click(function() {
-     if ($("#chkYes").is(":checked")) {
+   $("input[name='leaveStatus']").click(function() {
+     if ($("#leave_status_approve").is(":checked")) {
        $("#reject_reason").hide();
      } else {
        $("#reject_reason").show();
@@ -95,3 +95,20 @@ $(document).ready(function(){
      }
    });
  });
+
+
+ jQuery(function() {
+  var states;
+  states = $('#payroll_employee_id').html();
+  return $('#payroll_department').change(function() {
+    var country, escaped_country, options;
+    country = $('#payroll_department :selected').text();
+    escaped_country = country.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1');
+    options = $(states).filter("optgroup[label='" + escaped_country + "']").html();
+    if (options) {
+      $('#payroll_employee_id').html(options);
+    } else {
+      $('#payroll_employee_id').empty();
+    }
+  });
+});

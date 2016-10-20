@@ -10,12 +10,17 @@ class ApplicationController < ActionController::Base
   def current_ability
     @current_ability ||= Ability.new(current_employee)
   end
-
-
+  
+  def upcoming_events
+    Event.where('start >= ?', Date.today).limit(2)
+  end
+ 
   rescue_from CanCan::AccessDenied do |exception|
   flash[:error] = "Access denied."
   redirect_to root_url
   end
+
+  helper_method :upcoming_events
 
   protected
   def authenticate_employee!(options={})

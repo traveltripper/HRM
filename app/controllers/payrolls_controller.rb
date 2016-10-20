@@ -1,5 +1,6 @@
 class PayrollsController < ApplicationController
   before_action :authenticate_employee!
+  load_and_authorize_resource
   layout 'dashboard'
   before_action :set_payroll, only: [:show, :edit, :update, :destroy]
   add_breadcrumb "Home", :root_path
@@ -8,8 +9,8 @@ class PayrollsController < ApplicationController
   # GET /payrolls.json
   def index
     @emp = current_employee
-    if @emp.role.name == "Employee"
-      @payrolls = @emp.payrolls
+    if ["Employee", "Manager"].include? @emp.role.name
+      @payrolls = @emp.payrolls.paginate(:page => params[:page], :per_page => 10)
     elsif ["Finance", "HR"].include? @emp.role.name
       @payrolls = Payroll.paginate(:page => params[:page], :per_page => 10)
     end

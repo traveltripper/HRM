@@ -25,7 +25,7 @@
         
         <div class="form-group">
         <%=f.label :fromdate%>
-        <%=f.text_field :fromdate, class: 'form-control datepicker', :id=>"dt1"%>
+        <%=f.text_field :fromdate, class: 'form-control', :id=>"dt1"%>
         </div>        
         
         <div class="form-group">
@@ -53,9 +53,9 @@
 
 
 <script>
-
+$(document).ready(function(){
 $("#dt1").datepicker({
-
+    
     minDate: 0,
     dateFormat: "dd-mm-yy",
     maxDate: '+1Y+6M',
@@ -63,6 +63,13 @@ $("#dt1").datepicker({
         
         var min = $(this).datepicker('getDate'); // Get selected date
         $("#dt2").datepicker('option', 'minDate', min || '0'); // Set other min, default to today
+        var start = $("#dt1").datepicker("getDate");
+        var end = $("#dt2").datepicker("getDate");
+        if (start != null && end !=null){
+            var days = (end - start) / (1000 * 60 * 60 * 24);
+            days = days+1;
+            $("#dt3").val(days);
+        }
     }
 });
 
@@ -74,13 +81,19 @@ $("#dt2").datepicker({
         var max = $(this).datepicker('getDate'); // Get selected date
         $('#datepicker').datepicker('option', 'maxDate', max || '+1Y+6M'); // Set other max, default to +18 months
         var start = $("#dt1").datepicker("getDate");
-        var end = $("#dt2").datepicker("getDate");
-        var days = (end - start) / (1000 * 60 * 60 * 24);
-        days = days+1;
-        $("#dt3").val(days);
+        if (start == null){
+            alert("select start date");
+        } 
+        else
+        { 
+            var end = $("#dt2").datepicker("getDate");
+            var days = (end - start) / (1000 * 60 * 60 * 24);
+            days = days+1;
+            $("#dt3").val(days);
+        }
     }
 });
-
+});
 </script>
 
 

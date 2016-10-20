@@ -13,6 +13,7 @@ class Ability
         cannot :read, Leavetype
         can :read, Employee
         can :read, Payroll
+        can :read, Event
     end
     
   end

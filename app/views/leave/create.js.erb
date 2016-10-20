@@ -3,7 +3,8 @@ $('#error_explanation').empty();
 <% if @leave.errors.blank? %>
   $('#leave-modal').modal('hide');
   $('table.waiting-for-approval tbody').prepend('<%= j render "leave_row", leave: @leave %>');
-  $('#leave-notice').html("<p class='alert alert-notice'>You have applied leave successfully and an e-mail will be sent to HR and Manager. Waiting for approval.</p>");  
+  $('#leave-notice').html("<p class='alert alert-notice'>You have applied leave successfully and an e-mail will be sent to HR and Manager. Waiting for approval.</p>");
+  //$('#leave_request_pending').html("99");  
 <% else %>
 
   // TODO: show the errors in the UI

@@ -135,8 +135,8 @@
     </div>
     <div class="col-md-4">
        <div class="form-group">
-        <%= f.label :doj, 'DOJ' %><br>
-        <%= f.text_field :doj, :class=>"form-control datepicker", required: true %>
+        <%= f.label :date_of_joining, 'Date of Joining' %><br>
+        <%= f.text_field :date_of_joining, :class=>"form-control datepicker", required: true %>
        </div>
     </div>
   </div>
@@ -199,13 +199,20 @@
     </div>
     <div class="col-md-4">
       <div class="form-group">
-       <%= f.label :lwd, 'Last Working Day' %><br>
-       <%= f.text_field :lwd, :class=>"form-control datepicker" %>
+        <%= f.label :source_of_hire, 'Source of Hire' %><br>
+        <%= f.select :source_of_hire, options_for_select(["Direct", "Consultancy", "Campus", "Referral"]), {}, {:class=>"form-control"}  %>
       </div>
+      
     </div>
   </div>
 
   <div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+          <%= f.label :status %><br>        
+          <%= f.select :status, options_for_select(["Active", "Resigned", "Exited"]), {}, {:class=>"form-control"} %>
+        </div>        
+    </div>
     <div class="col-md-4">      
         <div class="form-group">
           <%= f.label :date_of_resignation, 'Date of Resignation' %><br>
@@ -213,17 +220,11 @@
        </div>
     </div>    
     <div class="col-md-4">
-        <div class="form-group">
-          <%= f.label :source_of_hire, 'Source of Hire' %><br>
-          <%= f.select :source_of_hire, options_for_select(["Direct", "Consultancy", "Campus", "Referral"]), {}, {:class=>"form-control"}  %>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group">
-          <%= f.label :pancard_no, 'Pancard Number' %><br>
-          <%= f.text_field :pancard_no, :class=>"form-control" %>
-        </div>
-    </div>
+      <div class="form-group">
+       <%= f.label :lwd, 'Last Working Day' %><br>
+       <%= f.text_field :lwd, :class=>"form-control datepicker" %>
+      </div>
+    </div>    
   </div>
 
 
@@ -231,14 +232,14 @@
   <div class="row">
     <div class="col-md-4">
         <div class="form-group">
-          <%= f.label :passport_no, 'Passport Number' %><br>
-          <%= f.text_field :passport_no, :class=>"form-control" %>
-        </div>
+          <%= f.label :pancard_no, 'Pancard Number' %><br>
+          <%= f.text_field :pancard_no, :class=>"form-control" %>
+        </div>        
     </div>    
     <div class="col-md-4">
         <div class="form-group">
-          <%= f.label :status %><br>        
-          <%= f.select :status, options_for_select(["Active", "Resigned", "Exited"]), {}, {:class=>"form-control"} %>
+          <%= f.label :passport_no, 'Passport Number' %><br>
+          <%= f.text_field :passport_no, :class=>"form-control" %>
         </div>
     </div>
     <div class="col-md-4">
@@ -284,18 +285,14 @@
         </div>
     </div>
     <div class="col-md-4">
-      
-    </div>    
-  </div>      
-
-  <div class="row">
-
-    <div class="col-md-4">
         <div class="form-group">
           <%= f.label :profile_picture %><br>
           <%= f.file_field :profile_picture, :class=>"btn btn-primary" %>
         </div>
-    </div>       
+    </div>     
+  </div>      
+
+  <div class="row">          
     <% if f.object.new_record?%>
       <div class="col-md-4">
         <div class="form-group">

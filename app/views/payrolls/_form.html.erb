@@ -4,13 +4,13 @@
     <div class="form-group">
       <%#=f.label :department%>
       <%#=f.select_tag :department_id, Department.all, :id, :name, {:prompt => 'Select Department'}, :class=>"form-control", required: true%>
-      <%= select_tag "Department", options_for_select(Department.all.collect{ |u| [u.name, u.id]}), class: 'form-control' %>
+      <%= select_tag "Department", options_for_select(Department.all.collect{ |u| [u.name, u.id]}), {:include_blank=> "Select Department", class: 'form-control', id: 'payroll_department'} %>
     </div>
 
     <div class="form-group">
     	<%=f.label :employee_id%>
     	<%#=f.collection_select :employee_id, Employee.all, :id, :fullname, {:prompt => 'Select Employee'}, :class=>"form-control", required: true%>
-      <%=f.grouped_collection_select(:employee_id, Department.all, :name, :name, :id, :name)%>
+      <%=f.grouped_collection_select :employee_id, Department.all, :employees, :name, :id, :fullname, {:include_blank=> "Select Employee"}, {:class=>'form-control'} %>
     </div>
 
     <div class="form-group">
@@ -29,3 +29,5 @@
     <%= f.submit :submit, :class=>'btn btn-primary' %>
   </div>
 <% end %>
+
+

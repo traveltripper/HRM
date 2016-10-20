@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161017044658) do
+ActiveRecord::Schema.define(version: 20161020044726) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -45,6 +45,14 @@ ActiveRecord::Schema.define(version: 20161017044658) do
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "announcements", force: :cascade do |t|
+    t.string   "title",       limit: 255
+    t.text     "message",     limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "employee_id", limit: 4
+  end
 
   create_table "conference_rooms", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -121,17 +129,25 @@ ActiveRecord::Schema.define(version: 20161017044658) do
     t.string   "profile_picture_content_type", limit: 255
     t.integer  "profile_picture_file_size",    limit: 4
     t.datetime "profile_picture_updated_at"
+    t.datetime "date_of_joining"
+    t.integer  "days_of_leave",                limit: 4
+    t.integer  "leave_used",                   limit: 4,     default: 0
   end
 
   add_index "employees", ["email"], name: "index_employees_on_email", unique: true, using: :btree
   add_index "employees", ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true, using: :btree
 
   create_table "events", force: :cascade do |t|
-    t.string   "title",      limit: 255
+    t.string   "title",                limit: 255
     t.datetime "start"
     t.datetime "end"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.text     "reason",               limit: 65535
+    t.string   "picture_file_name",    limit: 255
+    t.string   "picture_content_type", limit: 255
+    t.integer  "picture_file_size",    limit: 4
+    t.datetime "picture_updated_at"
   end
 
   create_table "leaves", force: :cascade do |t|

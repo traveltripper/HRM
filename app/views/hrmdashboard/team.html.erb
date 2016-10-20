@@ -1,0 +1,15 @@
+<div class="col-md-12">
+	<h4>My Team</h4>
+	<div class="col-md-12 nullPadding bg-color-white myteam">    
+	    <ul> 
+	    	<% @team.each_with_index do |emp, index| %>		    
+			    <li>
+			    <!-- <img src="/images/avatar.jpg" alt=""> -->
+			    <%=link_to image_tag(emp.profile_picture.url(:thumb)), emp%>
+			    <h6><%= emp.fullname  %></h6>
+			    <p><%= emp.role.name  %></p>
+			    </li>
+		    <%end%>	    
+	    </ul>
+	</div>
+</div>

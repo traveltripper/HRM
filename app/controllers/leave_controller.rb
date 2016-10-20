@@ -55,19 +55,17 @@ class LeaveController < ApplicationController
     # end
   end
 
-  def update     
+  def update
     @leave = Leave.find(params[:id])
-    if params[:chkNo] == "approve"
-      @leave.update_attribute(:status, true)
-      respond_to do |format|
-        format.html { redirect_to root_path, notice: 'Employee leave is approved' }
+    respond_to do |format|
+      if @leave.update(leave_params)
+        format.html { redirect_to @leave, notice: 'Leave was successfully updated.' }
+        format.json { render :show, status: :ok, location: @leave }
+      else
+        format.html { render :edit }
+        format.json { render json: @leave.errors, status: :unprocessable_entity }
       end
-    else
-      @leave.update_attributes(:status => false, :reject_reason => params[:leave][:reject_reason])      
-      respond_to do |format|
-        format.html { redirect_to root_path, notice: 'Employee leave is rejected' }
-      end
-    end    
+    end
   end
 
   def leave_applied_by_team
@@ -83,6 +81,23 @@ class LeaveController < ApplicationController
     add_breadcrumb "Leave Management", :leave_index_path
     add_breadcrumb "Leave applied by team", leave_applied_by_team_path
   end
+
+  def leave_status
+    @leave = Leave.find(params[:id])
+    @emp = @leave.employee
+    if params[:leaveStatus] == "approve"
+      status = true
+    else
+      status = false
+    end
+    respond_to do |format|     
+      if @leave.update_attributes(:status => status, :reject_reason => params[:leave]["reject_reason"])
+        format.html { redirect_to leave_index_path, notice: 'Leave was successfully updated.' }
+      else
+        format.html { render :edit }
+      end
+    end
+  end
   
   private
   def leave_params
@@ -90,3 +105,4 @@ class LeaveController < ApplicationController
   end
   
 end
+

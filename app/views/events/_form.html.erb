@@ -1,24 +1,28 @@
-<div class="row">
-<div class="col-md-12">
-<%= simple_form_for @event, remote: true do |f| %>
-  <div class="form-inputs">    
-    <%= f.label :title %><br/>
-    <%= f.text_field :title, :class=>"form-control" %><br/>
-    <%= f.input :date_range, input_html: { class: "form-control input-sm date-range-picker" } %>
-    <%= f.input_field :start, as: :hidden, value: Date.today, class: 'form-control input-sm start_hidden' %>
-    <%= f.input_field :end, as: :hidden, value: Date.today, class: 'form-control input-sm end_hidden' %>
-    
+<%= form_for(@event) do |f| %>
+
+  <div class="form-inputs">
+  <%=f.label :title%>
+  <%=f.text_field :title, class: "form-control"%>
+  </div>
+  <div class="form-inputs">
+  <%=f.label :start%>
+  <%=f.text_field :start, class: "form-control datepicker"%>
+  </div>
+  <div class="form-inputs">
+  <%=f.label :end%>
+  <%=f.text_field :end, class: "form-control datepicker"%>
+  </div>
+  <div class="form-inputs">
+  <%=f.label :reason%>
+  <%=f.text_area :reason, class: "form-control"%>
+  </div>
+  <div class="form-inputs">
+  <%=f.label :picture%>
+  <%=f.file_field :picture%>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, :class=>"btn btn-primary" %>
-    <%= link_to 'Delete', 
-                event, 
-                method: :delete, 
-                class: 'btn btn-danger', 
-                data: { confirm: 'Are you sure?' }, 
-                remote: true unless @event.new_record? %>
+    <%= f.submit :class=>'btn btn-primary'%>
   </div>
+
 <% end %>
-</div>
-</div>

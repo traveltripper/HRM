@@ -1,0 +1,11 @@
+<h4>Upcoming Events</h4>
+<% upcoming_events.each do |f| %>
+	<div class="col-md-12 bg-color-white">
+		<span class="span-title-color"><%=f.title%></span>
+		<h5><%=f.start.strftime("%A, %B %d")%></h5>            
+		<%=image_tag f.picture.url(:medium)%>
+		<p><%=f.reason%></p>
+	</div>
+<br/>
+
+<%end%>

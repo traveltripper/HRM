@@ -1,60 +1,35 @@
-<%title "Events"%>
-<script src="https://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
-<link rel="stylesheet" media="all" href="https://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+<p id="notice"><%= notice %></p>
 
-<script>
-$(document).ready(function(){
-initialize_calendar();
-date_range_picker();
-});
-</script>
+<h1>Listing Events</h1>
 
-<div class='calendar'></div>
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Picture</th>
+      <th>Reason</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
 
-<div id='remote_container'></div>
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= event.title%></td>
+        <td><%= event.start.strftime("%d-%b-%Y")%></td>
+        <td><%= event.end.strftime("%d-%b-%Y") %></td>
+        <td><%= image_tag event.picture.url(:thumb)%></td>
+        <td><%= event.reason%></td>
+        <td><%= link_to 'Show', event %></td>
+        <td><%= link_to 'Edit', edit_event_path(event) %></td>
+        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
+<br>
 
-<div id="calendarModal" class="modal fade">
-<div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-            <span id="modalTitle" class="modal-title"></span>            
-        </div>
-        <div id="modalBody" class="modal-body col-md-8">
-            <p>Name: <span class="cal-name"></span></p>
-            <p>Department: <span class="cal-dept"></span></p>
-            <p>Role: <span class="cal-role"></span></p>
-        </div>
-        <div class="col-md-2">
-        <img src="images/birthday-cake.png" width="100px" height="100px">
-        </div>
-        <div class="modal-footer">
-            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-        </div>
-    </div>
-</div>
-</div>
-
-
-<div id="EventModal" class="modal fade">
-<div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-            <span id="modalTitle" class="modal-title"></span>            
-        </div>
-        <div id="modalBody" class="modal-body col-md-8">            
-            <p>Title: <span class="event-title"></span></p>
-            <p>From: <span class="event-from"></span></p>
-            <p>To: <span class="event-to"></span></p>
-        </div>
-        <div class="col-md-2">
-        <img src="images/event.jpg" width="100px" height="100px">
-        </div>
-        <div class="modal-footer">
-            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-        </div>
-    </div>
-</div>
-</div>
+<%= link_to 'New Event', new_event_path %>

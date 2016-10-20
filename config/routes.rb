@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get '/hrmdashboard' => 'hrmdashboard#index'
+
+  resources :announcements
   resources :payrolls
   get 'alerts/index'
 
@@ -50,7 +53,12 @@ Rails.application.routes.draw do
   end
 
   resources :leavetypes
-  resources :leave
+  resources :leave do
+    member do
+      patch :leave_status
+    end
+  end
+
   get '/team' => 'employees#team'
   get '/leave-applied-by-team' => 'leave#leave_applied_by_team'
   # match '/departments/:id/employees' => 'departments#employees', via: [:get, :post]
@@ -65,4 +73,9 @@ Rails.application.routes.draw do
 
   get 'alerts/search' => 'alerts#search'
   get '/get_emails' => 'employees#get_emails_and_name'
+  #get '/leave_status' => 'leave#leave_status'
+  #patch '/leave_status' => 'leave#leave_status'
+
+  get 'hrm_team' => 'hrmdashboard#team'
+  get 'hrm_leave' => 'hrmdashboard#leave'
 end
