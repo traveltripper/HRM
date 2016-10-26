@@ -3,16 +3,16 @@
 	<div class="col-md-12 nullPadding bg-color-white myteam">    
 	    <ul> 
 	    	<% @team.each_with_index do |emp, index| %>		    
-			    <li>
-			    <!-- <img src="/images/avatar.jpg" alt=""> -->
-			    <%=image_tag emp.profile_picture.url(:thumb)%>
-			    <h6><%= emp.fullname  %></h6>
-			    <p><%= emp.role.name  %></p>
+			    <li>			    
+				    <%=image_tag emp.profile_picture.url(:thumb), class:'img-circle'%>
+				    <h6><%= emp.fullname  %></h6>
+				    <p><%= emp.role.name  %></p>
 			    </li>
 		    <%end%>	    
 	    </ul>
 	</div>
 </div>
+
 <div class="col-md-6">
 	<h4>Payroll</h4>	
 	<div class="col-md-12 bg-color-white ">
@@ -24,46 +24,66 @@
 	<div class="clearfix"></div>
 	<h4>Leave Management</h4> 
 	<div class="col-md-12 bg-color-white">
-    <div class="leave-management">
-		<ul >
-        <li><span class="span-title-color">Available</span>
-        <h3><%=@available_leave%></h3>
-        
-        <!-- <button class="btn-primary">Apply Leave</button> -->
-        <%=link_to 'Apply leave', new_leave_path, remote: true, :class=>"btn btn-primary" %>
-        </li>
-        <li><span class="span-title-color">Used</span>
-         <h3><%= @leave_used%></h3>
-        </li>
-        <li><span class="span-title-color">Request Pending</span>
-        <h3 class="req" id = "leave_request_pending" ><%=@request_pending%></h3>
-        </li>
-        </ul>
-        </div>				
-        
-        
-		<br />
-		
+	    <div class="leave-management">
+			<ul >
+		        <li>
+			        <span class="span-title-color">Available</span>
+			        <h3><%=@available_leave%></h3>		        
+			        <!-- <button class="btn-primary">Apply Leave</button> -->
+			        <%=link_to 'Apply leave', new_leave_path, remote: true, :class=>"btn btn-primary" %>
+			    </li>
+			    <li>
+			    	<span class="span-title-color">Used</span>
+			        <h3><%= @leave_used%></h3>
+			    </li>
+			    <li>
+			    	<span class="span-title-color">Request Pending</span>
+			        <h3 class="req" id = "leave_request_pending" ><%=@request_pending%></h3>
+		        </li>
+	        </ul>
+	    </div>        
+		<br />		
 	</div>
 </div>
+
 <div class="col-md-12">
-	<h4>
-		Announcements
-	</h4>
+	<h4>Announcements</h4>
     <div class="Announcements bg-color-white">
-	<table >
-	    <%@announcements.each do |f|%>
-		<tr>
-			<td ><span class="span-title-color"><%=f.created_at.strftime("%d-%b-%Y")%></span></td>
-			<td><span class="text-primary"><%=f.title%></span><br /><%=f.message%></td>
-		</tr>
-		<%end%>
-	</table>
+		<table >
+			<%if @names.length > 0 %>
+				<tr>
+					<td >
+						<span class="span-title-color"><%=Time.now.strftime("%d-%b-%Y")%></span>
+					</td>
+					<td>
+						<span class="text-primary">Happy Birthday</span><br />		
+						<%@names.each_with_index do |name, i|%>
+							 
+							<% if (i + 1) != @names.length %>
+							Happy Birthday <%=name.capitalize%>,
+							<%else%>
+							Happy Birthday <%=name.capitalize%>
+							<%end%>
+						<%end%>
+					</td>
+				</tr>
+			<%end%>
+
+		    <%@announcements.each do |f|%>
+				<tr>
+					<td >
+						<span class="span-title-color">
+							<%=f.created_at.strftime("%d-%b-%Y")%>
+						</span>
+					</td>
+					<td>
+						<span class="text-primary">
+							<%=f.title%>
+						</span>
+						<br /><%=f.message%>
+					</td>
+				</tr>
+			<%end%>		
+		</table>
     </div>
 </div>
-		
-		
-	
-
-
-

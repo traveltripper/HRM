@@ -5,11 +5,22 @@
 	    	<% @team.each_with_index do |emp, index| %>		    
 			    <li>
 			    <!-- <img src="/images/avatar.jpg" alt=""> -->
-			    <%=link_to image_tag(emp.profile_picture.url(:thumb)), emp%>
+			    <%=link_to image_tag(emp.profile_picture.url(:thumb), class:'img-circle'), employee_details_hrmdashboard_path(emp), remote:true, class:'emp_link'%>
 			    <h6><%= emp.fullname  %></h6>
 			    <p><%= emp.role.name  %></p>
 			    </li>
 		    <%end%>	    
 	    </ul>
+	</div>
+</div>
+
+<div class="col-md-12">
+	<div class=" col-md-4">		
+		<span id="emp_profile_picture"><%=image_tag @team.first.profile_picture%></span>	
+	</div>
+	<div class="col-md-8">
+		<h4>General Information</h4>
+		<p> Name: <span id="emp_name"><%=@team.first.fullname%></span></p>
+		<p> Role: <span id="emp_role"><%=@team.first.role.name%></span></p>
 	</div>
 </div>

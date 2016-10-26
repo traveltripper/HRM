@@ -5,7 +5,7 @@
 		<h5><%=f.start.strftime("%A, %B %d")%></h5>            
 		<%=image_tag f.picture.url(:medium)%>
 		<p><%=f.reason%></p>
-	</div>
-<br/>
-
+	</div>	
 <%end%>
+
+<%=link_to 'View All Events', events_path, class: 'btn btn-primary'%>

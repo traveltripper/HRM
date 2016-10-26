@@ -78,4 +78,15 @@ Rails.application.routes.draw do
 
   get 'hrm_team' => 'hrmdashboard#team'
   get 'hrm_leave' => 'hrmdashboard#leave'
+
+  resources :hrmdashboard do
+    member do
+      get :employee_details      
+    end
+  end
+
+  get '/hrm_profile' => 'hrmdashboard#profile'
+  get 'hrm_events' => 'hrmdashboard#events'
+  get '/hrm_payroll' => 'hrmdashboard#payroll'
+  get '/download_payslip' => 'payrolls#download_payslip'
 end

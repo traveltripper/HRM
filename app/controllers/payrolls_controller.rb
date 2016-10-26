@@ -16,6 +16,16 @@ class PayrollsController < ApplicationController
     end
   end
 
+  def download_payslip
+    @emp = current_employee
+    @payroll = @emp.payrolls.where('extract(year from pay_date) = ? and extract(month from pay_date) = ?', Date.today.strftime("%Y"), params[:month]).first
+    if @payroll
+      send_file(@payroll.attachment.path, :type => 'application/pdf', :disposition => 'attachment', :url_based_filename => true)
+    else
+      redirect_to hrm_payroll_path, notice: 'No Payroll'
+    end
+  end
+
   # GET /payrolls/1
   # GET /payrolls/1.json
   def show

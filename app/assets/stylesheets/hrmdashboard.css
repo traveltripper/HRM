@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:100,200,300,400,700,900&subset=latin-ext');
 
-body {
+ body #hrm_dashboard {
 	background: #ebebeb;
-	font-family: 'Lato', sans-serif;
+	/* font-family: 'Lato', sans-serif; */
+	color: #000000 !important;
 }
 
 
@@ -337,4 +338,71 @@ a:focus, a:hover{
 #hrm_dashboard .span-title-color{
 	color: #20272D;
     font-weight: 300;
+}
+
+
+#employee_details{
+	display: none;
+}
+
+#hrm_dashboard .panel.panel-cblue {
+    border-color: #0092B3;
+}
+
+#hrm_dashboard .panel.panel-cblue > .panel-heading {
+    color: #FFFFFF;
+    background: #0092B3;
+    border-color: #0092B3 !important;
+}
+
+#hrm_dashboard .panel > .panel-heading {
+    font-size: 18px;
+    padding: 7px 15px;
+    border-top-right-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+    border-color: #e5e5e5 !important;
+}
+
+#hrm_dashboard .panel {
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+    border: 5px solid #e5e5e5;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+#hrm_dashboard .panel-heading {
+    background: #0092B3;
+    color: #fff;
+}
+
+#hrm_dashboard .panel-body a {
+	color:#0092B3;
+}
+
+#hrm_dashboard th, #hrm_dashboard td, #hrm_dashboard a {
+    /*color: #0092B3; */
+}
+
+.hrm_event_images{
+	width: 100%;
+}
+
+.padding-bottom-25{
+	padding-bottom: 25px;
+}
+
+.Announcements tr:last-child {
+    border-bottom: none;
+}
+
+#hrm_dashboard .text-primary {
+    color: #428bca !important;
+}
+
+#hrm_dashboard td{
+	color: #000000 !important;
 }

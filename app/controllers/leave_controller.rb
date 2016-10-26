@@ -68,16 +68,26 @@ class LeaveController < ApplicationController
     end
   end
 
+  def destroy
+    @leave = Leave.find(params[:id])
+    @leave.destroy
+    respond_to do |format|
+      format.html { redirect_to leave_index_path, notice: 'Leave was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
   def leave_applied_by_team
     @emp = current_employee
     @subordinates = @emp.subordinates 
     @emp_ids = @subordinates.all.map(&:id)
-    @leave_from_date = 1.month.ago.beginning_of_month
+    @leave_from_date = 3.month.ago.beginning_of_month
     @leave_to_date = Time.now
-    @leaves = Leave.all.where(:created_at => @leave_from_date..@leave_to_date)    
+    @leaves = Leave.where(:created_at => @leave_from_date..@leave_to_date )    
     @team_leave = @leaves.where(employee_id: @emp_ids)
     @leave_approved_recently = @team_leave.where(:status => [true, false]).limit(10)
     @leave_waiting_for_approve = @team_leave.where(status: nil)
+    
     add_breadcrumb "Leave Management", :leave_index_path
     add_breadcrumb "Leave applied by team", leave_applied_by_team_path
   end
@@ -85,14 +95,19 @@ class LeaveController < ApplicationController
   def leave_status
     @leave = Leave.find(params[:id])
     @emp = @leave.employee
-    if params[:leaveStatus] == "approve"
-      status = true
-    else
-      status = false
-    end
+
+    @leave_used = @emp.leave_used
+    @requested_leave = @leave.no_of_days
+
+    params[:leaveStatus] == "approve" ? status = true : status = false
+
+    status == true ? @leave_used = (@leave_used + @requested_leave) : @leave_used
+      
     respond_to do |format|     
       if @leave.update_attributes(:status => status, :reject_reason => params[:leave]["reject_reason"])
-        format.html { redirect_to leave_index_path, notice: 'Leave was successfully updated.' }
+        @emp.update_attribute(:leave_used, @leave_used)
+        LeaveMailer.employee_leave_status(@emp, @leave).deliver_later
+        format.html { redirect_to leave_index_path, notice: 'Leave status mailed to Employee' }
       else
         format.html { render :edit }
       end

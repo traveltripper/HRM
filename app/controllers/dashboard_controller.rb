@@ -3,7 +3,10 @@ class DashboardController < ApplicationController
   layout 'dashboard'
   def index
   	@emp = current_employee
-    @leave_from_date = 1.month.ago.beginning_of_month
+    if @emp.role.name == "Employee"
+      redirect_to hrmdashboard_index_path
+    end
+    @leave_from_date = 3.month.ago.beginning_of_month
     @leave_to_date = Time.now
     @leaves = Leave.all.where(:created_at => @leave_from_date..@leave_to_date)
     if @emp.role.name == "HR"      
@@ -15,6 +18,7 @@ class DashboardController < ApplicationController
       @subordinates = @emp.subordinates 
       @emp_ids = @subordinates.all.map(&:id)
       @team_leave = @leaves.where(employee_id: @emp_ids)
+      
       @leave_approved_recently = @team_leave.where(:status => [true, false]).limit(10)
       @team_leave_waiting_for_approve = @team_leave.where(status: nil)
     end

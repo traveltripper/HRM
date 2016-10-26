@@ -2,15 +2,15 @@
 
   <div class="form-inputs">
   <%=f.label :title%>
-  <%=f.text_field :title, class: "form-control"%>
+  <%=f.text_field :title, class: "form-control", :required => true%>
   </div>
   <div class="form-inputs">
   <%=f.label :start%>
-  <%=f.text_field :start, class: "form-control datepicker"%>
+  <%=f.text_field :start, class: "form-control datepicker", :required => true%>
   </div>
   <div class="form-inputs">
   <%=f.label :end%>
-  <%=f.text_field :end, class: "form-control datepicker"%>
+  <%=f.text_field :end, class: "form-control datepicker", :required => true%>
   </div>
   <div class="form-inputs">
   <%=f.label :reason%>

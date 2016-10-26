@@ -31,6 +31,10 @@ class Employee < ActiveRecord::Base
     p Date.strptime(custom_date, "%d-%b-%y")    
   end
 
+  def today_birthday
+    actual_dob.strftime("%m%d")
+  end
+
   private
     def set_days_of_leave
       self.days_of_leave = ((Time.now.end_of_year - self.date_of_joining)/1.month.second).ceil * 2     
