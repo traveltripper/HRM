@@ -1,0 +1,30 @@
+<div class="col-md-12 bg-color-white">
+    <div class="Team bg-color-white">
+		<div class="col-md-4 Team">
+			<img class="profileImg" src="images/avatar.jpg" alt="">
+			<h6 class="profileImgHeading"><%=@employee.fullname%></h6>
+			<h6 class="profileImgEmail"><%=@employee.email%></h6>
+			<p class="profileImgText"><%=@employee.about_me%></p>
+		</div>
+		<div class="col-md-8">
+			<h4>General Information</h4>
+			<p>Position:</p>
+			<p>Department: <%=@employee.department.name%></p>
+			<p>Supervisor:</p>
+			<p>Status: <%=@employee.status%></p>
+			<h4>Contact Information</h4>
+			<p>E-Mail: <%=@employee.email%></p>
+			<p>Phone: <%=@employee.contact_no%></p>
+			<p>Skype: <%=@employee.skype_id%></p>
+			<h4>Additional Information</h4>
+			<p>Birthday: <%=@employee.actual_dob.strftime("%d-%B")%></p>
+			<h4>Education Information</h4>
+			<p>Graduation: <%=@employee.graduation%></p>
+			<p>Post Graduation: <%=@employee.pg%></p>
+			<p>PHD:</p>
+			<p>Certifications:</p>
+			<h4>Professional Experience</h4>
+			<p>Previous Company: <%=@employee.previous_employer%></p>
+		</div>
+    </div>
+</div>

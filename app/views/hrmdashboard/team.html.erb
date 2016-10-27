@@ -1,26 +1,48 @@
 <div class="col-md-12">
 	<h4>My Team</h4>
-	<div class="col-md-12 nullPadding bg-color-white myteam">    
-	    <ul> 
-	    	<% @team.each_with_index do |emp, index| %>		    
-			    <li>
-			    <!-- <img src="/images/avatar.jpg" alt=""> -->
-			    <%=link_to image_tag(emp.profile_picture.url(:thumb), class:'img-circle'), employee_details_hrmdashboard_path(emp), remote:true, class:'emp_link'%>
-			    <h6><%= emp.fullname  %></h6>
-			    <p><%= emp.role.name  %></p>
-			    </li>
-		    <%end%>	    
-	    </ul>
+	<div class="col-md-12 nullPadding bg-color-white myteam">
+        <ul class="team_list">
+        	<% @team.each_with_index do |emp, index| %>
+	            <%= link_to employee_details_hrmdashboard_path(emp), remote:true, class:'emp_link' do %>
+	            	<li class="teammembers_img">
+	            	<%=image_tag emp.profile_picture.url(:thumb), class:'img-circle'%>
+	            	<h6><%= emp.fullname  %></h6>
+			    	<p><%= emp.role.name  %></p>
+			    	</li>
+	            <%end%>
+            <%end%>  
+        </ul>
 	</div>
-</div>
 
-<div class="col-md-12">
-	<div class=" col-md-4">		
-		<span id="emp_profile_picture"><%=image_tag @team.first.profile_picture%></span>	
+	<div class="col-md-12">
+		<hr style="border-color:#0092B5;margin-top: 0px;margin-bottom: 0px;border-width: 2px;">
 	</div>
-	<div class="col-md-8">
-		<h4>General Information</h4>
-		<p> Name: <span id="emp_name"><%=@team.first.fullname%></span></p>
-		<p> Role: <span id="emp_role"><%=@team.first.role.name%></span></p>
+
+	<div class="col-md-12 bg-color-white">
+        <div class="Team bg-color-white">
+			<div class="col-md-4 Team">
+				<!-- <img class="profileImg" src="images/avatar.jpg" alt=""> -->
+				<span id="emp_profile_picture"><%=image_tag @team.first.profile_picture.url(:medium)%></span>
+				<h6 class="profileImgHeading" id="emp_name"><%=@team.first.fullname%></h6>
+				<h6 class="profileImgEmail emp_email"><%=@team.first.email%></h6>
+				<p class="profileImgText" id="emp_aboutme"><%=@team.first.about_me%></p>
+			</div>
+			<div class="col-md-8">
+				<h4>General Information</h4>
+				<p>Position: <span id="emp_designation"><%=@team.first.designation%></span></p>
+				<p>Department: <span id="emp_department"><%=@team.first.department.name%></span></p>
+				<p>Supervisor: <span id="emp_manager"><%=@team.first.manager%></span></p>
+				<p>Status: <span id="emp_status"><%=@team.first.status%></span></p>
+				<h4>Contact Information</h4>
+				<p>E-Mail: <span class="emp_email company_email"><%=@team.first.email%></span></p>
+				<p>Phone: <span id="emp_phone"><%=@team.first.contact_no%></span></p>
+				<p>Skype: <span id="emp_skypeid"></span></p>
+				<h4>Additional Information</h4>
+				<p>Birthday: <span id="emp_birthday"><%=@team.first.actual_dob.strftime("%d-%b")%></span></p>
+			</div>
+			<div class="col-md-12">
+				<hr style="border-color:#0092B5;margin-top: 0px;margin-bottom: 0px;border-width: 2px;">
+			</div>
+        </div>
 	</div>
 </div>

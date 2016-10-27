@@ -62,7 +62,7 @@
 	 }
 	
  
- .active{ 
+ #bs-example-navbar-collapse-1 .active{ 
 	 background:#056985!important;
 	 }
 
@@ -167,7 +167,7 @@ h4{
 		
 	.myteam ul{ list-style:none; margin:5px; padding:0px; }
 	.myteam ul li{display:inline-block; margin:12px; text-align:center;}
-	.myteam ul li img{ width:55px;}
+	.myteam ul li img{ width:60px;}
 	.myteam ul li h6{color:#72bfd4; text-transform:uppercase; font-size:12px;}
 	.myteam ul li p{color:#000; font-weight:300; font-size:12px; text-transform:capitalize;}	
 	
@@ -406,3 +406,57 @@ a:focus, a:hover{
 #hrm_dashboard td{
 	color: #000000 !important;
 }
+
+.profileImgHeading {
+    text-transform: uppercase;
+    font-size: 17px;
+}
+
+.profileImgEmail {
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.profileImgText {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.teammembers_img{
+	
+    padding: 10px;
+    border-top-right-radius: 3em;
+    border-top-left-radius: 3em;
+    max-width: 110px;
+    height: 140px;
+}
+
+.teammembers_img:hover, .teammembers_img.active{
+	background: #0092B5;    
+}
+
+
+
+li.teammembers_img:hover p, li.teammembers_img.active p{
+	color: #fff !important; 
+}
+
+
+ul.team_list li a {
+  display: block;
+}
+
+
+.company_email, #emp_phone, #emp_skypeid{
+	color: #1298B9;
+}
+
+.custom_bluecolor{
+	color: #0092b3;
+}
+
+
+.waiting-for-approval th, .waiting-for-approval td, .applied-recently th, .applied-recently td{
+	color: #000;
+} 
+
