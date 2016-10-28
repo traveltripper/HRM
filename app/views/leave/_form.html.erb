@@ -3,52 +3,66 @@
 <div id="leave-modal" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">    
-      <div class="panel-heading">Apply Leave</div>
-      <div class="panel-body pan">
-        <%= form_for @leave, remote: true do |f| %>
-          <div class="form-body pal">
-            <div id="error_explanation">
-            <% if @leave.errors.any? %>
-            <div class="alert alert-error">
-              <strong><%= pluralize(@leave.errors.count, "error") %>    prohibited
-                this leave from being saved:</strong>
-              <ul>
-              <% @leave.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-              <% end %>
-              </ul>
-            </div>
-            <% end %>
-            </div>
-            <div class="form-group">
-            <%=f.label :leave_type%>
-            <%=f.collection_select :leavetype_id, Leavetype.all, :id, :name, {:prompt => 'Select Leavetype'}, :class=>"form-control", :required=>true%>
-            </div>       
-            
-            <div class="form-group">
-            <%=f.label :fromdate%>
-            <%=f.text_field :fromdate, class: 'form-control', :id=>"dt1", :required=>true%>
-            </div>        
-            
-            <div class="form-group">
-            <%=f.label :todate%>
-            <%=f.text_field :todate, class: 'form-control', :id=>"dt2", :required=>true%>
-            </div>        
-            <div class="form-group">
-            <%=f.label :no_of_days%>
-            <%=f.text_field :no_of_days, class: 'form-control', :id=>"dt3", :readonly => true%>
-            </div>
-            <div class="form-group">
-            <%=f.label :reason%>
-            <%=f.text_area :reason, class: 'form-control tinymce', cols: "30", rows: "5", :required=>true%>
-            </div>
+        <div class="panel-heading-style">Apply Leave</div>
+        <div class="panel-body pan">
+            <%= form_for @leave, remote: true do |f| %>
+                <div class="form-body pal">
+                    <div id="error_explanation">
+                        <% if @leave.errors.any? %>
+                            <div class="alert alert-error">
+                                <strong><%= pluralize(@leave.errors.count, "error") %>    prohibited
+                    this leave from being saved:</strong>
+                                <ul>
+                                    <% @leave.errors.full_messages.each do |msg| %>
+                                        <li><%= msg %></li>
+                                    <% end %>
+                                </ul>
+                             </div>
+                        <% end %>
+                    </div>
 
-            <div class="text-right pal">
-              <%= f.submit class: "btn btn-primary"%>
-            </div>
-          </div>
-        <% end %>
-      </div>    
+                    <div class="row">                        
+                        <div class="col-md-6">
+                            <div class="form-group">
+                            <%=f.label :fromdate%>
+                            <%=f.text_field :fromdate, class: 'form-control form-height40', :id=>"dt1", :required=>true%>
+                            </div> 
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                            <%=f.label :todate%>
+                            <%=f.text_field :todate, class: 'form-control form-height40', :id=>"dt2", :required=>true%>
+                            </div> 
+                        </div>
+                    </div>       
+                
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                            <%=f.label :leave_type%>
+                            <%=f.collection_select :leavetype_id, Leavetype.all, :id, :name, {:prompt => 'Select Leavetype'}, :class=>"form-control form-height40", :required=>true%>
+                            </div>                           
+                        </div>
+                        <div class="col-md-6">       
+                            <div class="form-group">
+                            <%=f.label :no_of_days%>
+                            <%=f.text_field :no_of_days, class: 'form-control form-height40', :id=>"dt3", :readonly => true%>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    <%=f.label :reason%>
+                    <%=f.text_area :reason, class: 'form-control tinymce', cols: "30", rows: "5", :required=>true%>
+                    </div>
+                </div>
+                <div class="form-submit-buttons">
+                   
+                    <button type="button" class="btn btn-cgray width-50p" data-dismiss="modal">CANCEL</button>                
+                    <%= f.submit "APPLY", class: "btn btn-cblue width-50p"%>       
+                       
+                </div>                
+            <% end %>
+        </div>    
     </div>
 </div>
 <script>

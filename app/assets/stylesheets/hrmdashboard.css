@@ -460,3 +460,41 @@ ul.team_list li a {
 	color: #000;
 } 
 
+
+.panel-heading-style{
+    padding: 10px 20px;
+    font-size: 20px;
+    border-bottom: 1px solid #ccc9c9;
+}
+
+.width-50p{
+	width: 50%;
+	float: left;
+	height: 50px;
+}
+
+.btn-cblue{
+	background: #0092B5;
+	color: #fff;
+}
+
+.modal-content{
+	border-radius: 1em !important;
+}
+
+#hrm_dashboard .modal,  #hrm_dashboard .modal-dialog, #hrm_dashboard .modal-content{
+	border-radius: 1em !important;
+}
+
+.form-height40{
+	height: 40px;
+}
+
+.form-control:focus{	
+	border-color: #FF726F !important;
+    border-left: 5px solid #FF726F !important;
+}
+
+.btn-cgray{
+	background: #DBDBDB;	
+}
