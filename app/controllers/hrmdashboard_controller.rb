@@ -12,7 +12,6 @@ class HrmdashboardController < ApplicationController
   	@announcements = Announcement.limit(4)
     @today_birthdays = Employee.find_by_sql("select first_name from employees where to_char(actual_dob, '%m%d') = to_char(now(), '%m%d')")  
     #@today_birthdays = Employee.find_by_sql("select first_name from employees where date_format(actual_dob, '%m%d') = date_format(now(), '%m%d')") 	
-    
     @names = []
     @today_birthdays.each do |name|
       @names << name.first_name
