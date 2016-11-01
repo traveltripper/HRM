@@ -35,6 +35,10 @@ class Employee < ActiveRecord::Base
     actual_dob.strftime("%m%d")
   end
 
+  def self.today_month_and_day
+    p Time.now.strftime("%m%d")
+  end
+
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|  
       row1 = row.to_hash 
