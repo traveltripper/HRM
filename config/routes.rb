@@ -38,6 +38,7 @@ Rails.application.routes.draw do
 
   resources :employees do
     get :birthdays, on: :collection
+    post :import, on: :collection
   end
   resources :roles do 
     member do

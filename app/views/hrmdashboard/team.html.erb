@@ -15,7 +15,7 @@
 	</div>
 
 	<div class="col-md-12">
-		<hr style="border-color:#0092B5;margin-top: 0px;margin-bottom: 0px;border-width: 2px;">
+		<hr style="border-color:#0092B5;margin-top: 0px;margin-bottom: 0px;border-width: 3px;">
 	</div>
 
 	<div class="col-md-12 bg-color-white">
@@ -31,17 +31,17 @@
 				<h4>General Information</h4>
 				<p>Position: <span id="emp_designation"><%=@team.first.designation%></span></p>
 				<p>Department: <span id="emp_department"><%=@team.first.department.name%></span></p>
-				<p>Supervisor: <span id="emp_manager"><%=@team.first.manager%></span></p>
+				<p>Supervisor: <span id="emp_manager"><%=@team.first.manager.fullname if @team.first.manager %></span></p>
 				<p>Status: <span id="emp_status"><%=@team.first.status%></span></p>
 				<h4>Contact Information</h4>
 				<p>E-Mail: <span class="emp_email company_email"><%=@team.first.email%></span></p>
 				<p>Phone: <span id="emp_phone"><%=@team.first.contact_no%></span></p>
-				<p>Skype: <span id="emp_skypeid"></span></p>
+				<p>Skype: <span id="emp_skypeid"><%=@team.first.skype_id%></span></p>
 				<h4>Additional Information</h4>
 				<p>Birthday: <span id="emp_birthday"><%=@team.first.actual_dob.strftime("%d-%b")%></span></p>
 			</div>
 			<div class="col-md-12">
-				<hr style="border-color:#0092B5;margin-top: 0px;margin-bottom: 0px;border-width: 2px;">
+				<hr style="border-color:#0092B5;margin-top: 0px;margin-bottom: 0px;border-width: 3px;">
 			</div>
         </div>
 	</div>

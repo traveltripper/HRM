@@ -1,7 +1,7 @@
 class EmployeesController < ApplicationController
   before_action :authenticate_employee!
   #before_filter(:only => [:index, :show]) { unauthorized! if cannot? :read, :Employee }
-  before_filter :require_permission, :only => [:index, :new, :create, :destroy]
+  before_filter :require_permission, :only => [:index, :new, :edit, :create, :destroy]
   layout 'dashboard'
   add_breadcrumb "Home", :root_path
   respond_to :json
@@ -128,6 +128,10 @@ class EmployeesController < ApplicationController
     render json: {role: current_employee.role.name}
   end
 
+  def import
+    Employee.import(params[:file])
+    redirect_to employees_path, notice: "Employees imported."
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -6,7 +6,7 @@
 			    <li>			    
 				    <%=image_tag emp.profile_picture.url(:thumb), class:'img-circle'%>
 				    <h6><%= emp.fullname  %></h6>
-				    <p><%= emp.role.name  %></p>
+				    <p><%= emp.designation  %></p>
 			    </li>
 		    <%end%>	    
 	    </ul>
@@ -17,8 +17,8 @@
 	<h4>Payroll</h4>	
 	<div class="col-md-12 bg-color-white ">
 		<div class="col-md-12 nullPadding">Last Pay Date</div>
-		<div class="col-md-12 nullPadding date"><%= @payroll.pay_date.strftime("%d-%m-%Y") %></div>		
-		<%= link_to 'View Payslip', @payroll.attachment_url, :target => "_blank", class: " btn btn-primary" %>
+		<div class="col-md-12 nullPadding date"><%= @payroll.pay_date.strftime("%d-%m-%Y") if @payroll  %></div>		
+		<%= link_to 'View Payslip', @payroll.attachment_url, :target => "_blank", class: " btn btn-primary" if @payroll %>
 	</div>
 
 	<div class="clearfix"></div>

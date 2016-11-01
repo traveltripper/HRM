@@ -5,7 +5,7 @@ class HrmdashboardController < ApplicationController
   def index
   	@emp = current_employee
   	@team = Employee.where(:department_id=> @emp.department_id)
-  	@payroll = @emp.payrolls.last
+  	@payroll = @emp.payrolls.first
   	@leave_used = @emp.leave_used
   	@available_leave = @emp.days_of_leave - @leave_used  	
   	@request_pending = @emp.leave.where(status: nil).count  

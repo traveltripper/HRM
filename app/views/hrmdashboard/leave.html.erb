@@ -1,38 +1,39 @@
 <div class="col-md-12">
-
-  <div class="col-md-10">	
-	 <h4>Leave Management</h4>
+  <div class="row">
+    <div class="col-md-10"> 
+     <h4>Leave Management</h4>
+    </div>
+    <div class="col-md-2">
+      <%=link_to 'Apply leave', new_leave_path, remote: true, :class=>"btn btn-primary" %> 
+    </div>
   </div>
-  <div class="col-md-2">
-    <%=link_to 'Apply leave', new_leave_path, remote: true, :class=>"btn btn-primary" %> 
-  </div>
 
-	<div class="col-md-12 bg-color-white">
-    <div class="leave-management">		 
-      <div class="col-md-4">
-        <span class="span-title-color">Available</span>
-        <h3 class="custom_bluecolor"><%=@available_leave%></h3> 
+  <div class="col-md-12 bg-color-white">
+    <div class="leave-management">     
+      <div class="col-md-4 border-right-gray">
+        <h5>Available</h5>
+        <h1 class="custom_bluecolor padding-0 margin-0"><%=@available_leave%></h1> 
       </div> 
-      <div class="col-md-4">
-        <span class="span-title-color">Used</span>
-        <h3 class="custom_bluecolor"><%= @leave_used%></h3>
+      <div class="col-md-4 border-right-gray">
+        <h5>Used</h5>
+        <h1 class="custom_bluecolor padding-0 margin-0"><%= @leave_used%></h1>
       </div>
       <div class="col-md-4">
-        <span class="span-title-color">Request Pending</span>
-        <h3 class="req" id = "leave_request_pending" ><%=@request_pending%></h3>
+        <h5>Request Pending</h5>
+        <h1 class="req padding-0 margin-0" id = "leave_request_pending" ><%=@request_pending%></h1>
       </div> 
-    </div>		
-	</div>
+    </div>    
+  </div>
 </div>
 
 
 
 <div class="col-md-12">
-  <div class="col-md-10">
-    <h4>Leaves waiting for approval</h4>
-  </div>
-  <div class="panel-body">
-    <table class="table table-hover-color table-bordered waiting-for-approval">
+  
+    <h4 class="h4_custom_style">Leaves waiting for approval</h4>
+  
+  
+    <table class="table table-hover-color table-bordered waiting-for-approval table-white-background">
       <thead>
         <tr>    
           <th>Type of Leave</th>
@@ -47,17 +48,19 @@
 
       <tbody>
         <% @leave_waiting_for_approve.each_with_index do |leave, index| %>
-          <%= render 'leave/leave_row', leave: leave %>      
+          <tr id="leave_<%=leave.id%>">
+            <%= render 'leave/leave_row', leave: leave %>
+          </tr>      
         <% end %>
       </tbody>
     </table>
-  </div>  
+   
 
-  <div class="col-md-10">
-    <h4>Leaves applied recently</h4>
-  </div>
-  <div class="panel-body">
-  <table class="table table-hover-color table-bordered applied-recently">
+  
+    <h4 class="h4_custom_style">Leaves applied recently</h4>
+  
+  
+  <table class="table table-hover-color table-bordered applied-recently table-white-background">
     <thead>
       <tr>
         <th>S.No</th>      
@@ -90,5 +93,5 @@
       <% end %>
     </tbody>
   </table>
-  </div>  
+   
 </div>

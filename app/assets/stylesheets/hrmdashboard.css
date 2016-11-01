@@ -168,7 +168,7 @@ h4{
 	.myteam ul{ list-style:none; margin:5px; padding:0px; }
 	.myteam ul li{display:inline-block; margin:12px; text-align:center;}
 	.myteam ul li img{ width:60px;}
-	.myteam ul li h6{color:#72bfd4; text-transform:uppercase; font-size:12px;}
+	.myteam ul li h6{color:#72bfd4; text-transform:uppercase; font-size:10px;}
 	.myteam ul li p{color:#000; font-weight:300; font-size:12px; text-transform:capitalize;}	
 	
 /*Payroll*/
@@ -427,7 +427,7 @@ a:focus, a:hover{
     padding: 10px;
     border-top-right-radius: 3em;
     border-top-left-radius: 3em;
-    max-width: 110px;
+    width: 110px;
     height: 140px;
 }
 
@@ -490,11 +490,87 @@ ul.team_list li a {
 	height: 40px;
 }
 
-.form-control:focus{	
+#leave-modal .form-control:focus{	
 	border-color: #FF726F !important;
     border-left: 5px solid #FF726F !important;
 }
 
 .btn-cgray{
 	background: #DBDBDB;	
+}
+
+
+.table-white-background{
+	background: #fff;	
+}
+
+
+.border-right-gray{
+	border-right: 2px solid #EBEBEB;
+}
+
+.padding-0{
+	padding: 0px;
+}
+
+.margin-0{
+	margin:0px;
+}
+
+.h4_custom_style{
+	color: #6A7984;
+    font-weight: 300;
+}
+
+
+input#dt1, input#dt2{
+	 background: url(/images/calendaricon.png) no-repeat scroll 227px 2px;
+    background-size: 33px;
+}
+
+.modal-dialog, .modal-content{
+	border-radius: 1em !important;
+}
+
+.btn-border-left-radius{
+border-bottom-left-radius: 1em !important;		
+}
+
+.btn-border-right-radius{
+border-bottom-right-radius: 1em !important;		
+}
+
+@media (min-width: 768px)
+{
+	.modal-dialog 
+	{    
+    	margin: 75px auto;
+	}
+}
+
+
+.navbar-collapse{
+	padding-left: 0;
+	padding-right: 0;
+}
+
+i.fa{
+	font-size: 20px;
+}
+
+.padding-left-0{
+	padding-left: 0;
+}
+
+.event-background-color{
+	background: #fff;
+}
+
+.import_employees input[type=file] {
+    display: inline;
+    width: 200px;
+}
+
+.import_employees{
+	float: left;
 }

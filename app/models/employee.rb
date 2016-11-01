@@ -35,6 +35,19 @@ class Employee < ActiveRecord::Base
     actual_dob.strftime("%m%d")
   end
 
+  def self.import(file)
+    CSV.foreach(file.path, headers: true) do |row|  
+      row1 = row.to_hash 
+      row2 = {"password"=>"123456" , "password_confirmation"=>"123456"}
+      row3 =row1.merge(row2.to_hash)
+      p ".........."
+      p row3
+      p ".........."
+           
+      Employee.create! row3
+    end
+  end
+
   private
     def set_days_of_leave
       self.days_of_leave = ((Time.now.end_of_year - self.date_of_joining)/1.month.second).ceil * 2     

@@ -41,10 +41,9 @@ class LeaveController < ApplicationController
     end
   end
 
-  def create
-    
-     @emp = current_employee
-     @leave = current_employee.leave.create(leave_params)    
+  def create    
+    @emp = current_employee
+    @leave = current_employee.leave.create(leave_params)    
      
     # if @leave.save
     #   #LeaveMailer.employee_leave_request_email(@emp, @leave).deliver_later
@@ -57,10 +56,12 @@ class LeaveController < ApplicationController
 
   def update
     @leave = Leave.find(params[:id])
+    p "..........leave update........."
     respond_to do |format|
       if @leave.update(leave_params)
         format.html { redirect_to @leave, notice: 'Leave was successfully updated.' }
         format.json { render :show, status: :ok, location: @leave }
+        format.js
       else
         format.html { render :edit }
         format.json { render json: @leave.errors, status: :unprocessable_entity }
@@ -74,6 +75,7 @@ class LeaveController < ApplicationController
     respond_to do |format|
       format.html { redirect_to leave_index_path, notice: 'Leave was successfully destroyed.' }
       format.json { head :no_content }
+      format.js
     end
   end
 

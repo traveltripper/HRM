@@ -5753,7 +5753,7 @@ li [class*=" icon-"].icon-large {
 .modal .modal-dialog .modal-content {
   -webkit-border-radius: 0 !important;
   -moz-border-radius: 0 !important;
-  /*border-radius: 0 !important; */
+  border-radius: 1em !important; 
 }
 .modal .modal-dialog .modal-content .modal-header.modal-header-primary {
   background: #dc6767;

@@ -113,7 +113,9 @@
 
   <tbody>
     <% @leave_waiting_for_approve.each_with_index do |leave, index| %>
-      <%= render 'leave_row', leave: leave %>      
+      <tr id="leave_<%=leave.id%>">
+        <%= render 'leave_row', leave: leave %> 
+      </tr>     
     <% end %>
   </tbody>
 </table>

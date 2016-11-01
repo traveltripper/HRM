@@ -130,7 +130,7 @@ ActiveRecord::Schema.define(version: 20161024101859) do
     t.integer  "profile_picture_file_size",    limit: 4
     t.datetime "profile_picture_updated_at"
     t.datetime "date_of_joining"
-    t.integer  "days_of_leave",                limit: 4
+    t.integer  "days_of_leave",                limit: 4,     default: 0
     t.integer  "leave_used",                   limit: 4,     default: 0
     t.string   "skype_id",                     limit: 255
     t.string   "designation",                  limit: 255

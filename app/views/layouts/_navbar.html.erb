@@ -1,12 +1,12 @@
 <nav class="menu">
- <div class="container-fluid">
+ <div class="container-fluid padding-left-0">
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="pull-left">
 			<li class="<%= 'active' if current_page?(hrmdashboard_path) %>"><a href="/hrmdashboard" class="dashboard" ><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a>  </li>
 			<li class="<%= 'active' if current_page?(hrm_team_path) %>"><a href="/hrm_team" class="team"><i class="fa fa-users" aria-hidden="true"></i>Team</a>  </li>
 			<li class="<%= 'active' if current_page?(hrm_leave_path) %>"><a href="/hrm_leave" class="l-management"><i class="fa fa-calendar-o" aria-hidden="true"></i> Leave Management</a>
-			<li class="<%= 'active' if current_page?(hrm_profile_path) %>"><a href="/hrm_profile" class="profile"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Profile</a> </li> </li>
-			<li class="<%= 'active' if current_page?(hrm_events_path) %>"><a href="/hrm_events" class="e-management"><i class="fa fa-dashcube" aria-hidden="true"></i>Event Management</a> </li>
+			<li class="<%= 'active' if current_page?(hrm_profile_path) %>"><a href="/hrm_profile" class="profile"><i class="fa fa-user" aria-hidden="true"></i> Profile</a> </li> </li>
+			<li class="<%= 'active' if current_page?(hrm_events_path) %>"><a href="/hrm_events" class="e-management"><i class="fa fa-clock-o" aria-hidden="true"></i>Event Management</a> </li>
 			<li class="<%= 'active' if current_page?(hrm_payroll_path) %>"><a href="/hrm_payroll" class="payroll"><i class="fa fa-money" aria-hidden="true"></i>Payroll</a> </li>
         </ul>
             

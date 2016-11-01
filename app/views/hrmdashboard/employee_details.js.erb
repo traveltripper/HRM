@@ -1,7 +1,7 @@
 $('#emp_name').html('<%= j @emp.fullname%>');
 $('#emp_designation').html('<%= j @emp.designation%>');
 $('#emp_department').html('<%= j @emp.department.name%>');
-$('#emp_manager').html('<%#= j @emp.manager.fullname%>');
+$('#emp_manager').html('<%= j @emp.manager.fullname if @emp.manager%>');
 $('#emp_status').html('<%= j @emp.status%>');
 $('.emp_email').html('<%= j @emp.email%>');
 $('#emp_aboutme').html('<%= j @emp.about_me%>');
