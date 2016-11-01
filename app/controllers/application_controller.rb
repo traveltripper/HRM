@@ -12,7 +12,8 @@ class ApplicationController < ActionController::Base
   end
   
   def upcoming_events
-    Event.where('start >= ? or end >= ?', Date.today, Date.today).limit(5)
+    Event.all
+    #Event.where('start >= ? or end >= ?', Date.today, Date.today).limit(5)
   end
  
   rescue_from CanCan::AccessDenied do |exception|
