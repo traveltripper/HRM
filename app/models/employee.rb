@@ -21,6 +21,7 @@ class Employee < ActiveRecord::Base
   validates_attachment_content_type :profile_picture, content_type: /\Aimage\/.*\z/
   before_create :set_days_of_leave
   has_many :announcements  
+  has_many :healthinsurances
 
   def fullname
   	first_name.capitalize.to_s + " " + middle_name.capitalize.to_s + " " + last_name.capitalize.to_s

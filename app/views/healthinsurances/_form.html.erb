@@ -1,0 +1,17 @@
+<%= simple_form_for(@healthinsurance) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :card_number %>
+    <%= f.input :relation %>
+    <%= f.input :issued_date %>
+    <%= f.input :policy_start_date %>
+    <%= f.input :policy_end_date %>
+    <%= f.input :employee_id %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

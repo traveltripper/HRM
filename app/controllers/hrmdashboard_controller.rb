@@ -9,13 +9,8 @@ class HrmdashboardController < ApplicationController
   	@leave_used = @emp.leave_used
   	@available_leave = @emp.days_of_leave - @leave_used  	
   	@request_pending = @emp.leave.where(status: nil).count  
-  	@announcements = Announcement.limit(4)
-    #@today_birthdays = Employee.find_by_sql("select first_name from employees where to_char(actual_dob, '%m%d') = to_char(now(), '%m%d')")  
-    #@today_birthdays = Employee.find_by_sql("select first_name from employees where date_format(actual_dob, '%m%d') = date_format(now(), '%m%d')") 	
-    @names = []
-    #@today_birthdays.each do |name|
-      #@names << name.first_name
-    #end
+  	@announcements = Announcement.limit(4)    
+    @names = []    
     @employees=Employee.all
     @employees.each do |u| 
       if u.actual_dob+(Date.today.year-u.actual_dob.year).years >= Date.yesterday && u.actual_dob+(Date.today.year-u.actual_dob.year).years <= Date.tomorrow

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :healthinsurances
   get '/hrmdashboard' => 'hrmdashboard#index'
 
   resources :announcements

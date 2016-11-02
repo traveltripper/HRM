@@ -7,20 +7,21 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-Leavetype.create(name: "Sick")
-Leavetype.create(name: "Maternity")
-Leavetype.create(name: "Paternity")
-Leavetype.create(name: "Vacation")
-
 Role.create(name: "Employee")
 Role.create(name: "Manager")
 Role.create(name: "HR")
 Role.create(name: "Finace")
 
-Department.create(name: "IT")
+
 Department.create(name: "ROR")
 Department.create(name: "JAVA")
+Department.create(name: "IT")
 Department.create(name: "CS")
+
+Leavetype.create(name: "Sick")
+Leavetype.create(name: "Maternity")
+Leavetype.create(name: "Paternity")
+Leavetype.create(name: "Vacation")
 
 
 # AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
