@@ -2,15 +2,18 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_employee!
   layout 'dashboard'
+  add_breadcrumb "Home", :root_path
   # GET /events
   # GET /events.json
   def index
     @events = Event.all
+    add_breadcrumb "Events", :events_path
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
+    add_breadcrumb "Event"
   end
 
   # GET /events/new

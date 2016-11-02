@@ -1,14 +1,8 @@
 <p id="notice"><%= notice %></p>
+<%title 'Announcement'%>
+<h2 class="link-color">Title: <%= @announcement.title %></h2>
 
-<p>
-  <strong>Title:</strong>
-  <%= @announcement.title %>
-</p>
+<h2 class="link-color"> <%= @announcement.message %> </h2>
 
-<p>
-  <strong>Message:</strong>
-  <%= @announcement.message %>
-</p>
-
-<%= link_to 'Edit', edit_announcement_path(@announcement) %> |
-<%= link_to 'Back', announcements_path %>
+<%= link_to 'Edit', edit_announcement_path(@announcement), :class=>"fa fa-pencil-square-o btn btn-primary" %> |
+<%= link_to 'Back', announcements_path, :class=>"fa fa-arrow-left btn btn-primary" %>

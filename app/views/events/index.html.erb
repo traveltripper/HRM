@@ -1,35 +1,18 @@
 <p id="notice"><%= notice %></p>
-
-<h1>Listing Events</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Start Date</th>
-      <th>End Date</th>
-      <th>Picture</th>
-      <th>Reason</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @events.each do |event| %>
-      <tr>
-        <td><%= event.title%></td>
-        <td><%= event.start.strftime("%d-%b-%Y")%></td>
-        <td><%= event.end_date.strftime("%d-%b-%Y") %></td>
-        <td><%= image_tag event.picture.url(:thumb)%></td>
-        <td><%= event.reason%></td>
-        <td><%= link_to 'Show', event %></td>
-        <td><%= link_to 'Edit', edit_event_path(event) %></td>
-        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+<%title "Events"%>
+<div class="row">
+  <%@events.each do |event|%>
+    <div class="col-md-4 event-background-color">     
+      <%=image_tag event.picture.url(:medium), class:'hrm_event_images'%>
+      <h4><%=event.title%></h4>
+      <p>From: <%=event.start.strftime("%d-%b-%Y")%> To: <%=event.end_date.strftime("%d-%b-%Y")%></p>
+      <p><%=event.reason%></p>  
+      <%= link_to 'Show', event %>
+      <%= link_to 'Edit', edit_event_path(event) %>
+      <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %>    
+    </div>
+  <%end%>
+</div>
 <br>
 
 <%= link_to 'New Event', new_event_path %>

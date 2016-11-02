@@ -3,16 +3,18 @@ class AnnouncementsController < ApplicationController
   # load_and_authorize_resource
   layout 'dashboard'
   before_action :set_announcement, only: [:show, :edit, :update, :destroy]
-
+  add_breadcrumb "Home", :root_path
   # GET /announcements
   # GET /announcements.json
   def index
     @announcements = Announcement.all
+    add_breadcrumb "Announcements", :announcements_path
   end
 
   # GET /announcements/1
   # GET /announcements/1.json
   def show
+    add_breadcrumb "Announcement"
   end
 
   # GET /announcements/new

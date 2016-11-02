@@ -1,13 +1,22 @@
 <p id="notice"><%= notice %></p>
+<% title "Announcements" %>
+<div class="row">
+<div class="col-md-12">
+<% if can? :create, @announcement %>
+<%= link_to ' Add', new_announcement_path, :class=>"fa fa-plus btn btn-primary bottom-margin-10 link-float-right" %>
+<%end%>
+</div>
+</div>
 
-<h1>Listing Announcements</h1>
+<div class="panel panel-cblue">
 
-<table>
+<div class="panel-body">
+<table class="table table-hover-color table-bordered">
   <thead>
     <tr>
       <th>Title</th>
       <th>Message</th>
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
@@ -16,14 +25,16 @@
       <tr>
         <td><%= announcement.title %></td>
         <td><%= announcement.message %></td>
-        <td><%= link_to 'Show', announcement %></td>
-        <td><%= link_to 'Edit', edit_announcement_path(announcement) %></td>
-        <td><%= link_to 'Destroy', announcement, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '', announcement, :class=>"fa fa-eye btn" %></td>
+        <td><%= link_to '', edit_announcement_path(announcement), :class=>"fa fa-pencil-square-o btn " %></td>
+        <!-- <td><%#= link_to 'Destroy', announcement, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
+</div>
+</div>
 
-<%= link_to 'New Announcement', new_announcement_path %>
+
