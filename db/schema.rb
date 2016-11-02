@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161024101859) do
+ActiveRecord::Schema.define(version: 20161102062147) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -130,7 +130,7 @@ ActiveRecord::Schema.define(version: 20161024101859) do
     t.integer  "profile_picture_file_size",    limit: 4
     t.datetime "profile_picture_updated_at"
     t.datetime "date_of_joining"
-    t.integer  "days_of_leave",                limit: 4,     default: 0
+    t.integer  "days_of_leave",                limit: 4
     t.integer  "leave_used",                   limit: 4,     default: 0
     t.string   "skype_id",                     limit: 255
     t.string   "designation",                  limit: 255
@@ -143,7 +143,7 @@ ActiveRecord::Schema.define(version: 20161024101859) do
   create_table "events", force: :cascade do |t|
     t.string   "title",                limit: 255
     t.datetime "start"
-    t.datetime "end"
+    t.datetime "end_date"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
     t.text     "reason",               limit: 65535

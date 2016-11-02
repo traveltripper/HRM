@@ -11,9 +11,8 @@ class ApplicationController < ActionController::Base
     @current_ability ||= Ability.new(current_employee)
   end
   
-  def upcoming_events
-    Event.all
-    #Event.where('start >= ? or end >= ?', Date.today, Date.today).limit(5)
+  def upcoming_events   
+    Event.where('start >= ? or end_date >= ?', Date.today, Date.today).limit(5)
   end
  
   rescue_from CanCan::AccessDenied do |exception|

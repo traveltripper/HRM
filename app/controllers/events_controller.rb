@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_employee!
   layout 'dashboard'
   # GET /events
   # GET /events.json
@@ -69,6 +70,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:title, :start, :end, :reason, :picture)
+      params.require(:event).permit(:title, :start, :end_date, :reason, :picture)
     end
 end
