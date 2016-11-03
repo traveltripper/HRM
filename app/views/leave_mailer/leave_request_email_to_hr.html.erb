@@ -43,12 +43,9 @@ pre { white-space: pre; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; wh
 <tbody>
 <tr>
 <td bgcolor="#FFFFFF" style="border-radius:0px 0px 3px 3px;color:#777777;font-family:Helvetica,Arial,sans-serif;font-size:16px;line-height:25px;padding:30px 50px 35px 50px"><br><br>Dear <%=@employee.fullname%>,<br><br>
-    Your applied leave is <%=@status%> <br>
-    <%if @status == "Rejected"%>
-      Rejected Reason: <%=@leave.reject_reason.html_safe%>
-    <%end%>
+    Your Teammember <%=@employee.fullname%> has applied leave.<br>
 <br>
-<a href=""></a> <br><br><span style="color:#222222;font-family:Helvetica,Arial,sans-serif;font-size:18px">Leave Details:</span><br>From: <a style="color:#888888;text-decoration:none"><%=@leave.fromdate.strftime('%d-%b-%Y')%></a><br>To: <%=@leave.todate.strftime('%d-%b-%Y')%><br>No of days:<%=@leave.no_of_days%><br> Reason: <%=@leave.reason.html_safe%> <br><br>Thanks,<br>
+<a href="http://localhost:3000/leave/<%=@leave.id%>" style="color:#000;">Click here to check leave request</a> <br><br><span style="color:#222222;font-family:Helvetica,Arial,sans-serif;font-size:18px">Leave Details:</span><br>From: <a style="color:#888888;text-decoration:none"><%=@leave.fromdate.strftime('%d-%b-%Y')%></a><br>To: <%=@leave.todate.strftime('%d-%b-%Y')%><br>No of days:<%=@leave.no_of_days%><br> Reason: <%=@leave.reason.html_safe%> <br><br>Thanks,<br>
 HRM Team, <br> Travel tripper
 </td>
 </tr>

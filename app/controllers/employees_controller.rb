@@ -133,6 +133,19 @@ class EmployeesController < ApplicationController
     redirect_to employees_path, notice: "Employees imported."
   end
 
+  def change_password
+    @employee = current_employee
+    render :layout => 'application'    
+  end
+
+  def update_password
+    @employee = current_employee
+    @employee.update_attributes(:password => params[:password], :password_confirmation => params[:password_confirmation], password_changed: true)    
+    if @employee.save
+      redirect_to root_path
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     

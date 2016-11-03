@@ -43,7 +43,7 @@ pre { white-space: pre; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; wh
 <tbody>
 <tr>
 <td bgcolor="#FFFFFF" style="border-radius:0px 0px 3px 3px;color:#777777;font-family:Helvetica,Arial,sans-serif;font-size:16px;line-height:25px;padding:30px 50px 35px 50px"><br><br>Dear <%=@employee.fullname%>,<br><br>
-    Your applied leave is <%=@status%> <br>
+    <%=@employee.fullname%> applied leave is <%=@status%> <br>
     <%if @status == "Rejected"%>
       Rejected Reason: <%=@leave.reject_reason.html_safe%>
     <%end%>

@@ -43,15 +43,8 @@ class LeaveController < ApplicationController
 
   def create    
     @emp = current_employee
-    @leave = current_employee.leave.create(leave_params)    
-     
-    # if @leave.save
-    #   #LeaveMailer.employee_leave_request_email(@emp, @leave).deliver_later
-    #   flash[:success] = "You have applied leave successfully and an e-mail will be sent to HR and Manager. Waiting for approval."
-    #   redirect_to root_url
-    # else
-    #   render 'new'
-    # end
+    @leave = current_employee.leave.create(leave_params)
+    flash[:success] = "You have applied leave successfully and an e-mail will be sent to HR and Manager. Waiting for approval."    
   end
 
   def update
@@ -109,6 +102,7 @@ class LeaveController < ApplicationController
       if @leave.update_attributes(:status => status, :reject_reason => params[:leave]["reject_reason"])
         @emp.update_attribute(:leave_used, @leave_used)
         LeaveMailer.employee_leave_status(@emp, @leave).deliver_later
+        LeaveMailer.employee_leave_status_to_hr(@emp, @leave).deliver_later
         format.html { redirect_to leave_index_path, notice: 'Leave status mailed to Employee' }
       else
         format.html { render :edit }

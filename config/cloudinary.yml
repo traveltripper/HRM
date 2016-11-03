@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: dpb1kenoe
+  api_key: '463641116547827'
+  api_secret: HSD60KFQbIPhnCJk_zeBE-ZUo10
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: dpb1kenoe
+  api_key: '463641116547827'
+  api_secret: HSD60KFQbIPhnCJk_zeBE-ZUo10
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: dpb1kenoe
+  api_key: '463641116547827'
+  api_secret: HSD60KFQbIPhnCJk_zeBE-ZUo10
+  enhance_image_tag: true
+  static_image_support: false

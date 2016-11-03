@@ -39,7 +39,7 @@ Rails.application.routes.draw do
 
   resources :employees do
     get :birthdays, on: :collection
-    post :import, on: :collection
+    post :import, on: :collection 
   end
   resources :roles do 
     member do
@@ -91,4 +91,6 @@ Rails.application.routes.draw do
   get 'hrm_events' => 'hrmdashboard#events'
   get '/hrm_payroll' => 'hrmdashboard#payroll'
   get '/download_payslip' => 'payrolls#download_payslip'
+  get '/change_password' => 'employees#change_password'
+  post '/update_password' => 'employees#update_password'
 end

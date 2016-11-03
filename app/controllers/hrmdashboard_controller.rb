@@ -1,6 +1,7 @@
 class HrmdashboardController < ApplicationController
   before_action :authenticate_employee!
   layout 'hrmdashboard'  
+  before_action :check_password_changed  
 
   def index
   	@emp = current_employee
@@ -16,8 +17,7 @@ class HrmdashboardController < ApplicationController
       if u.actual_dob+(Date.today.year-u.actual_dob.year).years >= Date.yesterday && u.actual_dob+(Date.today.year-u.actual_dob.year).years <= Date.tomorrow
           @names << u.first_name 
       end
-    end
-   
+    end   
   end
 
   def team
@@ -59,5 +59,12 @@ class HrmdashboardController < ApplicationController
     @employee = current_employee
     @payroll = @employee.payrolls.last
     @payrolls = @employee.payrolls
+  end
+
+
+  def check_password_changed
+   unless current_employee.password_changed
+     redirect_to change_password_path, alert: "You must change your password before logging in for the first time"
+   end
   end
 end

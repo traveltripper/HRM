@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   require 'carrierwave'
   require 'carrierwave/orm/activerecord'
   
+  
   def current_ability
     @current_ability ||= Ability.new(current_employee)
   end

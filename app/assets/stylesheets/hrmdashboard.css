@@ -166,9 +166,9 @@ h4{
 		}
 		
 	.myteam ul{ list-style:none; margin:5px; padding:0px; }
-	.myteam ul li{display:inline-block; margin:12px; text-align:center;}
+	.myteam ul li{display:inline-block; margin:5px; text-align:center;}
 	.myteam ul li img{ width:60px;}
-	.myteam ul li h6{color:#72bfd4; text-transform:uppercase; font-size:10px;}
+	.myteam ul li h6{color:#72bfd4; text-transform:uppercase; font-size:9px;}
 	.myteam ul li p{color:#000; font-weight:300; font-size:12px; text-transform:capitalize;}	
 	
 /*Payroll*/
@@ -573,4 +573,9 @@ i.fa{
 
 .import_employees{
 	float: left;
+}
+
+.form-top-bottom-padding{
+	padding-bottom: 15px;
+	padding-top: 15px;
 }
