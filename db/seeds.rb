@@ -12,10 +12,9 @@ Role.create(name: "Manager")
 Role.create(name: "HR")
 Role.create(name: "Finace")
 
-
+Department.create(name: "IT")
 Department.create(name: "ROR")
 Department.create(name: "JAVA")
-Department.create(name: "IT")
 Department.create(name: "CS")
 
 Leavetype.create(name: "Sick")
