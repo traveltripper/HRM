@@ -18,12 +18,12 @@ class Leave < ActiveRecord::Base
 
 	private
 
-	def send_emails		
-		# @leave = Leave.find(id) 
-		# @employee = @leave.employee 
-  #   	LeaveMailer.employee_leave_request_email(@emp, @leave).deliver_later
-  #   	LeaveMailer.team_leave_request_email(@emp, @leave).deliver_later
-  #   	LeaveMailer.leave_request_email_to_hr(@emp, @leave).deliver_later
+	def send_emails			
+		@leave = Leave.find(id) 			
+		@emp = @leave.employee 
+     	LeaveMailer.employee_leave_request_email(@emp, @leave).deliver_later
+    	LeaveMailer.team_leave_request_email(@emp, @leave).deliver_later
+     	LeaveMailer.leave_request_email_to_hr(@emp, @leave).deliver_later
 	end
 	
 

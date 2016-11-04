@@ -4,6 +4,6 @@ class Event < ActiveRecord::Base
  #    self.start == self.start.midnight && self.end == self.end.midnight ? true : false
  #    end
 
-    has_attached_file :picture, styles: { medium: "300x300>", thumb: "100x100>" }
+    has_attached_file :picture, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/missing.jpg"
   	validates_attachment_content_type :picture, content_type: /\Aimage\/.*\z/
 end
