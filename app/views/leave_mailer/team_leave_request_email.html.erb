@@ -42,7 +42,7 @@ pre { white-space: pre; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; wh
 <table border="0" cellpadding="0px" cellspacing="0px" width="600">
 <tbody>
 <tr>
-<td bgcolor="#FFFFFF" style="border-radius:0px 0px 3px 3px;color:#777777;font-family:Helvetica,Arial,sans-serif;font-size:16px;line-height:25px;padding:30px 50px 35px 50px"><br><br>Dear <%=@employee.manager.fullname%>,<br><br>
+<td bgcolor="#FFFFFF" style="border-radius:0px 0px 3px 3px;color:#777777;font-family:Helvetica,Arial,sans-serif;font-size:16px;line-height:25px;padding:30px 50px 35px 50px"><br><br>Dear <%=@employee.manager.fullname if @employee.manager %>,<br><br>
     Your Teammember <%=@employee.fullname%> has applied leave.<br>
 <br>
 <a href="http://localhost:3000/leave/<%=@leave.id%>" style="color:#000;">Click here to view leave request</a> <br><br><span style="color:#222222;font-family:Helvetica,Arial,sans-serif;font-size:18px">Leave Details:</span><br>From: <a style="color:#888888;text-decoration:none"><%=@leave.fromdate.strftime('%d-%b-%Y')%></a><br>To: <%=@leave.todate.strftime('%d-%b-%Y')%><br>No of days:<%=@leave.no_of_days%><br> Reason: <%=@leave.reason.html_safe%> <br><br>Thanks,<br>

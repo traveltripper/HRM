@@ -1,16 +1,14 @@
 Rails.application.routes.draw do
+  
   resources :healthinsurances
-  get '/hrmdashboard' => 'hrmdashboard#index'
-
   resources :announcements
   resources :payrolls
-  get 'alerts/index'
-
-  get 'dashboard/index'
-
   resources :events
   resources :events
   resources :conference_rooms
+
+  get 'alerts/index'
+  get 'dashboard/index'
   get 'static' => 'static#home'
   get '/employees' => 'employees#index'
   get 'get_current_employee_role' => "employees#get_current_employee_role"
@@ -18,18 +16,12 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  get '/dashboard' => 'dashboard#index'
-
-  get '/reports' => 'employees#reports'
-
-  get 'profile' => 'employees#profile'
-
   devise_scope :employee do
    get "login", to: "devise/sessions#new"
    get "logout", to: "devise/sessions#destroy"
   end
 
-  root :to => 'dashboard#index'
+  root :to => 'hrmdashboard#index'
 
   devise_for :employees, :skip => [:registrations]                                          
   as :employee do
@@ -41,6 +33,7 @@ Rails.application.routes.draw do
     get :birthdays, on: :collection
     post :import, on: :collection 
   end
+
   resources :roles do 
     member do
       get :employees
@@ -61,7 +54,24 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/team' => 'employees#team'
+  resources :hrmdashboard do
+    member do
+      get :employee_details      
+    end
+  end
+
+  #get '/dashboard' => 'dashboard#index'
+  get '/dashboard' => 'hrmdashboard#index'
+
+  get '/reports' => 'employees#reports'
+
+  #get 'profile' => 'employees#profile'
+  get '/profile' => 'hrmdashboard#profile'
+
+  get '/hrm_leave' => 'hrmdashboard#leave'
+
+  #get '/team' => 'employees#team'
+  get '/team' => 'hrmdashboard#team'
   get '/leave-applied-by-team' => 'leave#leave_applied_by_team'
   # match '/departments/:id/employees' => 'departments#employees', via: [:get, :post]
   
@@ -76,18 +86,7 @@ Rails.application.routes.draw do
   get 'alerts/search' => 'alerts#search'
   get '/get_emails' => 'employees#get_emails_and_name'
   #get '/leave_status' => 'leave#leave_status'
-  #patch '/leave_status' => 'leave#leave_status'
-
-  get 'hrm_team' => 'hrmdashboard#team'
-  get 'hrm_leave' => 'hrmdashboard#leave'
-
-  resources :hrmdashboard do
-    member do
-      get :employee_details      
-    end
-  end
-
-  get '/hrm_profile' => 'hrmdashboard#profile'
+  #patch '/leave_status' => 'leave#leave_status'  
   get 'hrm_events' => 'hrmdashboard#events'
   get '/hrm_payroll' => 'hrmdashboard#payroll'
   get '/download_payslip' => 'payrolls#download_payslip'

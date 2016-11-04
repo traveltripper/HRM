@@ -5,7 +5,7 @@
     <div class="modal-content">    
         <div class="panel-heading-style">Apply Leave</div>
         <div class="panel-body pan">
-            <%= form_for @leave, remote: true do |f| %>
+            <%= form_for @leave do |f| %>
                 <div class="form-body pal">
                     <div id="error_explanation">
                         <% if @leave.errors.any? %>

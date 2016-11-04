@@ -3,6 +3,7 @@ class LeaveController < ApplicationController
   layout 'dashboard'
   add_breadcrumb "Home", :root_path
   add_breadcrumb "Leave Management", :leave_index_path
+  after_action :send_emails, only: [:create]
   
   def index
     @emp = current_employee
@@ -43,13 +44,24 @@ class LeaveController < ApplicationController
 
   def create    
     @emp = current_employee
-    @leave = current_employee.leave.create(leave_params)
-    flash[:success] = "You have applied leave successfully and an e-mail will be sent to HR and Manager. Waiting for approval."    
+    @leave = current_employee.leave.new(leave_params)
+    if @leave.save
+      flash[:success] = "You have applied leave successfully and an e-mail will be sent to HR and Manager. Waiting for approval." 
+      redirect_to root_path
+      # LeaveMailer.employee_leave_request_email(@emp, @leave).deliver_later      
+      # LeaveMailer.leave_request_email_to_hr(@emp, @leave).deliver_later
+      # if @emp.manager 
+      #   LeaveMailer.team_leave_request_email(@emp, @leave).deliver_later
+      # end
+      #render nothing: true
+    else
+      render 'edit'
+    end
+       
   end
 
   def update
     @leave = Leave.find(params[:id])
-    p "..........leave update........."
     respond_to do |format|
       if @leave.update(leave_params)
         format.html { redirect_to @leave, notice: 'Leave was successfully updated.' }
@@ -108,6 +120,19 @@ class LeaveController < ApplicationController
         format.html { render :edit }
       end
     end
+  end
+
+  def send_emails
+    # debugger
+    #@leave = Leave.find(id)       
+    @emp = current_employee
+    @leave = @emp.leave.last 
+      LeaveMailer.employee_leave_request_email(@emp, @leave).deliver_later      
+      LeaveMailer.leave_request_email_to_hr(@emp, @leave).deliver_later
+
+      if @emp.manager 
+        LeaveMailer.team_leave_request_email(@emp, @leave).deliver_later
+      end
   end
   
   private
