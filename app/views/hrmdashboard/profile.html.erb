@@ -9,7 +9,7 @@
 <div class="col-md-12 bg-color-white">
     <div class="Team bg-color-white">
 		<div class="col-md-4 Team">
-			<img class="profileImg" src="images/avatar.jpg" alt="">
+			<%=image_tag @employee.profile_picture.url(:medium), class: "profileImg"%>
 			<h6 class="profileImgHeading"><%=@employee.fullname%></h6>
 			<h6 class="profileImgEmail"><%=@employee.email%></h6>
 			<p class="profileImgText"><%=@employee.about_me%></p>
