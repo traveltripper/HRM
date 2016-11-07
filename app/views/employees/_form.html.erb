@@ -280,8 +280,8 @@
     </div>    
     <div class="col-md-4">
         <div class="form-group">
-          <%= f.label :health_insurance_card_no, 'Health Insurance Card Number' %><br>
-          <%= f.text_field :health_insurance_card_no, :class=>"form-control" %>
+          <%= f.label :no_of_health_ins_cards_issued, 'No of Health Insurance Cards issued' %><br>
+          <%= f.text_field :no_of_health_ins_cards_issued, :class=>"form-control" %>
         </div>
     </div>
     <div class="col-md-4">
@@ -318,13 +318,13 @@
       <div class="col-md-4">
         <div class="form-group">
           <%= f.label :password %><br>
-          <%= f.text_field :password, :class=>"form-control", :value => @rand %>
+          <%= f.text_field :password, :class=>"form-control", :value => "123456" %>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <%= f.label :password_confirmation %><br>
-          <%= f.text_field :password_confirmation, :class=>"form-control", :value => @rand %>
+          <%= f.text_field :password_confirmation, :class=>"form-control", :value => "123456" %>
         </div>
       </div>      
     <%end%>
