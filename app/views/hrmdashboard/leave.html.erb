@@ -33,9 +33,10 @@
     <h4 class="h4_custom_style">Leaves waiting for approval</h4>
   
   
-    <table class="table table-hover-color table-bordered waiting-for-approval table-white-background">
+    <table class="table table-hover-color table-bordered waiting-for-approval table-white-background table-align-center">
       <thead>
         <tr>    
+          <th>S.No</th>
           <th>Type of Leave</th>
           <th>From Date</th>
           <th>To Date</th>
@@ -49,6 +50,7 @@
       <tbody>
         <% @leave_waiting_for_approve.each_with_index do |leave, index| %>
           <tr id="leave_<%=leave.id%>">
+            <td><%=index+1%></td>
             <%= render 'leave/leave_row', leave: leave %>
           </tr>      
         <% end %>
@@ -60,7 +62,7 @@
     <h4 class="h4_custom_style">Leaves applied recently</h4>
   
   
-  <table class="table table-hover-color table-bordered applied-recently table-white-background">
+  <table class="table table-hover-color table-bordered applied-recently table-white-background table-align-center">
     <thead>
       <tr>
         <th>S.No</th>      
