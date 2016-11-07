@@ -18,7 +18,8 @@ class LeaveMailer < ApplicationMailer
   def leave_request_email_to_hr(employee, leave)
     @employee = employee
     @leave = leave
-    @hr = Employee.where(:role_id => 2).first
+    @role = Role.where(:name=>"HR").first
+    @hr = Employee.where(role_id: @role.id).first
     @email = "srinivas08478@gmail.com"
     @subject = @employee.fullname + " " + "Leave request" 
     mail(to: @email, subject: @subject)
@@ -39,7 +40,8 @@ class LeaveMailer < ApplicationMailer
   def employee_leave_status_to_hr(employee, leave)
     @employee = employee
     @leave = leave
-    @hr = Employee.where(:role_id => 2).first
+    @role = Role.where(:name=>"HR").first
+    @hr = Employee.where(role_id: @role.id).first
     if @leave.status == true
       @status = "Approved"
     else
