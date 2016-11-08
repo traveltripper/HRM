@@ -28,39 +28,35 @@
 
 
 
-<div class="col-md-12">
-  
-    <h4 class="h4_custom_style">Leaves waiting for approval</h4>
-  
-  
-    <table class="table table-hover-color table-bordered waiting-for-approval table-white-background table-align-center">
-      <thead>
-        <tr>    
-          <th>S.No</th>
-          <th>Type of Leave</th>
-          <th>From Date</th>
-          <th>To Date</th>
-          <th>No of days</th>
-          <th>Reason</th>
-          <th>Status</th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
+<div class="col-md-12">  
+  <h4 class="h4_custom_style">Leaves waiting for approval</h4> 
+  <table class="table table-hover-color table-bordered waiting-for-approval table-white-background table-align-center">
+    <thead>
+      <tr>    
+        <th>S.No</th>
+        <th>Type of Leave</th>
+        <th>From Date</th>
+        <th>To Date</th>
+        <th>No of days</th>
+        <th>Reason</th>
+        <th>Status</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
 
-      <tbody>
-        <% @leave_waiting_for_approve.each_with_index do |leave, index| %>
-          <tr id="leave_<%=leave.id%>">
-            <td><%=index+1%></td>
-            <%= render 'leave/leave_row', leave: leave %>
-          </tr>      
-        <% end %>
-      </tbody>
-    </table>
+    <tbody>
+      <% @leave_waiting_for_approve.each_with_index do |leave, index| %>
+        <tr id="leave_<%=leave.id%>">
+          <td><%=index+1%></td>
+          <%= render 'leave/leave_row', leave: leave %>
+        </tr>      
+      <% end %>
+    </tbody>
+  </table>
    
 
   
-    <h4 class="h4_custom_style">Leaves applied recently</h4>
-  
+  <h4 class="h4_custom_style">Leaves applied recently</h4>
   
   <table class="table table-hover-color table-bordered applied-recently table-white-background table-align-center">
     <thead>
@@ -94,6 +90,5 @@
         </tr>
       <% end %>
     </tbody>
-  </table>
-   
+  </table>   
 </div>

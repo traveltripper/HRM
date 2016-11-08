@@ -1,17 +1,12 @@
-<%title 'Leave applied by Team'%>
-
-<div class="panel panel-cblue">
-<div class="panel-heading">Team Leave waiting for approval from <%=@leave_from_date.strftime("%d-%b-%y")%> to <%=@leave_to_date.strftime("%d-%b-%y")%></div>
-<div class="panel-body">
-
-<table class="table table-hover-color table-bordered">
+<h4>Team Leave waiting for approval</h4>
+<table class="table table-hover-color table-bordered waiting-for-approval table-white-background table-align-center">
   <thead>
     <tr>
       <th>ID</th>
       <th>Employee</th>      
       <th>Leave type</th>
-      <th>From date</th>
-      <th>To date</th>
+      <th>From Date</th>
+      <th>To Date</th>
       <th>Reason</th>
       <th>No of days</th>
       <th colspan="1"></th>
@@ -28,27 +23,21 @@
         <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
         <td><%=truncate(leave.reason, :escape => false, :length => 30, :omission => '...')%></td>
         <td><%=leave.no_of_days%></td>
-        <td><%=link_to '', leave, :class=>"fa fa-eye btn"%></td>         
+        <td><%=link_to ' Show', leave, :class=>"fa fa-eye btn"%></td>         
       </tr>
     <% end %>
   </tbody>
 </table>
-</div>
-</div>
 
-
-<div class="panel panel-cblue">
-<div class="panel-heading">Team Leave from <%=@leave_from_date.strftime("%d-%b-%y")%> to <%=@leave_to_date.strftime("%d-%b-%y")%></div>
-<div class="panel-body">
-
-<table class="table table-hover-color table-bordered">
+<h4>Recent Team Leave</h4>
+<table class="table table-hover-color table-bordered waiting-for-approval table-white-background table-align-center">
   <thead>
     <tr>
       <th>ID</th>
       <th>Employee</th>      
       <th>Leave type</th>
-      <th>From date</th>
-      <th>To date</th>
+      <th>From Date</th>
+      <th>To Date</th>
       <th>Reason</th>
       <th>No of days</th>
       <th>Status</th>
@@ -67,15 +56,13 @@
         <td><%=truncate(leave.reason, :escape => false, :length => 30, :omission => '...')%></td>
         <td><%=leave.no_of_days%></td>        
         <%if leave.status == true%>
-        <td>Approved</td>
+        <td style="color: #1F9B00 !important;">Approved</td>
         <%elsif leave.status ==false%>
-        <td>Rejected</td>
+        <td style="color: #F10000 !important;">Rejected</td>
         <%end%>
                
-        <td><%=link_to '', leave, :class=>"fa fa-eye btn "%></td>        
+        <td><%=link_to ' Show', leave, :class=>"fa fa-eye btn "%></td>        
       </tr>
     <% end %>
   </tbody>
 </table>
-</div>
-</div>

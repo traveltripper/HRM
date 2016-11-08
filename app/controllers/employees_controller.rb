@@ -1,14 +1,13 @@
 class EmployeesController < ApplicationController
   before_action :authenticate_employee!
-  #before_filter(:only => [:index, :show]) { unauthorized! if cannot? :read, :Employee }
   before_filter :require_permission, :only => [:index, :new, :edit, :create, :destroy]
   layout 'dashboard'
   add_breadcrumb "Home", :root_path
   respond_to :json
+
   def index
   	@employee = current_employee
     @employees = Employee.all
-    #binding.pry
     add_breadcrumb "Employee Manager", :employees_path
   end
 
@@ -26,7 +25,6 @@ class EmployeesController < ApplicationController
     @employee = Employee.find_by_id(params[:id])
     add_breadcrumb "Employee Profile"
     render :template => 'employees/profile'
-
   end
 
   def new
@@ -64,11 +62,6 @@ class EmployeesController < ApplicationController
     end
   end
 
-
-  def reports
-    add_breadcrumb "Reports", reports_path
-  end
-
   def profile
     @employee = current_employee
     add_breadcrumb "Profile", profile_path
@@ -91,31 +84,20 @@ class EmployeesController < ApplicationController
   end
 
   def require_permission
-  if current_employee.role.name != "HR" 
-    redirect_to dashboard_path
-  end
+    if current_employee.role.name != "HR" 
+      redirect_to dashboard_path
+    end
   end    
   
-  def team
-    #@emp = current_employee
+  def team    
     @team = Employee.where(:department_id=> current_employee.department_id)
-    # if current_employee.role.name == "Manager"
-    # @team = @emp.subordinates
-    # else
-    # @team = @emp.manager.subordinates      
-    # end
     add_breadcrumb "Team", team_path
-
   end
 
-  def birthdays   
-  
+  def birthdays  
     @employees = Employee.all
     p startmonth = params[:start]
-    p endmonth =  params[:end]
-    
-    #render json: @events.to_json
-    # render :text => events.to_json    
+    p endmonth =  params[:end] 
     add_breadcrumb "Employees Birthday Calendar", :birthdays_path
   end
 
@@ -158,8 +140,3 @@ class EmployeesController < ApplicationController
       params.require(:employee).permit(:first_name, :middle_name, :last_name, :manager_id, :role_id, :department_id, :ttid, :email, :personal_email, :contact_no, :emergency_name, :emergency_contact_no, :actual_dob, :certificate_dob, :previous_employer, :prev_years_of_exp, :pg, :graduation, :source_of_hire, :pancard_no, :passport_no, :status, :lwd, :date_of_resignation, :address, :password, :password_confirmation, :blood_group, :father_or_spouse, :marital_status, :graduation_institution, :graduation_university, :pg_university, :pg_institution, :pf_no, :aadhar_no, :health_insurance_card_no, :nationality, :current_address, :profile_picture, :date_of_joining, :days_of_leave, :leave_used, :skype_id, :about_me, :designation, :no_of_health_ins_cards_issued  )
     end
 end
-
-
-
-
-

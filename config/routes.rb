@@ -8,13 +8,8 @@ Rails.application.routes.draw do
   resources :conference_rooms
 
   get 'alerts/index'
-  get 'dashboard/index'
-  get 'static' => 'static#home'
   get '/employees' => 'employees#index'
   get 'get_current_employee_role' => "employees#get_current_employee_role"
-  
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
 
   devise_scope :employee do
    get "login", to: "devise/sessions#new"
@@ -48,6 +43,7 @@ Rails.application.routes.draw do
   end
 
   resources :leavetypes
+
   resources :leave do
     member do
       patch :leave_status
@@ -59,11 +55,8 @@ Rails.application.routes.draw do
       get :employee_details      
     end
   end
-
-  #get '/dashboard' => 'dashboard#index'
+  
   get '/dashboard' => 'hrmdashboard#index'
-
-  get '/reports' => 'employees#reports'
 
   #get 'profile' => 'employees#profile'
   get '/profile' => 'hrmdashboard#profile'
@@ -72,9 +65,8 @@ Rails.application.routes.draw do
 
   #get '/team' => 'employees#team'
   get '/team' => 'hrmdashboard#team'
-  get '/leave-applied-by-team' => 'leave#leave_applied_by_team'
-  # match '/departments/:id/employees' => 'departments#employees', via: [:get, :post]
-  
+  get '/team_leave' => 'leave#leave_applied_by_team'
+  get '/employees_leave' => 'leave#leave_applied_by_employees'  
   get '/birthdays' => 'employees#birthdays'
   get 'search' => 'employees#search'
   get '/alerts' => 'alerts#index'
@@ -82,11 +74,8 @@ Rails.application.routes.draw do
   post '/sendmail' => 'alerts#sendmail'
   get '/edit_profile' => 'employees#edit_profile'
   patch '/update_profile' => 'employees#update_profile'
-
   get 'alerts/search' => 'alerts#search'
   get '/get_emails' => 'employees#get_emails_and_name'
-  #get '/leave_status' => 'leave#leave_status'
-  #patch '/leave_status' => 'leave#leave_status'  
   get 'hrm_events' => 'hrmdashboard#events'
   get '/hrm_payroll' => 'hrmdashboard#payroll'
   get '/download_payslip' => 'payrolls#download_payslip'

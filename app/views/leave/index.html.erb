@@ -1,168 +1,104 @@
 <% title "Leave Management" %>
-<div id="leave-notice"></div>
-<%#= link_to "Apply Leave", new_leave_path, remote: true, class: "btn btn-primary" %>
-<div class="row">
-<div class="show-options">
-<%=link_to ' Apply leave', new_leave_path, remote: true, :class=>"fa fa-pencil-square-o btn btn-primary" %>
-<%if @emp.role.name == "Manager"%>
-  <%=link_to ' Team leave', leave_applied_by_team_path, :class=>"fa fa-users btn btn-primary" %>
-<%end%>
-</div>
-</div>
+<!-- <div id="leave-notice"></div> -->
 
-
-<div class="row">
-<%if @emp.role.name == "HR"%>
-    <div class="panel panel-cblue">
-    <div class="panel-heading">Employees leave waiting for approval from <%=@leave_from_date.strftime("%d-%b-%y")%> to <%=@leave_to_date.strftime("%d-%b-%y")%></div>
-    <div class="panel-body">
-
-      <table class="table table-hover-color table-bordered">
-        <thead>
-          <tr>
-            <th>S.No</th>
-            <th>Emp. Name</th>      
-            <th>Type of Leave</th>
-            <th>From date</th>
-            <th>To date</th>
-            <th>Reason</th>
-            <th>No of days</th>
-            <th colspan="1"></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% @emp_leaves_waiting_for_approval.each_with_index do |leave, index| %>
-            <tr>
-              <td><%= index+1 %></td>
-              <td><%=link_to leave.employee.fullname, leave.employee%></td>
-              <td><%=leave.leavetype.name %></td>
-              <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
-              <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
-              <td><%=truncate(leave.reason, :escape => false, :length => 30, :omission => '...')%></td>
-              <td><%=leave.no_of_days%></td>
-              <td>
-                <%=link_to '', leave, :class=>"fa fa-eye btn"%>
-              </td>         
-            </tr>
-          <% end %>
-        </tbody>
-    </table>
+<div class="col-md-12">
+  <div class="row">
+    <div class="col-md-6"> 
+     <h4>Leave Management</h4>
+    </div>
+    <div class="col-md-6 text-align-right">      
+      <%if @emp.role.name == "Manager"%>
+        <%=link_to 'Team Leave Management', team_leave_path, :class=>"btn btn-primary" %>
+      <%end%>
+      <%if @emp.role.name == "HR"%>
+        <%=link_to 'Employee Leave Management', employees_leave_path, :class=>"btn btn-primary" %>
+      <%end%>
+      <%=link_to 'Apply leave', new_leave_path, remote: true, :class=>"btn btn-primary" %> 
     </div>
   </div>
 
-  <div class="panel panel-cblue">
-    <div class="panel-heading">Employees recent leave from <%=@leave_from_date.strftime("%d-%b-%y")%> to <%=@leave_to_date.strftime("%d-%b-%y")%></div>
-    <div class="panel-body">
-
-      <table class="table table-hover-color table-bordered">
-        <thead>
-          <tr>
-            <th>S.No</th>
-            <th>Emp. Name</th>      
-            <th>Type of Leave</th>
-            <th>From date</th>
-            <th>To date</th>
-            <th>Reason</th>
-            <th>No of days</th>
-            <th>Status</th>
-            <th></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% @emp_leaves_approved_recently.each_with_index do |leave, index| %>
-            <tr>
-              <td><%= index+1 %></td>
-              <td><%=link_to leave.employee.fullname, leave.employee%></td>
-              <td><%=leave.leavetype.name %></td>
-              <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
-              <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
-              <td><%=truncate(leave.reason, :escape => false, :length => 30, :omission => '...')%></td>
-              <td><%=leave.no_of_days%></td>              
-              <%if leave.status == true%>
-              <td>Approved</td>
-              <%elsif leave.status ==false%>
-              <td>Rejected</td>
-              <%end%>
-              <td><%=link_to '', leave, :class=>"fa fa-eye btn"%></td>       
-            </tr>
-          <% end %>
-        </tbody>
-    </table>
-    </div>
+  <div class="col-md-12 bg-color-white">
+    <div class="leave-management">     
+      <div class="col-md-4 border-right-gray">
+        <h5>Available</h5>
+        <h1 class="custom_bluecolor padding-0 margin-0"><%=@available_leave%></h1> 
+      </div> 
+      <div class="col-md-4 border-right-gray">
+        <h5>Used</h5>
+        <h1 class="custom_bluecolor padding-0 margin-0"><%= @leave_used%></h1>
+      </div>
+      <div class="col-md-4">
+        <h5>Request Pending</h5>
+        <h1 class="req padding-0 margin-0" id = "leave_request_pending" ><%=@request_pending%></h1>
+      </div> 
+    </div>    
   </div>
-<%end%>
-
-<div class="panel panel-cblue">
-<div class="panel-heading">Leaves waiting for approval</div>
-<div class="panel-body">
-
-<table class="table table-hover-color table-bordered waiting-for-approval">
-  <thead>
-    <tr>    
-      <th>Type of Leave</th>
-      <th>From date</th>
-      <th>To date</th>
-      <th>No of days</th>
-      <th>Reason</th>
-      <th>Status</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @leave_waiting_for_approve.each_with_index do |leave, index| %>
-      <tr id="leave_<%=leave.id%>">
-        <%= render 'leave_row', leave: leave %> 
-      </tr>     
-    <% end %>
-  </tbody>
-</table>
-</div>
 </div>
 
-<div class="panel panel-cblue">
-<div class="panel-heading">Leaves applied recently</div>
-<div class="panel-body">
-
-<table class="table table-hover-color table-bordered">
-  <thead>
-    <tr>
-      <th>S.No</th>      
-      <th>Type of Leave</th>
-      <th>From date</th>
-      <th>To date</th>
-      <th>No of days</th>
-      <th>Reason</th>
-      <th>Status</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @leave_approved.each_with_index do |leave, index| %>
+<div class="col-md-12">
+  <h4 class="h4_custom_style">Leaves waiting for approval</h4>
+  <table class="table table-hover-color table-bordered table-color">
+    <thead>
       <tr>
-        <td><%= index+1 %></td>
-        <td><%=Leavetype.find(leave.leavetype_id).name%></td>
-        <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
-        <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
-        <td><%=leave.no_of_days%></td>
-        <td><%=truncate(leave.reason, :escape => false, :length => 30, :omission => '...')%></td>        
-        <%if leave.status == true%>
-          <td>Approved</td>
-          <%else%>
-          <td>Rejected</td>
-        <%end%>
-        <td><%=link_to '', leave, :class=>"fa fa-eye btn"%></td>      	
-                 
+        <th>S.No</th>    
+        <th>Type of Leave</th>
+        <th>From Date</th>
+        <th>To Date</th>
+        <th>No of days</th>
+        <th>Reason</th>
+        <th>Status</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @leave_waiting_for_approve.each_with_index do |leave, index| %>
+        <tr id="leave_<%=leave.id%>">
+          <td><%=index+1%></td>
+          <%= render 'leave_row', leave: leave %> 
+        </tr>     
+      <% end %>
+    </tbody>
+  </table>
 </div>
+
+
+<div class="col-md-12">
+  <h4 class="h4_custom_style">Leaves applied recently</h4>
+  <table class="table table-hover-color table-bordered table-color">
+    <thead>
+      <tr>
+        <th>S.No</th>      
+        <th>Type of Leave</th>
+        <th>From Date</th>
+        <th>To Date</th>
+        <th>No of days</th>
+        <th>Reason</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @leave_approved.each_with_index do |leave, index| %>
+        <tr>
+          <td><%= index+1 %></td>
+          <td><%=Leavetype.find(leave.leavetype_id).name%></td>
+          <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
+          <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
+          <td><%=leave.no_of_days%></td>
+          <td><%=truncate(leave.reason, :escape => false, :length => 30, :omission => '...')%></td>        
+          <%if leave.status == true%>
+            <td style="color: #1F9B00 !important;">Approved</td>
+            <%else%>
+            <td style="color: #F10000 !important;">Rejected</td>
+          <%end%>                  
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
-</div>
+
+
 
 
 

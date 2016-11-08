@@ -1,14 +1,14 @@
 <%title "Leave Details" %>
 <div class="row">
-<div class="col-md-8">
+<div class="col-md-12">
 <div class="row">
 	<div class="col-md-12">	 
-	<%=link_to ' Edit', edit_leave_path(@leave), :class=>"fa fa-pencil-square-o btn btn-primary bottom-margin-10 link-float-right"%>
+		<h4>Leave Details</h4>
 	</div>
 </div>
 
 <div class="leave_details">
-<div class="panel panel-cblue">
+<div class="panel">
 <table class="table table-bordered">
 <tbody>
 
@@ -61,16 +61,6 @@
 </td>
 
 <%end%>
-
-<!--
-<%if @leave.status == true%>
-<td>Approved</td>
-<%elsif @leave.status == false%>
-<td>Rejected</td>
-<%elsif @leave.status == nil%>
-<td>Waiting for Approval</td>
-<%end%>
--->
 </tr>
 </tbody>
 </table>

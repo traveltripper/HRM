@@ -1,0 +1,73 @@
+<div class="col-md-12">    
+  <h4>Employees leave waiting for approval</h4>
+  <table class="table table-hover-color table-bordered table-color">
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Emp. Name</th>      
+        <th>Type of Leave</th>
+        <th>From Date</th>
+        <th>To Date</th>
+        <th>Reason</th>
+        <th>No of days</th>
+        <th colspan="1"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @emp_leaves_waiting_for_approval.each_with_index do |leave, index| %>
+        <tr>
+          <td><%= index+1 %></td>
+          <td><%=link_to leave.employee.fullname, leave.employee%></td>
+          <td><%=leave.leavetype.name %></td>
+          <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
+          <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
+          <td><%=truncate(leave.reason, :escape => false, :length => 30, :omission => '...')%></td>
+          <td><%=leave.no_of_days%></td>
+          <td>
+            <%=link_to 'Show', leave, :class=>"btn"%>
+          </td>         
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+    
+
+<div class="col-md-12">
+  <h4>Employees recent leave </h4> 
+  <table class="table table-hover-color table-bordered table-color">
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Emp. Name</th>      
+        <th>Type of Leave</th>
+        <th>From Date</th>
+        <th>To Date</th>
+        <th>Reason</th>
+        <th>No of days</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @emp_leaves_approved_recently.each_with_index do |leave, index| %>
+        <tr>
+          <td><%= index+1 %></td>
+          <td><%=link_to leave.employee.fullname, leave.employee%></td>
+          <td><%=leave.leavetype.name %></td>
+          <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
+          <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
+          <td><%=truncate(leave.reason, :escape => false, :length => 30, :omission => '...')%></td>
+          <td><%=leave.no_of_days%></td>              
+          <%if leave.status == true%>
+          <td style="color: #1F9B00 !important;">Approved</td>
+          <%elsif leave.status ==false%>
+          <td style="color: #F10000 !important;">Rejected</td>
+          <%end%>
+          <td><%=link_to 'Show', leave, :class=>"btn"%></td>       
+        </tr>
+      <% end %>
+    </tbody>
+  </table> 
+</div>  
