@@ -34,7 +34,7 @@ class LeaveMailer < ApplicationMailer
       @status = "Rejected"
     end
     @email = "srinivas08478@gmail.com"
-    mail(to: @email, subject: 'Leave request status', :cc => "nsangana@traveltripper.com")
+    mail(to: @email, subject: 'Leave request status')
   end
 
   def employee_leave_status_to_hr(employee, leave)
@@ -49,6 +49,6 @@ class LeaveMailer < ApplicationMailer
     end
     @email = "srinivas08478@gmail.com"
     @subject = @employee.fullname + " " + "Leave request status" 
-    mail(to: @email, subject: @subject, :cc => "nsangana@traveltripper.com")
+    mail(to: @email, subject: @subject)
   end
 end

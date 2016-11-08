@@ -591,3 +591,11 @@ i.fa{
 .text-align-right{
 	text-align: right;
 }
+
+.green-color{
+	color: #1F9B00 !important;
+}
+
+.red-color{
+	color: #F10000 !important;
+}

@@ -47,6 +47,7 @@ Rails.application.routes.draw do
   resources :leave do
     member do
       patch :leave_status
+      get :leave_status_approve
     end
   end
 

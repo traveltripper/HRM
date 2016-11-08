@@ -44,22 +44,13 @@
 
 <tr>
 <%if (current_employee == @leave.employee.manager) || (current_employee.role.name =="HR")%>
-<td>Status: </td>
-<td>
-<%=form_for @leave, :url => leave_status_leave_path do |f|%>
-	<%= f.radio_button :status, 'approve', :name=>'leaveStatus' %> 
-	<%= label :status, 'approve' %>
-	<%= f.radio_button :status, 'reject', :checked => true, :name=>'leaveStatus' %>
-	<%= label :status, 'reject' %>
-	<br/>
-	<div id="reject_reason">
-	<%=f.label :reject_reason%><br/>
-	<%=f.text_area :reject_reason, size: "20x4"%>	
-	</div>
-	<%= f.submit "submit", :class=>"btn btn-primary"%>
-<%end%>
-</td>
-
+	<td>Reject Reason: </td>
+	<td>
+		<%=form_for @leave, :url => leave_status_leave_path do |f|%>
+			<%=f.text_area :reject_reason, size: "40x4"%>	<br/>
+		<%= f.submit "submit", :class=>"btn btn-primary"%>
+		<%end%>
+	</td>
 <%end%>
 </tr>
 </tbody>

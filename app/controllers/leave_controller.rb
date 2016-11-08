@@ -94,15 +94,10 @@ class LeaveController < ApplicationController
   end
 
   def leave_status
-    @leave = Leave.find(params[:id])
-    @emp = @leave.employee
-    @leave_used = @emp.leave_used
-    @requested_leave = @leave.no_of_days
-    params[:leaveStatus] == "approve" ? status = true : status = false
-    status == true ? @leave_used = (@leave_used + @requested_leave) : @leave_used      
+    @leave = Leave.find(params[:id]) 
+    @emp = @leave.employee    
     respond_to do |format|     
-      if @leave.update_attributes(:status => status, :reject_reason => params[:leave]["reject_reason"])
-        @emp.update_attribute(:leave_used, @leave_used)
+      if @leave.update_attributes(:status => false, :reject_reason => params[:leave]["reject_reason"])        
         LeaveMailer.employee_leave_status(@emp, @leave).deliver_later
         LeaveMailer.employee_leave_status_to_hr(@emp, @leave).deliver_later
         if current_employee.role.name=="HR"
@@ -114,6 +109,29 @@ class LeaveController < ApplicationController
         format.html { render :edit }
       end
     end
+  end
+
+  def leave_status_approve
+    
+    @leave = Leave.find(params[:id])
+    @emp = @leave.employee
+    @leave_used = @emp.leave_used
+    @requested_leave = @leave.no_of_days
+    @leave_used = (@leave_used + @requested_leave)
+    respond_to do |format|     
+      if @leave.update_attributes(:status => true)
+        @emp.update_attribute(:leave_used, @leave_used)
+        LeaveMailer.employee_leave_status(@emp, @leave).deliver_later
+        LeaveMailer.employee_leave_status_to_hr(@emp, @leave).deliver_later
+        if current_employee.role.name=="HR"
+          format.html { redirect_to employees_leave_path, notice: 'Leave status mailed to Employee' }
+        else
+          format.html { redirect_to team_leave_path, notice: 'Leave status mailed to Employee' }
+        end
+      else
+        format.html { render :edit }
+      end
+    end       
   end
 
   def send_emails     
