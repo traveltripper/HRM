@@ -22,7 +22,7 @@
         <div class="Team bg-color-white">
 			<div class="col-md-4 Team">
 				<!-- <img class="profileImg" src="images/avatar.jpg" alt=""> -->
-				<span id="emp_profile_picture"><%=image_tag @team.first.profile_picture.url(:medium)%></span>
+				<span id="emp_profile_picture"><%=image_tag @team.first.profile_picture.url(:medium) if @team.first %></span>
 				<h6 class="profileImgHeading" id="emp_name"><%=@team.first.fullname%></h6>
 				<h6 class="profileImgEmail emp_email"><%=@team.first.email%></h6>
 				<p class="profileImgText" id="emp_aboutme"><%=@team.first.about_me%></p>
