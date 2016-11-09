@@ -17,7 +17,7 @@
     <% @leave_waiting_for_approve.each_with_index do |leave, index| %>
       <tr>
         <td><%= index+1 %></td>
-        <td><%=link_to leave.employee.fullname, leave%></td>
+        <td><%=leave.employee.fullname%></td>
         <td><%=leave.leavetype.name%></td>
         <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
         <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
@@ -52,7 +52,7 @@
     <% @leave_approved_recently.each_with_index do |leave, index| %>
       <tr>
         <td><%= index+1 %></td>
-        <td><%=link_to leave.employee.fullname, leave%></td>
+        <td><%=leave.employee.fullname%></td>
         <td><%=leave.leavetype.name%></td>
         <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
         <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
