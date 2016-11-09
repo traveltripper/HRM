@@ -46,7 +46,7 @@
     <div class="col-md-4">
       <div class="form-group">
         <%= f.label :manager_id %><span id="notice-no-manager"> No manager for this Department</span><br>
-        <%=f.collection_select :manager_id, Employee.where(:role_id=>2), :id, :fullname, {:prompt => 'Select Manager'}, :class=>"form-control", required: true %>
+        <%=f.collection_select :manager_id, Employee.where(:role_id=>2), :id, :fullname, {:prompt => 'Select Manager'}, :class=>"form-control" %>
         <%#= f.select(:manager_id, [], {}, {:class => 'form-control'})  %>              
       </div>
     </div>    
