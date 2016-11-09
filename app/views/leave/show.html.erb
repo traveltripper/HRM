@@ -42,7 +42,7 @@
 <td><%=@leave.reason.html_safe%></td>
 </tr>
 
-<%if @leave.reject_reason? %>
+<%if(@leave.status != nil and @leave.reject_reason != nil) %>
 	<tr>
 		<td>Rejected Reason</td>
 		<td><%=@leave.reject_reason%></td>
@@ -60,7 +60,7 @@
 				<br/>
 				<div id="reject_reason">
 				<%=f.label :reject_reason%><br/>
-				<%=f.text_area :reject_reason, size: "20x4"%>	
+				<%=f.text_area :reject_reason, size: "20x4", required: true%>	
 				</div>
 				<%= f.submit "submit", :class=>"btn btn-primary"%>
 			<%end%>
