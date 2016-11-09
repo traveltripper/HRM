@@ -62,9 +62,16 @@
 
 
 <br/>
-<%=link_to ' Back', leave_index_path, :class=>"fa fa-arrow-left btn btn-primary"%>
+<%if current_employee.role.name == "Manager"%>
+	<%=link_to ' Back', team_leave_path, :class=>"fa fa-arrow-left btn btn-primary"%>
+<%else%>
+	<%=link_to ' Back', employees_leave_path, :class=>"fa fa-arrow-left btn btn-primary"%>
+<%end%>
 </div>
 </div>
+
+
+
 
 
 
