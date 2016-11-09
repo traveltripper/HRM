@@ -1,2 +1,0 @@
-$('#leave_<%=@leave.id%>').remove();
-$('#leave_request_pending').html("<%= j @leave.employee.leave.where(status: nil).count.to_s%>"); 

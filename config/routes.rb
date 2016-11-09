@@ -48,6 +48,7 @@ Rails.application.routes.draw do
     member do
       patch :leave_status
       get :leave_status_approve
+      get :leave_details
     end
   end
 

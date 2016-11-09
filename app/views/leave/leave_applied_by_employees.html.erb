@@ -24,8 +24,9 @@
           <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
           <td><%=truncate(leave.reason, :escape => false, :length => 30, :omission => '...')%></td>
           <td><%=leave.no_of_days%></td>
-          <td>
-            <%=link_to 'Show', leave, :class=>"btn"%>
+          <td><%=link_to 'Accept', leave_status_approve_leave_path(leave), :data => {:confirm => 'Are you sure?'}, class:"green-color"%> /      
+              <%=link_to 'Reject', leave_details_leave_path(leave), :data => {:confirm => 'Are you sure?'}, class: "red-color" %> |      
+              <%=link_to 'View Details', leave%></td> 
           </td>         
         </tr>
       <% end %>

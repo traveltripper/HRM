@@ -24,8 +24,9 @@
         <td><%=truncate(leave.reason, :escape => false, :length => 30, :omission => '...')%></td>
         <td><%=leave.no_of_days%></td>
         <td><%=link_to 'Accept', leave_status_approve_leave_path(leave), :data => {:confirm => 'Are you sure?'}, class:"green-color"%> /      
-        <%=link_to 'Reject', leave, :data => {:confirm => 'Are you sure?'}, class: "red-color" %> |      
-        <%=link_to 'View Details', leave%></td>         
+            <%=link_to 'Reject', leave_details_leave_path(leave), :data => {:confirm => 'Are you sure?'}, class: "red-color" %> |      
+            <%=link_to 'View Details', leave%>              
+        </td>         
       </tr>
     <% end %>
   </tbody>
@@ -58,9 +59,9 @@
         <td><%=truncate(leave.reason, :escape => false, :length => 30, :omission => '...')%></td>
         <td><%=leave.no_of_days%></td>        
         <%if leave.status == true%>
-        <td style="color: #1F9B00 !important;">Approved</td>
+        <td style="color: #1F9B00 !important; font-weight:600;">Approved</td>
         <%elsif leave.status ==false%>
-        <td style="color: #F10000 !important;">Rejected</td>
+        <td style="color: #F10000 !important; font-weight:600;">Rejected</td>
         <%end%>
                
         <td><%=link_to 'View Details', leave%></td>        

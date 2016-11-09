@@ -594,8 +594,10 @@ i.fa{
 
 .green-color{
 	color: #1F9B00 !important;
+	font-weight: 600;
 }
 
 .red-color{
 	color: #F10000 !important;
+	font-weight: 600;
 }
