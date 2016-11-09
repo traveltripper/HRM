@@ -25,7 +25,7 @@
         <td><%=leave.no_of_days%></td>
         <td><%=link_to 'Accept', leave_status_approve_leave_path(leave), :data => {:confirm => 'Are you sure?'}, class:"green-color"%> /      
             <%=link_to 'Reject', leave_details_leave_path(leave), :data => {:confirm => 'Are you sure?'}, class: "red-color" %> |      
-            <%=link_to 'View Details', leave%>              
+            <%=link_to 'View Details', leave, :style=>"font-weight:600;"%>              
         </td>         
       </tr>
     <% end %>
@@ -64,7 +64,7 @@
         <td style="color: #F10000 !important; font-weight:600;">Rejected</td>
         <%end%>
                
-        <td><%=link_to 'View Details', leave%></td>        
+        <td style="font-weight:600;"><%=link_to 'View Details', leave%></td>        
       </tr>
     <% end %>
   </tbody>
