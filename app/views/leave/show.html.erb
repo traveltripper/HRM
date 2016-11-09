@@ -43,10 +43,12 @@
 </tr>
 
 <%if @leave.status != nil %>
-	<tr>
-		<td>Rejected Reason</td>
-		<td><%=@leave.reject_reason%></td>
-	</tr>
+	<%if @leave.reject_reason != nil%>
+		<tr> 
+			<td>Rejected Reason</td>
+			<td><%=@leave.reject_reason%></td>
+		</tr>
+	<%end%>
 <%else%>
 	<tr>
 		<%if (current_employee == @leave.employee.manager) || (current_employee.role.name =="HR")%>
