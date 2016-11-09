@@ -42,7 +42,7 @@
 <td><%=@leave.reason.html_safe%></td>
 </tr>
 
-<%if(@leave.status != nil and @leave.reject_reason != nil) %>
+<%if @leave.status != nil %>
 	<tr>
 		<td>Rejected Reason</td>
 		<td><%=@leave.reject_reason%></td>
