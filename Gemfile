@@ -32,7 +32,8 @@ gem 'devise'
 
 # Paperclip gem for image attachements
 gem "paperclip", "~> 5.0.0"
-gem 'paperclip-cloudinary'
+gem 'aws-sdk', '~> 2.3'
+#gem 'paperclip-cloudinary'
 
 # Carrierwave gem for file attachements
 gem 'carrierwave', '>= 1.0.0.beta', '< 2.0'

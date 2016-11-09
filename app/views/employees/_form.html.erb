@@ -29,7 +29,7 @@
     </div>    
     <div class="col-md-4">
      <div class="form-group">
-      <%= f.label :middle_name, 'Middle Name*' %><br>
+      <%= f.label :middle_name, 'Middle Name' %><br>
       <%= f.text_field :middle_name, :class=>"form-control" %>
      </div>
     </div>    
@@ -46,7 +46,8 @@
     <div class="col-md-4">
       <div class="form-group">
         <%= f.label :manager_id %><span id="notice-no-manager"> No manager for this Department</span><br>
-        <%= f.select(:manager_id, [], {}, {:class => 'form-control'})  %>              
+        <%=f.collection_select :manager_id, Employee.where(:role_id=>2), :id, :fullname, {:prompt => 'Select Manager'}, :class=>"form-control", required: true %>
+        <%#= f.select(:manager_id, [], {}, {:class => 'form-control'})  %>              
       </div>
     </div>    
     <div class="col-md-4">
@@ -61,7 +62,7 @@
     <div class="col-md-4">
       <div class="form-group">
         <%= f.label :ttid, 'TT ID*' %><br>
-        <%= f.number_field :ttid, :class=>"form-control", required: true %>
+        <%= f.text_field :ttid, :class=>"form-control", required: true %>
       </div>
     </div>    
     <div class="col-md-4">
@@ -317,14 +318,14 @@
     <% if f.object.new_record?%>
       <div class="col-md-4">
         <div class="form-group">
-          <%= f.label :password %><br>
-          <%= f.text_field :password, :class=>"form-control", :value => "123456" %>
+          <%#= f.label :password %><br>
+          <%= f.hidden_field :password, :class=>"form-control", :value => "123456" %>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <%= f.label :password_confirmation %><br>
-          <%= f.text_field :password_confirmation, :class=>"form-control", :value => "123456" %>
+          <%#= f.label :password_confirmation %><br>
+          <%= f.hidden_field :password_confirmation, :class=>"form-control", :value => "123456" %>
         </div>
       </div>      
     <%end%>

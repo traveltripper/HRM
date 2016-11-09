@@ -5,8 +5,8 @@ class HrmdashboardController < ApplicationController
 
   def index
   	@emp = current_employee
-    # @team = Employee.where(:department_id=> @emp.department_id)
-  	@team = Employee.all
+    @team = Employee.where(:department_id=> @emp.department_id).where.not(:id => @emp.id)
+  	#@team = Employee.all
   	@payroll = @emp.payrolls.first
   	@leave_used = @emp.leave_used
   	@available_leave = @emp.days_of_leave - @leave_used  	
@@ -23,8 +23,8 @@ class HrmdashboardController < ApplicationController
 
   def team
     @emp = current_employee
-    #@team = Employee.where(:department_id=> @emp.department_id)
-    @team = Employee.all
+    @team = Employee.where(:department_id=> @emp.department_id).where.not(:id => @emp.id)
+    #@team = Employee.all
   end
 
   def leave
