@@ -10,6 +10,10 @@ $(selector).on('click', function(){
     $(this).addClass('active');
 });
 
-$(".team_list li:first").addClass("active");
+if ( $('.team_list li.active').length == 0 )
+{
+	$(".team_list li:first").addClass("active");
+}
+
 
 });

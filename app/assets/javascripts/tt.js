@@ -62,27 +62,28 @@ $(document).ready(function(){
     changeYear: true
     });
 
-    $("#employee_department_id").change(function(){
-      $("#employee_manager_id").empty();
-      $.ajax({url: "/departments/" + encodeURIComponent($(this).attr('value')) + '/manager.json',
-      success: function(result){
-          if(result.employee_name != null ){
-            var option = new Option(result.employee_name, result.employee_id);
-            $("#employee_manager_id").append($(option));
-            $("#notice-no-manager").css("display","none");
-            if(result.employee_name == '' ){$("#notice-no-manager").css("display","inline");};
-          };
+    // $("#employee_department_id").change(function(){
+    //   $("#employee_manager_id").empty();
+    //   $.ajax({url: "/departments/" + encodeURIComponent($(this).attr('value')) + '/manager.json',
+    //   success: function(result){
+    //       if(result.employee_name != null ){
+    //         var option = new Option(result.employee_name, result.employee_id);
+    //         $("#employee_manager_id").append($(option));
+    //         $("#notice-no-manager").css("display","none");
+    //         if(result.employee_name == '' ){$("#notice-no-manager").css("display","inline");};
+    //       };
           
           
-          //$('.tag-tooltip').tooltip();
-      },
-      error: function(result){
-          //$("#employee_manager_id").empty();
-          //alert();
-          //$('.tag-tooltip').tooltip();
-      }
-      });
-    });
+    //       //$('.tag-tooltip').tooltip();
+    //   },
+    //   error: function(result){
+    //       //$("#employee_manager_id").empty();
+    //       //alert();
+    //       //$('.tag-tooltip').tooltip();
+    //   }
+    //   });
+    // });
+    
   });
 
 

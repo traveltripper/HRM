@@ -11,7 +11,7 @@ class PayrollsController < ApplicationController
     @emp = current_employee
     if ["Employee", "Manager"].include? @emp.role.name
       @payrolls = @emp.payrolls.paginate(:page => params[:page], :per_page => 10)
-    elsif ["Finance", "HR"].include? @emp.role.name
+    elsif ["Finance", "HR", "Admin"].include? @emp.role.name
       @payrolls = Payroll.paginate(:page => params[:page], :per_page => 10)
     end
   end

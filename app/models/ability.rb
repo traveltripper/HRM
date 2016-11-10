@@ -3,7 +3,7 @@ class Ability
 
   def initialize(employee)
     employee ||= Employee.new
-    if employee.role.name == "HR"
+    if employee.role.name.in?(['HR', 'Admin'])
         can :manage, :all 
     elsif employee.role.name == "Finance"
         can :manage, Payroll        
@@ -14,6 +14,7 @@ class Ability
         can :read, Employee
         can :read, Payroll
         can :read, Event
+        can :read, Announcement
     end
     
   end

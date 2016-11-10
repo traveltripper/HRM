@@ -30,7 +30,7 @@ class LeaveController < ApplicationController
 
   def edit
     @leave= Leave.find(params[:id])
-    unless (([@leave.employee , @leave.employee.manager].include? current_employee) || current_employee.role.name == "HR")
+    unless (([@leave.employee , @leave.employee.manager].include? current_employee) || current_employee.role.name.in?(['HR', 'Admin']))
       redirect_to root_path
     end
   end
@@ -73,7 +73,7 @@ class LeaveController < ApplicationController
   def leave_applied_by_team
     @emp = current_employee
     @leaves = Leave.where(:created_at => 3.month.ago.beginning_of_month..Time.now )
-    @subordinates = @emp.subordinates 
+    @subordinates = @emp.subordinates.where.not(id: @emp.id) 
     @emp_ids = @subordinates.all.map(&:id)        
     @team_leave = @leaves.where(employee_id: @emp_ids)
     @leave_approved_recently = @team_leave.where(:status => [true, false]).limit(10)
@@ -99,7 +99,7 @@ class LeaveController < ApplicationController
         @emp.update_attribute(:leave_used, @leave_used)
         LeaveMailer.employee_leave_status(@emp, @leave).deliver_later
         LeaveMailer.employee_leave_status_to_hr(@emp, @leave).deliver_later
-        if current_employee.role.name=="HR"
+        if current_employee.role.name.in?(['HR', 'Admin'])
           format.html { redirect_to employees_leave_path, notice: "The employee #{@emp.fullname} leave has #{@leave.status == true ? "approved" : "Rejected"}  and an email has been sent to employee and HR." }
         else
           format.html { redirect_to team_leave_path, notice: "The employee #{@emp.fullname} leave has #{@leave.status == true ? "approved" : "Rejected"} and an email has been sent to employee and HR." }
@@ -121,7 +121,7 @@ class LeaveController < ApplicationController
         @emp.update_attribute(:leave_used, @leave_used)
         LeaveMailer.employee_leave_status(@emp, @leave).deliver_later
         LeaveMailer.employee_leave_status_to_hr(@emp, @leave).deliver_later
-        if current_employee.role.name=="HR"
+        if current_employee.role.name.in?(['HR', 'Admin'])
           format.html { redirect_to employees_leave_path, notice: "The employee #{@emp.fullname} leave has approved and an email has been sent to employee and HR." }
         else
           format.html { redirect_to team_leave_path, notice: "The employee #{@emp.fullname} leave has approved and an email has been sent to employee and HR." }
@@ -134,7 +134,7 @@ class LeaveController < ApplicationController
 
   def leave_details
     @leave= Leave.find(params[:id])
-    unless (([@leave.employee , @leave.employee.manager].include? current_employee) || current_employee.role.name == "HR")
+    unless (([@leave.employee , @leave.employee.manager].include? current_employee) || current_employee.role.name.in?(['HR', 'Admin']))
       redirect_to root_path
     end
   end

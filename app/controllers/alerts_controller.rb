@@ -25,7 +25,7 @@ class AlertsController < ApplicationController
 
       if current_employee.role.name == "Manager"
           @emails = current_employee.subordinates.pluck :email
-      elsif current_employee.role.name == "HR"
+      elsif current_employee.role.name.in?(['HR', 'Admin'])
           @emails = Employee.all.pluck :email
       end 
       AlertMailer.alert_to_particular_emails(@emails, @subject, @message).deliver_later     

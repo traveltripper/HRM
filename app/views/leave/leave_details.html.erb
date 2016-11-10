@@ -43,7 +43,7 @@
 </tr>
 
 <tr>
-<%if (current_employee == @leave.employee.manager) || (current_employee.role.name =="HR")%>	
+<%if (current_employee == @leave.employee.manager) || (current_employee.role.name.in?(['HR', 'Admin']))%>	
 	<td>Reject Reason: </td>
 	<td>
 		<%=form_for @leave, :url => leave_status_leave_path do |f|%>

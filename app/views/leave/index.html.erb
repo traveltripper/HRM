@@ -10,7 +10,7 @@
       <%if @emp.role.name == "Manager"%>
         <%=link_to 'Team Leave Management', team_leave_path, :class=>"btn btn-primary" %>
       <%end%>
-      <%if @emp.role.name == "HR"%>
+      <%if @emp.role.name.in?(['HR', 'Admin'])%>
         <%=link_to 'Employee Leave Management', employees_leave_path, :class=>"btn btn-primary" %>
       <%end%>
       <%=link_to 'Apply leave', new_leave_path, remote: true, :class=>"btn btn-primary" %> 

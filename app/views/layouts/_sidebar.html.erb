@@ -28,7 +28,7 @@
                     </li>                   
                     
 
-                    <%if current_employee.role.name == "HR"%>
+                    <%if current_employee.role.name.in?(['HR', 'Admin'])%>
                     
                     <li class="<%= 'active' if current_page?(employees_path) %>"><a href="/employees"><i class="fa fa-users fa-fw">
                         <div class="icon-bg bg-yellow"></div>
@@ -67,7 +67,7 @@
                     </i><span class="menu-title">Announcements</span></a>
                     </li>
 
-                    <%if current_employee.role.name.in?(['HR', 'Manager'])%>
+                    <%if current_employee.role.name.in?(['HR', 'Manager', 'Admin'])%>
                     <li class="<%= 'active' if current_page?(alerts_path) %>"><a href="/alerts"><i class="fa fa-envelope fa-fw">
                         <div class="icon-bg bg-yellow"></div>
                     </i><span class="menu-title">Alerts</span></a>

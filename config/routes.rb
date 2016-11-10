@@ -54,7 +54,8 @@ Rails.application.routes.draw do
 
   resources :hrmdashboard do
     member do
-      get :employee_details      
+      get :employee_details   
+      #get 'team'   
     end
   end
   

@@ -84,7 +84,7 @@ class EmployeesController < ApplicationController
   end
 
   def require_permission
-    if current_employee.role.name != "HR" 
+    unless current_employee.role.name.in?(['HR', 'Admin'])
       redirect_to dashboard_path
     end
   end    
@@ -122,6 +122,9 @@ class EmployeesController < ApplicationController
 
   def update_password
     @employee = current_employee
+    if params[:password] != params[:password_confirmation]
+      redirect_to root_path, :notice => "your password and confirmation password do not match"
+    end
     @employee.update_attributes(:password => params[:password], :password_confirmation => params[:password_confirmation], password_changed: true)    
     if @employee.save
       redirect_to root_path

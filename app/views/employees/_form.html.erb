@@ -46,7 +46,7 @@
     <div class="col-md-4">
       <div class="form-group">
         <%= f.label :manager_id %><span id="notice-no-manager"> No manager for this Department</span><br>
-        <%=f.collection_select :manager_id, Employee.where(:role_id=>2), :id, :fullname, {:prompt => 'Select Manager'}, :class=>"form-control" %>
+        <%=f.collection_select :manager_id, Employee.where("role_id IN (?) or manager_id IS ?", [2,5], nil), :id, :fullname, {:prompt => 'Select Manager'}, :class=>"form-control" %>
         <%#= f.select(:manager_id, [], {}, {:class => 'form-control'})  %>              
       </div>
     </div>    
@@ -82,7 +82,7 @@
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
-        <%= f.label :blood_group, 'Blood Group*' %><br>
+        <%= f.label :blood_group, 'Blood Group' %><br>
         <%= f.text_field :blood_group, :class=>"form-control" %>
       </div>
     </div>    
@@ -130,8 +130,8 @@
     </div>
     <div class="col-md-4">
       <div class="form-group">
-        <%= f.label :designation, 'Designation' %><br>
-        <%= f.text_field :designation, :class=>"form-control" %>
+        <%= f.label :designation, 'Designation*' %><br>
+        <%= f.text_field :designation, :class=>"form-control", required: true %>
       </div>
     </div>
     <div class="col-md-4">
