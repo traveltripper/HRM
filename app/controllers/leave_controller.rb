@@ -1,7 +1,7 @@
 class LeaveController < ApplicationController
   before_action :authenticate_employee!
   layout 'hrmdashboard'
-  after_action :send_emails, only: [:create]
+  #after_action :send_emails, only: [:create]
   
   def index
     @emp = current_employee
@@ -41,6 +41,11 @@ class LeaveController < ApplicationController
     if @leave.save
       flash[:success] = "You have applied leave successfully and an e-mail will be sent to HR and Manager. Waiting for approval." 
       redirect_to leave_index_path
+      LeaveMailer.employee_leave_request_email(@emp, @leave).deliver_later      
+      LeaveMailer.leave_request_email_to_hr(@emp, @leave).deliver_later
+      if @emp.manager 
+        LeaveMailer.team_leave_request_email(@emp, @leave).deliver_later
+      end
     else
       render 'edit'
     end       
@@ -139,16 +144,10 @@ class LeaveController < ApplicationController
     end
   end
 
-  def send_emails     
-    @emp = current_employee
-    @leave = @emp.leave.last 
-      LeaveMailer.employee_leave_request_email(@emp, @leave).deliver_later      
-      LeaveMailer.leave_request_email_to_hr(@emp, @leave).deliver_later
-
-      if @emp.manager 
-        LeaveMailer.team_leave_request_email(@emp, @leave).deliver_later
-      end
-  end
+  # def send_emails     
+  #   @emp = current_employee
+  #   @leave = @emp.leave.last       
+  # end
   
   private
   def leave_params
