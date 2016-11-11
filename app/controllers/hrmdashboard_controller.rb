@@ -10,7 +10,7 @@ class HrmdashboardController < ApplicationController
   	@payroll = @emp.payrolls.first
   	@leave_used = @emp.leave_used
   	@available_leave = @emp.days_of_leave - @leave_used  	
-  	@request_pending = @emp.leave.where(status: nil).count  
+  	@request_pending = @emp.leave.where("status IS ? and leave_cancel =?", nil, false).count  
   	@announcements = Announcement.limit(4)    
     @names = []    
     @employees=Employee.all

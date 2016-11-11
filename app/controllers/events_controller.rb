@@ -7,7 +7,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @events = current_employee.events
     add_breadcrumb "Events", :events_path
   end
 
@@ -19,7 +19,8 @@ class EventsController < ApplicationController
 
   # GET /events/new
   def new
-    @event = Event.new
+    @employee = current_employee
+    @event = @employee.events.new
   end
 
   # GET /events/1/edit
@@ -29,7 +30,8 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(event_params)
+    @employee = current_employee
+    @event = @employee.events.new(event_params)
 
     respond_to do |format|
       if @event.save

@@ -601,3 +601,9 @@ i.fa{
 	color: #F10000 !important;
 	font-weight: 600;
 }
+
+
+.margin-top-bottom-5{
+	margin-top: 5px;
+    margin-bottom: 5px;
+}

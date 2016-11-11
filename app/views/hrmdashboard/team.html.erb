@@ -21,14 +21,14 @@
 	<%if @team_employee %>
 		<div class="col-md-12 bg-color-white">
 	        <div class="Team bg-color-white">
-				<div class="col-md-4 Team">
+				<div class="col-md-6 Team">
 					<!-- <img class="profileImg" src="images/avatar.jpg" alt=""> -->
 					<span id="emp_profile_picture"><%=image_tag @team_employee.profile_picture.url(:medium) %></span>
 					<h6 class="profileImgHeading" id="emp_name"><%=@team_employee.fullname%></h6>
 					<h6 class="profileImgEmail emp_email"><%=@team_employee.email%></h6>
 					<p class="profileImgText" id="emp_aboutme"><%=@team_employee.about_me%></p>
 				</div>
-				<div class="col-md-8">
+				<div class="col-md-6">
 					<h4>General Information</h4>
 					<p>Position: <span id="emp_designation"><%=@team_employee.designation%></span></p>
 					<p>Department: <span id="emp_department"><%=@team_employee.department.name%></span></p>
@@ -49,14 +49,14 @@
 	<% elsif @team.first %>
 	<div class="col-md-12 bg-color-white">
         <div class="Team bg-color-white">
-			<div class="col-md-4 Team">
+			<div class="col-md-6 Team">
 				<!-- <img class="profileImg" src="images/avatar.jpg" alt=""> -->
 				<span id="emp_profile_picture"><%=image_tag @team.first.profile_picture.url(:medium) %></span>
 				<h6 class="profileImgHeading" id="emp_name"><%=@team.first.fullname%></h6>
 				<h6 class="profileImgEmail emp_email"><%=@team.first.email%></h6>
 				<p class="profileImgText" id="emp_aboutme"><%=@team.first.about_me%></p>
 			</div>
-			<div class="col-md-8">
+			<div class="col-md-6">
 				<h4>General Information</h4>
 				<p>Position: <span id="emp_designation"><%=@team.first.designation%></span></p>
 				<p>Department: <span id="emp_department"><%=@team.first.department.name%></span></p>

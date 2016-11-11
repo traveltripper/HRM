@@ -7,7 +7,7 @@ class LeaveController < ApplicationController
     @emp = current_employee
     @leave_used = @emp.leave_used
     @available_leave = @emp.days_of_leave - @leave_used   
-    @request_pending = @emp.leave.where(status: nil).count
+    @request_pending = @emp.leave.where("status IS ? and leave_cancel =?", nil, false).count
     @leave_from_date = 3.month.ago.beginning_of_month
     @leave_to_date = Time.now
     @leaves = Leave.all.where(:created_at => @leave_from_date..@leave_to_date)    
@@ -75,9 +75,16 @@ class LeaveController < ApplicationController
     end
   end
 
+  def leave_cancel
+    @leave = Leave.find(params[:id])
+    if @leave.update_attribute(:leave_cancel, true)
+      redirect_to leave_index_path
+    end
+  end
+
   def leave_applied_by_team
     @emp = current_employee
-    @leaves = Leave.where(:created_at => 3.month.ago.beginning_of_month..Time.now )
+    @leaves = Leave.where(:created_at => 3.month.ago.beginning_of_month..Time.now, leave_cancel: false )
     @subordinates = @emp.subordinates.where.not(id: @emp.id) 
     @emp_ids = @subordinates.all.map(&:id)        
     @team_leave = @leaves.where(employee_id: @emp_ids)
@@ -87,7 +94,7 @@ class LeaveController < ApplicationController
 
   def leave_applied_by_employees
     @emp = current_employee    
-    @leaves = Leave.all.where(:created_at => 3.month.ago.beginning_of_month..Time.now)         
+    @leaves = Leave.all.where(:created_at => 3.month.ago.beginning_of_month..Time.now, leave_cancel: false)         
     @emp_leaves_waiting_for_approval = @leaves.where(:status => nil).limit(15) 
     @emp_leaves_approved_recently = @leaves.where(:status => [true, false]).limit(15)    
   end

@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   resources :employees do
     get :birthdays, on: :collection
     post :import, on: :collection 
+    get 'send_welcome_email'
   end
 
   resources :roles do 
@@ -49,6 +50,7 @@ Rails.application.routes.draw do
       patch :leave_status
       get :leave_status_approve
       get :leave_details
+      get :leave_cancel
     end
   end
 

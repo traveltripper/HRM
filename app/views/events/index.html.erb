@@ -1,18 +1,28 @@
 <p id="notice"><%= notice %></p>
 <%title "Events"%>
+
+<div class="row">
+<div class="col-md-12">
+<%if can? :create, Event %>
+<%= link_to ' Add', new_event_path, :class=>"fa fa-plus btn btn-primary bottom-margin-10 link-float-right" %>
+<%end%>
+</div>
+</div>
+
 <div class="row">
   <%@events.each do |event|%>
-    <div class="col-md-4 event-background-color">     
+    <div class="col-md-4 event-background-color margin-top-bottom-5">     
       <%=image_tag event.picture.url(:medium), class:'hrm_event_images'%>
       <h4><%=event.title%></h4>
       <p>From: <%=event.start.strftime("%d-%b-%Y")%> To: <%=event.end_date.strftime("%d-%b-%Y")%></p>
       <p><%=event.reason%></p>  
-      <%= link_to 'Show', event %>
-      <%= link_to 'Edit', edit_event_path(event) %>
-      <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %>    
-    </div>
+      <%= link_to ' Show', event, :class=>"fa fa-eye btn btn btn-primary" %>
+      <%= link_to ' Edit', edit_event_path(event), :class=>"fa fa-pencil-square-o btn btn-warning" %>
+      <%= link_to ' Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"fa fa-times btn btn-danger" %>    
+    </div>    
   <%end%>
 </div>
-<br>
 
-<%= link_to 'New Event', new_event_path %>
+
+   
+    

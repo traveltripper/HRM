@@ -6,7 +6,9 @@ class Ability
     if employee.role.name.in?(['HR', 'Admin'])
         can :manage, :all 
     elsif employee.role.name == "Finance"
-        can :manage, Payroll        
+        can :manage, Payroll     
+    elsif employee.role.name == "Manager" 
+        can :manage, Event   
     else
         cannot :read, Role
         cannot :read, Department

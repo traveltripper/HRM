@@ -88,6 +88,18 @@ class EmployeesController < ApplicationController
       redirect_to dashboard_path
     end
   end    
+
+  def send_welcome_email
+    @employee = Employee.find(params[:employee_id])
+    @random_password = (0...10).map { ('a'..'z').to_a[rand(26)] }.join
+    @employee.password = @random_password
+    @employee.password_confirmation = @random_password
+    @employee.welcome_email_sent = true
+    if @employee.save
+      EmployeeMailer.welcome_email(@employee, @random_password).deliver_later
+      redirect_to employees_path, notice: "Welcome Email successfully sent to employee"
+    end
+  end
   
   def team    
     @team = Employee.where(:department_id=> current_employee.department_id)

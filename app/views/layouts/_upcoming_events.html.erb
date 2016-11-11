@@ -1,5 +1,5 @@
-<h4>Upcoming Events</h4>
-<% upcoming_events.each do |f| %>
+<h4>Upcoming Company Events</h4>
+<% upcoming_company_events.each do |f| %>
 	<div class="col-md-12 bg-color-white">
 		<span class="span-title-color"><%=f.title%></span>
 		<h5><%=f.start.strftime("%A, %B %d")%></h5>            
@@ -7,5 +7,19 @@
 		<p><%=f.reason%></p>
 	</div>	
 <%end%>
+
+<%if upcoming_team_events != nil%>
+<h4>Upcoming Team Events</h4>
+<% upcoming_team_events.each do |f| %>
+	<div class="col-md-12 bg-color-white">
+		<span class="span-title-color"><%=f.title%></span>
+		<h5><%=f.start.strftime("%A, %B %d")%></h5>            
+		<%=image_tag f.picture.url(:medium)%>
+		<p><%=f.reason%></p>
+	</div>	
+<%end%>
+<%end%>
+
+
 
 <%#=link_to 'View All Events', hrm_events_path, class: 'btn btn-primary'%>

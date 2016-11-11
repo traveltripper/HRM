@@ -12,8 +12,18 @@ class ApplicationController < ActionController::Base
     @current_ability ||= Ability.new(current_employee)
   end
   
-  def upcoming_events   
-    Event.where('start >= ? or end_date >= ?', Date.today, Date.today).limit(5)
+  def upcoming_company_events   
+    role_ids = Role.where(name: ["HR", "Admin"] ).pluck :id
+    Event.includes(:employee).where(:employees =>{role_id: role_ids}).where('start >= ? or end_date >= ?', Date.today, Date.today).last(3)
+  end
+
+  def upcoming_team_events
+    @department = current_employee.department
+    @role = Role.where(:name => "Manager").first
+    @mng = Employee.where(:role_id =>@role.id , :department_id => @department.id).first
+    if @mng
+      @mng.events.where('start >= ? or end_date >= ?', Date.today, Date.today).last(3)
+    end        
   end
  
   rescue_from CanCan::AccessDenied do |exception|
@@ -21,7 +31,8 @@ class ApplicationController < ActionController::Base
   redirect_to root_url
   end
 
-  helper_method :upcoming_events
+  helper_method :upcoming_company_events
+  helper_method :upcoming_team_events
 
   protected
   def authenticate_employee!(options={})

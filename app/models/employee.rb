@@ -17,11 +17,12 @@ class Employee < ActiveRecord::Base
   validates :email, format: { with: /\b[A-Z0-9._%a-z\-]+@traveltripper\.com\z/,
                   message: "must be a traveltripper.com account" }
 
-  has_attached_file :profile_picture, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/profilepic.png"
+  has_attached_file :profile_picture, styles: { medium: "225x225>", thumb: "100x100!" }, default_url: "/images/profilepic.png"
   validates_attachment_content_type :profile_picture, content_type: /\Aimage\/.*\z/
   before_create :set_days_of_leave
   has_many :announcements  
   has_many :healthinsurances
+  has_many :events
 
   def fullname
   	first_name.capitalize.to_s + " " + middle_name.capitalize.to_s + " " + last_name.capitalize.to_s

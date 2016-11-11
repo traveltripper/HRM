@@ -13,4 +13,10 @@
 <%end%>
 <!-- <td><%#=link_to '', leave, :class=>"fa fa-eye btn"%></td>  -->
 <td><%=link_to ' Edit', edit_leave_path(leave), remote: true, :class=>"fa fa-pencil-square-o btn"%></td>
-<td><%= link_to ' Delete', leave, method: :delete, data: { confirm: 'Are you sure?' }, class: "fa fa-times btn" %></td> 
+<td>
+<%if leave.leave_cancel == false%>
+<%= link_to ' Cancel', leave_cancel_leave_path(leave), data: { confirm: 'Are you sure?' }, class: "fa fa-times red-color" %>	
+<%else%>
+Cancelled
+<%end%>
+</td> 
