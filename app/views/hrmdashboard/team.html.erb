@@ -69,7 +69,7 @@
 				<p>Supervisor: 
 				<span id="emp_manager">
 				<%if @team.first.manager%>
-				<%=link_to @team.first.manager.fullname, team_path(:params => { :employee_id => leave.employee.id }) %>		
+				<%=link_to @team.first.manager.fullname, team_path(:params => { :employee_id => @team.first.id }) %>		
 				<%else%>
 				Manager
 				<%end%>
