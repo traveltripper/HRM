@@ -3,13 +3,15 @@
 	<div class="col-md-12 nullPadding bg-color-white myteam">
         <ul class="team_list">
         	<% @team.each_with_index do |emp, index| %>
-	            <%= link_to employee_details_hrmdashboard_path(emp), remote:true, class:'emp_link' do %>
-	            	<li class="teammembers_img <%= 'active' if emp.id == @team_emp_id %>" id="<%=emp.id%>">
-	            	<%=image_tag emp.profile_picture.url(:thumb), class:'img-circle'%>
-	            	<h6><%= emp.fullname  %></h6>
-			    	<p><%= emp.designation  %></p>
-			    	</li>
-	            <%end%>
+        		<li class="teammembers_img <%= 'active' if emp.id == @team_emp_id %>" id="<%=emp.id%>">
+		            <%= link_to employee_details_hrmdashboard_path(emp), remote:true, class:'emp_link' do %>
+		            	
+		            	<%=image_tag emp.profile_picture.url(:thumb), class:'img-circle'%>
+		            	<h6><%= emp.fullname  %></h6>
+				    	<p><%= emp.designation  %></p>
+				    	
+		            <%end%>
+	            </li>
             <%end%>  
         </ul>
 	</div>
