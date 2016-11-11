@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Lato:100,200,300,400,700,900&subset=latin-ext');
+/*@import url('https://fonts.googleapis.com/css?family=Lato:100,200,300,400,700,900&subset=latin-ext');*/
 
  body #hrm_dashboard {
 	background: #ebebeb;
@@ -611,4 +611,11 @@ i.fa{
 
 .event-title-color{
 	color: #00A8C5;
+}
+
+
+.team-icons .fa{
+    color: #00A8C5;
+    font-size: 15px;
+    padding-right: 4px;
 }

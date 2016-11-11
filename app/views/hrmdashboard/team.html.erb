@@ -27,18 +27,18 @@
 					<!-- <img class="profileImg" src="images/avatar.jpg" alt=""> -->
 					<span id="emp_profile_picture"><%=image_tag @team_employee.profile_picture.url(:medium) %></span>
 					<h6 class="profileImgHeading" id="emp_name"><%=@team_employee.fullname%></h6>
-					<h6 class="profileImgEmail emp_email"><%=@team_employee.email%></h6>
+					<!-- <h6 class="profileImgEmail emp_email"><%#=@team_employee.email%></h6> -->
 					<p class="profileImgText" id="emp_aboutme"><%=@team_employee.about_me%></p>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-6 team-icons">
 					<h4>General Information</h4>
 					<p>Position: <span id="emp_designation"><%=@team_employee.designation%></span></p>
 					<p>Department: <span id="emp_department"><%=@team_employee.department.name%></span></p>
 					<p>Supervisor: <span id="emp_manager"><%=@team_employee.manager.fullname if @team_employee.manager %></span></p>					
 					<h4>Contact Information</h4>
-					<p>E-Mail: <span class="emp_email company_email"><%=@team_employee.email%></span></p>
-					<p>Phone: <span id="emp_phone"><%=@team_employee.contact_no%></span></p>
-					<p>Skype: <span id="emp_skypeid"><%=@team_employee.skype_id%></span></p>
+					<p><i class="fa fa-envelope-o" aria-hidden="true"></i> : <span class="emp_email company_email"><%=mail_to @team_employee.email%></span></p>
+					<p><i class="fa fa-mobile" aria-hidden="true"></i> : <span id="emp_phone"><%=@team_employee.contact_no%></span></p>
+					<p><i class="fa fa-skype" aria-hidden="true"></i> : <span id="emp_skypeid"><%=@team_employee.skype_id%></span></p>
 					<h4>Additional Information</h4>
 					<p>Birthday: <span id="emp_birthday"><%=@team_employee.actual_dob.strftime("%d-%b")%></span></p>
 				</div>
@@ -56,15 +56,15 @@
 				<h6 class="profileImgHeading" id="emp_name"><%=@team.first.fullname%></h6>			
 				<p class="profileImgText" id="emp_aboutme"><%=@team.first.about_me%></p>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-6 team-icons">
 				<h4>General Information</h4>
 				<p>Position: <span id="emp_designation"><%=@team.first.designation%></span></p>
 				<p>Department: <span id="emp_department"><%=@team.first.department.name%></span></p>
 				<p>Supervisor: <span id="emp_manager"><%=@team.first.manager.fullname if @team.first.manager %></span></p>				
 				<h4>Contact Information</h4>
-				<p>E-Mail: <span class="emp_email company_email"><%=@team.first.email%></span></p>
-				<p>Phone: <span id="emp_phone"><%=@team.first.contact_no%></span></p>
-				<p>Skype: <span id="emp_skypeid"><%=@team.first.skype_id%></span></p>
+				<p><i class="fa fa-envelope-o" aria-hidden="true"></i> : <span class="emp_email company_email"><%=mail_to @team.first.email  %></span></p>
+				<p><i class="fa fa-mobile" aria-hidden="true"></i> : <span id="emp_phone"><%=@team.first.contact_no%></span></p>
+				<p><i class="fa fa-skype" aria-hidden="true"></i>: <span id="emp_skypeid"><%=@team.first.skype_id%></span></p>
 				<h4>Additional Information</h4>
 				<p>Birthday: <span id="emp_birthday"><%=@team.first.actual_dob.strftime("%d-%b")%></span></p>
 			</div>
