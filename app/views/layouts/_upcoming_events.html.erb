@@ -1,10 +1,10 @@
 <h4>Upcoming Company Events</h4>
 <% upcoming_company_events.each do |f| %>
 	<div class="col-md-12 bg-color-white">
-		<span class="span-title-color"><%=f.title%></span>
-		<h5><%=f.start.strftime("%A, %B %d")%></h5>            
+		<h5 class="event-title-color"><%=f.title%></h5>
+		<span class="span-title-color"><%=f.start.strftime("%A, %B %d")%></span>            
 		<%=image_tag f.picture.url(:medium)%>
-		<p><%=f.reason%></p>
+		<p><%=f.reason.html_safe%></p>
 	</div>	
 <%end%>
 
@@ -12,10 +12,10 @@
 <h4>Upcoming Team Events</h4>
 <% upcoming_team_events.each do |f| %>
 	<div class="col-md-12 bg-color-white">
-		<span class="span-title-color"><%=f.title%></span>
-		<h5><%=f.start.strftime("%A, %B %d")%></h5>            
+		<h5 class="event-title-color"><%=f.title%></h5>
+		<span class="span-title-color"><%=f.start.strftime("%A, %B %d")%></span>            
 		<%=image_tag f.picture.url(:medium)%>
-		<p><%=f.reason%></p>
+		<p><%=f.reason.html_safe%></p>
 	</div>	
 <%end%>
 <%end%>

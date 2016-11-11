@@ -83,6 +83,10 @@ class EmployeesController < ApplicationController
     end
   end
 
+  def update_leave_used
+    @employee = Employee.find(params[:employee_id])
+  end
+
   def require_permission
     unless current_employee.role.name.in?(['HR', 'Admin'])
       redirect_to dashboard_path

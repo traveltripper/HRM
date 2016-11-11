@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     get :birthdays, on: :collection
     post :import, on: :collection 
     get 'send_welcome_email'
+    get 'update_leave_used'
   end
 
   resources :roles do 

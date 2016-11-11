@@ -2,12 +2,14 @@
 	<h4>My Team</h4>
 	<div class="col-md-12 nullPadding bg-color-white myteam">    
 	    <ul> 
-	    	<% @team.each_with_index do |emp, index| %>		    
-			    <li>			    
-				    <%=image_tag emp.profile_picture.url(:thumb), class:'img-circle'%>
-				    <h6><%= emp.fullname  %></h6>
-				    <p><%= emp.designation  %></p>
-			    </li>
+	    	<% @team.each_with_index do |emp, index| %>
+	    		<%= link_to team_path(:params => { :employee_id => emp.id }) do %>		    
+				    <li>			    
+					    <%=image_tag emp.profile_picture.url(:thumb), class:'img-circle'%>
+					    <h6><%= emp.fullname  %></h6>
+					    <p><%= emp.designation  %></p>
+				    </li>
+			    <%end%>
 		    <%end%>	    
 	    </ul>
 	</div>

@@ -5,7 +5,11 @@ class HrmdashboardController < ApplicationController
 
   def index
   	@emp = current_employee
-    @team = Employee.where(:department_id=> @emp.department_id).where.not(:id => @emp.id)
+    if current_employee.role.name.in?(['Admin', 'HR'])
+      @team = Employee.all.where.not(:id => @emp.id)
+    else
+      @team = Employee.where(:department_id=> @emp.department_id).where.not(:id => @emp.id)
+    end
   	#@team = Employee.all
   	@payroll = @emp.payrolls.first
   	@leave_used = @emp.leave_used
@@ -23,7 +27,13 @@ class HrmdashboardController < ApplicationController
 
   def team
     @emp = current_employee
-    @team = Employee.where(:department_id=> @emp.department_id).where.not(:id => @emp.id)
+    
+    if current_employee.role.name.in?(['Admin', 'HR'])
+      @team = Employee.all.where.not(:id => @emp.id)
+    else
+      @team = Employee.where(:department_id=> @emp.department_id).where.not(:id => @emp.id)
+    end
+
     if params[:employee_id]
       p ".........."
       p @team_employee = Employee.where(:id=>params[:employee_id]).first

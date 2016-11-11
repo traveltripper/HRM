@@ -18,7 +18,7 @@
       <% @emp_leaves_waiting_for_approval.each_with_index do |leave, index| %>
         <tr>
           <td><%= index+1 %></td>
-          <td><%=leave.employee.fullname%></td>
+          <td><%=link_to leave.employee.fullname, team_path(:params => { :employee_id => leave.employee.id })%></td>
           <td><%=leave.leavetype.name %></td>
           <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
           <td><%=leave.todate.strftime('%d-%b-%Y')%></td>

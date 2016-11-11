@@ -41,6 +41,7 @@
         <%else%>
           <td>Nil</td>
         <%end%>
+        <!-- <td><%=link_to 'Update Leave Used', employee_update_leave_used_path(emp), remote: true, class: 'static-popup-link' %></td> -->
         <td>
           <%if emp.welcome_email_sent == false%>
             <%= link_to "Send Welcome Email", employee_send_welcome_email_path(emp)%>
@@ -56,4 +57,5 @@
 </table>
 </div>
 </div>
+
 

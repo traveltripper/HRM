@@ -1,3 +1,4 @@
+<%= tinymce %>
 <%= form_for(@event) do |f| %>
 
   <div class="form-inputs">
@@ -13,8 +14,8 @@
   <%=f.text_field :end_date, class: "form-control datepicker", :required => true%>
   </div>
   <div class="form-inputs">
-  <%=f.label :reason%>
-  <%=f.text_area :reason, class: "form-control"%>
+  <%=f.label :reason, "Description"%>
+  <%=f.text_area :reason, class: "form-control tinymce"%>
   </div>
   <div class="form-inputs">
   <%=f.label :picture%>
@@ -26,3 +27,5 @@
   </div>
 
 <% end %>
+
+
