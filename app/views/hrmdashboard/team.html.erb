@@ -36,7 +36,7 @@
 					<p>Department: <span id="emp_department"><%=@team_employee.department.name%></span></p>
 					<p>Supervisor: <span id="emp_manager">
 						<%if @team.first.manager%>
-							<%=link_to @team.first.manager.fullname, team_path(:params => { :employee_id => leave.employee.id }) %>		
+							<%=link_to @team.first.manager.fullname, team_path(:params => { :employee_id => @team_employee.id }) %>		
 						<%else%>
 							Manager
 						<%end%>						
