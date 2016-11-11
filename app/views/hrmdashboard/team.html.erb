@@ -34,7 +34,13 @@
 					<h4>General Information</h4>
 					<p>Position: <span id="emp_designation"><%=@team_employee.designation%></span></p>
 					<p>Department: <span id="emp_department"><%=@team_employee.department.name%></span></p>
-					<p>Supervisor: <span id="emp_manager"><%=@team_employee.manager.fullname if @team_employee.manager %></span></p>					
+					<p>Supervisor: <span id="emp_manager">
+						<%if @team.first.manager%>
+							<%=link_to @team.first.manager.fullname, team_path(:params => { :employee_id => leave.employee.id }) %>		
+						<%else%>
+							Manager
+						<%end%>						
+					</span></p>					
 					<h4>Contact Information</h4>
 					<p><i class="fa fa-envelope-o" aria-hidden="true"></i> : <span class="emp_email company_email"><%=mail_to @team_employee.email%></span></p>
 					<p><i class="fa fa-mobile" aria-hidden="true"></i> : <span id="emp_phone"><%=@team_employee.contact_no%></span></p>
@@ -60,7 +66,14 @@
 				<h4>General Information</h4>
 				<p>Position: <span id="emp_designation"><%=@team.first.designation%></span></p>
 				<p>Department: <span id="emp_department"><%=@team.first.department.name%></span></p>
-				<p>Supervisor: <span id="emp_manager"><%=@team.first.manager.fullname if @team.first.manager %></span></p>				
+				<p>Supervisor: 
+				<span id="emp_manager">
+				<%if @team.first.manager%>
+				<%=link_to @team.first.manager.fullname, team_path(:params => { :employee_id => leave.employee.id }) %>		
+				<%else%>
+				Manager
+				<%end%>
+				</span></p>				
 				<h4>Contact Information</h4>
 				<p><i class="fa fa-envelope-o" aria-hidden="true"></i> : <span class="emp_email company_email"><%=mail_to @team.first.email  %></span></p>
 				<p><i class="fa fa-mobile" aria-hidden="true"></i> : <span id="emp_phone"><%=@team.first.contact_no%></span></p>
