@@ -15,7 +15,7 @@
             <%=form_for :employee, :url => employee_update_leave_used_path(@employee) do |f|%>
 
               
-              <%@twentyfourdays = (1..24).to_a %>
+              <%@twentyfourdays = (0..24).to_a %>
               <div class="row">
                 <div class="col-md-3"><h5><%=f.label :leave_used%></h5></div>
                 <div class="col-md-4">                  
