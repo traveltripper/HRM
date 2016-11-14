@@ -26,6 +26,10 @@
     	<div class="col-md-4 events ">
         <% if current_page?(:controller => 'hrmdashboard', :action => 'payroll') %>
           <%=render 'hrmdashboard/downloadforms'%>
+        <%elsif current_page?(:controller => 'events', :action => 'company_events') %> 
+           <%=render 'layouts/team_events'%>
+        <%elsif current_page?(:controller => 'events', :action => 'team_events') %> 
+           <%=render 'layouts/company_events'%>
         <%else%> 	
     		  <%=render 'layouts/upcoming_events'%>
         <%end%>

@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   
   def upcoming_company_events   
     role_ids = Role.where(name: ["HR", "Admin"] ).pluck :id
-    Event.includes(:employee).where(:employees =>{role_id: role_ids}).where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today).last(3)
+    Event.joins(:employee).where(:employees =>{role_id: role_ids}).where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today).last(3)
   end
 
   def upcoming_team_events

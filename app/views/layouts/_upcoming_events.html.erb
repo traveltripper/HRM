@@ -1,4 +1,4 @@
-<h4>Upcoming Company Events</h4>
+<h4><%=link_to "Upcoming Company Events", company_events_path, class:"text-color-black"%></h4>
 <% upcoming_company_events.each do |f| %>
 	<div class="col-md-12 bg-color-white">
 		<h5 class="event-title-color"><%=f.title%></h5>
@@ -9,7 +9,7 @@
 <%end%>
 
 <%if upcoming_team_events != nil%>
-<h4>Upcoming Team Events</h4>
+<h4><%=link_to "Upcoming Team Events", team_events_path, class:"text-color-black"%></h4>
 <% upcoming_team_events.each do |f| %>
 	<div class="col-md-12 bg-color-white">
 		<h5 class="event-title-color"><%=f.title%></h5>

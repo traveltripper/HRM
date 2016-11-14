@@ -88,4 +88,6 @@ Rails.application.routes.draw do
   get '/download_payslip' => 'payrolls#download_payslip'
   get '/change_password' => 'employees#change_password'
   post '/update_password' => 'employees#update_password'
+  get '/company-events' => 'events#company_events'
+  get '/team-events' => 'events#team_events'
 end

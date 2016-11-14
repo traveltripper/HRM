@@ -1,8 +1,10 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_employee!
-  load_and_authorize_resource
+  load_and_authorize_resource  
   layout 'dashboard'
+  #layout "hrmdashboard", only: [:upcoming_company_events, :upcoming_team_events]
+
   add_breadcrumb "Home", :root_path
   # GET /events
   # GET /events.json
@@ -66,6 +68,23 @@ class EventsController < ApplicationController
       format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def company_events
+    #render :layout => 'hrmdashboard'
+    role_ids = Role.where(name: ["HR", "Admin"] ).pluck :id
+    Event.joins(:employee).where(:employees =>{role_id: role_ids}).where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today)
+    render :layout => 'hrmdashboard'
+  end
+
+  def team_events
+    @department = current_employee.department
+    @role = Role.where(:name => "Manager").first
+    @mng = Employee.where(:role_id =>@role.id , :department_id => @department.id).first
+    if @mng
+      @mng.events.where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today)
+    end 
+    render :layout => 'hrmdashboard'    
   end
 
   private

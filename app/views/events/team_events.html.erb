@@ -1,0 +1,11 @@
+<%if upcoming_team_events != nil%>
+<h4>Upcoming Team Events</h4>
+<% upcoming_team_events.each do |f| %>
+	<div class="col-md-6">
+		<h5 class="event-title-color"><%=f.title%></h5>
+		<p><%=f.start.strftime("%A, %B %d")%></p>            
+		<%=image_tag f.picture.url(:medium)%>
+		<p><%=f.reason.html_safe%></p>
+	</div>	
+<%end%>
+<%end%>
