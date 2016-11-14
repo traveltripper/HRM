@@ -59,7 +59,8 @@ $(document).ready(function(){
     $('.datepicker').datepicker({
     dateFormat: "dd-mm-yy",
     changeMonth: true,
-    changeYear: true
+    changeYear: true,
+    yearRange: "1960:+0"
     });
 
     // $("#employee_department_id").change(function(){

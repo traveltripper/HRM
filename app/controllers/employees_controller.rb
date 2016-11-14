@@ -83,8 +83,16 @@ class EmployeesController < ApplicationController
     end
   end
 
+  def get_leave_used
+    @employee = Employee.find(params[:employee_id])    
+  end
+
   def update_leave_used
     @employee = Employee.find(params[:employee_id])
+    @employee.update_attribute(:leave_used, params["employee"]["leave_used"])
+    @employee.save
+    redirect_to employees_path
+    
   end
 
   def require_permission

@@ -1,0 +1,37 @@
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title modal-title-color">Update Employee Leave Used</h4>
+        </div>
+        <div class="modal-body">
+          <div class="col-md-12">
+            <h5 class="blue_color_text">Employee Name: <%=@employee.fullname%></h5>
+            <h5 class="blue_color_text">Employee ID: <%=@employee.ttid%></h5>
+            <%=form_for :employee, :url => employee_update_leave_used_path(@employee) do |f|%>
+
+              
+              <%@twentyfourdays = (1..24).to_a %>
+              <div class="row">
+                <div class="col-md-3"><h5><%=f.label :leave_used%></h5></div>
+                <div class="col-md-4">                  
+                  <%=f.select :leave_used, options_for_select(@twentyfourdays, @employee.leave_used), {}, {autofocus: 'true', class: 'form-control'}%><br/>
+                </div>
+                <div class="col-md-4">
+                  <%=f.submit "update", class: "btn btn-primary"%>
+                </div>
+              </div>
+            <%end%>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
