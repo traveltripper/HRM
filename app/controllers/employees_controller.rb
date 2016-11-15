@@ -68,7 +68,8 @@ class EmployeesController < ApplicationController
   end
 
   def edit_profile
-    @employee = current_employee    
+    @employee = current_employee
+    render :layout => 'hrmdashboard'    
     add_breadcrumb "Edit Profile"
   end
 
@@ -160,7 +161,7 @@ class EmployeesController < ApplicationController
     
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:employee).permit( :current_address, :marital_status, :contact_no, :emergency_contact_no, :emergency_name )
+      params.require(:employee).permit( :current_address, :marital_status, :contact_no, :emergency_contact_no, :emergency_name, :personal_email, :skype_id, :about_me )
     end
 
     def employee_params

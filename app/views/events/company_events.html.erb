@@ -2,9 +2,9 @@
 <div class="row">
 <% upcoming_company_events.each do |f| %>
 	<div class="col-md-6">	
-		<h5 class="event-title-color"><%=f.title%></h5>
+		<h4><%=link_to f.title, f, class:"event-title-color"%></h4>
 		<p><%=f.start.strftime("%A, %B %d")%></p>            
-		<%=image_tag f.picture.url(:medium)%>
+		<%=image_tag f.picture.url(:medium), class:"event-image"%>
 		<p><%=f.reason.html_safe%></p>	
 	</div>
 <%end%>

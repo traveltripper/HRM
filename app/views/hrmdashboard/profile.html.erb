@@ -3,7 +3,7 @@
 		<h3>My Profile</h3>
 	</div>
 	<div class="col-md-offset-2 col-md-2">
-		<%#=link_to 'Update Profile', edit_profile_path, :class=>'btn btn-primary'%>
+		<%=link_to 'Update Profile', edit_profile_path, :class=>'btn btn-primary', remote:true%>
 	</div>	
 </div>
 <div class="col-md-12 bg-color-white">
@@ -11,7 +11,7 @@
 		<div class="col-md-4 Team">
 			<%=image_tag @employee.profile_picture.url(:medium), class: "profileImg"%>
 			<h6 class="profileImgHeading"><%=@employee.fullname%></h6>
-			<h6 class="profileImgEmail"><%=@employee.email%></h6>
+			<!-- <h6 class="profileImgEmail"><%#=@employee.email%></h6> -->
 			<p class="profileImgText"><%=@employee.about_me%></p>
 		</div>
 		<div class="col-md-offset-1 col-md-7">
@@ -19,7 +19,7 @@
 			<p>Position: <%=@employee.designation%></p>
 			<p>Department: <%=@employee.department.name%></p>
 			<p>Supervisor:</p>
-			<p>Status: <%=@employee.status%></p>
+			<!-- <p>Status: <%#=@employee.status%></p> -->
 			<h4>Contact Information</h4>
 			<p>E-Mail: <span class="company_email"><%=@employee.email%></span></p>
 			<p>Phone: <span id="emp_phone"><%=@employee.contact_no%></span></p>

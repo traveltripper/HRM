@@ -5754,6 +5754,8 @@ li [class*=" icon-"].icon-large {
   -webkit-border-radius: 0 !important;
   -moz-border-radius: 0 !important;
   border-radius: 1em !important; 
+  /*border-top-left-radius: 1em !important;
+  border-top-right-radius: 1em !important;*/
 }
 .modal .modal-dialog .modal-content .modal-header.modal-header-primary {
   background: #dc6767;

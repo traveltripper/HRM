@@ -16,6 +16,7 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    render :layout => 'hrmdashboard'
     add_breadcrumb "Event"
   end
 

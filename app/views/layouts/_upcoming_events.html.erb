@@ -3,7 +3,7 @@
 	<h4>Upcoming Company Events</h4>
 	<% upcoming_company_events.each do |f| %>
 		<div class="col-md-12 bg-color-white">
-			<h5 class="event-title-color"><%=f.title%></h5>
+			<h5><%= link_to f.title, f, class:"event-title-color"%></h5>
 			<span class="span-title-color"><%=f.start.strftime("%A, %B %d")%></span>            
 			<%=image_tag f.picture.url(:medium)%>
 			<%=f.reason.html_safe%>
@@ -15,11 +15,11 @@
 
 <div class="row">
 <div class="col-lg-12">
-<%if upcoming_team_events != nil%>
+<%if upcoming_team_events.count > 0 %>
 <h4>Upcoming Team Events</h4>
 <% upcoming_team_events.each do |f| %>
 	<div class="col-md-12 bg-color-white">
-		<h5 class="event-title-color"><%=f.title%></h5>
+		<h5><%=link_to f.title, f, class:"event-title-color"%></h5>
 		<span class="span-title-color"><%=f.start.strftime("%A, %B %d")%></span>            
 		<%=image_tag f.picture.url(:medium)%>
 		<%=f.reason.html_safe%>
