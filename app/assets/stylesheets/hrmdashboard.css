@@ -1,5 +1,11 @@
 /*@import url('https://fonts.googleapis.com/css?family=Lato:100,200,300,400,700,900&subset=latin-ext');*/
 
+body {
+   min-height: 550px;
+   margin-bottom: 100px;
+   clear: both;
+}
+
  body #hrm_dashboard {
 	background: #ebebeb;
 	/* font-family: 'Lato', sans-serif; */
@@ -191,10 +197,11 @@ h4{
 	display: inline-block;
     margin: 0px;
     border-right: 1px solid #ccc;
-    padding: 7px 18px 7px 10px;
+    /*padding: 7px 18px 7px 10px; */
+    padding: 7px 10px 7px 10px;
     vertical-align: top;
     height: 100px;
-	font-size:16px;
+	font-size:15px;
 	font-weight:200;
 	}
 	
@@ -285,18 +292,39 @@ h4{
 	padding:10px;
 	}	
 
-footer {
+#footer {
     /*position: fixed;*/
-	background-color: white;
+	/*background-color: white; 
+	background-color: #0D2C40;
+	color: #fff;
     bottom: 0;
     width: 100%;
-	height: 33px;
+	height: 33px;*/
 	
 }
 
+#footer {
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   height:35px;
+   width:100%;
+   background:#0D2C40;
+   color: #fff;
+   padding: 10px 20px;
+   border-top: 10px solid #EBEBEB;
+}
+
+/* IE 6 */
+* html #footer {
+   position:absolute;
+   top:expression((0-(footer.offsetHeight)+(document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight)+(ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop))+'px');
+}
+
+
 .footerText {
 	text-align: center;
-	padding: 8px;
+	/*padding: 8px; */
 }
 
 

@@ -1,4 +1,4 @@
-<div class="col-md-6">
+<div class="col-md-7">
 	<h4>My Team</h4>
 	<div class="col-md-12 nullPadding bg-color-white myteam">    
 	    <ul> 
@@ -17,12 +17,13 @@
 	</div>
 </div>
 
-<div class="col-md-6">
+<div class="col-md-5">
 	<h4>Payroll</h4>	
 	<div class="col-md-12 bg-color-white ">
 		<div class="col-md-12 nullPadding">Last Pay Date</div>
-		<div class="col-md-12 nullPadding date"><%= @payroll.pay_date.strftime("%d-%m-%Y") if @payroll  %></div>		
-		<%= link_to 'View Payslip', @payroll.attachment_url, :target => "_blank", class: " btn btn-primary" if @payroll %>
+		<div class="col-md-12 nullPadding date"><%#= @payroll.pay_date.strftime("%d-%m-%Y") if @payroll  %><%=Date.today.at_beginning_of_month.strftime("%d/%m/%Y")%></div>	
+		
+		<%#= link_to 'View Payslip', @payroll.attachment_url, :target => "_blank", class: " btn btn-primary" if @payroll %>
 	</div>
 
 	<div class="clearfix"></div>
@@ -33,8 +34,7 @@
 		        <li>
 			        <span class="span-title-color">Available</span>
 			        <h3><%=@available_leave%></h3>		        
-			        <!-- <button class="btn-primary">Apply Leave</button> -->
-			        <%=link_to 'Apply leave', new_leave_path, remote: true, :class=>"btn btn-primary" %>
+			        <!-- <button class="btn-primary">Apply Leave</button> -->			        
 			    </li>
 			    <li>
 			    	<span class="span-title-color">Used</span>
@@ -45,6 +45,8 @@
 			        <h3 class="req" id = "leave_request_pending" ><%=@request_pending%></h3>
 		        </li>
 	        </ul>
+		    <%=link_to 'Apply leave', new_leave_path, remote: true, :class=>"btn btn-primary" %>
+
 	    </div>        
 		<br />		
 	</div>
