@@ -8,12 +8,12 @@
 				    			    
 					    <%=image_tag emp.profile_picture.url(:thumb), class:'img-circle'%>
 					    <h6><%= emp.fullname  %></h6>
-					    <p><%= emp.designation  %></p>
-				    
+					    <p><%= emp.designation  %></p>				    
 			    <%end%>
 			    </li>
 		    <%end%>	    
 	    </ul>
+	    <%=link_to "View All", team_path, class: 'btn-primary pull-right'%>
 	</div>
 </div>
 

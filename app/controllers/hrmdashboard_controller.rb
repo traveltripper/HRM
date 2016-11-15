@@ -6,7 +6,7 @@ class HrmdashboardController < ApplicationController
   def index
   	@emp = current_employee
     if current_employee.role.name.in?(['Admin', 'HR'])
-      @team = Employee.all.where.not(:id => @emp.id)
+      @team = Employee.all.where.not(:id => @emp.id).limit(6)
     else
       @team = Employee.where(:department_id=> @emp.department_id).where.not(:id => @emp.id)
     end
