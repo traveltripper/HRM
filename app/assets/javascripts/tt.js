@@ -60,7 +60,7 @@ $(document).ready(function(){
     dateFormat: "dd-mm-yy",
     changeMonth: true,
     changeYear: true,
-    yearRange: "1960:+0"
+    yearRange: "1960:+3"
     });
 
     // $("#employee_department_id").change(function(){
