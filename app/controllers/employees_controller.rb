@@ -7,7 +7,7 @@ class EmployeesController < ApplicationController
 
   def index
   	@employee = current_employee
-    @employees = Employee.all
+    @employees = Employee.all.order( 'first_name ASC' )
     add_breadcrumb "Employee Manager", :employees_path
   end
 
