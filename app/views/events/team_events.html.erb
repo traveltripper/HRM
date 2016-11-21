@@ -1,7 +1,7 @@
 <%if @team_events != nil%>
 <h4>Upcoming Team Events</h4>
 <% @team_events.each do |f| %>
-	<div class="col-md-6">
+	<div class="col-md-6 bg-color-white">
 		<h5><%=link_to f.title, f, class:"event-title-color"%></h5>
 		<p><%=f.start.strftime("%A, %B %d")%></p>            
 		<%=image_tag f.picture.url(:medium), class:"event-image"%>
