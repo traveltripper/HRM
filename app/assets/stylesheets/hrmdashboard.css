@@ -167,8 +167,8 @@ h4{
 	
 	/*Myteam*/
 	.myteam{
-		height:334px;
-		overflow-y:scroll; 
+		height:350px;
+		/* overflow-y:scroll; */ 
 		}
 		
 	.myteam ul{ list-style:none; margin:5px; padding:0px; }
