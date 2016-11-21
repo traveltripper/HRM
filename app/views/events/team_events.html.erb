@@ -1,6 +1,6 @@
-<%if upcoming_team_events != nil%>
+<%if @team_events != nil%>
 <h4>Upcoming Team Events</h4>
-<% upcoming_team_events.each do |f| %>
+<% @team_events.each do |f| %>
 	<div class="col-md-6">
 		<h5><%=link_to f.title, f, class:"event-title-color"%></h5>
 		<p><%=f.start.strftime("%A, %B %d")%></p>            

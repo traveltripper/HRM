@@ -74,7 +74,7 @@ class EventsController < ApplicationController
   def company_events
     #render :layout => 'hrmdashboard'
     role_ids = Role.where(name: ["HR", "Admin"] ).pluck :id
-    Event.joins(:employee).where(:employees =>{role_id: role_ids}).where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today)
+    @company_events = Event.joins(:employee).where(:employees =>{role_id: role_ids}).where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today)
     render :layout => 'hrmdashboard'
   end
 
@@ -83,7 +83,7 @@ class EventsController < ApplicationController
     @role = Role.where(:name => "Manager").first
     @mng = Employee.where(:role_id =>@role.id , :department_id => @department.id).first
     if @mng
-      @mng.events.where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today)
+      @team_events = @mng.events.where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today)
     end 
     render :layout => 'hrmdashboard'    
   end
