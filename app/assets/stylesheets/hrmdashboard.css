@@ -691,7 +691,7 @@ color: #72bfd4;
 .change_picture, #employee_profile_picture {display: none;}
 .change_picture >.fa{ font-size: 14px; color: #FFF;  }
 
-.upload_picture:hover .change_picture {width: 30px; height:30px;  position: absolute; left: 20px; bottom: 80px; display: block; text-align: right; 
+.upload_picture:hover .change_picture {width: 30px; height:30px;  position: absolute; left: 20px; bottom: 60px; display: block; text-align: right; 
 background:#0092b3; border-radius: 50%; padding:6px 10px;
  }
 .changeange_picture b {
