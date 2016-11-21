@@ -167,7 +167,8 @@ h4{
 	
 	/*Myteam*/
 	.myteam{
-		height:350px;
+		min-height:350px;
+		height: auto;
 		/* overflow-y:scroll; */ 
 	}
 	.myteam1{
@@ -190,8 +191,10 @@ h4{
 	font-weight:300;
 	font-size:30px;
 	color:#4e9d00;
-	background:url(/images/cash.jpg) no-repeat right 1px;
+	background:url(/images/cash.jpg) no-repeat right 21px;
 	background-size:40px;
+	padding-top: 19px;
+	padding-bottom: 19px;
 	}
 
 
@@ -678,7 +681,7 @@ color: #72bfd4;
 	padding: 10px;
     border-top-right-radius: 3em;
     border-top-left-radius: 3em;
-    width: 135px;
+    width: 133px;
     height: 130px;
     float: left;
 }
