@@ -1,11 +1,13 @@
 <h4>Upcoming Company Events</h4>
 <div class="row">
 <% @company_events.each do |f| %>
-	<div class="col-md-6 bg-color-white">	
+	<div class="col-md-6">
+		<div class="col-md-12 bg-color-white">	
 		<h4><%=link_to f.title, f, class:"event-title-color"%></h4>
 		<p><%=f.start.strftime("%A, %B %d")%></p>            
 		<%=image_tag f.picture.url(:medium), class:"event-image"%>
 		<p><%=truncate(f.reason, :length =>100)%><%=link_to "Read More", f%></p>	
+		</div>
 	</div>
 <%end%>
 </div>
