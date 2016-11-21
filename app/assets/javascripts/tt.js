@@ -31,6 +31,17 @@ $(document).ready(function(){
   });
 });
 
+$(document).ready(function(){ 
+
+  $('#employee_profile_picture').on('change', function() {
+      $(".edit_employee").submit();
+  });
+
+  $(".upload_picture").click(function(){
+        $('#employee_profile_picture').click();
+        return false;
+    }); 
+});
 
 // jQuery(function() {
 //   var states;
