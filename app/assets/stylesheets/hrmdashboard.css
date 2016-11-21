@@ -169,7 +169,11 @@ h4{
 	.myteam{
 		height:350px;
 		/* overflow-y:scroll; */ 
-		}
+	}
+	.myteam1{
+		height:350px;
+		overflow-y:scroll; 
+	}
 		
 	.myteam ul{ list-style:none; margin:5px; padding:0px; }
 	.myteam ul li{display:inline-block; margin:5px; text-align:center;}
