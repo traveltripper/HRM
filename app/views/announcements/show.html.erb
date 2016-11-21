@@ -1,8 +1,11 @@
 <p id="notice"><%= notice %></p>
 <%title 'Announcement'%>
-<h2 class="link-color">Title: <%= @announcement.title %></h2>
+<div class="col-md-12 bg-color-white">
+<h4 class="title-blue">Title: <%= @announcement.title %></h4>
 
-<p class="link-color"> <%= @announcement.message %> </p>
+<p> <%= @announcement.message %> </p>
 
-<%= link_to 'Edit', edit_announcement_path(@announcement), :class=>"fa fa-pencil-square-o btn btn-primary" %> |
-<%= link_to 'Back', announcements_path, :class=>"fa fa-arrow-left btn btn-primary" %>
+
+<%#= link_to 'Edit', edit_announcement_path(@announcement), :class=>"fa fa-pencil-square-o btn btn-primary" %> 
+<a href="javascript:history.back()" class="fa fa-arrow-left btn btn-primary"> Back</a>
+</div>

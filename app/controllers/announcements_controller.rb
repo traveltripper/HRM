@@ -1,7 +1,7 @@
 class AnnouncementsController < ApplicationController
   before_action :authenticate_employee!
   # load_and_authorize_resource
-  layout 'dashboard'
+  layout 'hrmdashboard'
   before_action :set_announcement, only: [:show, :edit, :update, :destroy]
   add_breadcrumb "Home", :root_path
   # GET /announcements

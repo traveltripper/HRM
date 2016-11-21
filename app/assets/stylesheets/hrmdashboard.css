@@ -168,7 +168,7 @@ h4{
 	/*Myteam*/
 	.myteam{
 		height:334px;
-		overflow-y:scroll;
+		/* overflow-y:scroll; */
 		}
 		
 	.myteam ul{ list-style:none; margin:5px; padding:0px; }
@@ -257,7 +257,7 @@ h4{
 	
 	.text-primary	{
 		 font-weight:300;
-		font-size:20px;
+		font-size:17px;
 		}
 	
 			
@@ -428,8 +428,14 @@ a:focus, a:hover{
 }
 
 #hrm_dashboard .text-primary {
-    color: #428bca !important;
+    /* color: #428bca !important; */
+    color: #72bfd4 !important;
 }
+
+.Announcements a {
+	color: #72bfd4 !important;
+}
+
 
 #hrm_dashboard td{
 	color: #000000 !important;
@@ -658,4 +664,17 @@ i.fa{
 
 img.event-image{
 	width: 100%;
+}
+
+.title-blue{
+color: #72bfd4;	
+}
+
+.viewteam{
+	padding: 10px;
+    border-top-right-radius: 3em;
+    border-top-left-radius: 3em;
+    width: 110px;
+    height: 110px;
+    float: left;
 }

@@ -3,7 +3,7 @@
 	<div class="col-md-12 nullPadding bg-color-white myteam">    
 	    <ul> 
 	    	<% @team.each_with_index do |emp, index| %>
-	    		<li>
+	    		<li class="viewteam">
 	    		<%= link_to team_path(:params => { :employee_id => emp.id }) do %>		    
 				    			    
 					    <%=image_tag emp.profile_picture.url(:thumb), class:'img-circle'%>
@@ -13,8 +13,11 @@
 			    </li>
 		    <%end%>	    
 	    </ul>
-	    <%=link_to "View All Employees", team_path, class: 'btn-primary pull-right'%>
+	    <div class="col-md-12">
+	    	<%=link_to "View All Employees", team_path, class: 'btn-primary pull-right'%>
+	    </div>	    
 	</div>
+
 </div>
 
 <div class="col-md-5">
@@ -75,18 +78,18 @@
 				</tr>
 			<%end%>
 
-		    <%@announcements.each do |f|%>
+		    <%@announcements.each do |announcement|%>
 				<tr>
 					<td >
 						<span class="span-title-color">
-							<%=f.created_at.strftime("%d-%b-%Y")%>
+							<%=announcement.created_at.strftime("%d-%b-%Y")%>
 						</span>
 					</td>
 					<td>
 						<span class="text-primary">
-							<%=f.title%>
+							<%=link_to announcement.title, announcement%>
 						</span>
-						<br /><%=f.message%>
+						<br /><%=truncate(announcement.message, :length => 200)%><%= link_to "Read More", announcement %>
 					</td>
 				</tr>
 			<%end%>		
