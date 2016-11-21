@@ -6,9 +6,9 @@ class HrmdashboardController < ApplicationController
   def index
   	@emp = current_employee
     if current_employee.role.name.in?(['Admin', 'HR'])
-      @team = Employee.all.where.not(:id => @emp.id).limit(6)
+      @team = Employee.all.where.not(:id => @emp.id).order('first_name ASC').limit(6)
     else
-      @team = Employee.where(:department_id=> @emp.department_id).where.not(:id => @emp.id)
+      @team = Employee.where(:department_id=> @emp.department_id).where.not(:id => @emp.id).order('first_name ASC')
     end
   	#@team = Employee.all
   	@payroll = @emp.payrolls.first
@@ -29,9 +29,9 @@ class HrmdashboardController < ApplicationController
     @emp = current_employee
     
     if current_employee.role.name.in?(['Admin', 'HR'])
-      @team = Employee.all.where.not(:id => @emp.id)
+      @team = Employee.all.where.not(:id => @emp.id).order('first_name ASC')
     else
-      @team = Employee.where(:department_id=> @emp.department_id).where.not(:id => @emp.id)
+      @team = Employee.where(:department_id=> @emp.department_id).where.not(:id => @emp.id).order('first_name ASC')
     end
 
     if params[:employee_id]
