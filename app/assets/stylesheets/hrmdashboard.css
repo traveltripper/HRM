@@ -43,7 +43,7 @@ body {
 .menu ul li{
 	float:left;
 	padding:0px 0px;
-	background:#0092b3 url(/images/menu-border.png) no-repeat right;
+	/* background:#0092b3 url(/images/menu-border.png) no-repeat right; */
 	background-size:2px;
 	}
 	
