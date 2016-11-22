@@ -1,3 +1,18 @@
+<% unless current_page?(dashboard_path) %>
+<div class="row">
+<div class="col-md-12">
+<h4>Announcements</h4>
+	<div class="col-md-12 bg-color-white">
+	<%latest_announcements.each do |announcement|%>
+		<%=link_to announcement.title, announcement, class:"announcement-style"%>
+		<p><%=truncate(announcement.message, length:150)%><%=link_to "..Read More", announcement, class:"title-blue"%></p>	
+	<%end%>	
+	</div>
+	<%=link_to 'View All', announcements_path, class:'btn-primary pull-right'%>
+</div>
+</div>
+<%end%>
+
 <div class="row">
 <div class="col-lg-12">
 	<h4>Upcoming Company Events</h4>

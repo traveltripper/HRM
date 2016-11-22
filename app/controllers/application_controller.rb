@@ -25,6 +25,10 @@ class ApplicationController < ActionController::Base
       @mng.events.where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today).last(1)
     end        
   end
+
+  def latest_announcements
+    Announcement.limit(2)
+  end
  
   rescue_from CanCan::AccessDenied do |exception|
   flash[:error] = "Access denied."
@@ -33,6 +37,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :upcoming_company_events
   helper_method :upcoming_team_events
+  helper_method :latest_announcements
 
   protected
   def authenticate_employee!(options={})

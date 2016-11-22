@@ -1,3 +1,16 @@
+<div class="row">
+<div class="col-md-12">
+<h4>Announcements</h4>
+	<div class="col-md-12 bg-color-white">
+	<%latest_announcements.each do |announcement|%>
+		<%=link_to announcement.title, announcement, class:"announcement-style"%>
+		<p><%=truncate(announcement.message, length:150)%><%=link_to "..Read More", announcement, class:"title-blue"%></p>	
+	<%end%>	
+	</div>
+	<%=link_to 'View All', announcements_path, class:'btn-primary pull-right'%>
+</div>
+</div>
+
 <%if upcoming_team_events != nil%>
 <h4><%= link_to "Upcoming Team Events", team_events_path, class:"text-color-black" %></h4>
 <% upcoming_team_events.each do |f| %>

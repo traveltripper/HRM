@@ -679,6 +679,11 @@ img.event-image{
 color: #72bfd4;	
 }
 
+.announcement-style{
+	font-size:18px;
+	color: #72bfd4;
+}
+
 .viewteam{
 	padding: 10px;
     border-top-right-radius: 3em;
@@ -687,6 +692,8 @@ color: #72bfd4;
     height: 130px;
     float: left;
 }
+
+
 
 .change_picture, #employee_profile_picture {display: none;}
 .change_picture >.fa{ font-size: 14px; color: #FFF;  }
