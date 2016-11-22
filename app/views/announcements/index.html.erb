@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 <div class="row"> 
   <div class="col-md-12">
     <div class="col-md-8">
@@ -29,6 +28,12 @@
               </span>
               <br /><%=truncate(announcement.message, :length => 200)%><%= link_to "Read More", announcement %>
             </td>
+            <% if can? :edit, @announcement %>            
+            <td><%= link_to '', edit_announcement_path(announcement), remote:true, :class=>"fa fa-pencil-square-o btn " %></td>
+            <%end%>
+            <% if can? :destroy, @announcement %>
+            <td><%= link_to '', announcement, method: :delete, :class=>"fa fa-times btn", data: { confirm: 'Are you sure?' } %></td>
+            <%end%>
           </tr>
         <%end%>   
       </table>
