@@ -473,10 +473,15 @@ a:focus, a:hover{
     border-top-right-radius: 3em;
     border-top-left-radius: 3em;
     /* width: 110px; */
-    width: 147px;
+    /* width: 147px; */
+    width: 178px;
     /*height: 160px; */
     height: 130px;
     float: left;
+}
+
+.teammembers_img.active h6{
+	color: #fff;
 }
 
 .teammembers_img:hover, .teammembers_img.active{
