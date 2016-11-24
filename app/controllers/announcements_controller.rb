@@ -14,6 +14,7 @@ class AnnouncementsController < ApplicationController
   # GET /announcements/1
   # GET /announcements/1.json
   def show
+    @announcements = Announcement.where.not(id: @announcement.id).limit(4)
     add_breadcrumb "Announcement"
   end
 

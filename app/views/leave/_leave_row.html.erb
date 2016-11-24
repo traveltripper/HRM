@@ -3,7 +3,7 @@
 <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
 <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
 <td style="text-align:center;"><%=leave.no_of_days%></td>
-<td><%=truncate(leave.reason, :escape => false, :length => 30, :omission => '...')%></td>        
+<td><%=truncate(leave.reason, :escape => false, :length => 15, :omission => '...')%></td>        
 <%if leave.status == true%>
 <td>Approved</td>
 <%elsif leave.status ==false%>
@@ -11,11 +11,12 @@
 <%elsif leave.status ==nil%>
 <td>Waiting for Approval</td>
 <%end%>
-<!-- <td><%#=link_to '', leave, :class=>"fa fa-eye btn"%></td>  -->
-<td><%=link_to ' Edit', edit_leave_path(leave), remote: true, :class=>"fa fa-pencil-square-o btn"%></td>
-<td>
+<td style="font-weight:600;"><%=link_to ' view', leave%> |
 <%if leave.leave_cancel == false%>
-<%= link_to ' Cancel', leave_cancel_leave_path(leave), data: { confirm: 'Are you sure?' }, class: "fa fa-times red-color" %>	
+<%=link_to ' Edit', edit_leave_path(leave), remote: true%> |
+<%end%>
+<%if leave.leave_cancel == false%>
+<%= link_to ' Cancel', leave_cancel_leave_path(leave), data: { confirm: 'Are you sure?' }%>	
 <%else%>
 Cancelled
 <%end%>

@@ -44,8 +44,12 @@
 					</span></p>					
 					<h4>Contact Information</h4>
 					<p><i class="fa fa-envelope-o" aria-hidden="true"></i>  <span class="emp_email company_email"><%=mail_to @team_employee.email%></span></p>
+					<%if @team_employee.contact_no%>
 					<p><i class="fa fa-mobile" aria-hidden="true" style="font-size:25px;"></i>  <span id="emp_phone"><%=@team_employee.contact_no%></span></p>
+					<%end%>
+					<%#if @team_employee.skype_id%>
 					<p><i class="fa fa-skype" aria-hidden="true" style="font-size:19px;"></i>  <span id="emp_skypeid"><%=@team_employee.skype_id%></span></p>
+					<%#end%>
 					<h4>Additional Information</h4>
 					<p>Birthday: <span id="emp_birthday"><%=@team_employee.actual_dob.strftime("%d-%b")%></span></p>
 				</div>
@@ -78,7 +82,9 @@
 				<h4>Contact Information</h4>
 				<p><i class="fa fa-envelope-o" aria-hidden="true"></i> <span class="emp_email company_email"><%=mail_to @team.first.email  %></span></p>
 				<p><i class="fa fa-mobile" aria-hidden="true" style="font-size:25px;"></i> <span id="emp_phone"><%=@team.first.contact_no%></span></p>
+				<%#if @team.first.skype_id.blank?%>
 				<p><i class="fa fa-skype" aria-hidden="true" style="font-size:19px;"></i> <span id="emp_skypeid"><%=@team.first.skype_id%></span></p>
+				<%#end%>
 				<h4>Additional Information</h4>
 				<p>Birthday: <span id="emp_birthday"><%=@team.first.actual_dob.strftime("%d-%b")%></span></p>
 			</div>

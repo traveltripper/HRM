@@ -25,13 +25,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                             <%=f.label :fromdate%>
-                            <%=f.text_field :fromdate, class: 'form-control form-height40', :id=>"dt1", :required=>true%>
+                            <%=f.text_field :fromdate, :value=>@leave.fromdate.strftime("%d-%m-%Y"), class: 'form-control form-height40', :id=>"dt1", :required=>true%>
                             </div> 
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                             <%=f.label :todate%>
-                            <%=f.text_field :todate, class: 'form-control form-height40', :id=>"dt2", :required=>true%>
+                            <%=f.text_field :todate, :value=>@leave.todate.strftime("%d-%m-%Y"), class: 'form-control form-height40', :id=>"dt2", :required=>true%>
                             </div> 
                         </div>
                     </div>       
@@ -46,7 +46,8 @@
                         <div class="col-md-6">       
                             <div class="form-group">
                             <%=f.label :no_of_days%>
-                            <%=f.text_field :no_of_days, class: 'form-control form-height40', :id=>"dt3", :readonly => true%>
+                            <%=f.hidden_field :no_of_days, class: 'form-control form-height40 dt3', :readonly => true%>
+                            <%=text_field_tag :no_of_days, "#{@leave.no_of_days}", class: 'form-control form-height40 dt3', :readonly => true%>
                             </div>
                         </div>
                     </div>
@@ -79,9 +80,27 @@ $("#dt1").datepicker({
         var start = $("#dt1").datepicker("getDate");
         var end = $("#dt2").datepicker("getDate");
         if (start != null && end !=null){
+            // caliculate weekend days
+                var weekend_start = start,
+                weekend_finish = end,
+                dayMilliseconds = 1000 * 60 * 60 * 24;
+
+                var weekendDays = 0;
+
+                while (weekend_start <= weekend_finish) {
+                    var day = weekend_start.getDay()
+                    if (day == 0 || day == 6) {
+                        weekendDays++;
+                    }
+                    weekend_start = new Date(+weekend_start + dayMilliseconds);
+                }
+            // caliculate weekend days
             var days = (end - start) / (1000 * 60 * 60 * 24);
             days = days+1;
-            $("#dt3").val(days);
+            days = days-weekendDays;
+
+            
+            $(".dt3").val(days);
         }
     }
 });
@@ -100,15 +119,36 @@ $("#dt2").datepicker({
         else
         { 
             var end = $("#dt2").datepicker("getDate");
+            // caliculate weekend days
+                var weekend_start = start,
+                weekend_finish = end,
+                dayMilliseconds = 1000 * 60 * 60 * 24;
+
+                var weekendDays = 0;
+
+                while (weekend_start <= weekend_finish) {
+                    var day = weekend_start.getDay()
+                    if (day == 0 || day == 6) {
+                        weekendDays++;
+                    }
+                    weekend_start = new Date(+weekend_start + dayMilliseconds);
+                }
+            // caliculate weekend days
             var days = (end - start) / (1000 * 60 * 60 * 24);
             days = days+1;
-            $("#dt3").val(days);
+            days = days-weekendDays;
+            $(".dt3").val(days);
         }
     }
 });
 });
 </script>
 </div>
+
+
+
+
+
 
 
 

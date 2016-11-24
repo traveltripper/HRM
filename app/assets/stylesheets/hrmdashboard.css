@@ -173,8 +173,11 @@ h4{
 		/* overflow-y:scroll; */ 
 	}
 	.myteam1{
-		height:350px;
-		overflow-y:scroll; 
+		/*height:350px;
+		overflow-y:scroll; */
+		min-height: 170px;
+    	max-height: 350px;
+    	overflow-y: auto;
 	}
 		
 	.myteam ul, .myteam1 ul{ list-style:none; margin:5px; padding:0px; }
@@ -282,14 +285,14 @@ h4{
 	
 .events h5{
 	font-weight:300;
-	font-size:27px;
-	padding:0px 0px 10px 10px;
+	font-size:23px;
+	padding:0px 0px 10px 0px;
 	margin:0px
 	}
 .events	 span{
 	font-weight:200; 
 	font-size:16px;
-	padding:20px 0px 3px 10px;
+	padding:20px 0px 3px 0px;
 	}	
 	
 .events img{width:100%;}
@@ -469,8 +472,10 @@ a:focus, a:hover{
     padding: 10px;
     border-top-right-radius: 3em;
     border-top-left-radius: 3em;
-    width: 110px;
-    height: 160px;
+    /* width: 110px; */
+    width: 147px;
+    /*height: 160px; */
+    height: 130px;
     float: left;
 }
 

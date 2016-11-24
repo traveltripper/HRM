@@ -35,10 +35,12 @@ class HrmdashboardController < ApplicationController
     end
 
     if params[:employee_id]
-      p ".........."
-      p @team_employee = Employee.where(:id=>params[:employee_id]).first
-      @team_emp_id = @team_employee.id
-      p ".........."
+      if current_employee.id == params[:employee_id]
+        redirect_to profile_path
+      else
+        @team_employee = Employee.where(:id=>params[:employee_id]).first
+        @team_emp_id = @team_employee.id
+      end
     end
   end
 

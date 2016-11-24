@@ -25,18 +25,28 @@
 			<h4>General Information</h4>
 			<p>Position: <%=@employee.designation%></p>
 			<p>Department: <%=@employee.department.name%></p>
-			<p>Supervisor:</p>
+			<p>Supervisor:
+				<%if @employee.manager%>
+				<%=link_to @employee.manager.fullname, team_path(:params => { :employee_id => @employee.id }) %>		
+				<%else%>
+				Manager
+				<%end%>
+
+			</p>
 			<!-- <p>Status: <%#=@employee.status%></p> -->
 			<h4>Contact Information</h4>
 			<p>E-Mail: <span class="company_email"><%=@employee.email%></span></p>
 			<p>Phone: <span id="emp_phone"><%=@employee.contact_no%></span></p>
+			<%unless @employee.skype_id.blank?%>
 			<p>Skype: <span id="emp_skypeid"><%=@employee.skype_id%></span></p>
+			<%end%>
 			<h4>Additional Information</h4>
 			<p>Birthday: <%=@employee.actual_dob.strftime("%d-%B")%></p>
 			<h4>Education Information</h4>
 			<p>Graduation: <%=@employee.graduation%></p>
+			<%unless @employee.pg.blank?%>
 			<p>Post Graduation: <%=@employee.pg%></p>
-			<p>Certifications:</p>
+			<%end%>
 			<h4>Professional Experience</h4>
 			<p>Previous Company: <%=@employee.previous_employer%></p>
 		</div>

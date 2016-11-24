@@ -55,8 +55,13 @@ class LeaveController < ApplicationController
     @leave = Leave.find(params[:id])
     respond_to do |format|
       if @leave.update(leave_params)
-        format.html { redirect_to leave_index_path, notice: 'Leave was successfully updated.' }
+        format.html { redirect_to leave_index_path, notice: 'leave updated successfully and an e-mail will be sent to HR and Manager. Waiting for approval.' }
         format.json { render :show, status: :ok, location: @leave }
+        LeaveMailer.employee_leave_request_email(@emp, @leave).deliver_later      
+        LeaveMailer.leave_request_email_to_hr(@emp, @leave).deliver_later
+        if @emp.manager 
+          LeaveMailer.team_leave_request_email(@emp, @leave).deliver_later
+        end
         #format.js
       else
         format.html { render :edit }

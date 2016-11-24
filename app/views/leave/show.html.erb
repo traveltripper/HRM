@@ -38,12 +38,12 @@
 </tr>
 
 <tr>
-<td>Reason: </td>
+<td>Leave Reason: </td>
 <td><%=@leave.reason.html_safe%></td>
 </tr>
 
 <%if @leave.status != nil %>
-	<%if @leave.reject_reason != nil%>
+	<%unless @leave.reject_reason.blank?%>
 		<tr> 
 			<td>Rejected Reason</td>
 			<td><%=@leave.reject_reason%></td>
@@ -62,7 +62,7 @@
 				<br/>
 				<div id="reject_reason">
 				<%=f.label :reject_reason%><br/>
-				<%=f.text_area :reject_reason, size: "20x4", required: true%>	
+				<%=f.text_area :reject_reason, size: "20x4"%>	
 				</div>
 				<%= f.submit "submit", :class=>"btn btn-primary"%>
 			<%end%>
