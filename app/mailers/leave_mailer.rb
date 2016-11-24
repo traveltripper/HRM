@@ -30,7 +30,6 @@ class LeaveMailer < ApplicationMailer
     else
       @status = "Rejected"
     end
-    #@email = "srinivas08478@gmail.com"
     mail(to: @employee.email, subject: 'Leave request status')
   end
 
