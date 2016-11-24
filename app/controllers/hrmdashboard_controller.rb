@@ -49,7 +49,6 @@ class HrmdashboardController < ApplicationController
   #   @leave_used = @emp.leave_used
   #   @available_leave = @emp.days_of_leave - @leave_used   
   #   @request_pending = @emp.leave.where(status: nil).count
-
   #   @leave_from_date = 1.month.ago.beginning_of_month
   #   @leave_to_date = Time.now
   #   @leaves = Leave.all.where(:created_at => @leave_from_date..@leave_to_date)

@@ -42,9 +42,8 @@ class LeaveMailer < ApplicationMailer
       @status = "Approved"
     else
       @status = "Rejected"
-    end
-    
+    end    
     @subject = @employee.fullname + " " + "Leave request status" 
-    mail(to: @hr.email, subject: @subject)
+    mail(to: @hr.email, subject: @subject) 
   end
 end
