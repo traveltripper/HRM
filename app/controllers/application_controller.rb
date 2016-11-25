@@ -12,17 +12,31 @@ class ApplicationController < ActionController::Base
     @current_ability ||= Ability.new(current_employee)
   end
   
-  def upcoming_company_events   
+  def upcoming_company_events  
+    
+    @current_event = Event.friendly.where(id: params[:id]).first
+     
     role_ids = Role.where(name: ["HR", "Admin"] ).pluck :id
-    Event.joins(:employee).where(:employees =>{role_id: role_ids}).where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today).last(2)
+    if @current_event
+      Event.joins(:employee).where(:employees =>{role_id: role_ids}).where(publish: true).where.not(id: @current_event.id).where('start >= ? or end_date >= ?', Date.today, Date.today).last(2)
+
+    else
+      Event.joins(:employee).where(:employees =>{role_id: role_ids}).where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today).last(2)
+    end
   end
 
   def upcoming_team_events
+    @current_event = Event.friendly.where(id: params[:id]).first
     @department = current_employee.department
     @role = Role.where(:name => "Manager").first
     @mng = Employee.where(:role_id =>@role.id , :department_id => @department.id).first
     if @mng
+      if @current_event
+      @mng.events.where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today).where.not(id: @current_event.id).last(2)
+
+      else
       @mng.events.where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today).last(2)
+      end
     end        
   end
 

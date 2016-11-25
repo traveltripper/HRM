@@ -1,4 +1,4 @@
-<%if @team_events != nil%>
+<%unless @team_events.blank?%>
 <h4>Upcoming Team Events</h4>
 <% @team_events.each do |f| %>
 	<div class="col-md-6">
