@@ -13,29 +13,30 @@ class ApplicationController < ActionController::Base
   end
   
   def upcoming_company_events  
-    
-    @current_event = Event.friendly.where(id: params[:id]).first
-     
+    if params[:id]
+    @current_event = Event.friendly.find(params[:id])
+    end
     role_ids = Role.where(name: ["HR", "Admin"] ).pluck :id
     if @current_event
-      Event.joins(:employee).where(:employees =>{role_id: role_ids}).where(publish: true).where.not(id: @current_event.id).where('start >= ? or end_date >= ?', Date.today, Date.today).last(2)
-
+      Event.joins(:employee).where(:employees =>{role_id: role_ids}).where(publish: true).where.not(id: @current_event.id).where('start >= ? or end_date >= ?', Date.today, Date.today).limit(2)
     else
-      Event.joins(:employee).where(:employees =>{role_id: role_ids}).where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today).last(2)
+      Event.joins(:employee).where(:employees =>{role_id: role_ids}).where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today).limit(2)
     end
   end
 
   def upcoming_team_events
-    @current_event = Event.friendly.where(id: params[:id]).first
+    if params[:id]
+    @current_event = Event.friendly.find(params[:id])
+    end
     @department = current_employee.department
     @role = Role.where(:name => "Manager").first
     @mng = Employee.where(:role_id =>@role.id , :department_id => @department.id).first
     if @mng
       if @current_event
-      @mng.events.where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today).where.not(id: @current_event.id).last(2)
+      @mng.events.where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today).where.not(id: @current_event.id).limit(2)
 
       else
-      @mng.events.where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today).last(2)
+      @mng.events.where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today).limit(2)
       end
     end        
   end
