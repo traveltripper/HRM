@@ -15,7 +15,7 @@ class HrmdashboardController < ApplicationController
   	@leave_used = @emp.leave_used
   	@available_leave = @emp.days_of_leave - @leave_used  	
   	@request_pending = @emp.leave.where("status IS ? and leave_cancel =?", nil, false).count  
-  	@announcements = Announcement.limit(4)    
+  	@announcements = Announcement.where(active: true).limit(4)    
     @names = []    
     @employees=Employee.all
     @employees.each do |u| 

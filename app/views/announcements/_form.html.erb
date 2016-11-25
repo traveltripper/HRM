@@ -13,7 +13,7 @@
                     <%= f.text_area :message, class:"form-control tinymce", size: "30x10", require:true %>
                     <%unless @announcement.new_record?%>
                     <br/>                    
-                    <%=f.label :active%>
+                    <%=f.label :active, "Status"%>
                     <%= f.select :active, [['active', 1], ['inactive', 0]], {}, class: "form-control" %>
                 <%end%>
                 </div>

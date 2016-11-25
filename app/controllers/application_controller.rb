@@ -13,8 +13,6 @@ class ApplicationController < ActionController::Base
   end
   
   def upcoming_company_events  
-    
-     
 
     if params[:id] and params[:controller] =="events"
     @current_event = Event.friendly.find(params[:id])
@@ -45,7 +43,7 @@ class ApplicationController < ActionController::Base
   end
 
   def latest_announcements
-    Announcement.limit(2)
+    Announcement.where(active:true).limit(2)
   end
  
   rescue_from CanCan::AccessDenied do |exception|
