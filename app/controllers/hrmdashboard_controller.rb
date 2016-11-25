@@ -40,10 +40,13 @@ class HrmdashboardController < ApplicationController
         redirect_to profile_path
       else
 
-      # if current_employee.role.name.in?(['Admin', 'HR'])
-      # elsif current_employee.department_id != Employee.find(:id=>params[:employee_id]).department_id
-      #   redirect_to team_path
-      # end         
+      if current_employee.role.name.in?(['Admin', 'HR'])
+        p "......"
+        p params[:employee_id]
+        p "......"
+      elsif current_employee.department_id != Employee.find(params[:employee_id]).department_id
+        redirect_to team_path
+      end         
       @team_employee = Employee.where(:id=>params[:employee_id]).first
       @team_emp_id = @team_employee.id
       end
