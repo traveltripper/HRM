@@ -27,7 +27,7 @@ class HrmdashboardController < ApplicationController
 
   def team
     @emp = current_employee
-    
+    @announcements = Announcement.limit(4)     
     if current_employee.role.name.in?(['Admin', 'HR'])
       @team = Employee.all.where.not(:id => @emp.id).order('first_name ASC')
     else
@@ -35,9 +35,16 @@ class HrmdashboardController < ApplicationController
     end
 
     if params[:employee_id]
-      if current_employee.id == params[:employee_id]
+       p "........."
+       p params[:employee_id]
+       p @emp.id
+       p "........."
+       
+      if @emp.id == params[:employee_id].to_i
+
         redirect_to profile_path
       else
+       
         @team_employee = Employee.where(:id=>params[:employee_id]).first
         @team_emp_id = @team_employee.id
       end

@@ -27,11 +27,14 @@
 			<p>Department: <%=@employee.department.name%></p>
 			<p>Supervisor:
 				<%if @employee.manager%>
-				<%=link_to @employee.manager.fullname, team_path(:params => { :employee_id => @employee.id }) %>		
+					<%if @employee.department_id == @employee.manager.department_id%>
+						<%=link_to @employee.manager.fullname, team_path(:params => { :employee_id => @employee.manager.id }) %>
+					<%else%>
+						<%=@employee.manager.fullname%>
+					<%end%>					
 				<%else%>
-				Manager
+					Manager
 				<%end%>
-
 			</p>
 			<!-- <p>Status: <%#=@employee.status%></p> -->
 			<h4>Contact Information</h4>

@@ -36,8 +36,12 @@
 					<p>Position: <span id="emp_designation"><%=@team_employee.designation%></span></p>
 					<p>Department: <span id="emp_department"><%=@team_employee.department.name%></span></p>
 					<p>Supervisor: <span id="emp_manager">
-						<%if @team.first.manager%>
-							<%=link_to @team.first.manager.fullname, team_path(:params => { :employee_id => @team_employee.id }) %>		
+						<%if @team_employee.manager%>
+							<%if @team_employee.department_id == @team_employee.manager.department_id%>
+								<%=link_to @team_employee.manager.fullname, team_path(:params => { :employee_id => @team_employee.manager.id }) %>
+							<%else%>
+								<%=@team_employee.manager.fullname%>
+							<%end%>									
 						<%else%>
 							Manager
 						<%end%>						
@@ -59,6 +63,7 @@
 	        </div>
 	</div>
 	<% elsif @team.first %>
+	
 	<div class="col-md-12 bg-color-white">
         <div class="Team bg-color-white">
 			<div class="col-md-6 Team">
@@ -73,18 +78,18 @@
 				<p>Department: <span id="emp_department"><%=@team.first.department.name%></span></p>
 				<p>Supervisor: 
 				<span id="emp_manager">
-				<%if @team.first.manager%>
-				<%=link_to @team.first.manager.fullname, team_path(:params => { :employee_id => @team.first.id }) %>		
+				<%if @team.first.manager%>					
+						<%=link_to @team.first.manager.fullname, team_path(:params => { :employee_id => @team.first.manager.id }) %>										
 				<%else%>
-				Manager
+					Manager
 				<%end%>
 				</span></p>				
 				<h4>Contact Information</h4>
 				<p><i class="fa fa-envelope-o" aria-hidden="true"></i> <span class="emp_email company_email"><%=mail_to @team.first.email  %></span></p>
 				<p><i class="fa fa-mobile" aria-hidden="true" style="font-size:25px;"></i> <span id="emp_phone"><%=@team.first.contact_no%></span></p>
-				<%#if @team.first.skype_id.blank?%>
+
 				<p><i class="fa fa-skype" aria-hidden="true" style="font-size:19px;"></i> <span id="emp_skypeid"><%=@team.first.skype_id%></span></p>
-				<%#end%>
+
 				<h4>Additional Information</h4>
 				<p>Birthday: <span id="emp_birthday"><%=@team.first.actual_dob.strftime("%d-%b")%></span></p>
 			</div>
@@ -94,4 +99,27 @@
         </div>
 	</div>
 	<%end%>
+</div>
+
+<div class="col-md-12">
+	<h4>Announcements</h4>
+    <div class="Announcements bg-color-white">
+		<table >
+		    <%@announcements.each do |announcement|%>
+				<tr>
+					<td >
+						<span class="span-title-color">
+							<%=announcement.created_at.strftime("%d-%b-%Y")%>
+						</span>
+					</td>
+					<td>
+						<span class="text-primary">
+							<%=link_to announcement.title, announcement%>
+						</span>
+						<br /><%=truncate(announcement.message, :length => 190)%><%= link_to "..Read More", announcement %>
+					</td>
+				</tr>
+			<%end%>		
+		</table>
+    </div>
 </div>

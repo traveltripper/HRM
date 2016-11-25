@@ -52,6 +52,7 @@ class LeaveController < ApplicationController
   end
 
   def update
+    @emp = current_employee
     @leave = Leave.find(params[:id])
     respond_to do |format|
       if @leave.update(leave_params)
@@ -82,8 +83,14 @@ class LeaveController < ApplicationController
 
   def leave_cancel
     @leave = Leave.find(params[:id])
+    @emp = current_employee
     if @leave.update_attribute(:leave_cancel, true)
       redirect_to leave_index_path
+      LeaveMailer.employee_cancel_leave_request_email(@emp, @leave).deliver_later      
+      LeaveMailer.leave_cancel_request_email_to_hr(@emp, @leave).deliver_later
+      if @emp.manager 
+        LeaveMailer.team_cancel_leave_request_email(@emp, @leave).deliver_later
+      end
     end
   end
 

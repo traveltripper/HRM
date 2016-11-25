@@ -25,13 +25,21 @@
                         <div class="col-md-6">
                             <div class="form-group">
                             <%=f.label :fromdate%>
+                            <%if @leave.new_record?%>
                             <%=f.text_field :fromdate, class: 'form-control form-height40', :id=>"dt1", :required=>true%>
+                            <%else%>
+                            <%=f.text_field :fromdate, :value =>"#{@leave.fromdate.strftime("%d-%m-%Y")}", class: 'form-control form-height40', :id=>"dt1", :required=>true%>
+                            <%end%>
                             </div> 
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                            <%=f.label :todate%>                            
+                            <%=f.label :todate%>
+                            <%if @leave.new_record?%>                            
                             <%=f.text_field :todate, class: 'form-control form-height40', :id=>"dt2", :required=>true%>
+                            <%else%>
+                            <%=f.text_field :todate, :value =>"#{@leave.todate.strftime("%d-%m-%Y")}", class: 'form-control form-height40', :id=>"dt2", :required=>true%>
+                            <%end%>
                             </div> 
                         </div>
                     </div>       
