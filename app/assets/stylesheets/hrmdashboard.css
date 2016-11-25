@@ -705,7 +705,7 @@ color: #72bfd4;
 
 
 
-.change_picture, #employee_profile_picture {display: none;}
+.change_picture, #employee_profile_picture {/*display: none;*/}
 .change_picture >.fa{ font-size: 14px; color: #FFF;  }
 
 .upload_picture:hover .change_picture {width: 30px; height:30px;  position: absolute; left: 20px; bottom: 60px; display: block; text-align: right; 
