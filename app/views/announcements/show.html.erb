@@ -25,7 +25,7 @@
 						<span class="text-primary">
 							<%=link_to announcement.title, announcement%>
 						</span>
-						<br /><%=truncate(announcement.message, :length => 190, escape: false).html_safe%><%= link_to "..Read More", announcement %>
+						<br /><%=truncate(announcement.message, :length => 250, escape: false).html_safe%><%= link_to "..Read More", announcement %>
 					</td>
 				</tr>
 			<%end%>		
