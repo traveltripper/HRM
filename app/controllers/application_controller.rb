@@ -13,7 +13,10 @@ class ApplicationController < ActionController::Base
   end
   
   def upcoming_company_events  
-    if params[:id]
+    
+     
+
+    if params[:id] and params[:controller] =="events"
     @current_event = Event.friendly.find(params[:id])
     end
     role_ids = Role.where(name: ["HR", "Admin"] ).pluck :id
@@ -25,7 +28,7 @@ class ApplicationController < ActionController::Base
   end
 
   def upcoming_team_events
-    if params[:id]
+    if params[:id] and params[:controller] =="events"
     @current_event = Event.friendly.find(params[:id])
     end
     @department = current_employee.department

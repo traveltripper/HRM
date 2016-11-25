@@ -1,4 +1,6 @@
+<%#= tinymce %>
 <div class="modal fade">
+<%= tinymce %>
   <div class="modal-dialog">
     <div class="modal-content">    
         <div class="panel-heading-style">Announcement</div>
@@ -8,7 +10,7 @@
                     <%=f.label :title%><br/>
                     <%= f.text_field :title, class:"form-control" %><br/>
                     <%=f.label :message%><br/>
-                    <%= f.text_area :message, class:"form-control", size: "30x10" %>
+                    <%= f.text_area :message, class:"form-control tinymce", size: "30x10" %>
                 </div>
                 <div class="form-submit-buttons">
                    
@@ -20,3 +22,4 @@
     </div>
 </div>
 </div>
+

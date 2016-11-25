@@ -26,7 +26,7 @@
               <span class="text-primary">
                 <%=link_to announcement.title, announcement%>
               </span>
-              <br /><%=truncate(announcement.message, :length => 160)%><%= link_to "Read More", announcement %>
+              <br /><%=truncate(announcement.message, :length => 1000, escape: false).html_safe%><%= link_to "Read More", announcement %>
             </td>
             <% if can? :edit, @announcement %>            
             <td><%= link_to '', edit_announcement_path(announcement), remote:true, :class=>"fa fa-pencil-square-o btn " %></td>
