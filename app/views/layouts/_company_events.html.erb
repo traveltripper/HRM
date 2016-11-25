@@ -4,7 +4,7 @@
 	<div class="col-md-12 bg-color-white">
 	<%latest_announcements.each do |announcement|%>
 		<%=link_to announcement.title, announcement, class:"announcement-style"%>
-		<p><%=truncate(announcement.message, length:150)%><%=link_to "..Read More", announcement, class:"title-blue"%></p>	
+		<p><%=truncate(announcement.message, length:150, escape: false).html_safe%><%=link_to "..Read More", announcement, class:"title-blue"%></p>	
 	<%end%>	
 	</div>
 	<%=link_to 'View All', announcements_path, class:'btn-primary pull-right'%>

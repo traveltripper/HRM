@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161122070400) do
+ActiveRecord::Schema.define(version: 20161125094945) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -49,10 +49,11 @@ ActiveRecord::Schema.define(version: 20161122070400) do
   create_table "announcements", force: :cascade do |t|
     t.string   "title",       limit: 255
     t.text     "message",     limit: 65535
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.integer  "employee_id", limit: 4
     t.string   "slug",        limit: 255
+    t.boolean  "active",                    default: true
   end
 
   add_index "announcements", ["slug"], name: "index_announcements_on_slug", unique: true, using: :btree
