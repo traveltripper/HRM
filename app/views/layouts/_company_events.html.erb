@@ -18,7 +18,7 @@
 		<h5><%=link_to f.title, f, class:"event-title-color"%></h5>
 		<span class="span-title-color"><%=f.start.strftime("%A, %B %d")%></span>            
 		<%=image_tag f.picture.url(:medium)%>
-		<p><%=f.reason.html_safe%></p>
+		<p><%=truncate(f.reason.html_safe, length:150)%></p>
 	</div>	
 <%end%>
 <%=link_to "View All", company_events_path, class:"btn-primary pull-right"%>

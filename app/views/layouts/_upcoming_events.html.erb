@@ -21,7 +21,7 @@
 			<h5><%= link_to f.title.capitalize, f, class:"event-title-color"%></h5>
 			<span class="span-title-color"><%=f.start.strftime("%A, %B %d")%></span>            
 			<%=image_tag f.picture.url(:medium)%>
-			<%=f.reason.html_safe%>
+			<%=truncate(f.reason.html_safe, length:150)%>
 		</div>	
 	<%end%>
 	<%=link_to "View All", company_events_path, class:"btn-primary pull-right"%>
@@ -37,7 +37,7 @@
 			<h5><%=link_to f.title.capitalize, f, class:"event-title-color"%></h5>
 			<span class="span-title-color"><%=f.start.strftime("%A, %B %d")%></span>        
 			<%=image_tag f.picture.url(:medium)%>
-			<%=f.reason.html_safe%>
+			<%=truncate(f.reason.html_safe, length:150)%>
 		</div>	
 	<%end%>
 <%=link_to "View All", team_events_path, class:"btn-primary pull-right"%>

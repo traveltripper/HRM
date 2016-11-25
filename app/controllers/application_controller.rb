@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   
   def upcoming_company_events   
     role_ids = Role.where(name: ["HR", "Admin"] ).pluck :id
-    Event.joins(:employee).where(:employees =>{role_id: role_ids}).where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today).last(1)
+    Event.joins(:employee).where(:employees =>{role_id: role_ids}).where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today).last(2)
   end
 
   def upcoming_team_events
@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
     @role = Role.where(:name => "Manager").first
     @mng = Employee.where(:role_id =>@role.id , :department_id => @department.id).first
     if @mng
-      @mng.events.where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today).last(1)
+      @mng.events.where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today).last(2)
     end        
   end
 
