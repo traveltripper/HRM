@@ -24,6 +24,8 @@ class Employee < ActiveRecord::Base
   has_many :healthinsurances
   has_many :events
 
+  scope :ordered_by_first_name, -> { order(first_name: :asc) }
+
   def fullname
   	first_name.capitalize.to_s + " " + middle_name.capitalize.to_s + " " + last_name.capitalize.to_s
   end

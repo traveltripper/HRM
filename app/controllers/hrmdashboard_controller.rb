@@ -6,11 +6,10 @@ class HrmdashboardController < ApplicationController
   def index
   	@emp = current_employee
     if current_employee.role.name.in?(['Admin', 'HR'])
-      @team = Employee.all.where.not(:id => @emp.id).order('first_name ASC').limit(6)
+      @team = Employee.where.not(:id => @emp.id).ordered_by_first_name.limit(6)
     else
-      @team = Employee.where(:department_id=> @emp.department_id).where.not(:id => @emp.id).order('first_name ASC')
+      @team = Employee.where(:department_id=> @emp.department_id).where.not(:id => @emp.id).ordered_by_first_name
     end
-  	#@team = Employee.all
   	@payroll = @emp.payrolls.first
   	@leave_used = @emp.leave_used
   	@available_leave = @emp.days_of_leave - @leave_used  	
@@ -41,9 +40,6 @@ class HrmdashboardController < ApplicationController
       else
 
       if current_employee.role.name.in?(['Admin', 'HR'])
-        p "......"
-        p params[:employee_id]
-        p "......"
       elsif current_employee.department_id != Employee.find(params[:employee_id]).department_id
         redirect_to team_path
       end         
@@ -52,19 +48,6 @@ class HrmdashboardController < ApplicationController
       end
     end
   end
-
-  # def leave
-  #   @emp = current_employee
-  #   @leave_used = @emp.leave_used
-  #   @available_leave = @emp.days_of_leave - @leave_used   
-  #   @request_pending = @emp.leave.where(status: nil).count
-  #   @leave_from_date = 1.month.ago.beginning_of_month
-  #   @leave_to_date = Time.now
-  #   @leaves = Leave.all.where(:created_at => @leave_from_date..@leave_to_date)
-    
-  #   @leave_approved = @emp.leave.where(:status => [true, false], :created_at => @leave_from_date..@leave_to_date).limit(15)    
-  #   @leave_waiting_for_approve = @emp.leave.where(status: nil, :created_at => @leave_from_date..@leave_to_date).limit(15)
-  # end
 
   def employee_details
     @emp = Employee.find(params[:id])
@@ -75,7 +58,6 @@ class HrmdashboardController < ApplicationController
 
   def profile
     @employee = current_employee
-    #render :template => 'employees/profile'    
   end
 
   def events
@@ -87,7 +69,6 @@ class HrmdashboardController < ApplicationController
     @payroll = @employee.payrolls.last
     @payrolls = @employee.payrolls
   end
-
 
   def check_password_changed
    unless current_employee.password_changed
