@@ -4,7 +4,7 @@
 <h4>Announcements</h4>
 	<div class="col-md-12 bg-color-white">
 	<%latest_announcements.each do |announcement|%>
-		<%=link_to announcement.title, announcement, class:"announcement-style"%>
+		<%=link_to announcement.title, announcement, class:"announcement-style"%><br/>
 		<%=truncate(announcement.message, length:150, escape: false).html_safe%><%=link_to "..Read More", announcement, class:"title-blue"%>	
 	<%end%>	
 	</div>

@@ -11,7 +11,7 @@
 <%elsif leave.status ==nil%>
 <td>Waiting for Approval</td>
 <%end%>
-<td style="font-weight:600;"><%=link_to ' view', leave%> |
+<td style="font-weight:600;"><%=link_to ' View', leave%> |
 <%if leave.leave_cancel == false%>
 <%=link_to ' Edit', edit_leave_path(leave), remote: true%> |
 <%end%>

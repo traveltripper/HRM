@@ -10,9 +10,10 @@ class LeaveController < ApplicationController
     @request_pending = @emp.leave.where("status IS ? and leave_cancel =?", nil, false).count
     @leave_from_date = 3.month.ago.beginning_of_month
     @leave_to_date = Time.now
-    @leaves = Leave.all.where(:created_at => @leave_from_date..@leave_to_date)    
-    @leave_approved = @emp.leave.where(:status => [true, false], :created_at => @leave_from_date..@leave_to_date).limit(15)    
-    @leave_waiting_for_approve = @emp.leave.where(status: nil, :created_at => @leave_from_date..@leave_to_date).limit(15)
+    @leaves = Leave.all.where(:created_at => @leave_from_date..@leave_to_date)        
+    #@leave_approved = @emp.leave.where(:created_at => @leave_from_date..@leave_to_date).where(:status => [true, false]).limit(15)    
+     @leave_approved = @emp.leave.where(:status => [true, false], :created_at => @leave_from_date..@leave_to_date).limit(15)    
+    @leave_waiting_for_approve = @emp.leave.where(status: nil, leave_cancel:false, :created_at => @leave_from_date..@leave_to_date).limit(15)
   end
   
   def show
