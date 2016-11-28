@@ -16,7 +16,7 @@
 			<h6 class="profileImgHeading"><%=@employee.fullname%></h6>
 			<!-- <h6 class="profileImgEmail"><%#=@employee.email%></h6> -->
 			<p class="profileImgText"><%=@employee.about_me%></p>
-			<%=form_for @employee, :url=> update_profile_path, :id=>"update_profile_picture" do |f|%>
+			<%=form_for @employee, :url=> update_profile_path, :html => {:id=>"update_profile_picture", class:"upload_profile_picture"} do |f|%>
 				<%=f.file_field :profile_picture, class: "img_upload profile_picture_upload" %>
 				<%#=f.submit%>
 			<%end%>			

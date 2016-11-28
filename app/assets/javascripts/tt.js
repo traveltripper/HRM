@@ -34,7 +34,7 @@ $(document).ready(function(){
 $(document).ready(function(){ 
 
   $('#employee_profile_picture').on('change', function() {
-      $(".edit_employee").submit();
+      $(".upload_profile_picture").submit();
   });
 
   $(".upload_picture").click(function(){
