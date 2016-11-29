@@ -57,7 +57,7 @@
         <td><%=leave.leavetype.name%></td>
         <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
         <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
-        <td><%=truncate(leave.reason, :escape => false, :length => 30, :omission => '...')%></td>
+        <td><%=truncate(leave.reason, :escape => false, :length => 20, :omission => '...')%></td>
         <td><%=leave.no_of_days%></td>        
         <%if leave.status == true%>
         <td style="color: #1F9B00 !important; font-weight:600;">Approved</td>
