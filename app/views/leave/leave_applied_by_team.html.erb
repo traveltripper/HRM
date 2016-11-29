@@ -63,7 +63,7 @@
         <td style="color: #1F9B00 !important; font-weight:600;">Approved</td>
         <%elsif leave.status ==false%>
         <td style="color: #F10000 !important; font-weight:600;">Rejected</td>
-        <%elsif leave.status == nil%>
+        <%elsif leave.status == nil and leave.leave_cancel == true%>
         <td>Cancelled</td>
         <%end%>
                
