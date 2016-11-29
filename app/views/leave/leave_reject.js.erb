@@ -1,0 +1,7 @@
+$('<%= j render "leave_reject" %>').on('hidden.bs.modal', function (e) {
+  $(this).remove();
+  $('.modal-backdrop').remove();
+}).modal({
+    backdrop: 'static',   // This disable for click outside event
+    keyboard: true        // This for keyboard event
+});

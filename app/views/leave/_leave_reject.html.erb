@@ -1,0 +1,22 @@
+<div id="leave-modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">    
+        <div class="panel-heading-style">Reject Leave</div>
+        <div class="panel-body pan">
+            <%=form_for @leave, :url => leave_status_reject_leave_path do |f|%>                
+                <div class="col-md-12">
+                    <%= f.hidden_field :status, :value => '0' %><br/>
+                    <%= f.label :reject_reason%>
+                    <%= f.text_area :reject_reason, class:"form-control", required:true%><br/>
+                </div>
+                <div class="form-submit-buttons">
+                   
+                    <button type="button" class="btn btn-cgray width-50p btn-border-left-radius" data-dismiss="modal">CANCEL</button>                
+                    <%= f.submit "Submit", class: "btn btn-cblue width-50p btn-border-right-radius"%>       
+                       
+                </div>                
+            <%end%>            
+        </div>    
+    </div>
+</div>
+</div>

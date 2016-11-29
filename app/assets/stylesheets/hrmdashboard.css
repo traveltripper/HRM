@@ -639,7 +639,7 @@ i.fa{
 }
 
 .table-align-center th, .table-align-center td{
-	text-align:center;
+	/* text-align:center; */
 }
 
 .text-align-right{

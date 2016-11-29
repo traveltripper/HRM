@@ -72,13 +72,14 @@ class EventsController < ApplicationController
   end
 
   def company_events
-    #render :layout => 'hrmdashboard'
+    @announcements = Announcement.where(active: true).limit(4)  
     role_ids = Role.where(name: ["HR", "Admin"] ).pluck :id
     @company_events = Event.joins(:employee).where(:employees =>{role_id: role_ids}).where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today)
     render :layout => 'hrmdashboard'
   end
 
   def team_events
+    @announcements = Announcement.where(active: true).limit(4)  
     @department = current_employee.department
     @role = Role.where(:name => "Manager").first
     @mng = Employee.where(:role_id =>@role.id , :department_id => @department.id).first

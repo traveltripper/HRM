@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     get 'send_welcome_email'
     get 'get_leave_used'
     post 'update_leave_used'
+
   end
 
   resources :roles do 
@@ -51,8 +52,10 @@ Rails.application.routes.draw do
     member do
       patch :leave_status
       get :leave_status_approve
+      patch :leave_status_reject
       get :leave_details
       get :leave_cancel
+      get :leave_reject
     end
   end
 
