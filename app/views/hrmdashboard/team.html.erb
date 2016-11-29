@@ -33,6 +33,7 @@
 				</div>
 				<div class="col-md-6 team-icons">
 					<h4>General Information</h4>
+					<p>Employee ID: <span id="emp_id"><%=@team_employee.ttid%></span></p>
 					<p>Position: <span id="emp_designation"><%=@team_employee.designation%></span></p>
 					<p>Department: <span id="emp_department"><%=@team_employee.department.name%></span></p>
 					<p>Supervisor: <span id="emp_manager">
@@ -74,6 +75,7 @@
 			</div>
 			<div class="col-md-6 team-icons">
 				<h4>General Information</h4>
+				<p>Employee ID: <span id="emp_id"><%=@team.first.ttid%></span></p>
 				<p>Position: <span id="emp_designation"><%=@team.first.designation%></span></p>
 				<p>Department: <span id="emp_department"><%=@team.first.department.name%></span></p>
 				<p>Supervisor: 
@@ -84,7 +86,7 @@
 					Manager
 				<%end%>
 				</span></p>				
-				<h4>Contact Information</h4>
+				<h4>Contact Information</h4>				
 				<p><i class="fa fa-envelope-o" aria-hidden="true"></i> <span class="emp_email company_email"><%=mail_to @team.first.email  %></span></p>
 				<p><i class="fa fa-mobile" aria-hidden="true" style="font-size:25px;"></i> <span id="emp_phone"><%=@team.first.contact_no%></span></p>
 
