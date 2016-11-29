@@ -7,7 +7,7 @@
 		<h4><%=link_to f.title, f, class:"event-title-color"%></h4>
 		<p><%=f.start.strftime("%A, %B %d")%></p>            
 		<%=image_tag f.picture.url(:medium), class:"event-image"%>
-		<p><%=truncate(f.reason, :length =>100)%><%=link_to "Read More", f%></p>	
+		<p><%=truncate(f.reason, :length =>100, escape:false).html_safe%><%=link_to "Read More", f%></p>	
 		</div><hr><hr>
 	</div>
 <%end%>

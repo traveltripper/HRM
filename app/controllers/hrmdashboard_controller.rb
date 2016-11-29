@@ -5,11 +5,12 @@ class HrmdashboardController < ApplicationController
 
   def index
   	@emp = current_employee
-    if current_employee.role.name.in?(['Admin', 'HR'])
-      @team = Employee.where.not(:id => @emp.id).ordered_by_first_name.limit(6)
-    else
-      @team = Employee.where(:department_id=> @emp.department_id).where.not(:id => @emp.id).ordered_by_first_name
-    end
+    #if current_employee.role.name.in?(['Admin', 'HR'])
+      #@team = Employee.where.not(:id => @emp.id).ordered_by_first_name.limit(6)
+    @team = Employee.where(:department_id=> @emp.department_id).where.not(:id => @emp.id).ordered_by_first_name      
+    #else
+     # @team = Employee.where(:department_id=> @emp.department_id).where.not(:id => @emp.id).ordered_by_first_name
+    #end
   	@payroll = @emp.payrolls.first
   	@leave_used = @emp.leave_used
   	@available_leave = @emp.days_of_leave - @leave_used  	
@@ -27,11 +28,11 @@ class HrmdashboardController < ApplicationController
   def team
     @emp = current_employee
     @announcements = Announcement.limit(4)     
-    if current_employee.role.name.in?(['Admin', 'HR'])
-      @team = Employee.all.where.not(:id => @emp.id).order('first_name ASC')
-    else
-      @team = Employee.where(:department_id=> @emp.department_id).where.not(:id => @emp.id).order('first_name ASC')
-    end
+    #if current_employee.role.name.in?(['Admin', 'HR'])
+      @team = Employee.where.not(:id => @emp.id).order('first_name ASC')
+    #else
+      #@team = Employee.where(:department_id=> @emp.department_id).where.not(:id => @emp.id).order('first_name ASC')
+    #end
 
     if params[:employee_id]
 

@@ -168,10 +168,13 @@ h4{
 	
 	/*Myteam*/
 	.myteam{
-		min-height:350px;
+		/* min-height:350px;
 		height: auto;
-		/* overflow-y:scroll; */ 
+		overflow-y:scroll; */ 
+		height:350px;
+		overflow-y:scroll;
 	}
+	
 	.myteam1{
 		/*height:350px;
 		overflow-y:scroll; */

@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_employee!
   load_and_authorize_resource  
-  layout 'dashboard'
+  layout 'hrmdashboard'
   #layout "hrmdashboard", only: [:upcoming_company_events, :upcoming_team_events]
 
   add_breadcrumb "Home", :root_path
