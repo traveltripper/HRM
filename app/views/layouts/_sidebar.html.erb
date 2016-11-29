@@ -67,17 +67,17 @@
                     
                     <%end%>
 
-                    <li class="<%= 'active' if current_page?(events_path) %>"><a href="/events"><i class="fa fa-gift fa-fw">
+                    <!-- <li class="<%= 'active' if current_page?(events_path) %>"><a href="/events"><i class="fa fa-gift fa-fw">
                         <div class="icon-bg bg-dark"></div>
                     </i><span class="menu-title">Event Management</span></a>
-                    </li>                   
+                    </li> -->                   
 
-                    <%if current_employee.role.name.in?(['HR', 'Manager', 'Admin'])%>
-                    <li class="<%= 'active' if current_page?(alerts_path) %>"><a href="/alerts"><i class="fa fa-envelope fa-fw">
+                    <%#if current_employee.role.name.in?(['HR', 'Manager', 'Admin'])%>
+                    <!-- <li class="<%= 'active' if current_page?(alerts_path) %>"><a href="/alerts"><i class="fa fa-envelope fa-fw">
                         <div class="icon-bg bg-yellow"></div>
                     </i><span class="menu-title">Alerts</span></a>
-                    </li>
-                    <%end%>
+                    </li> -->
+                    <%#end%>
 
                 </ul>
             </div>
