@@ -27,9 +27,10 @@ class HrmdashboardController < ApplicationController
 
   def team
     @emp = current_employee
-    @announcements = Announcement.limit(4)     
+    @announcements = Announcement.limit(4)  
+    testadmin = Employee.where(:email => "traveltripperhrm@traveltripper.com").first   
     #if current_employee.role.name.in?(['Admin', 'HR'])
-      @team = Employee.where.not(:id => @emp.id).where(status: "Active").order('first_name ASC')
+      @team = Employee.where.not(id: [@emp.id, testadmin.id]).where(status: "Active").order('first_name ASC')
     #else
       #@team = Employee.where(:department_id=> @emp.department_id).where.not(:id => @emp.id).order('first_name ASC')
     #end
