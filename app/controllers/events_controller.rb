@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_employee!
-  load_and_authorize_resource  
+  #load_and_authorize_resource  
   layout 'hrmdashboard'
   #layout "hrmdashboard", only: [:upcoming_company_events, :upcoming_team_events]
 
@@ -23,7 +23,11 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @employee = current_employee
-    @event = @employee.events.new
+    if @employee.role.name == "Employee"
+      redirect_to root_path
+    else
+      @event = @employee.events.new
+    end
   end
 
   # GET /events/1/edit
@@ -71,11 +75,12 @@ class EventsController < ApplicationController
     end
   end
 
-  def company_events
+  def company_events 
+    p"....."
     @announcements = Announcement.where(active: true).limit(4)  
     role_ids = Role.where(name: ["HR", "Admin"] ).pluck :id
     @company_events = Event.joins(:employee).where(:employees =>{role_id: role_ids}).where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today)
-    render :layout => 'hrmdashboard'
+    #render :layout => 'hrmdashboard'
   end
 
   def team_events
@@ -86,7 +91,7 @@ class EventsController < ApplicationController
     if @mng
       @team_events = @mng.events.where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today)
     end 
-    render :layout => 'hrmdashboard'    
+    #render :layout => 'hrmdashboard'    
   end
 
   private
