@@ -11,7 +11,8 @@
         <div class="modal-body">
           <div class="col-md-12">
             <h5 class="blue_color_text">Employee Name: <%=@employee.fullname%></h5>
-            <h5 class="blue_color_text">Employee ID: <%=@employee.ttid%></h5>
+            <h5 class="blue_color_text">Joining Date: <%=@employee.date_of_joining.strftime("%d-%b-%Y")%></h5>
+            <h5 class="blue_color_text">Available Leaves: <%=@employee.days_of_leave- @employee.leave_used %></h5>
             <%=form_for :employee, :url => employee_update_leave_used_path(@employee) do |f|%>
 
               
@@ -21,6 +22,11 @@
                 <div class="col-md-4">                  
                   <%=f.select :leave_used, options_for_select(@twentyfourdays, @employee.leave_used), {}, {autofocus: 'true', class: 'form-control'}%><br/>
                 </div>
+                <div class="col-md-4">                  
+                  <%=f.label :days_of_leave%>
+                  <%=f.text_field :days_of_leave, class:"form-control"%>
+                  <br/>
+                </div>               
                 <div class="col-md-4">
                   <%=f.submit "update", class: "btn btn-primary"%>
                 </div>

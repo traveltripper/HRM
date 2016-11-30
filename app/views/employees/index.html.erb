@@ -42,11 +42,11 @@
           <td>Nil</td>
         <%end%>
         <td>
-        <%if emp.leave_used == 0%>
+        <%#if emp.leave_used == 0%>
         <%=link_to 'Update Leave Used', employee_get_leave_used_path(emp), remote: true, class: 'static-popup-link' %> 
-        <%else%>
-        Leaves Used: <%=emp.leave_used%>
-        <%end%>       
+         <%#else%>
+        <!-- Leaves Used: <%=emp.leave_used%> -->
+        <%#end%>       
 
         </td>
         <td>
