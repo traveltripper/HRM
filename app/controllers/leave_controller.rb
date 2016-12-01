@@ -84,6 +84,15 @@ class LeaveController < ApplicationController
     end
   end
 
+  def team_leave_details
+    @employee = current_employee
+    if current_employee.role.name == "Manager"
+      @team = @employee.subordinates    
+    else
+      redirect_to root_path
+    end
+  end
+
   def leave_cancel
     @leave = Leave.find(params[:id])
     @emp = current_employee

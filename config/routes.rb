@@ -94,4 +94,5 @@ Rails.application.routes.draw do
   post '/update_password' => 'employees#update_password'
   get '/company-events' => 'events#company_events'
   get '/team-events' => 'events#team_events'
+  get 'team-leave-details' => 'leave#team_leave_details'
 end

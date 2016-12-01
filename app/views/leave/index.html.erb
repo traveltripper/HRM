@@ -3,11 +3,12 @@
 
 <div class="col-md-12">
   <div class="row">
-    <div class="col-md-6"> 
+    <div class="col-md-4"> 
      <h4>Leave Management</h4>
     </div>
-    <div class="col-md-6 text-align-right">      
+    <div class="col-md-8 text-align-right">      
       <%if @emp.role.name == "Manager"%>
+        <%=link_to 'Team Leave Details', team_leave_details_path, :class=>"btn btn-primary" %>
         <%=link_to 'Team Leave Management', team_leave_path, :class=>"btn btn-primary" %>
       <%end%>
       <%if @emp.role.name.in?(['HR', 'Admin'])%>

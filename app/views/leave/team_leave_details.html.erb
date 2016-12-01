@@ -1,0 +1,29 @@
+<div class="col-md-12">
+  <h4 class="h4_custom_style">Team Available Leaves</h4>
+  <table class="table table-hover-color table-white-background table-bordered table-color">
+    <thead>
+      <tr>
+        <th>S.No</th>      
+        <th>Employee Name</th>
+        <th>Date of Joining</th>
+        <th>Leave Available</th>
+        <th>Leave Used</th>
+        <th>Request Pending</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @team.each_with_index do |emp, index| %>
+        <tr>   
+            <td><%=index+1%></td>
+            <td><%= emp.fullname%></td>
+            <td><%= emp.date_of_joining.strftime("%d-%b-%Y")%></td>
+            <td><%= emp.days_of_leave - emp.leave_used%></td>
+            <td><%= emp.leave_used%></td>
+            <td><%= emp.leave.where("status IS ? and leave_cancel =?", nil, false).count %></td>
+        </tr>        
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
