@@ -38,9 +38,9 @@
 			</p>
 			<p>HR: <%display_hr.each_with_index do |name, i|%>							 
 						<% if (i + 1) != display_hr.length %>
-							<%=link_to name.fullname.capitalize, team_path(:params => { :employee_id => @employee.manager.id }) %>,
+							<%=link_to name.fullname.capitalize, team_path(:params => { :employee_id => name.manager.id }) %>,
 						<%else%>
-							<%=link_to name.fullname.capitalize, team_path(:params => { :employee_id => @employee.manager.id }) %>
+							<%=link_to name.fullname.capitalize, team_path(:params => { :employee_id => name.id }) %>
 						<%end%>
 					<%end%>
 			</p>
