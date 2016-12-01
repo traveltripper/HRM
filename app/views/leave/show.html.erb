@@ -51,7 +51,7 @@
 	<%end%>
 <%else%>
 	<tr>
-		<%if (current_employee == @leave.employee.manager) || (current_employee.role.name.in?(['HR', 'Admin']))%>
+		<%if (current_employee == @leave.employee.manager)%>
 			<td>Status: </td>
 			<td>
 			<%=form_for @leave, :url => leave_status_leave_path do |f|%>
