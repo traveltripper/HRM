@@ -19,9 +19,9 @@ class HrmdashboardController < ApplicationController
     @names = []    
     @employees=Employee.all
     @employees.each do |u| 
-      if u.actual_dob+(Date.today.year-u.actual_dob.year).years >= Date.yesterday && u.actual_dob+(Date.today.year-u.actual_dob.year).years <= Date.tomorrow
-          @names << u.first_name 
-      end
+      # if u.actual_dob+(Date.today.year-u.actual_dob.year).years >= Date.yesterday && u.actual_dob+(Date.today.year-u.actual_dob.year).years <= Date.tomorrow
+      #     @names << u.first_name 
+      # end
     end   
   end
 
