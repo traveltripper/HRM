@@ -11,7 +11,7 @@ class HrmdashboardController < ApplicationController
     #else
      # @team = Employee.where(:department_id=> @emp.department_id).where.not(:id => @emp.id).ordered_by_first_name
     #end
-  	@payroll = @emp.payrolls.first
+  	#@payroll = @emp.payrolls.first
   	@leave_used = @emp.leave_used
   	@available_leave = @emp.days_of_leave - @leave_used  	
   	@request_pending = @emp.leave.where("status IS ? and leave_cancel =?", nil, false).count  
