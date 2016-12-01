@@ -1,7 +1,7 @@
 class HrmdashboardController < ApplicationController
   before_action :authenticate_employee!
   layout 'hrmdashboard'  
-  before_action :check_password_changed  
+  #before_action :check_password_changed  
 
   def index
   	@emp = current_employee

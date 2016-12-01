@@ -108,8 +108,8 @@ class EmployeesController < ApplicationController
   def send_welcome_email
     @employee = Employee.find(params[:employee_id])
     @random_password = (0...10).map { ('a'..'z').to_a[rand(26)] }.join
-    @employee.password = @random_password
-    @employee.password_confirmation = @random_password
+    # @employee.password = @random_password
+    # @employee.password_confirmation = @random_password
     @employee.welcome_email_sent = true
     if @employee.save
       EmployeeMailer.welcome_email(@employee, @random_password).deliver_later
