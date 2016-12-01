@@ -97,6 +97,12 @@ class LeaveController < ApplicationController
     end
   end
 
+  def cancel_approved_leave
+    @leave = Leave.find(params[:id])
+    no_of_days = @leave.no_of_days
+    days_of_leave = @leave.employee.days_of_leave
+  end
+
   def leave_reject
     @leave = Leave.find(params[:id])
   end

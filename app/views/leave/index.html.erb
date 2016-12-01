@@ -92,7 +92,7 @@
             <!-- <td>Cancelled</td> -->
           <%#end%>
           <%if leave.status == true%>
-            <td style="color: #1F9B00 !important; font-weight:600;">Approved</td>
+            <td style="color: #1F9B00 !important; font-weight:600;">Approved <%#=link_to 'Cancel', cancel_approved_leave_leave_path(leave)%></td>
           <%elsif leave.status == false%>
             <td style="color: #F10000 !important; font-weight:600;">Rejected</td>
           <%elsif leave.status == nil%>

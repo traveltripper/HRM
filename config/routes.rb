@@ -56,6 +56,7 @@ Rails.application.routes.draw do
       get :leave_details
       get :leave_cancel
       get :leave_reject
+      get :cancel_approved_leave
     end
   end
 
