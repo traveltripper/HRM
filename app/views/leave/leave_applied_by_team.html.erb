@@ -7,7 +7,6 @@
       <th>Leave type</th>
       <th>From Date</th>
       <th>To Date</th>
-      <th>Leave Reason</th>
       <th>Days</th>
       <th colspan="1"></th>
     </tr>
@@ -21,7 +20,6 @@
         <td><%=leave.leavetype.name%></td>
         <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
         <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
-        <td><%=truncate(leave.reason, :escape => false, :length => 30, :omission => '...')%></td>
         <td><%=leave.no_of_days%></td>
         <td><%=link_to 'Accept', leave_status_approve_leave_path(leave), :data => {:confirm => 'Are you sure?'}, class:"green-color"%> /      
             <%#=link_to 'Reject', leave_details_leave_path(leave), :data => {:confirm => 'Are you sure?'}, class: "red-color" %>      
@@ -42,7 +40,6 @@
       <th>Leave type</th>
       <th>From Date</th>
       <th>To Date</th>
-      <th>Leave Reason</th>
       <th>Days</th>
       <th>Status</th>
       <th></th>
@@ -57,7 +54,6 @@
         <td><%=leave.leavetype.name%></td>
         <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
         <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
-        <td><%=truncate(leave.reason, :escape => false, :length => 20, :omission => '...')%></td>
         <td><%=leave.no_of_days%></td>        
         <%if leave.status == true%>
         <td style="color: #1F9B00 !important; font-weight:600;">Approved</td>

@@ -45,15 +45,28 @@ class ApplicationController < ActionController::Base
   def latest_announcements
     Announcement.where(active:true).limit(2)
   end
+
+  def display_hr
+    @role = Role.where(name: "HR").first
+    @emp = Employee.where(role_id: @role.id)
+    @names = []  
+    @emp.each do |name|
+      @names << name
+    end
+    p @names
+  end
  
   rescue_from CanCan::AccessDenied do |exception|
   flash[:error] = "Access denied."
   redirect_to root_url
   end
 
+
+
   helper_method :upcoming_company_events
   helper_method :upcoming_team_events
   helper_method :latest_announcements
+  helper_method :display_hr
 
   protected
   def authenticate_employee!(options={})

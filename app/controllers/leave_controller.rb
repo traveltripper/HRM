@@ -20,7 +20,7 @@ class LeaveController < ApplicationController
   
   def show
     @leave= Leave.find(params[:id])
-    unless (([@leave.employee , @leave.employee.manager].include? current_employee) || current_employee.role.name == "HR")
+    unless (([@leave.employee , @leave.employee.manager].include? current_employee) || current_employee.role.name.in?(['HR', 'Admin']))
       redirect_to root_path
     end
   end

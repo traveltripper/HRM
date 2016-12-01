@@ -36,6 +36,14 @@
 					Manager
 				<%end%>
 			</p>
+			<p>HR: <%display_hr.each_with_index do |name, i|%>							 
+						<% if (i + 1) != display_hr.length %>
+							<%=link_to name.fullname.capitalize, team_path(:params => { :employee_id => @employee.manager.id }) %>,
+						<%else%>
+							<%=link_to name.fullname.capitalize, team_path(:params => { :employee_id => @employee.manager.id }) %>
+						<%end%>
+					<%end%>
+			</p>
 			<!-- <p>Status: <%#=@employee.status%></p> -->
 			<h4>Contact Information</h4>
 			<p>E-Mail: <span class="company_email"><%=@employee.email%></span></p>
