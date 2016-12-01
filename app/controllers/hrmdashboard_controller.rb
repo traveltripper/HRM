@@ -1,7 +1,8 @@
 class HrmdashboardController < ApplicationController
   before_action :authenticate_employee!
   layout 'hrmdashboard'  
-  #before_action :check_password_changed  
+  require 'json'
+  before_action :check_password_changed  
 
   def index
   	@emp = current_employee
@@ -18,11 +19,19 @@ class HrmdashboardController < ApplicationController
   	@announcements = Announcement.where(active: true).limit(4)    
     @names = []    
     @employees=Employee.all
-    @employees.each do |u| 
-      # if u.actual_dob+(Date.today.year-u.actual_dob.year).years >= Date.yesterday && u.actual_dob+(Date.today.year-u.actual_dob.year).years <= Date.tomorrow
-      #     @names << u.first_name 
-      # end
-    end   
+    employee_emails = {}
+    @employees.each do |f|
+      employee_emails[f.fullname] = f.email
+    end
+    # @employees.each do |u| 
+    #   # if u.actual_dob+(Date.today.year-u.actual_dob.year).years >= Date.yesterday && u.actual_dob+(Date.today.year-u.actual_dob.year).years <= Date.tomorrow
+    #   #     @names << u.first_name 
+    #   # end
+    # end 
+
+    File.open("public/temp.json","w") do |f|
+      f.write(employee_emails.to_json)
+    end  
   end
 
   def team
