@@ -1,7 +1,6 @@
 class LeaveController < ApplicationController
   before_action :authenticate_employee!
   layout 'hrmdashboard'
-  #after_action :send_emails, only: [:create]
   
   def index
     @emp = current_employee
@@ -12,9 +11,6 @@ class LeaveController < ApplicationController
     @leave_to_date = Time.now
     @emp_leaves = @emp.leave.where(:created_at => @leave_from_date..@leave_to_date)       
     @leave_approved = @emp_leaves.where(:status => [true, false]) | @emp_leaves.where("status IS ? and leave_cancel =?", nil, true)
-    #@leave_approved2 = @emp_leaves.where(status: nil, leave_cancel: true)   
-    #p "........"
-    #@leave_approved = @leave_approved1 << @leave_approved2 
     @leave_waiting_for_approve = @emp.leave.where(status: nil, leave_cancel:false, :created_at => @leave_from_date..@leave_to_date).limit(15)
   end
   
@@ -78,7 +74,7 @@ class LeaveController < ApplicationController
     @leave = Leave.find(params[:id])
     @leave.destroy
     respond_to do |format|
-      format.html { redirect_to leave_index_path, notice: 'Leave was successfully destroyed.' }
+      format.html { redirect_to leave_index_path }
       format.json { head :no_content }
       format.js
     end
@@ -97,7 +93,7 @@ class LeaveController < ApplicationController
     @leave = Leave.find(params[:id])
     @emp = current_employee
     if @leave.update_attribute(:leave_cancel, true)
-      redirect_to leave_index_path
+      redirect_to leave_index_path, notice: 'Your leave is cancelled and an e-mail will be sent to HR and Manager. '
       LeaveMailer.employee_cancel_leave_request_email(@emp, @leave).deliver_later      
       LeaveMailer.leave_cancel_request_email_to_hr(@emp, @leave).deliver_later
       if @emp.manager 
@@ -108,8 +104,21 @@ class LeaveController < ApplicationController
 
   def cancel_approved_leave
     @leave = Leave.find(params[:id])
-    no_of_days = @leave.no_of_days
-    days_of_leave = @leave.employee.days_of_leave
+    @emp = @leave.employee
+    requested_leave_days = @leave.no_of_days
+    leave_used = @emp.leave_used
+    leave_used = leave_used - requested_leave_days
+    @leave.leave_cancel = true
+    @leave.status = nil
+    @leave.save
+    if @emp.update_attribute(:leave_used, leave_used)
+      redirect_to leave_index_path, notice: 'Your leave is cancelled and an e-mail will be sent to HR and Manager.'
+      LeaveMailer.employee_cancel_leave_request_email(@emp, @leave).deliver_later      
+      LeaveMailer.leave_cancel_request_email_to_hr(@emp, @leave).deliver_later
+      if @emp.manager 
+        LeaveMailer.team_cancel_leave_request_email(@emp, @leave).deliver_later
+      end
+    end
   end
 
   def leave_reject
@@ -180,9 +189,6 @@ class LeaveController < ApplicationController
 
   def leave_status_reject    
     @leave = Leave.find(params[:id])
-    p "............"
-    p params
-    p "............"
     @emp = @leave.employee
     respond_to do |format|     
       if @leave.update_attributes(:status => false, :reject_reason => params[:leave]["reject_reason"])
@@ -206,16 +212,9 @@ class LeaveController < ApplicationController
       redirect_to root_path
     end
   end
-
-  # def send_emails     
-  #   @emp = current_employee
-  #   @leave = @emp.leave.last       
-  # end
   
   private
   def leave_params
       params.require(:leave).permit(:employee_id, :no_of_days, :status, :leavetype_id, :fromdate, :todate, :reason, :reject_reason)
-  end
-  
+  end  
 end
-

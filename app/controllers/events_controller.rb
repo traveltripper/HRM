@@ -76,11 +76,9 @@ class EventsController < ApplicationController
   end
 
   def company_events 
-    p"....."
     @announcements = Announcement.where(active: true).limit(4)  
     role_ids = Role.where(name: ["HR", "Admin"] ).pluck :id
     @company_events = Event.joins(:employee).where(:employees =>{role_id: role_ids}).where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today)
-    #render :layout => 'hrmdashboard'
   end
 
   def team_events
@@ -91,7 +89,6 @@ class EventsController < ApplicationController
     if @mng
       @team_events = @mng.events.where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today)
     end 
-    #render :layout => 'hrmdashboard'    
   end
 
   private
