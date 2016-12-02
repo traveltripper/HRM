@@ -725,3 +725,7 @@ background:#0092b3; border-radius: 50%; padding:6px 10px;
   -webkit-transition:background .2s ease-out, background 1s ease-in;
 	font-size: 1.5em; font-weight: normal; padding: 8px 12px; border-radius: 5px; background: #00A8C5; color: #fff; font-family: sans-serif;}
 .change_picture b:hover {background: #000;}
+
+#team-mebers-leaves th, #team-mebers-leaves td{
+	text-align: center;
+}
