@@ -42,6 +42,11 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
+        if @employee.role.name == "HR"
+          EventMailer.send_event_email_to_all_employees(@event).deliver_later
+        elsif @employee.role.name == "Manager"
+          EventMailer.send_event_email_to_team(@event, @employee).deliver_later
+        end
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @event }
       else
