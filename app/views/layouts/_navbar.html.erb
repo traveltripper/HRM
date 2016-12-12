@@ -2,13 +2,16 @@
  <div class="container-fluid padding-left-0">
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="pull-left">
-			<li class="<%= 'active' if current_page?(dashboard_path) %>"><a href="/dashboard" class="dashboard" ><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a>  </li>
+			<li class="<%= 'active' if current_page?(dashboard_path) || current_page?(root_path) %>"><a href="/dashboard" class="dashboard" ><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a>  </li>
 			<li class="<%= 'active' if current_page?(team_path) %>"><a href="/team" class="team"><i class="fa fa-users" aria-hidden="true"></i>Employees Directory</a>  </li>
 			<li class="<%= 'active' if current_page?(leave_index_path) %>"><a href="/leave" class="l-management"><i class="fa fa-calendar-o" aria-hidden="true"></i> Leave Management</a>
 			<li class="<%= 'active' if current_page?(profile_path) %>"><a href="/profile" class="profile"><i class="fa fa-user" aria-hidden="true"></i> Profile</a> </li> 			
 			<li class="<%= 'active' if current_page?(announcements_path) %>"><a href="/announcements" class="profile"><i class="fa fa-bullhorn" aria-hidden="true"></i> Announcements</a> </li>
 			<%if current_employee.role.name.in?(["Manager", "HR", "Admin"])%>
 			<li class="<%= 'active' if current_page?(events_path) %>"><a href="/events" class="e-management"><i class="fa fa-clock-o" aria-hidden="true"></i>Events</a> </li>
+			<%end%>
+			<%if current_employee.email == "traveltripperhrm@traveltripper.com"%>
+			<li class="<%= 'active' if current_page?(cpp_index_path) %>"><a href="/cpp" class="e-management"><i class="fa fa-bullseye" aria-hidden="true"></i>CPP</a> </li>
 			<%end%>
 			<!-- <li class="<%= 'active' if current_page?(hrm_payroll_path) %>"><a href="#" class="payroll"><i class="fa fa-money" aria-hidden="true"></i>Payroll</a> </li> -->
         </ul>

@@ -42,6 +42,17 @@ class ApplicationController < ActionController::Base
     end        
   end
 
+  def cpp_designations_except_current    
+    if params[:id] and params[:controller] =="cpp"
+      @current_designation = Cpp.friendly.find(params[:id])      
+      designations = Cpp.where.not(id: @current_designation.id)      
+    end    
+  end
+
+  def cpp_designations        
+      designations = Cpp.all   
+  end
+
   def latest_announcements
     Announcement.where(active:true).limit(2)
   end
@@ -67,6 +78,8 @@ class ApplicationController < ActionController::Base
   helper_method :upcoming_team_events
   helper_method :latest_announcements
   helper_method :display_hr
+  helper_method :cpp_designations
+  helper_method :cpp_designations_except_current
 
   protected
   def authenticate_employee!(options={})

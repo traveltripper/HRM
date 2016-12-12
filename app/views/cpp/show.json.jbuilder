@@ -1,0 +1,1 @@
+json.partial! "cpps/cpp", cpp: @cpp

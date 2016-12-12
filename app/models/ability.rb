@@ -17,6 +17,7 @@ class Ability
         can :read, Payroll
         can :read, Event
         can :read, Announcement
+        can :read, Cpp
     end
     
   end

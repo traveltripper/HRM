@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161125094945) do
+ActiveRecord::Schema.define(version: 20161207065101) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -70,6 +70,13 @@ ActiveRecord::Schema.define(version: 20161125094945) do
     t.boolean  "available"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "cpps", force: :cascade do |t|
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "designation", limit: 255
   end
 
   create_table "departments", force: :cascade do |t|
@@ -142,6 +149,7 @@ ActiveRecord::Schema.define(version: 20161125094945) do
     t.string   "no_of_health_ins_cards_issued", limit: 255
     t.boolean  "password_changed"
     t.boolean  "welcome_email_sent",                          default: false
+    t.integer  "work_from_home_used",           limit: 4,     default: 0
   end
 
   add_index "employees", ["email"], name: "index_employees_on_email", unique: true, using: :btree
@@ -190,18 +198,19 @@ ActiveRecord::Schema.define(version: 20161125094945) do
   end
 
   create_table "leaves", force: :cascade do |t|
-    t.integer  "employee_id",   limit: 4
+    t.integer  "employee_id",    limit: 4
     t.datetime "fromdate"
     t.datetime "todate"
-    t.text     "reason",        limit: 65535
+    t.text     "reason",         limit: 65535
     t.boolean  "status"
-    t.integer  "no_of_days",    limit: 4
-    t.integer  "leavetype_id",  limit: 4
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
-    t.integer  "leave_balance", limit: 4
-    t.text     "reject_reason", limit: 65535
-    t.boolean  "leave_cancel",                default: false
+    t.integer  "no_of_days",     limit: 4
+    t.integer  "leavetype_id",   limit: 4
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+    t.integer  "leave_balance",  limit: 4
+    t.text     "reject_reason",  limit: 65535
+    t.boolean  "leave_cancel",                 default: false
+    t.boolean  "work_from_home",               default: false
   end
 
   create_table "leavetypes", force: :cascade do |t|

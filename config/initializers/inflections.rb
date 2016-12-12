@@ -17,4 +17,5 @@
 
 ActiveSupport::Inflector.inflections do |inflect|
    inflect.uncountable %w( leave )
+   inflect.uncountable %w( cpp )
 end

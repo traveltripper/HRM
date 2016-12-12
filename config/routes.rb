@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :cpp
   resources :healthinsurances
   resources :announcements
   resources :payrolls
@@ -95,4 +96,5 @@ Rails.application.routes.draw do
   get '/company-events' => 'events#company_events'
   get '/team-events' => 'events#team_events'
   get 'team-leave-details' => 'leave#team_leave_details'
+  get '/cpp' => 'cpps#index'
 end

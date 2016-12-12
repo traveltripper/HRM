@@ -127,3 +127,9 @@ $(document).ready(function(){
 });
 
 
+tinymce.init({
+  selector: 'textarea',  // change this value according to your HTML
+  toolbar: 'fontselect',
+   body_class: 'tinymce-content-editor',
+  font_formats: 'Open Sans, sans-serif, Arial=arial,helvetica,sans-serif;Courier New=courier new,courier,monospace;AkrutiKndPadmini=Akpdmi-n'
+});

@@ -1,3 +1,21 @@
+<% if controller.controller_name == "cpp" and controller.action_name == "show"%>
+	<h4>CPP based on designations</h4>
+	<div class="bg-color-white">
+	<%cpp_designations_except_current.each do |cpp|%>
+		<p id="cpp_designation"><%=link_to cpp.designation, cpp, class:"custom_bluecolor"%></p>
+	<%end%>
+	</div>
+<%end%>
+
+<% if controller.controller_name == "cpp" and controller.action_name == "index"%>
+	<h4>CPP based on designations</h4>
+	<div class="bg-color-white">
+	<%cpp_designations.each do |cpp|%>
+		<p id="cpp_designation"><%=link_to cpp.designation, cpp, class:"custom_bluecolor"%></p>
+	<%end%>		
+	</div>
+<%end%>
+
 <%if false%>
 <% if current_page?(leave_index_path) || current_page?(profile_path) %>
 <div class="row">
@@ -15,6 +33,7 @@
 <%end%>
 <%end%>
 
+<% unless controller.controller_name == "cpp"%> 
 <div class="row">
 <div class="col-lg-12">
 	<h4>Upcoming Company Events</h4>
@@ -47,7 +66,7 @@
 <%end%>
 </div>
 </div>
-
+<%end%>
 
 
 <%#=link_to 'View All Events', hrm_events_path, class: 'btn btn-primary'%>

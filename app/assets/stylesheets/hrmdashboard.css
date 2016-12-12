@@ -92,7 +92,7 @@ body {
 	width:20px;
 	}
 .userName{
-	background:url(/images/user.png) no-repeat right;
+	/*background:url(/images/user.png) no-repeat right;*/
 	font-size:12px;
 	font-weight:300;
 	background-size:30px;
@@ -728,4 +728,47 @@ background:#0092b3; border-radius: 50%; padding:6px 10px;
 
 #team-mebers-leaves th, #team-mebers-leaves td{
 	text-align: center;
+}
+
+
+#cpp p{
+	text-align: justify; 
+}
+
+#cpp_designation{
+	font-size: 17px;
+    margin-top: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;    
+}
+
+.key_objectives {
+    padding-left: 15px;
+}
+
+img.img-responsive.img-center {
+    margin: 0 auto;
+}
+
+
+#cpp h5{
+	font-weight: 500;
+	color: #0092b3;
+}
+
+strong{
+	font-weight: 600;
+}
+
+#cpp br{
+	margin-top: 5px;
+}
+
+.margin-top-20{
+	margin-top: 20px !important;
+}
+
+#cpp strong{
+	color: #006400;
 }
