@@ -56,7 +56,7 @@
 					<p><i class="fa fa-skype" aria-hidden="true" style="font-size:19px;"></i>  <span id="emp_skypeid"><%=@team_employee.skype_id%></span></p>
 					<%#end%>
 					<h4>Additional Information</h4>
-					<p>Birthday: <span id="emp_birthday"><%=@team_employee.actual_dob.strftime("%d-%b")%></span></p>
+					<p>Birthday: <span id="emp_birthday"><%=@team_employee.actual_dob.strftime("%d-%b") if @team_employee.actual_dob %></span></p>
 				</div>
 				<div class="col-md-12">
 					<hr style="border-color:#0092B5;margin-top: 0px;margin-bottom: 0px;border-width: 3px;">
@@ -93,7 +93,7 @@
 				<p><i class="fa fa-skype" aria-hidden="true" style="font-size:19px;"></i> <span id="emp_skypeid"><%=@team.first.skype_id%></span></p>
 
 				<h4>Additional Information</h4>
-				<p>Birthday: <span id="emp_birthday"><%=@team.first.actual_dob.strftime("%d-%b")%></span></p>
+				<p>Birthday: <span id="emp_birthday"><%=@team.first.actual_dob.strftime("%d-%b") if @team.first.actual_dob %></span></p>
 			</div>
 			<div class="col-md-12">
 				<hr style="border-color:#0092B5;margin-top: 0px;margin-bottom: 0px;border-width: 3px;">
