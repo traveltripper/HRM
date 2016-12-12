@@ -52,7 +52,7 @@
 			<p>Skype: <span id="emp_skypeid"><%=@employee.skype_id%></span></p>
 			<%end%>
 			<h4>Additional Information</h4>
-			<p>Birthday: <%=@employee.actual_dob.strftime("%d-%B")%></p>
+			<p>Birthday: <%=@employee.actual_dob.strftime("%d-%B") if @employee.actual_dob %></p>
 			<h4>Education Information</h4>
 			<p>Graduation: <%=@employee.graduation%></p>
 			<%unless @employee.pg.blank?%>
