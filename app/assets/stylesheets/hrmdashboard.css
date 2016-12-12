@@ -737,10 +737,12 @@ background:#0092b3; border-radius: 50%; padding:6px 10px;
 
 #cpp_designation{
 	font-size: 17px;
-    margin-top: 0;
+    margin-top: 6px;
+    margin-bottom: 6px;
     padding-top: 0;
     padding-bottom: 0;
-    margin-bottom: 0;    
+    padding-left: 20px;
+        
 }
 
 .key_objectives {
