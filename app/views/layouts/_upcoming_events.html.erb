@@ -1,20 +1,18 @@
 <% if current_page?(root_path) || current_page?(dashboard_path) %>
-
+<h4>Nominations</h4>
 <%= form_for(Nomination.new) do |f| %> 
-    <div class="row">
-        <div class="col-md-10 bg-color-white">
-        	<p style="font-size:15px;">Please suggest a name for HRM</p>
-        	<div class="col-md-9">    
+        <div class="col-md-12 bg-color-white">
+        	Please suggest a name for HRM 
+        	<div class="col-md-9">  
+        		<br/>  
     			<%= f.text_field :name, placeholder: "Suggest Name", required: true, class:"form-control" %>
     			<%= f.hidden_field :employee_id, :value => current_employee.id %>   
     		</div>
-    		<div class="col-md-3" style="margin-top: -8px;">
+    		<div class="col-md-3" >
     			<%= f.submit "submit", class: "btn btn-primary"%>    
     		</div>
-        </div>
-        <div class="col-md-2"></div>
-    	
-    </div>
+        </div>   	
+    
 <% end %>
 <% end %>
 
