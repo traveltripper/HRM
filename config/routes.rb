@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :nominations
   resources :cpp
   resources :healthinsurances
   resources :announcements

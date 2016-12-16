@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Nominations</h1>
+
+<table class="table table-hover-color table-white-background table-bordered table-color">
+  <thead>
+    <tr>
+      <th>Suggested Name</th>
+      <th>Employee</th>
+      <th>Department Name</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @nominations.each do |nomination| %>
+      <tr>
+        <td><%= nomination.name %></td>
+        <td><%= nomination.employee.fullname %></td>
+        <td><%= nomination.employee.department.name %></td>
+        <!-- <td><%#= link_to 'Show', nomination %></td> -->
+        <!-- <td><%#= link_to 'Edit', edit_nomination_path(nomination) %></td> -->
+        <!-- <td><%#= link_to 'Destroy', nomination, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%#= link_to 'New Nomination', new_nomination_path %>

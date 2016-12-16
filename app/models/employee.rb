@@ -7,6 +7,7 @@ class Employee < ActiveRecord::Base
   has_many :subordinates, class_name: "Employee", foreign_key: "manager_id" 
   belongs_to :manager, class_name: "Employee"
   has_many :payrolls
+  has_many :nominations
   validates_presence_of :first_name, :last_name, :role_id, :department_id
   # validates_presence_of :personal_email, :actual_dob, :certificate_dob, :date_of_joining   
   #validates_presence_of :graduation, :source_of_hire, :address

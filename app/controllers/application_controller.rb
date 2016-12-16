@@ -12,8 +12,8 @@ class ApplicationController < ActionController::Base
     @current_ability ||= Ability.new(current_employee)
   end
   
-  def upcoming_company_events  
-
+  def upcoming_company_events 
+    
     if params[:id] and params[:controller] =="events"
     @current_event = Event.friendly.find(params[:id])
     end
