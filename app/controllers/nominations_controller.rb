@@ -30,7 +30,7 @@ class NominationsController < ApplicationController
 
     respond_to do |format|
       if @nomination.save
-        format.html { redirect_to root_path, notice: 'Thanks for your interest about sugesting name for HRM tool. Will get back to you with results very soon.' }
+        format.html { redirect_to root_path, notice: 'Thanks for your interest on sugesting the name for HRM tool. Will get back to you with results very soon.' }
         format.json { render :show, status: :created, location: @nomination }
       else
         format.html { render :new }

@@ -2,7 +2,7 @@
 <h4>Nominations</h4>
 <%= form_for(Nomination.new) do |f| %> 
         <div class="col-md-12 bg-color-white">
-        	Please suggest a name for HRM 
+        	Please suggest a name for HRM tool:
         	<div class="col-md-9">  
         		<br/>  
     			<%= f.text_field :name, placeholder: "Suggest Name", required: true, class:"form-control" %>
@@ -11,6 +11,7 @@
     		<div class="col-md-3" style="margin-top: 8px;">
     			<%= f.submit "submit", class: "btn btn-primary"%>    
     		</div>
+    		<p>(last date for submission 23-12-2016)</p>
         </div>   	
     
 <% end %>
