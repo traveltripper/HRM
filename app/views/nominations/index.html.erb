@@ -5,6 +5,7 @@
 <table class="table table-hover-color table-white-background table-bordered table-color">
   <thead>
     <tr>
+      <th>S.No</th>
       <th>Suggested Name</th>
       <th>Employee</th>
       <th>Department Name</th>
@@ -12,8 +13,9 @@
   </thead>
 
   <tbody>
-    <% @nominations.each do |nomination| %>
+    <% @nominations.each_with_index do |nomination, index| %>
       <tr>
+        <td><%= index+1 %></td>
         <td><%= nomination.name %></td>
         <td><%= nomination.employee.fullname %></td>
         <td><%= nomination.employee.department.name %></td>

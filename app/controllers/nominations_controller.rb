@@ -6,7 +6,11 @@ class NominationsController < ApplicationController
   # GET /nominations
   # GET /nominations.json
   def index
-    @nominations = Nomination.all
+    if current_employee.role.name == "Admin"
+      @nominations = Nomination.all
+    else
+      redirect_to root_path
+    end
   end
 
   # GET /nominations/1
