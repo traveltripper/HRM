@@ -1,9 +1,9 @@
 <% if current_page?(root_path) || current_page?(dashboard_path) %>
 <h4>Nominations</h4>
 <%= form_for(Nomination.new) do |f| %> 
-        <div class="col-md-12 bg-color-white">
+        <div class="col-md-12 bg-color-white" style="padding-bottom:0;">
         	Please suggest a name for HRM tool:
-        	<div class="col-md-9">  
+        	<div class="col-md-9" style="padding-left:0;">  
         		<br/>  
     			<%= f.text_field :name, placeholder: "Suggest Name", required: true, class:"form-control" %>
     			<%= f.hidden_field :employee_id, :value => current_employee.id %>   
@@ -11,7 +11,7 @@
     		<div class="col-md-3" style="margin-top: 8px;">
     			<%= f.submit "submit", class: "btn btn-primary"%>    
     		</div>
-    		<p>(last date for submission 23-12-2016)</p>
+    		<p style="margin-bottom:0;">(last date for submission 23-12-2016)</p>
         </div>   	
     
 <% end %>
