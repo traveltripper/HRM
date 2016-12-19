@@ -25,9 +25,21 @@ class HrmdashboardController < ApplicationController
 
   def team
     @emp = current_employee
-    @announcements = Announcement.limit(4)  
+    @announcements = Announcement.where(active: true).limit(4)
+
     testadmin = Employee.where(:email => "traveltripperhrm@traveltripper.com").first   
-    @team = Employee.where.not(id: [@emp.id, testadmin.id]).where(status: "Active").order('first_name ASC')
+     @team = Employee.where.not(id: [@emp.id, testadmin.id]).where(status: "Active").order('first_name ASC')
+
+    if (params[:search_term].present?) && (params[:department_id].present?)
+      @team = @team.where("ttid LIKE ? or first_name LIKE ? or email LIKE ? or contact_no LIKE ? and department_id =?", "%#{params[:search_term]}%", "%#{params[:search_term]}%", "%#{params[:search_term]}%", "%#{params[:search_term]}%", params[:department_id])
+    elsif params[:search_term].present?
+      @team = @team.where("ttid LIKE ? or first_name LIKE ? or email LIKE ? or contact_no LIKE ?", "%#{params[:search_term]}%", "%#{params[:search_term]}%", "%#{params[:search_term]}%", "%#{params[:search_term]}%")
+    elsif params[:department_id].present?
+      @team = @team.where("department_id =?", params[:department_id])
+    else
+      @team
+    end
+    
     if params[:employee_id]
       if @emp.id == params[:employee_id].to_i
         redirect_to profile_path

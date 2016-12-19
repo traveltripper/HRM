@@ -1,5 +1,27 @@
+<p></p>
 <div class="col-md-12">
-	<h4>My Team</h4>
+    <div class="col-md-12 bg-color-white">
+		<div class="col-md-5">
+			<h4 class="margin-top-bottom10">My Team</h4>
+		</div>
+		<%if current_employee.email == "traveltripperhrm@traveltripper.com" %>
+		<div class="col-md-7">
+			<%= form_tag team_path, :method => 'get' do %>
+		    <div class="col-md-6">
+		    	<%= text_field_tag :search_term, params[:search_term], class:"form-control", placeholder: "Search Employees", :onfocus=> "this.placeholder = ''", onblur: "this.placeholder = 'Search Employees'" %>
+		    </div>
+		    <div class="col-md-5" style="padding:0;">
+		    	<%= select_tag :department_id, options_for_select(Department.all.collect {|a| [a.name, a.id]}, params[:department_id]), :class => 'form-control', :prompt => "Select Department" %>
+		    </div>
+		     <div class="col-md-1">
+		    	<%#= submit_tag "", :name => nil, :class=>"fa fa-plus btn btn-primary bottom-margin-10 link-float-right" %>
+		    	<button type="submit" class="btn btn-primary fa fa-search" style="margin:3px 0;"></button>
+		    </div>
+			<% end %>
+		</div>
+		<%end%>
+	</div>
+
 	<div class="col-md-12 nullPadding bg-color-white myteam1">
         <ul class="team_list">
         	<% @team.each_with_index do |emp, index| %>
@@ -12,7 +34,12 @@
 				    	
 		            <%end%>
 	            </li>
-            <%end%>  
+            <%end%> 
+            <%if @team.blank?%>
+            	<div class="col-md-12">
+            		<p>There are no results that match your search</p>
+            	</div>
+            <%end%> 
         </ul>
 	</div>
 
@@ -99,7 +126,7 @@
 				<hr style="border-color:#0092B5;margin-top: 0px;margin-bottom: 0px;border-width: 3px;">
 			</div>
         </div>
-	</div>
+	</div>	
 	<%end%>
 </div>
 
