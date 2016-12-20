@@ -32,7 +32,7 @@
       <% @team.each_with_index do |emp, index| %>
         <tr>   
             <td><%= index+1%></td>
-            <td><%= emp.fullname%></td>
+            <td style="padding-left: 10px; text-align: left !important;"><%= emp.fullname%></td>
             <td><%= emp.date_of_joining.strftime("%d-%b-%Y")%></td>
             <td><%= emp.days_of_leave - emp.leave_used%></td>
             <td><%= emp.leave_used%></td>

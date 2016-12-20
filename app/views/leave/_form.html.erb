@@ -3,7 +3,7 @@
 <div id="leave-modal" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">    
-        <div class="panel-heading-style">Apply Leave | Work From Home</div>
+        <div class="panel-heading-style">Apply Leave | WFH</div>
         <div class="panel-body pan">
             <div class="col-md-12"><p id="leave-error">*Please enter valid dates</p></div>
             <%= form_for @leave do |f| %>
@@ -55,8 +55,8 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                            <%=f.label :work_from_home, "Leave or Work form home"%>
-                            <%= f.select :work_from_home, [['Leave', 0], ['Work From Home', 1]], {}, class: "form-control form-height40" %>
+                            <%=f.label :work_from_home, "Leave / WFH"%>
+                            <%= f.select :work_from_home, [['Leave', 0], ['WFH', 1]], {}, class: "form-control form-height40" %>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -171,7 +171,7 @@ $("#dt2").datepicker({
 
 $('select#leave_work_from_home').change(function() {
         var selectedText = $(this).find('option:selected').text();
-        if (selectedText == "Work From Home")
+        if (selectedText == "WFH")
         {
             $('.select-leave').hide();
             $("#leave_leavetype_id").removeAttr('required');
