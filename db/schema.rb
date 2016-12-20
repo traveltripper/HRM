@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161216095507) do
+ActiveRecord::Schema.define(version: 20161219124820) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -59,13 +59,6 @@ ActiveRecord::Schema.define(version: 20161216095507) do
   add_index "announcements", ["slug"], name: "index_announcements_on_slug", unique: true, using: :btree
 
   create_table "conference_rooms", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.boolean  "available"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  create_table "conferencerooms", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.boolean  "available"
     t.datetime "created_at",             null: false
@@ -172,18 +165,6 @@ ActiveRecord::Schema.define(version: 20161216095507) do
   end
 
   add_index "events", ["slug"], name: "index_events_on_slug", unique: true, using: :btree
-
-  create_table "health_insurances", force: :cascade do |t|
-    t.string   "name",              limit: 255
-    t.string   "card_number",       limit: 255
-    t.string   "relation",          limit: 255
-    t.datetime "issued_date"
-    t.datetime "policy_start_date"
-    t.datetime "policy_end_date"
-    t.integer  "employee_id",       limit: 4
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-  end
 
   create_table "healthinsurances", force: :cascade do |t|
     t.string   "name",              limit: 255

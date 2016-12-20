@@ -13,21 +13,26 @@
             <h5 class="blue_color_text">Employee Name: <%=@employee.fullname%></h5>
             <h5 class="blue_color_text">Joining Date: <%=@employee.date_of_joining.strftime("%d-%b-%Y")%></h5>
             <h5 class="blue_color_text">Available Leaves: <%=@employee.days_of_leave- @employee.leave_used %></h5>
+            <h5 class="blue_color_text">Available Work From Home: <%=@employee.days_of_leave- @employee.work_from_home_used %></h5>
             <%=form_for :employee, :url => employee_update_leave_used_path(@employee) do |f|%>
 
               
               <%@twentyfourdays = (0..24).to_a %>
               <div class="row">
-                <div class="col-md-3"><h5><%=f.label :leave_used%></h5></div>
-                <div class="col-md-4">                  
-                  <%=f.select :leave_used, options_for_select(@twentyfourdays, @employee.leave_used), {}, {autofocus: 'true', class: 'form-control'}%><br/>
+                <div class="col-md-3">    
+                  <%=f.label :leave_used%>             
+                  <%=f.select :leave_used, options_for_select(@twentyfourdays, @employee.leave_used), {}, {autofocus: 'true', class: 'form-control'}%>
                 </div>
-                <div class="col-md-4">                  
+                <div class="col-md-4">    
+                  <%=f.label :work_from_home_used%>             
+                  <%=f.select :work_from_home_used, options_for_select(@twentyfourdays, @employee.work_from_home_used), {}, {autofocus: 'true', class: 'form-control'}%>
+                </div>
+                <div class="col-md-3">                  
                   <%=f.label :days_of_leave%>
-                  <%=f.text_field :days_of_leave, class:"form-control"%>
-                  <br/>
+                  <%=f.text_field :days_of_leave, class:"form-control"%>                  
                 </div>               
-                <div class="col-md-4">
+                <div class="col-md-2">
+                  <br/>
                   <%=f.submit "update", class: "btn btn-primary"%>
                 </div>
               </div>

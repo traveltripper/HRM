@@ -3,10 +3,10 @@
 
 <div class="col-md-12">
   <div class="row">
-    <div class="col-md-4"> 
-     <h4>Leave Management</h4>
-    </div>
-    <div class="col-md-8 text-align-right">      
+    <!-- <div class="col-md-3">  --><br/>
+     <h4 style="margin: 10px 0px;">Leave Management</h4>
+    <!-- </div> -->
+    <div class="col-md-12 text-align-right">      
       <%if @emp.role.name == "Manager"%>
         <%=link_to 'Team Members List', team_leave_details_path, :class=>"btn btn-primary" %>
         <%=link_to 'Team Members Leaves', team_leave_path, :class=>"btn btn-primary" %>
@@ -14,23 +14,27 @@
       <%if @emp.role.name.in?(['HR', 'Admin'])%>
         <%=link_to 'Employee Leave Management', employees_leave_path, :class=>"btn btn-primary" %>
       <%end%>
-      <%=link_to 'Apply leave', new_leave_path, remote: true, :class=>"btn btn-primary" %> 
+      <%=link_to 'Apply Leave / WFH', new_leave_path, remote: true, :class=>"btn btn-primary" %> 
     </div>
   </div>
 
-  <div class="col-md-12 bg-color-white">
+  <div class="col-md-12 bg-color-white text-center">
     <div class="leave-management">     
-      <div class="col-md-4 border-right-gray">
-        <h5>Available</h5>
+      <div class="col-md-3 border-right-gray">
+        <h5>Leaves Available</h5>
         <h1 class="custom_bluecolor padding-0 margin-0"><%=@available_leave%></h1> 
       </div> 
-      <div class="col-md-4 border-right-gray">
-        <h5>Used</h5>
+      <div class="col-md-2 border-right-gray">
+        <h5>Leaves Used</h5>
         <h1 class="custom_bluecolor padding-0 margin-0"><%= @leave_used%></h1>
       </div>
-      <div class="col-md-4">
-        <h5>Request Pending</h5>
+      <div class="col-md-3 border-right-gray">
+        <h5>Leave Request Pending</h5>
         <h1 class="req padding-0 margin-0" id = "leave_request_pending" ><%=@request_pending%></h1>
+      </div> 
+      <div class="col-md-4">
+        <h5>WFH Available | Used</h5>
+        <h1 class="req padding-0 margin-0" id = "leave_request_pending" ><%=@available_work_from_home%> | <%=@work_from_home_used%></h1>
       </div> 
     </div>    
   </div>
@@ -65,6 +69,33 @@
 
 
 <div class="col-md-12">
+  <h4 class="h4_custom_style">Work from home waiting for approval</h4>
+  <table class="table table-hover-color table-white-background table-bordered table-color">
+    <thead>
+      <tr>
+        <th>S.No</th> 
+        <th>From Date</th>
+        <th>To Date</th>
+        <th>Days</th>
+        <th>Reason</th>
+        <th>Status</th>
+        <th colspan="1"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @work_from_home_waiting_for_approve.each_with_index do |leave, index| %>
+        <tr id="leave_<%=leave.id%>">
+          <td><%=index+1%></td>
+          <%= render 'leave_row', leave: leave %>          
+        </tr>     
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+
+<div class="col-md-12">
   <h4 class="h4_custom_style">Leaves applied recently</h4>
   <table class="table table-hover-color table-white-background table-bordered table-color">
     <thead>
@@ -85,6 +116,50 @@
         <tr>
           <td><%= index+1 %></td>
           <td><%=Leavetype.find(leave.leavetype_id).name%></td>
+          <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
+          <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
+          <td><%=leave.no_of_days%></td>
+          <td><%=truncate(leave.reason, :escape => false, :length => 30, :omission => '...')%></td>        
+          <%#if leave.status == nil and leave.leave_cancel == true%>
+            <!-- <td>Cancelled</td> -->
+          <%#end%>
+          <%if leave.status == true%>
+            <td style="color: #1F9B00 !important; font-weight:600;">Approved 
+              <%if leave.fromdate > Date.today%>
+                | <%=link_to 'Cancel', cancel_approved_leave_leave_path(leave), data: { confirm: 'Are you sure?' }%></td>
+              <%end%>
+            
+          <%elsif leave.status == false%>
+            <td style="color: #F10000 !important; font-weight:600;">Rejected</td>
+          <%elsif leave.status == nil%>
+          <td>Cancelled</td>
+          <%end%>
+          <td style="font-weight:600;"><%=link_to 'View Details', leave%></td>                  
+        </tr>        
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="col-md-12">
+  <h4 class="h4_custom_style">Work from home applied recently</h4>
+  <table class="table table-hover-color table-white-background table-bordered table-color">
+    <thead>
+      <tr>
+        <th>S.No</th>    
+        <th>From Date</th>
+        <th>To Date</th>
+        <th>Days</th>
+        <th>Reason</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @work_from_home_approved.each_with_index do |leave, index| %>
+        <tr>
+          <td><%= index+1 %></td>
           <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
           <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
           <td><%=leave.no_of_days%></td>

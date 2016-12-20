@@ -788,3 +788,9 @@ strong{
 	padding: 0px 5px;
 	height: 28px;
 }
+
+#leave-error{
+	display: none;
+	color: red;
+	margin: 5px;
+}
