@@ -30,7 +30,7 @@ class PollsController < ApplicationController
 
     respond_to do |format|
       if @poll.save
-        format.html { redirect_to root_path, notice: 'Poll was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Thank you for Participating in our latest poll. Your opinion matters to us!' }
         format.json { render :show, status: :created, location: @poll }
       else
         format.html { render :new }
