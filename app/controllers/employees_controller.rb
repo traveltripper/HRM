@@ -89,9 +89,6 @@ class EmployeesController < ApplicationController
   end
 
   def update_leave_used
-    p "........"
-    p params
-    p "........"
     @employee = Employee.find(params[:employee_id])
     @employee.update_attributes(leave_used: params["employee"]["leave_used"], days_of_leave: params["employee"]["days_of_leave"]  )
     @employee.save

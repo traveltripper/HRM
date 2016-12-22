@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+<%title 'Poll Questions'%>
+
+
+<table class="table table-hover-color table-white-background table-bordered table-color">
+  <thead>
+    <tr> 
+      <th>S.No</th>
+      <th>Question ID</th>
+      <th>Question</th>
+      <th>Status</th>
+      <th colspan="3">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pollquestions.each_with_index do |pollquestion, index| %>
+      <tr> 
+        <td><%=index+1%></td>
+        <td><%=pollquestion.id%></td>
+        <td><%= link_to pollquestion.question, pollquestion %></td>
+        <td><%= pollquestion.status %></td>
+        <td><%= link_to 'Show', pollquestion %></td>
+        <td><%= link_to 'Edit', edit_pollquestion_path(pollquestion) %></td>
+        <td><%= link_to 'Destroy', pollquestion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Add Question', new_pollquestion_path, class:"btn btn-primary" %>

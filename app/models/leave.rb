@@ -6,6 +6,8 @@ class Leave < ActiveRecord::Base
 	validate :fromdate_must_be_lessthan_todate
 	#validate :days_greater_than_zero
 	default_scope { order('created_at DESC') }	
+
+	scope :status_true_or_false, -> { where(:status => [true, false]) }
 	#after_create :send_emails
 	def fromdate_must_be_lessthan_todate
   		return if fromdate.blank? || todate.blank?

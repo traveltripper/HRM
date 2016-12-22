@@ -1,6 +1,7 @@
 class Announcement < ActiveRecord::Base
 	belongs_to :employee
 	default_scope { order('created_at DESC') }
+	scope :active, -> {where(active: true)}
 	extend FriendlyId
 	friendly_id :title, use: :slugged
 	

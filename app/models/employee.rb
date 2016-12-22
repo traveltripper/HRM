@@ -14,6 +14,7 @@ class Employee < ActiveRecord::Base
   #validates_presence_of :ttid, :emergency_name, :emergency_contact_no, :health_insurance_card_no, :pf_no, :aadhar_no, :pancard_no, :passport_no
   #validates_presence_of :prev_years_of_exp, :father_or_spouse, :nationality, :date_of_resignation, :lwd
   belongs_to :department
+  has_many :polls
   validates_uniqueness_of :ttid
   
   validates :email, format: { with: /\b[A-Z0-9._%a-z\-]+@traveltripper\.com\z/,
@@ -27,6 +28,8 @@ class Employee < ActiveRecord::Base
   has_many :events
 
   scope :ordered_by_first_name, -> { order(first_name: :asc) }
+
+  scope :active, -> { where(status: "Active") }
 
   def fullname
   	first_name.capitalize.to_s + " " + middle_name.capitalize.to_s + " " + last_name.capitalize.to_s

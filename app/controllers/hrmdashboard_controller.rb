@@ -9,26 +9,15 @@ class HrmdashboardController < ApplicationController
   	@leave_used = @emp.leave_used
   	@available_leave = @emp.days_of_leave - @leave_used  	
   	@request_pending = @emp.leave.where("status IS ? and leave_cancel =?", nil, false).count  
-  	@announcements = Announcement.where(active: true).limit(4)    
-    @names = []    
-    @employees=Employee.all
-    # employee_emails = {}
-    # @employees.each do |f|
-    #   employee_emails[f.fullname] = f.email
-    # end
-    # @employees.each do |u| 
-    #   # if u.actual_dob+(Date.today.year-u.actual_dob.year).years >= Date.yesterday && u.actual_dob+(Date.today.year-u.actual_dob.year).years <= Date.tomorrow
-    #   #     @names << u.first_name 
-    #   # end
-    # end   
+  	@announcements = Announcement.active.limit(4)   
   end
 
   def team
     @emp = current_employee
-    @announcements = Announcement.where(active: true).limit(4)
+    @announcements = Announcement.active.limit(4)
 
     testadmin = Employee.where(:email => "traveltripperhrm@traveltripper.com").first   
-     @team = Employee.where.not(id: [@emp.id, testadmin.id]).where(status: "Active").order('first_name ASC')
+    @team = Employee.where.not(id: [@emp.id, testadmin.id]).active.ordered_by_first_name
 
     if (params[:search_term].present?) && (params[:department_id].present?)
       @team = @team.where("LOWER(ttid) LIKE ? or LOWER(first_name) LIKE ? or LOWER(middle_name) LIKE ? or LOWER(last_name) LIKE ? or LOWER(email) LIKE ? or contact_no LIKE ?", "%#{params[:search_term].downcase}%", "%#{params[:search_term].downcase}%", "%#{params[:search_term].downcase}%", "%#{params[:search_term].downcase}%", "%#{params[:search_term].downcase}%", "%#{params[:search_term].downcase}%").where(department_id: params[:department_id] )
@@ -44,8 +33,8 @@ class HrmdashboardController < ApplicationController
       if @emp.id == params[:employee_id].to_i
         redirect_to profile_path
       else       
-      @team_employee = Employee.where(:id=>params[:employee_id]).first
-      @team_emp_id = @team_employee.id
+        @team_employee = Employee.where(:id=>params[:employee_id]).first
+        @team_emp_id = @team_employee.id
       end
     end
   end
@@ -61,11 +50,11 @@ class HrmdashboardController < ApplicationController
     @employee = current_employee
   end
 
-  def payroll
-    @employee = current_employee
-    @payroll = @employee.payrolls.last
-    @payrolls = @employee.payrolls
-  end
+  # def payroll
+  #   @employee = current_employee
+  #   @payroll = @employee.payrolls.last
+  #   @payrolls = @employee.payrolls
+  # end
 
   def check_password_changed
    unless current_employee.password_changed

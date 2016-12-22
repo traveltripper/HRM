@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
   
+  resources :polls 
+  resources :pollanswers
+  resources :pollquestions do
+    member do
+      get 'poll'
+    end
+  end
   resources :nominations
   resources :cpp
   resources :healthinsurances
@@ -98,4 +105,6 @@ Rails.application.routes.draw do
   get '/team-events' => 'events#team_events'
   get 'team-leave-details' => 'leave#team_leave_details'
   get '/cpp' => 'cpps#index'
+  #get '/poll' => 'pollquestions#poll'
+  post '/savepoll' => 'pollquestions#savepoll'
 end

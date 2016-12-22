@@ -14,7 +14,7 @@ class DepartmentsController < ApplicationController
 
   def employees    
     @department = Department.find(params[:id])
-   @employees = @department.employees
+    @employees = @department.employees
   end
 
   # GET /departments/1
@@ -34,10 +34,7 @@ class DepartmentsController < ApplicationController
     add_breadcrumb "Edit Department"
   end
   
-  def manager
-    p "........."   
-    p params    
-    p "........."       
+  def manager    
     @emp = Employee.where(:manager_id => nil, :department_id=>params[:id]).first
     if @emp.nil?
       render json: {employee_id: '', employee_name: '' }

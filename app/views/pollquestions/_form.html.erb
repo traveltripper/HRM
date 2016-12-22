@@ -1,0 +1,26 @@
+<%= form_for @pollquestion do |f|%>
+
+  <div class="field">
+    <%= f.label :question%><br/>    
+    <%= f.text_area :question, class: "form-control", :required => true %>
+  </div>
+  <div class="field">
+    <%= f.label :status%><br/>    
+    <%= f.select :status, [['Active', 1], ['Inactive', 0]], {}, class: "form-control form-height40" %>
+  </div>
+
+  <h3> Answers</h3>
+
+  <div id="answers">
+
+    <%= f.fields_for :pollanswers do |answer| %>
+      <%= render 'pollanswer_fields', f: answer%>
+    <%end%>    
+    <div class="links">
+      <%= link_to_add_association 'Add Answer', f, :pollanswers, class: "btn btn-success"%>
+    </div>
+
+  </div>
+  <br/>
+  <%= f.submit class:"btn btn-primary" %>
+<%end%>

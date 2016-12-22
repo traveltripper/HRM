@@ -12,13 +12,13 @@ class LeaveController < ApplicationController
     @available_leave = @emp.days_of_leave - @leave_used   
     @request_pending = @emp.leave.where("status IS ? and leave_cancel =? and work_from_home =?", nil, false, false).count
     @emp_leaves = @emp.leave.where(:created_at => @leave_from_date..@leave_to_date, work_from_home: false)       
-    @leave_approved = @emp_leaves.where(:status => [true, false]) | @emp_leaves.where("status IS ? and leave_cancel =?", nil, true)
+    @leave_approved = @emp_leaves.status_true_or_false | @emp_leaves.where("status IS ? and leave_cancel =?", nil, true)
     @leave_waiting_for_approve = @emp_leaves.where(status: nil, leave_cancel:false).limit(15)
     # Employee Work From Home
     @work_from_home_used = @emp.work_from_home_used
     @available_work_from_home = @emp.days_of_leave - @work_from_home_used
     @emp_work_from_home = @emp.leave.where(:created_at => @leave_from_date..@leave_to_date, work_from_home: true)    
-    @work_from_home_approved = @emp_work_from_home.where(:status => [true, false]) | @emp_work_from_home.where("status IS ? and leave_cancel =?", nil, true)  
+    @work_from_home_approved = @emp_work_from_home.status_true_or_false | @emp_work_from_home.where("status IS ? and leave_cancel =?", nil, true)  
     @work_from_home_waiting_for_approve = @emp_work_from_home.where(status: nil, leave_cancel:false).limit(15)
   end
   
@@ -149,19 +149,24 @@ class LeaveController < ApplicationController
     @emp_ids = @emp.subordinates.where.not(id: @emp.id).map(&:id) 
     # Team Leaves       
     @team_leave = @leaves.where(employee_id: @emp_ids, work_from_home: false)
-    @leave_approved_recently = @team_leave.where(:status => [true, false]) | @team_leave.where("status IS ? and leave_cancel =?", nil, true)
+    @leave_approved_recently = @team_leave.status_true_or_false | @team_leave.where("status IS ? and leave_cancel =?", nil, true)
     @leave_waiting_for_approve = @team_leave.where(status: nil, leave_cancel: false)
     # Team Work From Home
     @team_work_from_home = @leaves.where(employee_id: @emp_ids, work_from_home: true)
-    @team_wfh_approved_recently = @team_work_from_home.where(:status => [true, false]) | @team_leave.where("status IS ? and leave_cancel =?", nil, true)
+    @team_wfh_approved_recently = @team_work_from_home.status_true_or_false | @team_leave.where("status IS ? and leave_cancel =?", nil, true)
     @team_wfh_waiting_for_approve = @team_work_from_home.where(status: nil, leave_cancel: false)
   end
 
   def leave_applied_by_employees
     @emp = current_employee    
+    # Employees Leaves
     @leaves = Leave.where(:created_at => 3.month.ago.beginning_of_month..Time.now, work_from_home: false)         
     @emp_leaves_waiting_for_approval = @leaves.where(:status => nil, leave_cancel: false)
-    @emp_leaves_approved_recently = @leaves.where(:status => [true, false]) | @leaves.where("status IS ? and leave_cancel =?", nil, true)  
+    @emp_leaves_approved_recently = @leaves.status_true_or_false | @leaves.where("status IS ? and leave_cancel =?", nil, true) 
+    # Employees Work From Home
+    @wfh = Leave.where(:created_at => 3.month.ago.beginning_of_month..Time.now, work_from_home: true)         
+    @emp_wfh_waiting_for_approval = @wfh.where(:status => nil, leave_cancel: false)
+    @emp_wfh_approved_recently = @wfh.status_true_or_false | @leaves.where("status IS ? and leave_cancel =?", nil, true) 
   end
 
 

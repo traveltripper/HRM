@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Question:</strong>
+  <%= @pollquestion.question %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @pollquestion.status %>
+</p>
+
+<%=form_for @poll do |f|%>
+	<%@pollquestion.pollanswers.each_with_index do |answer, index|%>
+	    <p>(<%=index+1%>) <%#=check_box_tag answer.id%>
+	    <%= f.radio_button :pollanswer_id, answer.id %> <%#= answer.id %>
+		<%=answer.option%></p>
+	<%end%>
+	<%=f.submit "submit", class:"btn btn-primary"%>
+<%end%>
+

@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   def upcoming_company_events 
     
     if params[:id] and params[:controller] =="events"
-    @current_event = Event.friendly.find(params[:id])
+      @current_event = Event.friendly.find(params[:id])
     end
     role_ids = Role.where(name: ["HR", "Admin"] ).pluck :id
     if @current_event
@@ -54,17 +54,21 @@ class ApplicationController < ActionController::Base
   end
 
   def latest_announcements
-    Announcement.where(active:true).limit(2)
+    Announcement.active.limit(2)
+  end
+
+  def polling
+    Pollquestion.where(status:true).first
   end
 
   def display_hr
-    @role = Role.where(name: "HR").first
-    @emp = Employee.where(role_id: @role.id)
+    role = Role.where(name: "HR").first
+    emp = Employee.where(role_id: role.id)
     @names = []  
-    @emp.each do |name|
+    emp.each do |name|
       @names << name
     end
-    p @names
+    @names
   end
  
   rescue_from CanCan::AccessDenied do |exception|
@@ -80,6 +84,7 @@ class ApplicationController < ActionController::Base
   helper_method :display_hr
   helper_method :cpp_designations
   helper_method :cpp_designations_except_current
+  helper_method :polling
 
   protected
   def authenticate_employee!(options={})

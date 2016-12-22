@@ -67,6 +67,18 @@
                     
                     <%end%>
 
+                    <li class="<%= 'active' if current_page?(pollquestions_path) %>"><a href="/pollquestions"><i class="fa fa-money fa-fw">
+                        <div class="icon-bg bg-dark"></div>
+                    </i><span class="menu-title">Poll Questions</span></a>
+                    </li>
+
+                    <li class="<%= 'active' if current_page?(polls_path) %>"><a href="/polls"><i class="fa fa-money fa-fw">
+                        <div class="icon-bg bg-dark"></div>
+                    </i><span class="menu-title">Polls</span></a>
+                    </li>
+
+                    
+
                     <!-- <li class="<%= 'active' if current_page?(events_path) %>"><a href="/events"><i class="fa fa-gift fa-fw">
                         <div class="icon-bg bg-dark"></div>
                     </i><span class="menu-title">Event Management</span></a>

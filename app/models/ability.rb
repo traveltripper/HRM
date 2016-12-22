@@ -18,6 +18,10 @@ class Ability
         can :read, Event
         can :read, Announcement
         can :read, Cpp
+        cannot :read, Poll
+        cannot :Pollquestion, Poll
+        cannot :Pollanswer, Poll
+        cannot :Nomination, Poll
     end
     
   end

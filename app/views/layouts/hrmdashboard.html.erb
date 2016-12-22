@@ -17,10 +17,13 @@
   	<%= render 'layouts/navbar' %>
   	<div class="col-md-12 nullPadding padding-bottom-50">
 		  <h3></h3>
+      <% flash.each do |key, value| %>
+          <div class="alert alert-<%= key %> alert-dismissable fade in">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+          <%= value %></div>
+      <% end %>
 		  <div class="col-md-8">
-        <% flash.each do |key, value| %>
-          <div class="alert alert-<%= key %> "><%= value %></div>
-        <% end %>
+        
     		<%= yield %>
     	</div>
     	<div class="col-md-4 events ">

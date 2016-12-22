@@ -1,0 +1,1 @@
+json.partial! "pollquestions/pollquestion", pollquestion: @pollquestion
