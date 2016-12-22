@@ -6,7 +6,7 @@
   </div>
   <div class="field">
     <%= f.label :status%><br/>    
-    <%= f.select :status, [['Active', 1], ['Inactive', 0]], {}, class: "form-control form-height40" %>
+    <%= f.select :status, [['Active', 1], ['Inactive', 0]],  {:include_blank => 'Select Status'},  class: "form-control form-height40", required: true %>
   </div>
 
   <h3> Answers</h3>
