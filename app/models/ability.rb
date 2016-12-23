@@ -21,7 +21,7 @@ class Ability
         cannot :read, Poll
         cannot :Pollquestion, Poll
         cannot :Pollanswer, Poll
-        cannot :Nomination, Poll
+        #cannot :Nomination, Poll
     end
     
   end

@@ -2,7 +2,7 @@ class NominationsController < ApplicationController
   before_action :set_nomination, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_employee!  
   layout 'hrmdashboard'
-  load_and_authorize_resource
+  #load_and_authorize_resource
   
 
   # GET /nominations
