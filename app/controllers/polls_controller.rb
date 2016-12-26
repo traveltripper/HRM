@@ -1,12 +1,16 @@
 class PollsController < ApplicationController
   before_action :set_poll, only: [:show, :edit, :update, :destroy]
   layout 'dashboard'
-  load_and_authorize_resource
+  #load_and_authorize_resource
 
   # GET /polls
   # GET /polls.json
   def index
-    @polls = Poll.all
+    if current_employee.role.name == "Admin"
+      @polls = Poll.all
+    else
+      redirect_to root_path
+    end
   end
 
   # GET /polls/1

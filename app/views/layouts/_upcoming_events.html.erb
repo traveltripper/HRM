@@ -5,7 +5,7 @@
         	Please suggest a name for HRM tool:
         	<div class="col-md-9" style="padding-left:0;">  
         		<br/>  
-    			<%= f.text_field :name, placeholder: "Suggest Name", required: true, class:"form-control" %>
+    			<%= f.text_field :name, placeholder: "Suggest Name", required: true, class:"form-control", readonly: true %>
     			<%= f.hidden_field :employee_id, :value => current_employee.id %>   
     		</div>
     		<div class="col-md-3" style="margin-top: 8px;">

@@ -107,4 +107,5 @@ Rails.application.routes.draw do
   get '/cpp' => 'cpps#index'
   #get '/poll' => 'pollquestions#poll'
   post '/savepoll' => 'pollquestions#savepoll'
+  get '/orgtree' => 'employees#org_tree'
 end

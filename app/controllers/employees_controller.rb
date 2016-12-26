@@ -156,6 +156,9 @@ class EmployeesController < ApplicationController
     end
   end
 
+  def org_tree
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     
