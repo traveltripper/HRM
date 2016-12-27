@@ -129,6 +129,7 @@ GEM
       momentjs-rails (>= 2.9.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    google_visualr (2.5.1)
     haml (4.0.7)
       tilt
     has_scope (0.6.0)
@@ -298,6 +299,7 @@ DEPENDENCIES
   faker
   friendly_id
   fullcalendar-rails
+  google_visualr (>= 2.5)
   haml
   htmlentities
   jbuilder (~> 2.0)

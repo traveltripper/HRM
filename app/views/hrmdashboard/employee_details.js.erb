@@ -11,5 +11,6 @@ $('#emp_phone').html('<%= j @emp.contact_no%>');
 $('#emp_skypeid').html('<%= j @emp.skype_id%>');
 $('#emp_birthday').html('<%= j @emp.actual_dob.strftime("%d-%b")%>');
 $('#emp_profile_picture').html('<%= image_tag @emp.profile_picture.url(:medium)%>');
+$('#org-tree').html('<%=link_to 'Organization Chart', orgtree_path(:params => { :employee_id => @emp.id }), remote:true%>');
 
 

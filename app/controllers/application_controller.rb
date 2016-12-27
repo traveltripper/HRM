@@ -76,6 +76,46 @@ class ApplicationController < ActionController::Base
   redirect_to root_url
   end
 
+  def pie_chart
+    @pieSize = {
+    :height => 500,
+    :width => 500
+  }
+
+  @pieData = [
+        {
+          value: 300,
+          color:"#F7464A",
+          highlight: "#FF5A5E",
+          label: "Red"
+        },
+        {
+          value: 50,
+          color: "#46BFBD",
+          highlight: "#5AD3D1",
+          label: "Green"
+        },
+        {
+          value: 100,
+          color: "#FDB45C",
+          highlight: "#FFC870",
+          label: "Yellow"
+        },
+        {
+          value: 40,
+          color: "#949FB1",
+          highlight: "#A8B3C5",
+          label: "Grey"
+        },
+        {
+          value: 120,
+          color: "#4D5360",
+          highlight: "#616774",
+          label: "Dark Grey"
+        }
+
+      ].to_json
+  end
 
 
   helper_method :upcoming_company_events
@@ -85,6 +125,7 @@ class ApplicationController < ActionController::Base
   helper_method :cpp_designations
   helper_method :cpp_designations_except_current
   helper_method :polling
+  helper_method :pie_chart
 
   protected
   def authenticate_employee!(options={})

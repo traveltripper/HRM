@@ -56,6 +56,8 @@
 
 
 
+
+
 <% if controller.controller_name == "cpp" and controller.action_name == "show"%>
 	<h4>CPP for other designations</h4>
 	<div class="bg-color-white">
@@ -126,5 +128,4 @@
 </div>
 <%end%>
 
-
-<%#=link_to 'View All Events', hrm_events_path, class: 'btn btn-primary'%>
+<%=render :partial => 'layouts/pie' %>

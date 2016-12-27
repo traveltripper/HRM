@@ -28,7 +28,7 @@
                   <%=f.select :work_from_home_used, options_for_select(@twentyfourdays, @employee.work_from_home_used), {}, {autofocus: 'true', class: 'form-control'}%>
                 </div>
                 <div class="col-md-3">                  
-                  <%=f.label :days_of_leave%>
+                  <%=f.label :days_of_leave, "Total Leaves/WFH"%>
                   <%=f.text_field :days_of_leave, class:"form-control"%>                  
                 </div>               
                 <div class="col-md-2">

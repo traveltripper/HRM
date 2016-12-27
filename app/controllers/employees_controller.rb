@@ -4,6 +4,7 @@ class EmployeesController < ApplicationController
   layout 'dashboard'
   add_breadcrumb "Home", :root_path
   respond_to :json
+  include EmployeesHelper
 
   def index
   	@employee = current_employee
@@ -90,7 +91,7 @@ class EmployeesController < ApplicationController
 
   def update_leave_used
     @employee = Employee.find(params[:employee_id])
-    @employee.update_attributes(leave_used: params["employee"]["leave_used"], days_of_leave: params["employee"]["days_of_leave"]  )
+    @employee.update_attributes(leave_used: params["employee"]["leave_used"], days_of_leave: params["employee"]["days_of_leave"], work_from_home_used: params["employee"]["work_from_home_used"]   )
     @employee.save
     redirect_to employees_path
     
@@ -157,6 +158,28 @@ class EmployeesController < ApplicationController
   end
 
   def org_tree
+    data_table = GoogleVisualr::DataTable.new
+    @emp = Employee.find(params[:employee_id])
+    @subordinates = []
+
+    @emp.subordinates.each do |f|
+      @subordinates << [ {:v => "#{f.fullname}" , :f => "#{f.fullname}<div style='color:red; font-style:italic'>#{f.designation}<div>"}  , @emp.fullname, f.fullname]
+    end
+
+    all_managers(@emp.id)      
+
+    data_table.new_column('string', 'Name'   )
+    data_table.new_column('string', 'Manager')
+    data_table.new_column('string', 'ToolTip')
+    
+    data_table.add_rows @subordinates 
+
+    opts   = { :allowHtml => true }
+    @chart = GoogleVisualr::Interactive::OrgChart.new(data_table, opts)
+    respond_to do |format|
+        format.html {render :layout => 'hrmdashboard'}
+        format.js
+      end
   end
 
   private
@@ -164,10 +187,10 @@ class EmployeesController < ApplicationController
     
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:employee).permit( :current_address, :marital_status, :contact_no, :emergency_contact_no, :emergency_name, :personal_email, :skype_id, :about_me, :profile_picture )
+      params.require(:employee).permit( :current_address, :marital_status, :contact_no, :emergency_contact_no, :emergency_name, :personal_email, :skype_id, :about_me, :profile_picture, :work_from_home_used )
     end
 
     def employee_params
-      params.require(:employee).permit(:first_name, :middle_name, :last_name, :manager_id, :role_id, :department_id, :ttid, :email, :personal_email, :contact_no, :emergency_name, :emergency_contact_no, :actual_dob, :certificate_dob, :previous_employer, :prev_years_of_exp, :pg, :graduation, :source_of_hire, :pancard_no, :passport_no, :status, :lwd, :date_of_resignation, :address, :password, :password_confirmation, :blood_group, :father_or_spouse, :marital_status, :graduation_institution, :graduation_university, :pg_university, :pg_institution, :pf_no, :aadhar_no, :health_insurance_card_no, :nationality, :current_address, :profile_picture, :date_of_joining, :days_of_leave, :leave_used, :skype_id, :about_me, :designation, :no_of_health_ins_cards_issued  )
+      params.require(:employee).permit(:first_name, :middle_name, :last_name, :manager_id, :role_id, :department_id, :ttid, :email, :personal_email, :contact_no, :emergency_name, :emergency_contact_no, :actual_dob, :certificate_dob, :previous_employer, :prev_years_of_exp, :pg, :graduation, :source_of_hire, :pancard_no, :passport_no, :status, :lwd, :date_of_resignation, :address, :password, :password_confirmation, :blood_group, :father_or_spouse, :marital_status, :graduation_institution, :graduation_university, :pg_university, :pg_institution, :pf_no, :aadhar_no, :health_insurance_card_no, :nationality, :current_address, :profile_picture, :date_of_joining, :days_of_leave, :leave_used, :skype_id, :about_me, :designation, :no_of_health_ins_cards_issued, :work_from_home_used  )
     end
 end

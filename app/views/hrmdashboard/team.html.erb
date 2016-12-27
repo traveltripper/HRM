@@ -59,6 +59,12 @@
 					<p class="profileImgText" id="emp_aboutme"><%=@team_employee.about_me%></p>
 				</div>
 				<div class="col-md-6 team-icons">
+				    
+			        <%if current_employee.email == "traveltripperhrm@traveltripper.com"%>
+			            <div id = "org-tree">
+			    		<%=link_to 'Organization Chart', orgtree_path(:params => { :employee_id => @team_employee.id }), remote:true%>
+			    		</div>
+			    	<%end%>				    
 					<h4>General Information</h4>
 					<p>Employee ID: <span id="emp_id"><%=@team_employee.ttid%></span></p>
 					<p>Position: <span id="emp_designation"><%=@team_employee.designation%></span></p>
@@ -101,6 +107,12 @@
 				<p class="profileImgText" id="emp_aboutme"><%=@team.first.about_me%></p>
 			</div>
 			<div class="col-md-6 team-icons">
+
+		        <%if current_employee.email == "traveltripperhrm@traveltripper.com"%>
+		            <div id = "org-tree">
+	    			<%=link_to 'Organization Chart', orgtree_path(:params => { :employee_id => @team.first.id }), remote:true%>
+	    			</div>
+	    		<%end%>
 				<h4>General Information</h4>
 				<p>Employee ID: <span id="emp_id"><%=@team.first.ttid%></span></p>
 				<p>Position: <span id="emp_designation"><%=@team.first.designation%></span></p>
