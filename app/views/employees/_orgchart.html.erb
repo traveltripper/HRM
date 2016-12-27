@@ -1,12 +1,12 @@
 <div id="leave-modal" class="modal fade">
-  <div class="modal-dialog">
+  <div class="modal-dialog" style="width: 700px;">
     <div class="modal-content"> 
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Organization Chart</h4>
         </div>           
         <div class="panel-body pan">
-          <div id='chart' style="overflow-x:auto;"></div>
+          <div id='chart' style="overflow-x:auto; padding: 10px;"></div>
   			<%= render_chart @chart, 'chart' %>
 
         </div>    
