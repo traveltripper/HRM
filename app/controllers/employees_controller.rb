@@ -160,6 +160,7 @@ class EmployeesController < ApplicationController
   def org_tree
     data_table = GoogleVisualr::DataTable.new
     @emp = Employee.find(params[:employee_id])
+    # @emp = Employee.first
     @subordinates = []
 
     @emp.subordinates.each do |f|
