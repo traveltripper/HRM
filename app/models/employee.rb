@@ -61,6 +61,20 @@ class Employee < ActiveRecord::Base
     end
   end
 
+  def active_for_authentication?
+    super && self.checking_active # i.e. super && self.is_active
+  end
+
+  def inactive_message
+    "Sorry, your account has been deactivated."
+  end
+
+  def checking_active
+    if self.status == "Active"
+      p "Active"    
+    end
+  end
+
   private
     def set_days_of_leave
       self.days_of_leave = ((Time.now.end_of_year - self.date_of_joining)/1.month.second).ceil * 2     

@@ -95,7 +95,7 @@
     <div class="col-md-4">
        <div class="form-group">
         <%= f.label :marital_status, 'Marital Status*' %><br>
-        <%= f.select :marital_status, options_for_select(["Married", "Single", "Divorced", "Widowed"]), {}, {:class=>"form-control"} %>
+        <%= f.select :marital_status, options_for_select(["Married", "Single", "Divorced", "Widowed"], @employee.marital_status), {}, {:class=>"form-control"} %>
        </div>
     </div>
   </div>
@@ -222,7 +222,7 @@
     <div class="col-md-4">
       <div class="form-group">
         <%= f.label :source_of_hire, 'Source of Hire' %><br>
-        <%= f.select :source_of_hire, options_for_select(["Direct", "Consultancy", "Campus", "Referral"]), {}, {:class=>"form-control"}  %>
+        <%= f.select :source_of_hire, options_for_select(["Direct", "Consultancy", "Campus", "Referral"], @employee.source_of_hire), {}, {:class=>"form-control"}  %>
       </div>
       
     </div>
@@ -232,7 +232,7 @@
     <div class="col-md-4">
         <div class="form-group">
           <%= f.label :status %><br>        
-          <%= f.select :status, options_for_select(["Active", "Resigned", "Exited"]), {}, {:class=>"form-control"} %>
+          <%= f.select :status, options_for_select(["Active", "Resigned", "Exited"], @employee.status), {}, {:class=>"form-control"} %>
         </div>        
     </div>
     <div class="col-md-4">      

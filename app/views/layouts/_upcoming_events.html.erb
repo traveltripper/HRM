@@ -1,7 +1,7 @@
 <% if current_page?(leave_index_path) && current_employee.email.in?(["traveltripperhrm@traveltripper.com", "srinivasvuppala@traveltripper.com", "nsangana@traveltripper.com"]) %>
     <!-- <h3></h3> -->
-    <h4>Leave chart</h4>
-	<h3></h3><div id="piechart" style="margin-top: 28px;"></div>
+    <h4 style="margin-top: 70px;">Leave/WFH chart</h4>
+	<h3></h3><div id="chart-container">FusionCharts XT will load here!</div>
 <%end%>
 <% if current_page?(root_path) || current_page?(dashboard_path) %>
 <h4>Nominations</h4>
@@ -57,12 +57,6 @@
 <% end %>
 <%end%>
 <%end%>
-
-
-
-
-
-
 <% if controller.controller_name == "cpp" and controller.action_name == "show"%>
 	<h4>CPP for other designations</h4>
 	<div class="bg-color-white">
@@ -133,4 +127,4 @@
 </div>
 <%end%>
 
-<%=render :partial => 'layouts/pie' %>
+<%=render :partial => 'layouts/pie.js.erb' %>
