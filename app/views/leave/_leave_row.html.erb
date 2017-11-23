@@ -1,5 +1,6 @@
-   
-<td><%=Leavetype.find(leave.leavetype_id).name%></td>
+<%unless leave.work_from_home == true%>
+<td><%=leave.leavetype.name%></td>
+<%end%>
 <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
 <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
 <td style="text-align:center;"><%=leave.no_of_days%></td>

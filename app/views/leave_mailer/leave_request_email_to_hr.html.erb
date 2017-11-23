@@ -43,7 +43,7 @@ pre { white-space: pre; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; wh
 <tbody>
 <tr>
 <td bgcolor="#FFFFFF" style="border-radius:0px 0px 3px 3px;color:#777777;font-family:Helvetica,Arial,sans-serif;font-size:16px;line-height:25px;padding:30px 50px 35px 50px">Dear <%=@hr.fullname%>,<br><br>
-    Employee <strong><%=@employee.fullname%></strong> has applied leave from <%=@leave.fromdate.strftime('%d-%b-%Y')%> to <%=@leave.todate.strftime('%d-%b-%Y')%>(<%=@leave.no_of_days%>) days. You can use the following link to view/approve/reject<br>
+    Employee <strong><%=@employee.fullname%></strong> has applied <%=@type%> from <%=@leave.fromdate.strftime('%d-%b-%Y')%> to <%=@leave.todate.strftime('%d-%b-%Y')%>(<%=@leave.no_of_days%> days). You can use the following link to view/approve/reject<br>
 <br>
 <a href="http://traveltripperhrm.herokuapp.com/employees_leave">Click here</a> <br>Thanks,<br>
 HRM Team, <br> Travel tripper

@@ -41,6 +41,37 @@
   </tbody>
 </table>
 
+<h4>Work From Home applied by team waiting for approval</h4>
+<table class="table table-hover-color table-bordered waiting-for-approval table-white-background table-align-center">
+  <thead>
+    <tr>
+      <th>S.No</th>
+      <th>Employee</th>
+      <th>From Date</th>
+      <th>To Date</th>
+      <th>Days</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @team_wfh_waiting_for_approve.each_with_index do |leave, index| %>
+      <tr>
+        <td><%= index+1 %></td>
+        <td><%=link_to leave.employee.fullname, team_path(:params => { :employee_id => leave.employee.id })%></td>
+        <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
+        <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
+        <td><%=leave.no_of_days%></td>
+        <td><%=link_to 'Accept', leave_status_approve_leave_path(leave), :data => {:confirm => 'Are you sure?'}, class:"green-color"%> /      
+            <%#=link_to 'Reject', leave_details_leave_path(leave), :data => {:confirm => 'Are you sure?'}, class: "red-color" %>      
+            <%=link_to 'Reject', leave_reject_leave_path(leave), remote:true, :data => {:confirm => 'Are you sure?'}, class: "red-color" %> |      
+            <%=link_to 'View Details', leave, :style=>"font-weight:600;"%>              
+        </td>         
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <h4>Leave applied by team recently</h4>
 <table class="table table-hover-color table-bordered waiting-for-approval table-white-background table-align-center">
   <thead>
@@ -62,6 +93,42 @@
         <td><%= index+1 %></td>
         <td><%=link_to leave.employee.fullname, team_path(:params => { :employee_id => leave.employee.id })%></td>
         <td><%=leave.leavetype.name%></td>
+        <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
+        <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
+        <td><%=leave.no_of_days%></td>        
+        <%if leave.status == true%>
+        <td style="color: #1F9B00 !important; font-weight:600;">Approved</td>
+        <%elsif leave.status ==false%>
+        <td style="color: #F10000 !important; font-weight:600;">Rejected</td>
+        <%elsif leave.status == nil and leave.leave_cancel == true%>
+        <td>Cancelled</td>
+        <%end%>
+               
+        <td style="font-weight:600;"><%=link_to 'View Details', leave%></td>        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h4>Work From Home applied by team recently</h4>
+<table class="table table-hover-color table-bordered waiting-for-approval table-white-background table-align-center">
+  <thead>
+    <tr>
+      <th>S.No</th>
+      <th>Employee</th> 
+      <th>From Date</th>
+      <th>To Date</th>
+      <th>Days</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @team_wfh_approved_recently.each_with_index do |leave, index| %>
+      <tr>
+        <td><%= index+1 %></td>
+        <td><%=link_to leave.employee.fullname, team_path(:params => { :employee_id => leave.employee.id })%></td>
         <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
         <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
         <td><%=leave.no_of_days%></td>        

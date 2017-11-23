@@ -3,7 +3,7 @@
 <div id="leave-modal" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">    
-        <div class="panel-heading-style">Apply Leave</div>
+        <div class="panel-heading-style">Apply Leave | Work From Home</div>
         <div class="panel-body pan">
             <%= form_for @leave do |f| %>
                 <div class="form-body pal">
@@ -41,23 +41,29 @@
                             <%=f.text_field :todate, :value =>"#{@leave.todate.strftime("%d-%m-%Y")}", class: 'form-control form-height40', :id=>"dt2", :required=>true%>
                             <%end%>
                             </div> 
-                        </div>
+                        </div>                        
                     </div>       
                 
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                            <%=f.label :leave_type%>
-                            <%=f.collection_select :leavetype_id, Leavetype.all, :id, :name, {:prompt => 'Select Leavetype'}, :class=>"form-control form-height40", :required=>true%>
-                            </div>                           
-                        </div>
-                        <div class="col-md-6">       
+                        <div class="col-md-4">
                             <div class="form-group">
                             <%=f.label :no_of_days%>
                             <%=f.hidden_field :no_of_days, class: 'form-control form-height40 dt3', :readonly => true%>
                             <%=text_field_tag :no_of_days, "#{@leave.no_of_days}", class: 'form-control form-height40 dt3', :readonly => true%>
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                            <%=f.label :work_from_home, "Leave or Work form home"%>
+                            <%= f.select :work_from_home, [['Leave', 0], ['Work From Home', 1]], {}, class: "form-control form-height40" %>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group select-leave">
+                            <%=f.label :leave_type%>
+                            <%=f.collection_select :leavetype_id, Leavetype.all, :id, :name, {:prompt => 'Select Leavetype'}, :class=>"form-control form-height40 required1", :required=>true%>
+                            </div>                           
+                        </div>                        
                     </div>
                     <div class="form-group">
                     <%=f.label :reason%>
@@ -149,7 +155,26 @@ $("#dt2").datepicker({
         }
     }
 });
+
+$('select#leave_work_from_home').change(function() {
+        var selectedText = $(this).find('option:selected').text();
+        if (selectedText == "Work From Home")
+        {
+            $('.select-leave').hide();
+            $("#leave_leavetype_id").removeAttr('required');
+
+        }
+        else{
+            $('.select-leave').show();
+            $("#leave_leavetype_id").attr('required', '');
+        }
 });
+
+
+
+});
+
+
 </script>
 </div>
 

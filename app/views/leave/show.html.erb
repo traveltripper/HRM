@@ -32,10 +32,12 @@
 <td><%=@leave.no_of_days%></td>
 </tr>
 
+<%if @leave.work_from_home == false%>
 <tr>
 <td>LeaveType: </td>
 <td><%=@leave.leavetype.name%></td>
 </tr>
+<%end%>
 
 <tr>
 <td>Leave Reason: </td>

@@ -1,0 +1,162 @@
+<%= tinymce %>
+
+<div id="leave-modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">    
+        <div class="panel-heading-style">Apply Leave</div>
+        <div class="panel-body pan">
+            <%= form_for @leave do |f| %>
+                <div class="form-body pal">
+                    <div id="error_explanation">
+                        <% if @leave.errors.any? %>
+                            <div class="alert alert-error">
+                                <strong><%= pluralize(@leave.errors.count, "error") %>    prohibited
+                    this leave from being saved:</strong>
+                                <ul>
+                                    <% @leave.errors.full_messages.each do |msg| %>
+                                        <li><%= msg %></li>
+                                    <% end %>
+                                </ul>
+                             </div>
+                        <% end %>
+                    </div>
+
+                    <div class="row">                        
+                        <div class="col-md-6">
+                            <div class="form-group">
+                            <%=f.label :fromdate%>
+                            <%if @leave.new_record?%>
+                            <%=f.text_field :fromdate, class: 'form-control form-height40', :id=>"dt1", :required=>true%>
+                            <%else%>
+                            <%=f.text_field :fromdate, :value =>"#{@leave.fromdate.strftime("%d-%m-%Y")}", class: 'form-control form-height40', :id=>"dt1", :required=>true%>
+                            <%end%>
+                            </div> 
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                            <%=f.label :todate%>
+                            <%if @leave.new_record?%>                            
+                            <%=f.text_field :todate, class: 'form-control form-height40', :id=>"dt2", :required=>true%>
+                            <%else%>
+                            <%=f.text_field :todate, :value =>"#{@leave.todate.strftime("%d-%m-%Y")}", class: 'form-control form-height40', :id=>"dt2", :required=>true%>
+                            <%end%>
+                            </div> 
+                        </div>
+                    </div>       
+                
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                            <%=f.label :leave_type%>
+                            <%=f.collection_select :leavetype_id, Leavetype.all, :id, :name, {:prompt => 'Select Leavetype'}, :class=>"form-control form-height40", :required=>true%>
+                            </div>                           
+                        </div>
+                        <div class="col-md-6">       
+                            <div class="form-group">
+                            <%=f.label :no_of_days%>
+                            <%=f.hidden_field :no_of_days, class: 'form-control form-height40 dt3', :readonly => true%>
+                            <%=text_field_tag :no_of_days, "#{@leave.no_of_days}", class: 'form-control form-height40 dt3', :readonly => true%>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    <%=f.label :reason%>
+                    <%=f.text_area :reason, class: 'form-control', cols: "30", rows: "5", :required=>true%>
+                    </div>
+                </div>
+                <div class="form-submit-buttons">
+                   
+                    <button type="button" class="btn btn-cgray width-50p btn-border-left-radius" data-dismiss="modal">CANCEL</button>                
+                    <%= f.submit "APPLY", class: "btn btn-cblue width-50p btn-border-right-radius"%>       
+                       
+                </div>                
+            <% end %>
+        </div>    
+    </div>
+</div>
+<script>
+$(document).ready(function(){
+$("#dt1").datepicker({
+    
+    minDate: 0,
+    dateFormat: "dd-mm-yy",
+    maxDate: '+1Y+6M',
+    onSelect: function (dateStr) {
+        
+        var min = $(this).datepicker('getDate'); // Get selected date
+        $("#dt2").datepicker('option', 'minDate', min || '0'); // Set other min, default to today
+        var start = $("#dt1").datepicker("getDate");
+        var end = $("#dt2").datepicker("getDate");
+        if (start != null && end !=null){
+            // caliculate weekend days
+                var weekend_start = start,
+                weekend_finish = end,
+                dayMilliseconds = 1000 * 60 * 60 * 24;
+
+                var weekendDays = 0;
+
+                while (weekend_start <= weekend_finish) {
+                    var day = weekend_start.getDay()
+                    if (day == 0 || day == 6) {
+                        weekendDays++;
+                    }
+                    weekend_start = new Date(+weekend_start + dayMilliseconds);
+                }
+            // caliculate weekend days
+            var days = (end - start) / (1000 * 60 * 60 * 24);
+            days = days+1;
+            days = days-weekendDays;
+
+            
+            $(".dt3").val(days);
+        }
+    }
+});
+
+$("#dt2").datepicker({
+    minDate: '0',
+    dateFormat: "dd-mm-yy",
+    maxDate: '+1Y+6M',
+    onSelect: function (dateStr) {
+        var max = $(this).datepicker('getDate'); // Get selected date
+        $('#datepicker').datepicker('option', 'maxDate', max || '+1Y+6M'); // Set other max, default to +18 months
+        var start = $("#dt1").datepicker("getDate");
+        if (start == null){
+            alert("select start date");
+        } 
+        else
+        { 
+            var end = $("#dt2").datepicker("getDate");
+            // caliculate weekend days
+                var weekend_start = start,
+                weekend_finish = end,
+                dayMilliseconds = 1000 * 60 * 60 * 24;
+
+                var weekendDays = 0;
+
+                while (weekend_start <= weekend_finish) {
+                    var day = weekend_start.getDay()
+                    if (day == 0 || day == 6) {
+                        weekendDays++;
+                    }
+                    weekend_start = new Date(+weekend_start + dayMilliseconds);
+                }
+            // caliculate weekend days
+            var days = (end - start) / (1000 * 60 * 60 * 24);
+            days = days+1;
+            days = days-weekendDays;
+            $(".dt3").val(days);
+        }
+    }
+});
+});
+</script>
+</div>
+
+
+
+
+
+
+
+
