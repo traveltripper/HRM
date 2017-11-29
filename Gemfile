@@ -85,7 +85,8 @@ gem "google_visualr", ">= 2.5"
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  gem 'mysql2'
+  # gem 'mysql2'
+  gem 'pg'
 end
 
 group :development do

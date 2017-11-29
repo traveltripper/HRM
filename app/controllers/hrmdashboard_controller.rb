@@ -8,7 +8,7 @@ class HrmdashboardController < ApplicationController
     @team = Employee.active.where(:department_id=> @emp.department_id).where.not(:id => @emp.id).ordered_by_first_name      
   	@leave_used = @emp.leave_used
   	@available_leave = @emp.days_of_leave - @leave_used  	
-  	@request_pending = @emp.leave.where("status IS ? and leave_cancel =?", nil, false).count  
+  	@request_pending = @emp.leave.where("status IS ? and leave_cancel =? and work_from_home =?", nil, false, false).count  
   	@announcements = Announcement.active.limit(4)   
   end
 
