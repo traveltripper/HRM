@@ -89,15 +89,15 @@ Rails.application.configure do
   # }
 
 
-  config.action_mailer.default_url_options = { host: 'http://traveltripperhrm.herokuapp.com' }
+  # config.action_mailer.default_url_options = { host: 'http://traveltripperhrm.herokuapp.com' }
 
-  config.action_mailer.smtp_settings = {
-      :address              => "smtp.gmail.com",
-      :port                 => 587,
-      :domain               => "gmail.com",
-      :user_name            => "traveltripperhrm@gmail.com",
-      :password             => "hrmq1w2e3r4T%Y^tool",
-      :authentication       => :plain,
-      :enable_starttls_auto => true
-  }
+  # config.action_mailer.smtp_settings = {
+  #     :address              => "smtp.gmail.com",
+  #     :port                 => 587,
+  #     :domain               => "gmail.com",
+  #     :user_name            => "traveltripperhrm@gmail.com",
+  #     :password             => "hrmq1w2e3r4T%Y^tool",
+  #     :authentication       => :plain,
+  #     :enable_starttls_auto => true
+  # }
 end
