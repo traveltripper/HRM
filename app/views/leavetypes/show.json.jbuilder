@@ -1,1 +1,0 @@
-json.partial! "leavetypes/leavetype", leavetype: @leavetype

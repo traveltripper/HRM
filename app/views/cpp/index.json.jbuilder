@@ -1,1 +1,0 @@
-json.array! @cpps, partial: 'cpps/cpp', as: :cpp
