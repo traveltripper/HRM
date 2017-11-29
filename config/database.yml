@@ -1,34 +1,20 @@
-# default: &default
-#   adapter: mysql2
-#   encoding: utf8
-#   username: root
-#   password: root
-#   host: 127.0.0.1
-#   port: 3306
-
-# development:
-#   <<: *default
-#   database: hrmdevp
-
-# test:
-#   <<: *default
-#   database: hrmtest
-
-# production:
-#   <<: *default
-#   database: hrmpro
-
-
 default: &default
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
+  adapter: mysql2
+  encoding: utf8
+  username: root
+  password: manasa
+  host: 127.0.0.1
+  port: 3306
 
 development:
   <<: *default
-  database: hrm_testdb1
-  host: localhost
-  port: 5433
-  username: postgres
-  password: postgres
+  database: hrmdevp
+
+test:
+  <<: *default
+  database: hrmtest
+
+production:
+  <<: *default
+  database: hrmpro
 

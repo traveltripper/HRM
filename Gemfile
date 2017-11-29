@@ -82,8 +82,8 @@ gem 'friendly_id'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  # gem 'mysql2'
-  gem 'pg'
+  gem 'mysql2'
+  # gem 'pg'
 end
 
 group :development do
