@@ -1,0 +1,96 @@
+<!--BEGIN SIDEBAR MENU-->
+            <nav id="sidebar" role="navigation" data-step="2" data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;"
+                data-position="right" class="navbar-default navbar-static-side">
+            <div class="sidebar-collapse menu-scroll">
+                <ul id="side-menu" class="nav">
+                    
+                     <div class="clearfix"></div>
+
+                    <!-- <li class="<%= 'active' if current_page?(dashboard_path) %>"><a href="/dashboard"><i class="fa fa-tachometer fa-fw">
+                        <div class="icon-bg bg-orange"></div>
+                    </i><span class="menu-title">Dashboard</span></a></li>
+
+                    <li class="<%= 'active' if current_page?(profile_path) %>"><a href="/profile"><i class="fa fa-user fa-fw">
+                        <div class="icon-bg bg-blue"></div>
+                    </i><span class="menu-title">Profile</span></a>                          
+                    </li>  --> 
+
+                    <%if current_employee.role.name.in?(['Employee', 'Manager'])%>
+                   <!--  <li class="<%= 'active' if current_page?(team_path) %>"><a href="/team"><i class="fa fa-users fa-fw">
+                        <div class="icon-bg bg-blue"></div>
+                    </i><span class="menu-title">Team</span></a>                          
+                    </li>  -->                   
+                    <%end%>
+                                        
+                    <!-- <li class="<%= 'active' if current_page?(leave_index_path) %>"><a href="/leave"><i class="fa fa-edit fa-fw">
+                        <div class="icon-bg bg-violet"></div>
+                    </i><span class="menu-title">Leave Management</span></a>
+                    </li>  -->                  
+                    
+
+                    <%if current_employee.role.name.in?(['HR', 'Admin'])%>
+                    
+                    <li class="<%= 'active' if current_page?(employees_path) %>"><a href="/employees"><i class="fa fa-users fa-fw">
+                        <div class="icon-bg bg-yellow"></div>
+                    </i><span class="menu-title">Employee Management</span></a>
+                    </li>
+
+                    <li class="<%= 'active' if current_page?(leavetypes_path) %>"><a href="/leavetypes"><i class="fa fa-slack fa-fw">
+                        <div class="icon-bg bg-grey"></div>
+                    </i><span class="menu-title">Leave Types</span></a>
+                    </li>
+
+                    <li class="<%= 'active' if current_page?(roles_path) %>"><a href="/roles"><i class="fa fa-users fa-fw">
+                        <div class="icon-bg bg-yellow"></div>
+                    </i><span class="menu-title">Roles</span></a>
+                    </li>
+
+                    <li class="<%= 'active' if current_page?(departments_path) %>"><a href="/departments"><i class="fa fa-users fa-fw">
+                        <div class="icon-bg bg-yellow"></div>
+                    </i><span class="menu-title">Departments</span></a>
+                    </li>
+                                        
+                    <!-- <li class="<%= 'active' if current_page?(conference_rooms_path) %>"><a href="/conference_rooms"><i class="fa fa-building fa-fw">
+                        <div class="icon-bg bg-dark"></div>
+                    </i><span class="menu-title">Conference Rooms</span></a>
+                    </li> -->
+
+                    <!-- <li class="<%= 'active' if current_page?(announcements_path) %>"><a href="/announcements"><i class="fa fa-comment fa-fw">
+                        <div class="icon-bg bg-dark"></div>
+                    </i><span class="menu-title">Announcements</span></a>
+                    </li> -->
+
+                    <li class="<%= 'active' if current_page?(payrolls_path) %>"><a href="/payrolls"><i class="fa fa-money fa-fw">
+                        <div class="icon-bg bg-dark"></div>
+                    </i><span class="menu-title">Payroll Management</span></a>
+                    </li>
+                    
+                    <%end%>
+
+                    <li class="<%= 'active' if current_page?(pollquestions_path) %>"><a href="/pollquestions"><i class="fa fa-money fa-fw">
+                        <div class="icon-bg bg-dark"></div>
+                    </i><span class="menu-title">Poll Questions</span></a>
+                    </li>
+
+                    <li class="<%= 'active' if current_page?(polls_path) %>"><a href="/polls"><i class="fa fa-money fa-fw">
+                        <div class="icon-bg bg-dark"></div>
+                    </i><span class="menu-title">Polls</span></a>
+                    </li>
+
+                    
+
+                    <!-- <li class="<%= 'active' if current_page?(events_path) %>"><a href="/events"><i class="fa fa-gift fa-fw">
+                        <div class="icon-bg bg-dark"></div>
+                    </i><span class="menu-title">Event Management</span></a>
+                    </li> -->                   
+
+                    <%#if current_employee.role.name.in?(['HR', 'Manager', 'Admin'])%>
+                    <!-- <li class="<%= 'active' if current_page?(alerts_path) %>"><a href="/alerts"><i class="fa fa-envelope fa-fw">
+                        <div class="icon-bg bg-yellow"></div>
+                    </i><span class="menu-title">Alerts</span></a>
+                    </li> -->
+                    <%#end%>
+
+                </ul>
+            </div>
+        </nav>

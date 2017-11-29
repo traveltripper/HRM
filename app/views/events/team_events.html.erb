@@ -1,0 +1,37 @@
+<%unless @team_events.blank?%>
+<h4>Upcoming Team Events</h4>
+<% @team_events.each do |f| %>
+	<div class="col-md-6">
+		<div class="col-md-12 bg-color-white">
+			<h5><%=link_to f.title, f, class:"event-title-color"%></h5>
+			<p><%=f.start.strftime("%A, %B %d")%></p>            
+			<%=image_tag f.picture.url(:medium), class:"event-image"%>
+			<p><%=truncate(f.reason, :length =>100, escape:false).html_safe%><%=link_to "Read More", f%></p>
+		</div>
+	</div>	
+<%end%>
+<%end%>
+
+<div class="col-md-12">
+	<h4>Announcements</h4>
+    <div class="Announcements bg-color-white">
+		<table >
+		    <%@announcements.each do |announcement|%>
+				<tr>
+					<td >
+						<span class="span-title-color">
+							<%=announcement.created_at.strftime("%d-%b-%Y")%>
+						</span>
+					</td>
+					<td>
+						<span class="text-primary">
+							<%=link_to announcement.title, announcement%>
+						</span>
+						<br /><%=truncate(announcement.message, :length => 250, escape: false).html_safe%>
+						<%= link_to "..Read More", announcement %>
+					</td>
+				</tr>
+			<%end%>		
+		</table>
+    </div>
+</div>

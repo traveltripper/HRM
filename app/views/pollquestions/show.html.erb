@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+<%title 'Question'%>
+
+<p>
+  <strong>Question:</strong>
+  <%= @pollquestion.question %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @pollquestion.status %>
+</p>
+
+<%@answers.each_with_index do |answer, index|%>
+    <p>(<%=index+1%>)
+	<%=answer.option%> - <%=caliculate_percentage(@pollquestion.id, answer.id) %> %</p>
+<%end%>
+
+<%= link_to 'Edit', edit_pollquestion_path(@pollquestion) %> |
+<%= link_to 'Back', pollquestions_path %>

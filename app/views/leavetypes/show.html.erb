@@ -1,0 +1,7 @@
+<p id="notice"><%= notice %></p>
+<%title 'Leavetype'%>
+<h2 class="link-color">Name: <%=@leavetype.name%></h2>
+
+<%= link_to ' Edit', edit_leavetype_path(@leavetype), :class=>"fa fa-pencil-square-o btn btn-primary" %> |
+<%= link_to ' Back', leavetypes_path, :class=>"fa fa-arrow-left btn btn-primary" %> |
+<%= link_to ' Destroy', @leavetype, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"fa fa-times btn btn-danger" %>

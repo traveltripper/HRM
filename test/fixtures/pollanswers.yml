@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pollquestion_id: 1
+  option: MyString
+  status: false
+
+two:
+  pollquestion_id: 1
+  option: MyString
+  status: false

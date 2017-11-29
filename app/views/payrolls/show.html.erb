@@ -1,0 +1,11 @@
+<%title 'Payroll'%>
+
+<h5 class='link-color'>Employee Name: <%= @payroll.employee.fullname %> </h5>
+
+<h5 class='link-color'>Pay date: <%= @payroll.pay_date.strftime('%d-%b-%Y') %> </h5>
+
+
+<h5 class='link-color'> Attachment: <%= link_to 'Download Payslip', @payroll.attachment_url, :target => "_blank" %></h5>
+
+<%= link_to ' Edit', edit_payroll_path(@payroll), class: 'fa fa-pencil-square-o btn btn-primary' %> |
+<%= link_to ' Back', payrolls_path, class:'fa fa-arrow-left btn btn-primary' %>

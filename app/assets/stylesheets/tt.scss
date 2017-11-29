@@ -1,0 +1,240 @@
+.form-position-from-top{    
+    position: fixed;
+    top: 42%;
+    left: 40%;
+    width: 46em;
+    height: 18em;
+    margin-top: -9em;
+    margin-left: -15em;
+}
+
+.form-background-image{
+	background-image: url("/images/bg/1.jpg");
+	height: 100%;
+}
+
+
+.panel.panel-cblue {
+    border-color: #3A6F9F;
+}
+
+.panel.panel-cblue > .panel-heading {
+    color: #FFFFFF;
+    background: #3A6F9F;
+    border-color: #3A6F9F !important;
+}
+
+.add-edit-links{
+    float: right;
+    color: #fff !important;
+}
+
+a.add-edit-links:hover{
+    background-color: transparent;
+}
+
+
+th, td, a, .page-header, label, .blue_color_text{
+    color: #3A6F9F;
+}
+
+input, textarea, select{
+    border-color: #66afe9 !important;
+}
+
+.link-color{
+    color: #3A6F9F !important;
+}
+
+.dropdown.show-options{
+    float: right;
+    margin-bottom: 15px;
+}
+
+.dropdown.show-options a{
+    color: #3A6F9F;
+}
+
+.ui-widget-header, .ui-widget-content .ui-state-default 
+{
+    background: #3A6F9F;
+}
+
+.fc-view.fc-view-month.fc-grid{
+    position: static !important;
+}
+
+.sidebar-collapse.menu-scroll{
+    /* overflow: visible !important; */
+}
+
+.fc-event{
+    background-color: transparent;
+    
+}
+
+.modal-content{
+    color: #000 !important;
+}
+
+
+@media (min-width: 768px)
+{
+    #calendarModal .modal-dialog, #EventModal .modal-dialog {
+        width: 400px;
+        margin: 30px auto;
+    }
+}
+
+.fc-center h2{
+    color: #3A6F9F;
+}
+
+.calendarModal .modal-header {
+    background: #3A6F9F;
+    color: white;
+    font-size: 18px;
+}
+
+.calendar .fc-today-button{
+    background: #3A6F9F;
+    color: white;
+}
+
+.calendar .fc-prev-button, .calendar .fc-next-button, .leave_details{
+    color: #3A6F9F;
+}
+
+.show-options {
+    float: right;
+    margin-bottom: 10px;
+}
+
+a.view_btnbtn.btn-primary {
+    padding: 4px 10px;
+}
+
+#leave_reject_reason{
+    color: #3A6F9F;
+}
+
+.modal-dialog .modal-header{
+    background: #3A6F9F;
+    color: white;
+    font-size: 18px;
+}
+
+div#modalBody {
+    color: #3A6F9F;
+    font-size: 15px;
+}
+
+input.input-mini.form-control.active, input.input-mini.form-control{
+    width: 100% !important;
+}
+
+.bottom-margin-10{
+    margin-bottom: 10px;
+}
+
+
+.link-float-right{
+    float: right;
+}
+
+.field_with_errors { display: inline }
+
+.ui-widget-header .ui-icon {
+    background-image: url("/images/ui-icons_ffffff_256x240.png");
+}
+
+.forgot-password-margin{
+    margin-right: 20px;
+}
+
+.page-content{
+    background: #fff;
+}
+
+
+.alert-notice
+{
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #3c763d;
+}
+
+#leave-modal .panel-heading{
+    background: #3A6F9F;
+    color: #fff;
+}
+
+.required{
+    color: red;
+}
+
+select.ui-datepicker-month, select.ui-datepicker-year{
+    color: #3A6F9F;
+}
+
+#notice-no-manager{
+    color :red;
+    display :none;
+}
+
+#emails_list{
+    display: none;
+}
+
+
+/* ............alertbox css................ */
+
+    #emails_list{
+  /* float:left; 
+  border:1px solid #ccc;
+  padding:5px;
+  font-family:Arial;*/
+}
+#emails_list > span{
+  cursor:pointer;
+  display:block;
+  float:left;
+  color:#fff;
+  background:#3A6F9F;
+  padding:5px;
+  padding-right:25px;
+  margin:4px;
+}
+#emails_list > span:hover{
+  opacity:0.7;
+}
+#emails_list > span:after{
+ position:absolute;
+ content:"×";
+ border:1px solid;
+ padding:2px 5px;
+ margin-left:3px;
+ font-size:11px;
+}
+#emails_list > textarea{
+  background:#eee;
+  border:0;
+  margin:4px;
+  padding:7px;
+  width:auto;
+}
+
+.email-errors{
+  color: red;
+  display: none;
+}
+
+div#get_email{
+  display: none;
+}
+
+.alert-error {
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+}

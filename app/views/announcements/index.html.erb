@@ -1,0 +1,47 @@
+<div class="row"> 
+  <div class="col-md-12">
+    <div class="col-md-8">
+      <h4>Announcements</h4>
+    </div>
+    <div class="col-md-offset-2 col-md-2">
+      <% if can? :create, @announcement %>
+        <%= link_to ' Add', new_announcement_path, remote: true, :class=>"fa fa-plus btn btn-primary bottom-margin-10 link-float-right" %>
+      <%end%>
+    </div> 
+  </div> 
+</div>
+
+
+<div class="col-md-12">
+    <div class="Announcements bg-color-white">
+      <table > 
+          <%@announcements.each do |announcement|%>
+          <tr>
+            <td >
+              <span class="span-title-color">
+                <%=announcement.created_at.strftime("%d-%b-%Y")%>
+              </span>
+            </td>
+            <td>
+              <span class="text-primary">
+                <%=link_to announcement.title, announcement%>
+              </span>
+              <br /><%=truncate(announcement.message, :length => 250, escape: false).html_safe%><%= link_to "Read More", announcement %>
+            </td>
+            <% if can? :edit, @announcement %>            
+            <td><%= link_to '', edit_announcement_path(announcement), remote:true, :class=>"fa fa-pencil-square-o btn " %></td>
+            <%end%>
+            <% if can? :destroy, @announcement %>
+            <td><%= link_to '', announcement, method: :delete, :class=>"fa fa-times btn", data: { confirm: 'Are you sure?' } %></td>
+            <%end%>
+          </tr>
+        <%end%>   
+      </table>
+    </div>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,29 @@
+<div class="col-md-12 bg-color-white" style="font-family: 'Open Sans', sans-serif; color:#594857;">
+
+<% if can? :update, @cpp %>
+	<div class="col-md-8">
+		<h4><strong>Career Performance Profile - <%=@cpp.designation%></strong></h4>
+	</div>
+	<div class="col-md-4">
+	<%= link_to ' Destroy',  @cpp,  method: :delete, data: { confirm: 'Are you sure?' }, class: "fa fa-times btn btn-primary link-float-right" %>
+	<span class="link-float-right"> &nbsp;</span>
+	<%= link_to ' Edit', edit_cpp_path(@cpp), class: "fa fa-pencil-square-o btn btn-primary link-float-right"%>
+	</div> 			
+<%else%>
+	<div class="col-md-12" style="text-align:center;">
+		<h4><strong>Career Performance Profile - <%=@cpp.designation%></strong></h4>
+	</div>
+<%end%>
+
+</div>
+
+
+<div class="bg-color-white col-md-12" id="cpp" style="font-family: 'Open Sans', sans-serif;">
+  <h5>Key Objectives: </h5><br/>
+  <div class="cpp-description" style="padding-left: 10px;">
+  	<%= @cpp.description.html_safe %>
+  </div>
+</div>
+
+
+

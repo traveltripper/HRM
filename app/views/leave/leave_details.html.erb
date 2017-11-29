@@ -1,0 +1,77 @@
+<%title "Leave Details" %>
+<div class="row">
+<div class="col-md-12">
+<div class="row">
+	<div class="col-md-12">	 
+		<h4>Leave Details</h4>
+	</div>
+</div>
+
+<div class="leave_details">
+<div class="panel">
+<table class="table table-bordered">
+<tbody>
+
+<tr>
+<td>Employee Name:</td>
+<td> <%=@leave.employee.fullname.to_s.capitalize%></td>
+</tr>
+
+<tr>
+<td>From:</td>
+<td><%=@leave.fromdate.strftime("%d-%b-%Y")%></td>
+</tr>
+
+<tr>
+<td>To:</td>
+<td><%=@leave.todate.strftime("%d-%b-%Y")%></td>
+</tr>
+
+<tr>
+<td>No of days: </td>
+<td><%=@leave.no_of_days%></td>
+</tr>
+
+<tr>
+<td>LeaveType: </td>
+<td><%=@leave.leavetype.name%></td>
+</tr>
+
+<tr>
+<td>Reason: </td>
+<td><%=@leave.reason.html_safe%></td>
+</tr>
+
+<tr>
+<%if (current_employee == @leave.employee.manager) || (current_employee.role.name.in?(['HR', 'Admin']))%>	
+	<td>Reject Reason: </td>
+	<td>
+		<%=form_for @leave, :url => leave_status_leave_path do |f|%>
+			<%= f.radio_button :status, 'approve', :name=>'leaveStatus', :style => 'display: none' %> 
+			<%= f.radio_button :status, 'reject', :checked => true, :name=>'leaveStatus', :style => 'display: none' %>
+			<%=f.text_area :reject_reason, size: "40x4"%>	<br/>
+		<%= f.submit "submit", :class=>"btn btn-primary"%>
+		<%end%>
+	</td>
+<%end%>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<br/>
+<%if current_employee.role.name == "Manager"%>
+	<%=link_to ' Back', team_leave_path, :class=>"fa fa-arrow-left btn btn-primary"%>
+<%else%>
+	<%=link_to ' Back', employees_leave_path, :class=>"fa fa-arrow-left btn btn-primary"%>
+<%end%>
+</div>
+</div>
+
+
+
+
+
+

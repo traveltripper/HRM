@@ -1,0 +1,16 @@
+$('#emp_id').html('<%= j @emp.ttid%>');
+$('#emp_name').html('<%= j @emp.fullname%>');
+$('#emp_designation').html('<%= j @emp.designation%>');
+$('#emp_department').html('<%= j @emp.department.name%>');
+$('#emp_manager').html('<%= j @emp.manager.fullname if @emp.manager%>');
+//$('#emp_manager').html('<%#= j @emp.manager.fullname if @emp.manager%>');
+$('#emp_status').html('<%= j @emp.status%>');
+$('.emp_email').html('<%= j @emp.email%>');
+$('#emp_aboutme').html('<%= j @emp.about_me%>');
+$('#emp_phone').html('<%= j @emp.contact_no%>');
+$('#emp_skypeid').html('<%= j @emp.skype_id%>');
+$('#emp_birthday').html('<%= j @emp.actual_dob.strftime("%d-%b")%>');
+$('#emp_profile_picture').html('<%= image_tag @emp.profile_picture.url(:medium)%>');
+$('#org-tree').html('<%=link_to 'Organization Chart', orgtree_path(:params => { :employee_id => @emp.id }), remote:true%>');
+
+

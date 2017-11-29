@@ -1,0 +1,1 @@
+json.array! @healthinsurances, partial: 'healthinsurances/healthinsurance', as: :healthinsurance

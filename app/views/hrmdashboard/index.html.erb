@@ -1,0 +1,78 @@
+<div class="col-md-7">
+	<h4>My Team</h4>
+	<div class="col-md-12 nullPadding bg-color-white myteam">    
+	    <ul> 
+	    	<% @team.each_with_index do |emp, index| %>
+	    		<li class="viewteam">
+	    		<%= link_to team_path(:params => { :employee_id => emp.id }) do %>		    
+				    			    
+					    <%=image_tag emp.profile_picture.url(:thumb), class:'img-circle'%>
+					    <h6><%= emp.fullname  %></h6>
+					    <p><%= emp.designation  %></p>				    
+			    <%end%>
+			    </li>
+		    <%end%>	    
+	    </ul>	    
+	</div>
+
+</div>
+
+<div class="col-md-5">
+	<h4>Payroll</h4>	
+	<div class="col-md-12 bg-color-white ">
+		<div class="col-md-12 nullPadding">Last Pay Date</div>
+		<div class="col-md-12 nullPadding date"><%=Date.today.at_beginning_of_month.strftime("%d/%m/%Y")%></div><%#= link_to 'View Payslip', @payroll.attachment_url, :target => "_blank", class: " btn btn-primary" if @payroll %>
+	</div>
+
+	<div class="clearfix"></div>
+	<h4>Leave Management</h4> 
+	<div class="col-md-12 bg-color-white">
+	    <div class="leave-management">
+			<ul >
+		        <li>
+			        <span class="span-title-color">Available</span>
+			        <h3><%=@available_leave%></h3>		        
+			    </li>
+			    <li>
+			    	<span class="span-title-color">Used</span>
+			        <h3><%= @leave_used%></h3>
+			    </li>
+			    <li>
+			    	<span class="span-title-color">Request Pending</span>
+			        <h3 class="req" id = "leave_request_pending" ><%=@request_pending%></h3>
+		        </li>
+	        </ul>
+		    <%=link_to 'Apply Leave / WFH', new_leave_path, remote: true, :class=>"btn btn-primary" %>
+
+	    </div>
+	</div>
+</div>
+
+<div class="col-md-12">
+	<h4>Announcements</h4>
+    <div class="Announcements bg-color-white">
+		<table >
+		    <%@announcements.each do |announcement|%>
+				<tr>
+					<td >
+						<span class="span-title-color">
+							<%=announcement.created_at.strftime("%d-%b-%Y")%>
+						</span>
+					</td>
+					<td>
+						<span class="text-primary">
+							<%=link_to announcement.title, announcement%>
+						</span>
+						<br /><%=truncate(announcement.message, :length => 250, escape: false).html_safe%>
+						<%= link_to "..Read More", announcement %>
+					</td>
+				</tr>
+			<%end%>		
+		</table>
+    </div>
+</div>
+
+
+
+
+

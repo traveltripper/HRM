@@ -1,0 +1,53 @@
+<% if current_page?(leave_index_path) %>
+<script>
+FusionCharts.ready(function () {
+    var demographicsChart = new FusionCharts({
+        type: 'pie2d',
+        renderAt: 'chart-container',
+        width: '100%',
+        height: '250',
+        dataFormat: 'json',
+        dataSource: {
+            "chart": {
+                      "caption": "",
+                      "bgcolor": "FFFFFF",
+                      "showvalues": "1",
+                      "showpercentvalues": "0",
+                      "showborder": "0",
+                      "showplotborder": "1",
+                      "showlegend": "0",
+                      "legendborder": "0",
+                      "legendposition": "bottom",
+                      "enablesmartlabels": "1",
+                      "use3dlighting": "1",
+                      "showshadow": "0",
+                      "labelFontSize": "12",
+                      "legendbgcolor": "#CCCCCC",
+                      "legendbgalpha": "20",
+                      "legendborderalpha": "0",
+                      "legendshadow": "0",
+                      "legendnumcolumns": "3",
+                      "pieRadius": "75",
+                      "plotTooltext": "$label : $datavalue",
+                      "palettecolors": "#f8bd19,#e44a00,#008ee4,#33bdda,#6baa01,#583e78"
+                    },
+            "data": [{
+                "label": "Leaves Used",
+                "value": <%=current_employee.leave_used%>
+            }, {
+                "label": "Leaves Available",
+                "value": <%=current_employee.days_of_leave - current_employee.leave_used%>
+            }, {
+                "label": "WFH Used",
+                "value": <%=current_employee.work_from_home_used%>
+            }, {
+                "label": "WFH Available",
+                "value": <%=current_employee.days_of_leave - current_employee.work_from_home_used%>
+            }]
+        }
+    });
+    demographicsChart.render();
+});
+</script>
+
+<%end%>

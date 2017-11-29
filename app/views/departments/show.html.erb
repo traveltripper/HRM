@@ -1,0 +1,6 @@
+<%title "Department"%>
+
+<h2 class="link-color">Department Name:<%=@department.name%></h2>
+<%= link_to ' Edit', edit_department_path(@department), :class=>"fa fa-pencil-square-o btn btn-warning" %> |
+<%= link_to ' Back', departments_path, :class=>"fa fa-arrow-left btn btn-primary" %> 
+<%= link_to ' Destroy', @department, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"fa fa-times btn btn-danger" %>

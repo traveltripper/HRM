@@ -1,0 +1,12 @@
+<%if upcoming_team_events != nil%>
+<h4><%= link_to "Upcoming Team Events", team_events_path, class:"text-color-black" %></h4>
+<% upcoming_team_events.each do |f| %>
+	<div class="col-md-12 bg-color-white">
+		<h5><%=link_to f.title, f, class:"event-title-color"%></h5>
+		<span class="span-title-color"><%=f.start.strftime("%A, %B %d")%></span>            
+		<%=image_tag f.picture.url(:medium)%>
+		<p><%=truncate(f.reason, length:200, escape:false).html_safe%></p>
+	</div>	
+<%end%>
+<%=link_to "View All", team_events_path, class:"btn-primary pull-right"%>
+<%end%>

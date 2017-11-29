@@ -1,0 +1,2 @@
+json.extract! healthinsurance, :id, :name, :card_number, :relation, :issued_date, :policy_start_date, :policy_end_date, :employee_id, :created_at, :updated_at
+json.url healthinsurance_url(healthinsurance, format: :json)

@@ -1,0 +1,166 @@
+<p></p>
+<div class="col-md-12">
+    <div class="col-md-12 bg-color-white">
+		<div class="col-md-5">
+			<h4 class="margin-top-bottom10">All Employees</h4>
+		</div>
+		
+		<div class="col-md-7 margin-top-bottom10">
+			<%= form_tag team_path, :method => 'get' do %>
+		    <div class="col-md-6">
+		    	<%= text_field_tag :search_term, params[:search_term], class:"form-control search-input", placeholder: "Search Employees", :onfocus=> "this.placeholder = ''", onblur: "this.placeholder = 'Search Employees'" %>
+		    </div>
+		    <div class="col-md-4" style="padding:0;">
+		    	<%= select_tag :department_id, options_for_select(Department.all.collect {|a| [a.name, a.id]}, params[:department_id]), :class => 'form-control search-input', :prompt => "Select Department" %>
+		    </div>
+		     <div class="col-md-1">
+		    	<%#= submit_tag "", :name => nil, :class=>"fa fa-plus btn btn-primary bottom-margin-10 link-float-right" %>
+		    	<button type="submit" class="btn btn-primary fa fa-search" style="margin:0;"></button>
+		    </div>
+			<% end %>
+		</div>
+		
+	</div>
+
+	<div class="col-md-12 nullPadding bg-color-white myteam1">
+        <ul class="team_list">
+        	<% @team.each_with_index do |emp, index| %>
+        		<li class="teammembers_img <%= 'active' if emp.id == @team_emp_id %>" id="<%=emp.id%>">
+		            <%= link_to employee_details_hrmdashboard_path(emp), remote:true, class:'emp_link' do %>
+		            	
+		            	<%=image_tag emp.profile_picture.url(:thumb), class:'img-circle'%>
+		            	<h6><%= emp.fullname  %></h6>
+				    	<p><%= emp.designation  %></p>
+				    	
+		            <%end%>
+	            </li>
+            <%end%> 
+            <%if @team.blank?%>
+            	<div class="col-md-12">
+            		<p>There are no results that match your search</p>
+            	</div>
+            <%end%> 
+        </ul>
+	</div>
+
+	<div class="col-md-12">
+		<hr style="border-color:#0092B5;margin-top: 0px;margin-bottom: 0px;border-width: 3px;">
+	</div>
+	<div class="clearfix"></div>
+	
+	<%if @team_employee %>
+		<div class="col-md-12 bg-color-white">
+	        <div class="Team bg-color-white">
+				<div class="col-md-6 Team">
+					<!-- <img class="profileImg" src="images/avatar.jpg" alt=""> -->
+					<span id="emp_profile_picture"><%=image_tag @team_employee.profile_picture.url(:medium) %></span>
+					<h6 class="profileImgHeading" id="emp_name"><%=@team_employee.fullname%></h6>
+					<!-- <h6 class="profileImgEmail emp_email"><%#=@team_employee.email%></h6> -->
+					<p class="profileImgText" id="emp_aboutme"><%=@team_employee.about_me%></p>
+				</div>
+				<div class="col-md-6 team-icons">
+				    
+			        <%if current_employee.email == "traveltripperhrm@traveltripper.com"%>
+			            <div id = "org-tree">
+			    		<%=link_to 'Organization Chart', orgtree_path(:params => { :employee_id => @team_employee.id }), remote:true%>
+			    		</div>
+			    	<%end%>				    
+					<h4>General Information</h4>
+					<p>Employee ID: <span id="emp_id"><%=@team_employee.ttid%></span></p>
+					<p>Position: <span id="emp_designation"><%=@team_employee.designation%></span></p>
+					<p>Department: <span id="emp_department"><%=@team_employee.department.name%></span></p>
+					<p>Supervisor: <span id="emp_manager">
+						<%if @team_employee.manager%>
+							<%if @team_employee.department_id == @team_employee.manager.department_id%>
+								<%=link_to @team_employee.manager.fullname, team_path(:params => { :employee_id => @team_employee.manager.id }) %>
+							<%else%>
+								<%=@team_employee.manager.fullname%>
+							<%end%>									
+						<%else%>
+							Manager
+						<%end%>						
+					</span></p>					
+					<h4>Contact Information</h4>
+					<p><i class="fa fa-envelope-o" aria-hidden="true"></i>  <span class="emp_email company_email"><%=mail_to @team_employee.email%></span></p>
+					<%if @team_employee.contact_no%>
+					<p><i class="fa fa-mobile" aria-hidden="true" style="font-size:25px;"></i>  <span id="emp_phone"><%=@team_employee.contact_no%></span></p>
+					<%end%>
+					<%#if @team_employee.skype_id%>
+					<p><i class="fa fa-skype" aria-hidden="true" style="font-size:19px;"></i>  <span id="emp_skypeid"><%=@team_employee.skype_id%></span></p>
+					<%#end%>
+					<h4>Additional Information</h4>
+					<p>Birthday: <span id="emp_birthday"><%=@team_employee.actual_dob.strftime("%d-%b") if @team_employee.actual_dob %></span></p>
+				</div>
+				<div class="col-md-12">
+					<hr style="border-color:#0092B5;margin-top: 0px;margin-bottom: 0px;border-width: 3px;">
+				</div>
+	        </div>
+	</div>
+	<% elsif @team.first %>
+	
+	<div class="col-md-12 bg-color-white">
+        <div class="Team bg-color-white">
+			<div class="col-md-6 Team">
+				<!-- <img class="profileImg" src="images/avatar.jpg" alt=""> -->
+				<span id="emp_profile_picture"><%=image_tag @team.first.profile_picture.url(:medium) %></span>
+				<h6 class="profileImgHeading" id="emp_name"><%=@team.first.fullname%></h6>			
+				<p class="profileImgText" id="emp_aboutme"><%=@team.first.about_me%></p>
+			</div>
+			<div class="col-md-6 team-icons">
+
+		        <%if current_employee.email == "traveltripperhrm@traveltripper.com"%>
+		            <div id = "org-tree">
+	    			<%=link_to 'Organization Chart', orgtree_path(:params => { :employee_id => @team.first.id }), remote:true%>
+	    			</div>
+	    		<%end%>
+				<h4>General Information</h4>
+				<p>Employee ID: <span id="emp_id"><%=@team.first.ttid%></span></p>
+				<p>Position: <span id="emp_designation"><%=@team.first.designation%></span></p>
+				<p>Department: <span id="emp_department"><%=@team.first.department.name%></span></p>
+				<p>Supervisor: 
+				<span id="emp_manager">
+				<%if @team.first.manager%>					
+						<%=link_to @team.first.manager.fullname, team_path(:params => { :employee_id => @team.first.manager.id }) %>										
+				<%else%>
+					Manager
+				<%end%>
+				</span></p>				
+				<h4>Contact Information</h4>				
+				<p><i class="fa fa-envelope-o" aria-hidden="true"></i> <span class="emp_email company_email"><%=mail_to @team.first.email  %></span></p>
+				<p><i class="fa fa-mobile" aria-hidden="true" style="font-size:25px;"></i> <span id="emp_phone"><%=@team.first.contact_no%></span></p>
+
+				<p><i class="fa fa-skype" aria-hidden="true" style="font-size:19px;"></i> <span id="emp_skypeid"><%=@team.first.skype_id%></span></p>
+
+				<h4>Additional Information</h4>
+				<p>Birthday: <span id="emp_birthday"><%=@team.first.actual_dob.strftime("%d-%b") if @team.first.actual_dob %></span></p>
+			</div>
+			<div class="col-md-12">
+				<hr style="border-color:#0092B5;margin-top: 0px;margin-bottom: 0px;border-width: 3px;">
+			</div>
+        </div>
+	</div>	
+	<%end%>
+</div>
+
+<div class="col-md-12">
+	<h4>Announcements</h4>
+    <div class="Announcements bg-color-white">
+		<table >
+		    <%@announcements.each do |announcement|%>
+				<tr>
+					<td >
+						<span class="span-title-color">
+							<%=announcement.created_at.strftime("%d-%b-%Y")%>
+						</span>
+					</td>
+					<td>
+						<span class="text-primary">
+							<%=link_to announcement.title, announcement%>
+						</span>
+						<br /><%=truncate(announcement.message, :length => 190, escape:false).html_safe%><%= link_to "..Read More", announcement %>
+					</td>
+				</tr>
+			<%end%>		
+		</table>
+    </div>
+</div>

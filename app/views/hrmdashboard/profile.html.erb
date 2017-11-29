@@ -1,0 +1,68 @@
+<div class="row">	
+	<div class="col-md-8">
+		<h4>My Profile</h4>
+	</div>
+	<div class="col-md-offset-2 col-md-2">
+		<%=link_to 'Update Profile', edit_profile_path, :class=>'btn btn-primary', remote:true%>
+	</div>	
+</div>
+<div class="col-md-12 bg-color-white">
+    <div class="Team bg-color-white">
+		<div class="col-md-4 Team">
+			<a href="" class="upload_picture">
+				<%=image_tag @employee.profile_picture.url(:medium), class: "profileImg"%>
+			<span class="change_picture"><i class="fa fa-pencil" aria-hidden="true"></i></span></a>
+
+			<h6 class="profileImgHeading"><%=@employee.fullname%></h6>
+			<!-- <h6 class="profileImgEmail"><%#=@employee.email%></h6> -->
+			<p class="profileImgText"><%=@employee.about_me%></p>
+			<%=form_for @employee, :url=> update_profile_path, :html => {:id=>"update_profile_picture", class:"upload_profile_picture"} do |f|%>
+				<%=f.file_field :profile_picture, class: "img_upload profile_picture_upload" %>
+				<%#=f.submit%>
+			<%end%>			
+		</div>
+		<div class="col-md-offset-1 col-md-7">
+			<h4>General Information</h4>
+			<p>Company Id: <%=@employee.ttid%></p>
+			<p>Position: <%=@employee.designation%></p>
+			<p>Department: <%=@employee.department.name%></p>
+			<p>Supervisor:
+				<%if @employee.manager%>
+					<%if @employee.department_id == @employee.manager.department_id%>
+						<%=link_to @employee.manager.fullname, team_path(:params => { :employee_id => @employee.manager.id }) %>
+					<%else%>
+						<%=@employee.manager.fullname%>
+					<%end%>					
+				<%else%>
+					Manager
+				<%end%>
+			</p>
+			<p>HR: <%display_hr.each_with_index do |name, i|%>							 
+						<% if (i + 1) != display_hr.length %>
+							<%=link_to name.fullname.capitalize, team_path(:params => { :employee_id => name.id }) %>,
+						<%else%>
+							<%=link_to name.fullname.capitalize, team_path(:params => { :employee_id => name.id }) %>
+						<%end%>
+					<%end%>
+			</p>
+			<h4>Contact Information</h4>
+			<p>E-Mail: <span class="company_email"><%=@employee.email%></span></p>
+			<p>Phone: <span id="emp_phone"><%=@employee.contact_no%></span></p>
+			<%unless @employee.skype_id.blank?%>
+			<p>Skype: <span id="emp_skypeid"><%=@employee.skype_id%></span></p>
+			<%end%>
+			<h4>Additional Information</h4>
+			<p>Birthday: <%=@employee.actual_dob.strftime("%d-%B") if @employee.actual_dob %></p>
+			<h4>Education Information</h4>
+			<p>Graduation: <%=@employee.graduation%></p>
+			<%unless @employee.pg.blank?%>
+			<p>Post Graduation: <%=@employee.pg%></p>
+			<%end%>
+			<h4>Professional Experience</h4>
+			<p>Previous Company: <%=@employee.previous_employer%></p>
+		</div>
+    </div>
+</div>
+
+
+

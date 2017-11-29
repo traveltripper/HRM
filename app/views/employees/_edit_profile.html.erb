@@ -1,0 +1,67 @@
+<div id="leave-modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">    
+      <div class="panel-heading-style">Edit Profile</div>
+      <div class="panel-body pan">
+        <%=form_for @employee, :url=> update_profile_path do |f|%>
+          <div class="form-body pal">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <%= f.label :contact_no, 'Contact Number' %><br>
+                   <%= f.text_field :contact_no, :class=>"form-control" %>
+                </div>
+              </div>
+              <div class="col-md-6">                
+                <div class="form-group">
+                  <%=f.label :personal_email%><br/>
+                  <%=f.text_field :personal_email, class: 'form-control'%>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <%= f.label :emergency_name, 'Emergency Contact Name' %><br>
+                  <%= f.text_field :emergency_name, :class=>"form-control" %>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <%= f.label :emergency_contact_no, 'Emergency Contact Number' %><br>
+                  <%= f.text_field :emergency_contact_no, :class=>"form-control" %>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+            <div class="col-md-6">              
+              <div class="form-group">
+                <%=f.label :skype_id, "Skype id"%><br/>
+                <%=f.text_field :skype_id, class: 'form-control'%>
+              </div>              
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <%=f.label :current_address%><br/>
+                <%=f.text_area :current_address, class: 'form-control'%>
+              </div>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <%=f.label :about_me, "About Me"%><br/>
+                <%=f.text_area :about_me, class: 'form-control'%>
+              </div>
+            </div>
+            </div>  
+          </div>
+          <div class="form-submit-buttons"> 
+            <button type="button" class="btn btn-cgray width-50p btn-border-left-radius" data-dismiss="modal">CANCEL</button>
+            <%= f.submit "Update Profile", class: "btn btn-cblue width-50p btn-border-right-radius"%>
+          </div>
+        <%end%>                     
+      </div>            
+    </div>
+</div>
+</div>

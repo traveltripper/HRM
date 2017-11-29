@@ -1,0 +1,130 @@
+<% if current_page?(leave_index_path) && current_employee.email.in?(["traveltripperhrm@traveltripper.com", "svuppala@traveltripper.com", "nsangana@traveltripper.com"]) %>
+    <!-- <h3></h3> -->
+    <h4 style="margin-top: 70px;">Leave/WFH chart</h4>
+	<h3></h3><div id="chart-container">FusionCharts XT will load here!</div>
+<%end%>
+<% if current_page?(root_path) || current_page?(dashboard_path) %>
+<h4>Nominations</h4>
+<%= form_for(Nomination.new) do |f| %> 
+        <div class="col-md-12 bg-color-white" style="padding-bottom:0;">
+        	Please suggest a name for HRM tool:
+        	<div class="col-md-9" style="padding-left:0;">  
+        		<br/>  
+    			<%= f.text_field :name, placeholder: "Suggest Name", required: true, class:"form-control", readonly: true %>
+    			<%= f.hidden_field :employee_id, :value => current_employee.id %>   
+    		</div>
+    		<div class="col-md-3" style="margin-top: 8px;">
+    			<%= f.submit "submit", class: "btn btn-primary"%>    
+    		</div>
+    		<p style="margin-bottom:0;">(last date for submission 23-12-2016)</p>
+        </div>   	
+    
+<% end %>
+
+<%if polling.present? && current_employee.email.in?(["traveltripperhrm@traveltripper.com", "srinivasvuppala@traveltripper.com", "nsangana@traveltripper.com"])  %>
+<%if check_poll_status(polling.id) < 1 %>
+<div class="row">
+	<div class="col-md-12">
+	<h4>Todays Polls</h4>
+	</div>
+</div>
+<div class="col-md-12 bg-color-white" style="padding-bottom:0; ">
+	<p class="margin0" style="font-weight: 400; padding-left:15px;" ><%=polling.question%></p>
+	<%=form_for Poll.new do |f|%>
+	    <div style="padding-left:15px;" >
+		<%polling.pollanswers.each do |answer|%>
+		    <!-- <p class="margin0" style="padding-top:4px;"> -->
+		    <div class="row">
+		    <div class="col-md-12">
+		    <div class="col-md-3" style="padding-top:0;"> 
+		    	<%= f.radio_button :pollanswer_id, answer.id, required: 'required' %> &nbsp; 
+				<%=answer.option%> 
+			</div>
+
+            <div class="progress col-md-6" style="padding-left:0; padding-right:0">
+    			<div class="progress-bar <%= answer.option == 'No' ? 'progress-bar-danger': 'progress-bar-info' %>" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:<%=caliculate_percentage(polling.id, answer.id) %>%"><%=caliculate_percentage(polling.id, answer.id) %>% 
+    		</div>
+  			</div>
+  			</div>
+  			</div>
+			<!-- </p> -->
+		<%end%>
+		<%=f.hidden_field :pollquestion_id, value: polling.id%>
+		<%=f.submit "submit", class:"btn btn-primary", style:"margin-top:2px;"%>
+		</div>
+	<%end%>
+</div>
+<% end %>
+<%end%>
+<%end%>
+<% if controller.controller_name == "cpp" and controller.action_name == "show"%>
+	<h4>CPP for other designations</h4>
+	<div class="bg-color-white">
+	<%cpp_designations_except_current.each do |cpp|%>
+		<p id="cpp_designation"><%=link_to cpp.designation, cpp, class:"custom_bluecolor"%></p>
+	<%end%>
+	</div>
+<%end%>
+
+<% if controller.controller_name == "cpp" and controller.action_name == "index"%>
+	<h4>CPP based on designations</h4>
+	<div class="bg-color-white">
+	<%cpp_designations.each do |cpp|%>
+		<p id="cpp_designation"><%=link_to cpp.designation, cpp, class:"custom_bluecolor"%></p>
+	<%end%>		
+	</div>
+<%end%>
+
+<%if false%>
+<% if current_page?(leave_index_path) || current_page?(profile_path) %>
+<div class="row">
+<div class="col-md-12">
+<h4>Announcements</h4>
+	<div class="col-md-12 bg-color-white">
+	<%latest_announcements.each do |announcement|%>
+		<%=link_to announcement.title, announcement, class:"announcement-style"%>
+		<%=truncate(announcement.message, length:150, escape: false).html_safe%><%=link_to "..Read More", announcement, class:"title-blue"%><br/>	
+	<%end%>	
+	</div>
+	<%=link_to 'View All', announcements_path, class:'btn-primary pull-right'%>
+</div>
+</div>
+<%end%>
+<%end%>
+
+<% unless controller.controller_name == "cpp"%> 
+<div class="row">
+<div class="col-lg-12">
+	<h4>Upcoming Company Events</h4>
+	<% upcoming_company_events.each do |f| %>
+		<div class="col-md-12 bg-color-white">
+			<h5><%= link_to f.title.capitalize, f, class:"event-title-color"%></h5>
+			<span class="span-title-color"><%=f.start.strftime("%A, %B %d")%></span>            
+			<%=image_tag f.picture.url(:medium)%>
+			<%=truncate(f.reason, length:200, escape:false).html_safe%>
+		</div>	
+	<%end%>
+	<%=link_to "View All", company_events_path, class:"btn-primary pull-right"%>
+</div>
+</div>
+
+
+<div class="row">
+<div class="col-lg-12">
+ <%unless upcoming_team_events.blank? %> 
+	<h4>Upcoming Team Events</h4>
+	<% upcoming_team_events.each do |f| %>
+		<div class="col-md-12 bg-color-white">
+			<h5><%=link_to f.title.capitalize, f, class:"event-title-color"%></h5>
+			<span class="span-title-color"><%=f.start.strftime("%A, %B %d")%></span>        
+			<%=image_tag f.picture.url(:medium)%>
+			<%=truncate(f.reason, length:200, escape:false).html_safe%>
+		</div>	
+	<%end%>
+<%=link_to "View All", team_events_path, class:"btn-primary pull-right"%>
+<%end%>
+</div>
+</div>
+<%end%>
+
+<%=render :partial => 'layouts/pie.js.erb' %>

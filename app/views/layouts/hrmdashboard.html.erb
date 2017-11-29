@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HRM</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <script src='http://www.google.com/jsapi'></script>
+  <script src="/assets/fusioncharts.js"></script>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,200,300,400,400i,500,600,700,900," rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/assets/hrmdashboard.css">
+</head>
+
+<body>
+  <div id="hrm_dashboard">
+    <%= render 'layouts/header' %>
+  	<%= render 'layouts/navbar' %>
+  	<div class="col-md-12 nullPadding padding-bottom-50">
+		  <h3></h3>
+      <% flash.each do |key, value| %>
+          <div class="alert alert-<%= key %> alert-dismissable fade in">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+          <%= value %></div>
+      <% end %>
+		  <div class="col-md-8">
+        
+    		<%= yield %>
+    	</div>
+    	<div class="col-md-4 events ">
+        <% if current_page?(:controller => 'hrmdashboard', :action => 'payroll') %>
+          <%=render 'hrmdashboard/downloadforms'%>
+        <%elsif current_page?(:controller => 'events', :action => 'company_events') %> 
+           <%=render 'layouts/team_events'%>
+        <%elsif current_page?(:controller => 'events', :action => 'team_events') %> 
+           <%=render 'layouts/company_events'%>
+        <%else%> 	
+    		  <%=render 'layouts/upcoming_events'%>
+        <%end%>
+		  </div>
+    </div>
+    <%= render 'layouts/footer' %>
+  </div>
+</body>
+</html>

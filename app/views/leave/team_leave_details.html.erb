@@ -1,0 +1,49 @@
+<div class="col-md-12">
+  <div class="row">
+    <div class="col-md-4"> 
+     <h4>Team Members Leaves</h4>
+    </div>
+    <div class="col-md-8 text-align-right">      
+      <%if @employee.role.name == "Manager"%>
+        <%=link_to 'Team Members Leaves', team_leave_path, :class=>"btn btn-primary" %>
+      <%end%>
+    </div>
+</div>
+</div>
+
+
+
+<div class="col-md-12">
+  <table class="table table-hover-color table-white-background table-bordered table-color" id="team-mebers-leaves">
+    <thead>
+      <tr>
+        <th>S.No</th>      
+        <th>Employee Name</th>
+        <th>DOJ</th>
+        <th>Leave Available</th>
+        <th>Leave Used</th>
+        <th>Request Pending</th>
+        <th>WFH Available</th>
+        <th>WFH Used</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @team.each_with_index do |emp, index| %>
+        <tr>   
+            <td><%= index+1%></td>
+            <td style="padding-left: 10px; text-align: left !important;"><%= emp.fullname%></td>
+            <td><%= emp.date_of_joining.strftime("%d-%b-%Y")%></td>
+            <td><%= emp.days_of_leave - emp.leave_used%></td>
+            <td><%= emp.leave_used%></td>
+            <td><%= emp.leave.where("status IS ? and leave_cancel =?", nil, false).count %></td>
+            <td><%= emp.days_of_leave - emp.work_from_home_used%></td>
+            <td><%= emp.work_from_home_used%></td>            
+        </tr>        
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<br/>
+<a href="javascript:history.back()" class="fa fa-arrow-left btn btn-primary">Back</a>
