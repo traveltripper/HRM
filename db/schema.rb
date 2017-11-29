@@ -13,16 +13,13 @@
 
 ActiveRecord::Schema.define(version: 20161219124820) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "active_admin_comments", force: :cascade do |t|
-    t.string   "namespace"
-    t.text     "body"
-    t.string   "resource_id",   null: false
-    t.string   "resource_type", null: false
-    t.integer  "author_id"
-    t.string   "author_type"
+    t.string   "namespace",     limit: 255
+    t.text     "body",          limit: 65535
+    t.string   "resource_id",   limit: 255,   null: false
+    t.string   "resource_type", limit: 255,   null: false
+    t.integer  "author_id",     limit: 4
+    t.string   "author_type",   limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -32,197 +29,197 @@ ActiveRecord::Schema.define(version: 20161219124820) do
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
   create_table "admin_users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
+    t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
   end
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "announcements", force: :cascade do |t|
-    t.string   "title"
-    t.text     "message"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.integer  "employee_id"
-    t.string   "slug"
-    t.boolean  "active",      default: true
+    t.string   "title",       limit: 255
+    t.text     "message",     limit: 65535
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.integer  "employee_id", limit: 4
+    t.string   "slug",        limit: 255
+    t.boolean  "active",                    default: true
   end
 
   add_index "announcements", ["slug"], name: "index_announcements_on_slug", unique: true, using: :btree
 
   create_table "conference_rooms", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       limit: 255
     t.boolean  "available"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "cpps", force: :cascade do |t|
-    t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.string   "designation"
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "designation", limit: 255
   end
 
   create_table "departments", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "employees", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.integer  "manager_id"
-    t.integer  "role_id"
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
-    t.string   "email",                         default: "",    null: false
-    t.string   "encrypted_password",            default: "",    null: false
-    t.string   "reset_password_token"
+    t.string   "first_name",                    limit: 255
+    t.string   "last_name",                     limit: 255
+    t.integer  "manager_id",                    limit: 4
+    t.integer  "role_id",                       limit: 4
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
+    t.string   "email",                         limit: 255,   default: "",    null: false
+    t.string   "encrypted_password",            limit: 255,   default: "",    null: false
+    t.string   "reset_password_token",          limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                 default: 0,     null: false
+    t.integer  "sign_in_count",                 limit: 4,     default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.string   "phone"
-    t.string   "middle_name"
-    t.string   "ttid"
-    t.string   "personal_email"
-    t.string   "contact_no"
+    t.string   "current_sign_in_ip",            limit: 255
+    t.string   "last_sign_in_ip",               limit: 255
+    t.string   "phone",                         limit: 255
+    t.string   "middle_name",                   limit: 255
+    t.string   "ttid",                          limit: 255
+    t.string   "personal_email",                limit: 255
+    t.string   "contact_no",                    limit: 255
     t.datetime "actual_dob"
     t.datetime "certificate_dob"
-    t.string   "emergency_name"
-    t.string   "emergency_contact_no"
+    t.string   "emergency_name",                limit: 255
+    t.string   "emergency_contact_no",          limit: 255
     t.datetime "doj"
-    t.integer  "prev_years_of_exp"
-    t.string   "pg"
-    t.string   "graduation"
-    t.text     "address"
-    t.string   "source_of_hire"
-    t.string   "pancard_no"
-    t.string   "passport_no"
-    t.integer  "department_id"
-    t.string   "status"
+    t.integer  "prev_years_of_exp",             limit: 4
+    t.string   "pg",                            limit: 255
+    t.string   "graduation",                    limit: 255
+    t.text     "address",                       limit: 65535
+    t.string   "source_of_hire",                limit: 255
+    t.string   "pancard_no",                    limit: 255
+    t.string   "passport_no",                   limit: 255
+    t.integer  "department_id",                 limit: 4
+    t.string   "status",                        limit: 255
     t.datetime "lwd"
     t.datetime "date_of_resignation"
-    t.string   "nationality"
-    t.string   "blood_group"
-    t.string   "marital_status"
-    t.string   "graduation_institution"
-    t.string   "graduation_university"
-    t.string   "pg_university"
-    t.string   "pg_institution"
-    t.string   "previous_employer"
-    t.string   "pf_no"
-    t.string   "aadhar_no"
-    t.text     "current_address"
-    t.string   "father_or_spouse"
-    t.string   "health_insurance_card_no"
-    t.string   "profile_picture_file_name"
-    t.string   "profile_picture_content_type"
-    t.integer  "profile_picture_file_size"
+    t.string   "nationality",                   limit: 255
+    t.string   "blood_group",                   limit: 255
+    t.string   "marital_status",                limit: 255
+    t.string   "graduation_institution",        limit: 255
+    t.string   "graduation_university",         limit: 255
+    t.string   "pg_university",                 limit: 255
+    t.string   "pg_institution",                limit: 255
+    t.string   "previous_employer",             limit: 255
+    t.string   "pf_no",                         limit: 255
+    t.string   "aadhar_no",                     limit: 255
+    t.text     "current_address",               limit: 65535
+    t.string   "father_or_spouse",              limit: 255
+    t.string   "health_insurance_card_no",      limit: 255
+    t.string   "profile_picture_file_name",     limit: 255
+    t.string   "profile_picture_content_type",  limit: 255
+    t.integer  "profile_picture_file_size",     limit: 4
     t.datetime "profile_picture_updated_at"
     t.datetime "date_of_joining"
-    t.integer  "days_of_leave"
-    t.integer  "leave_used",                    default: 0
-    t.string   "skype_id"
-    t.string   "designation"
-    t.text     "about_me"
-    t.string   "no_of_health_ins_cards_issued"
+    t.integer  "days_of_leave",                 limit: 4
+    t.integer  "leave_used",                    limit: 4,     default: 0
+    t.string   "skype_id",                      limit: 255
+    t.string   "designation",                   limit: 255
+    t.text     "about_me",                      limit: 65535
+    t.string   "no_of_health_ins_cards_issued", limit: 255
     t.boolean  "password_changed"
-    t.boolean  "welcome_email_sent",            default: false
-    t.integer  "work_from_home_used",           default: 0
+    t.boolean  "welcome_email_sent",                          default: false
+    t.integer  "work_from_home_used",           limit: 4,     default: 0
   end
 
   add_index "employees", ["email"], name: "index_employees_on_email", unique: true, using: :btree
   add_index "employees", ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true, using: :btree
 
   create_table "events", force: :cascade do |t|
-    t.string   "title"
+    t.string   "title",                limit: 255
     t.datetime "start"
     t.datetime "end_date"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.text     "reason"
-    t.string   "picture_file_name"
-    t.string   "picture_content_type"
-    t.integer  "picture_file_size"
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
+    t.text     "reason",               limit: 65535
+    t.string   "picture_file_name",    limit: 255
+    t.string   "picture_content_type", limit: 255
+    t.integer  "picture_file_size",    limit: 4
     t.datetime "picture_updated_at"
-    t.integer  "employee_id"
-    t.boolean  "publish",              default: true
-    t.string   "slug"
+    t.integer  "employee_id",          limit: 4
+    t.boolean  "publish",                            default: true
+    t.string   "slug",                 limit: 255
   end
 
   add_index "events", ["slug"], name: "index_events_on_slug", unique: true, using: :btree
 
   create_table "healthinsurances", force: :cascade do |t|
-    t.string   "name"
-    t.string   "card_number"
-    t.string   "relation"
+    t.string   "name",              limit: 255
+    t.string   "card_number",       limit: 255
+    t.string   "relation",          limit: 255
     t.datetime "issued_date"
     t.datetime "policy_start_date"
     t.datetime "policy_end_date"
-    t.integer  "employee_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.integer  "employee_id",       limit: 4
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   create_table "leaves", force: :cascade do |t|
-    t.integer  "employee_id"
+    t.integer  "employee_id",    limit: 4
     t.datetime "fromdate"
     t.datetime "todate"
-    t.text     "reason"
+    t.text     "reason",         limit: 65535
     t.boolean  "status"
-    t.integer  "no_of_days"
-    t.integer  "leavetype_id"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.integer  "leave_balance"
-    t.text     "reject_reason"
-    t.boolean  "leave_cancel",   default: false
-    t.boolean  "work_from_home", default: false
+    t.integer  "no_of_days",     limit: 4
+    t.integer  "leavetype_id",   limit: 4
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+    t.integer  "leave_balance",  limit: 4
+    t.text     "reject_reason",  limit: 65535
+    t.boolean  "leave_cancel",                 default: false
+    t.boolean  "work_from_home",               default: false
   end
 
   create_table "leavetypes", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "nominations", force: :cascade do |t|
-    t.string   "type"
-    t.string   "name"
-    t.integer  "employee_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "type",        limit: 255
+    t.string   "name",        limit: 255
+    t.integer  "employee_id", limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "payrolls", force: :cascade do |t|
-    t.integer  "employee_id"
-    t.string   "attachment"
+    t.integer  "employee_id", limit: 4
+    t.string   "attachment",  limit: 255
     t.datetime "pay_date"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "roles", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
 end
