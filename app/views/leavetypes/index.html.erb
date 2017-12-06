@@ -16,6 +16,7 @@
     <tr>
     <th>ID</th>
     <th>Name</th>
+    <th>Limit</th>
     <th colspan="2"></th>
     </tr>
   </thead>
@@ -25,6 +26,7 @@
       <tr>
         <td><%= index+1 %></td>
         <td><%=link_to leavetype.name, leavetype%></td>
+        <td><%=link_to leavetype.limit, leavetype%></td>
         <td><%= link_to '', leavetype, :class=>"fa fa-eye btn" %></td>
         <td><%= link_to '', edit_leavetype_path(leavetype), :class=>"fa fa-pencil-square-o btn " %></td>
         <!-- <td><%= link_to 'Destroy', leavetype, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->

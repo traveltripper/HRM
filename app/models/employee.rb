@@ -1,4 +1,5 @@
 class Employee < ActiveRecord::Base
+  require 'csv'
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :timeoutable
@@ -17,8 +18,8 @@ class Employee < ActiveRecord::Base
   has_many :polls
   validates_uniqueness_of :ttid
   
-  validates :email, format: { with: /\b[A-Z0-9._%a-z\-]+@traveltripper\.com\z/,
-                  message: "must be a traveltripper.com account" }
+  validates :email, format: { with: /\b[A-Z0-9._%a-z\-]+@traveltripper|@hoteltrader\.com\z/,
+                  message: "must be a traveltripper.com or hoteltrader.com account" }
 
   has_attached_file :profile_picture, styles: { medium: "225x225#", thumb: "100x100!" }, default_url: "/images/no-avatar.jpg"
   validates_attachment_content_type :profile_picture, content_type: /\Aimage\/.*\z/
@@ -32,7 +33,7 @@ class Employee < ActiveRecord::Base
   scope :active, -> { where(status: "Active") }
 
   def fullname
-  	first_name.capitalize.to_s + " " + middle_name.capitalize.to_s + " " + last_name.capitalize.to_s
+  	first_name.to_s + " " + middle_name.to_s + " " + last_name.to_s
   end
   
   def emp_birthday    
@@ -50,17 +51,32 @@ class Employee < ActiveRecord::Base
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|  
-      row1 = row.to_hash 
-      row2 = {"password"=>"123456" , "password_confirmation"=>"123456"}
-      row3 =row1.merge(row2.to_hash)
-      p ".........."
-      p row3
-      p ".........."
-           
-      Employee.create! row3
+      row = row.to_hash.values 
+      # row2 = {"password"=>"123456" , "password_confirmation"=>"123456"}
+      # row3 =row1.merge(row2.to_hash)
+      Employee.new(
+       :role_id => "1",
+       :ttid => row[0],
+       :first_name => row[1],
+       :last_name => row[2],
+       :department_id => row[3],
+       :designation => row[4],
+       :date_of_joining => row[5],
+       :contact_no => row[6],
+       :email => row[7],
+       :personal_email => row[8],
+       :emergency_contact_no => row[9],
+       :emergency_name => row[10],
+       :certificate_dob => row[11],
+       :actual_dob => row[12],
+       :nationality => row[13],
+       :manager_id => "nil",
+       :password => "123456" , 
+       :password_confirmation =>"123456").save     
+      # Employee.create! row3
     end
   end
-
+  
   def active_for_authentication?
     super && self.checking_active # i.e. super && self.is_active
   end
