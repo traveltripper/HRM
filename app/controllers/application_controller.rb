@@ -31,15 +31,17 @@ class ApplicationController < ActionController::Base
     end
     @department = current_employee.department
     @role = Role.where(:name => "Manager").first
-    @mng = Employee.where(:role_id =>@role.id , :department_id => @department.id).first
-    if @mng
-      if @current_event
-      @mng.events.where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today).where.not(id: @current_event.id).limit(2)
+    if Employee.count > 1
+      @mng = Employee.where(:role_id =>@role.id , :department_id => @department.id).first
+      if @mng
+        if @current_event
+        @mng.events.where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today).where.not(id: @current_event.id).limit(2)
 
-      else
-      @mng.events.where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today).limit(2)
-      end
-    end        
+        else
+        @mng.events.where(publish: true).where('start >= ? or end_date >= ?', Date.today, Date.today).limit(2)
+        end
+      end 
+    end       
   end
 
   def cpp_designations_except_current    
@@ -62,11 +64,13 @@ class ApplicationController < ActionController::Base
   end
 
   def display_hr
-    role = Role.where(name: "HR").first
-    emp = Employee.where(role_id: role.id)
-    @names = []  
-    emp.each do |name|
-      @names << name
+    @names = []
+    if Employee.count > 1
+      role = Role.where(name: "HR").first
+      emp = Employee.where(role_id: role.id)
+      emp.each do |name|
+        @names << name
+      end
     end
     @names
   end

@@ -7,27 +7,30 @@ class HrmdashboardController < ApplicationController
   	@emp = current_employee
     @team = Employee.active.where(:department_id=> @emp.department_id).where.not(:id => @emp.id).ordered_by_first_name      
   	@leave_used = @emp.leave_used
-  	@available_leave = @emp.days_of_leave - @leave_used  	
+  	# @available_leave = @emp.days_of_leave - @leave_used  	
   	@request_pending = @emp.leave.where("status IS ? and leave_cancel =? and work_from_home =?", nil, false, false).count  
   	@announcements = Announcement.active.limit(4)   
   end
 
   def team
+
     @emp = current_employee
     @announcements = Announcement.active.limit(4)
 
-    testadmin = Employee.where(:email => "traveltripperhrm@traveltripper.com").first   
-    @team = Employee.where.not(id: [@emp.id, testadmin.id]).active.ordered_by_first_name
-
-    if (params[:search_term].present?) && (params[:department_id].present?)
-      @team = @team.where("LOWER(ttid) LIKE ? or LOWER(first_name) LIKE ? or LOWER(middle_name) LIKE ? or LOWER(last_name) LIKE ? or LOWER(email) LIKE ? or contact_no LIKE ?", "%#{params[:search_term].downcase}%", "%#{params[:search_term].downcase}%", "%#{params[:search_term].downcase}%", "%#{params[:search_term].downcase}%", "%#{params[:search_term].downcase}%", "%#{params[:search_term].downcase}%").where(department_id: params[:department_id] )
-    elsif params[:search_term].present?
-      @team = @team.where("LOWER(ttid) LIKE ? or LOWER(first_name) LIKE ? or LOWER(middle_name) LIKE ? or LOWER(last_name) LIKE ? or LOWER(email) LIKE ? or contact_no LIKE ?", "%#{params[:search_term].downcase}%", "%#{params[:search_term].downcase}%", "%#{params[:search_term].downcase}%", "%#{params[:search_term].downcase}%", "%#{params[:search_term].downcase}%", "%#{params[:search_term].downcase}%")
-    elsif params[:department_id].present?
-      @team = @team.where("department_id =?", params[:department_id])
-    else
-      @team
-    end
+    testadmin = Employee.first  
+     
+      @team = Employee.where.not(id: [@emp.id, testadmin.id]).ordered_by_first_name
+      # @team = Employee.where.not(id: [@emp.id, testadmin.id]).active.ordered_by_first_name
+        if (params[:search_term].present?) && (params[:department_id].present?)
+          p params[:department_id]
+          @team = @team.where("LOWER(ttid) ? or LOWER(first_name) LIKE ? or LOWER(middle_name) LIKE ? or LOWER(last_name) LIKE ? or LOWER(email) LIKE ? or contact_no LIKE ?", "%#{params[:search_term].downcase}%", "%#{params[:search_term].downcase}%", "%#{params[:search_term].downcase}%", "%#{params[:search_term].downcase}%", "%#{params[:search_term].downcase}%", "%#{params[:search_term].downcase}%").where(department_id: params[:department_id] )
+        elsif params[:search_term].present?
+          @team = @team.where("LOWER(ttid) LIKE ? or LOWER(first_name) LIKE ? or LOWER(middle_name) LIKE ? or LOWER(last_name) LIKE ? or LOWER(email) LIKE ? or contact_no LIKE ?", "%#{params[:search_term].downcase}%", "%#{params[:search_term].downcase}%", "%#{params[:search_term].downcase}%", "%#{params[:search_term].downcase}%", "%#{params[:search_term].downcase}%", "%#{params[:search_term].downcase}%")
+        elsif params[:department_id].present?
+          @team = @team.where("department_id =?", params[:department_id])
+        else
+          @team
+        end
     
     if params[:employee_id]
       if @emp.id == params[:employee_id].to_i

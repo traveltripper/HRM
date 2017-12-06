@@ -55,7 +55,7 @@ class Employee < ActiveRecord::Base
       # row2 = {"password"=>"123456" , "password_confirmation"=>"123456"}
       # row3 =row1.merge(row2.to_hash)
       Employee.new(
-       :role_id => "1",
+       :role_id => 1,
        :ttid => row[0],
        :first_name => row[1],
        :last_name => row[2],
@@ -70,13 +70,13 @@ class Employee < ActiveRecord::Base
        :certificate_dob => row[11],
        :actual_dob => row[12],
        :nationality => row[13],
-       :manager_id => "nil",
-       :password => "123456" , 
-       :password_confirmation =>"123456").save     
+       :manager_id => nil ,
+       :password => 123456 , 
+       :password_confirmation => 123456).save     
       # Employee.create! row3
     end
   end
-  
+
   def active_for_authentication?
     super && self.checking_active # i.e. super && self.is_active
   end
