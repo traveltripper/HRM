@@ -30,7 +30,7 @@ class Employee < ActiveRecord::Base
 
   scope :ordered_by_first_name, -> { order(first_name: :asc) }
 
-  scope :active, -> { where(status: "Active") }
+  # scope :active, -> { where(status: "Active") }
 
   def fullname
   	first_name.to_s + " " + middle_name.to_s + " " + last_name.to_s
