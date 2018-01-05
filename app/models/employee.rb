@@ -70,6 +70,8 @@ class Employee < ActiveRecord::Base
        :certificate_dob => row[11],
        :actual_dob => row[12],
        :nationality => row[13],
+       :sick_leaves_available => row[14],
+       :casual_leaves_available => row[15],
        :manager_id => nil ,
        :password => 123456 , 
        :password_confirmation => 123456).save     

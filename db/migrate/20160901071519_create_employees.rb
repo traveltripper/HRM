@@ -52,6 +52,10 @@ class CreateEmployees < ActiveRecord::Migration
       t.string :previous_employer
       t.string :passport_no
       t.string :pancard_no
+      t.integer :sick_leaves_available
+      t.integer :casual_leaves_available
+      t.boolean :maternity_leaves
+      t.boolean :paternity_leaves
 
       t.timestamps null: false
     end
