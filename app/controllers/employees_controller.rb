@@ -92,6 +92,7 @@ class EmployeesController < ApplicationController
   def update_leave_used
     @employee = Employee.find(params[:employee_id])
     @employee.update_attributes(leave_used: params["employee"]["leave_used"], days_of_leave: params["employee"]["days_of_leave"], work_from_home_used: params["employee"]["work_from_home_used"]   )
+    @employee.update_attributes(sick_leaves_available: params["employee"]["sick_leaves_available"], casual_leaves_available: params["employee"]["casual_leaves_available"] )
     @employee.save
     redirect_to employees_path
     
@@ -106,8 +107,8 @@ class EmployeesController < ApplicationController
   def send_welcome_email
     @employee = Employee.find(params[:employee_id])
     @random_password = (0...10).map { ('a'..'z').to_a[rand(26)] }.join
-    # @employee.password = @random_password
-    # @employee.password_confirmation = @random_password
+    @employee.password = @random_password
+    @employee.password_confirmation = @random_password
     @employee.welcome_email_sent = true
     if @employee.save
       EmployeeMailer.welcome_email(@employee, @random_password).deliver_later

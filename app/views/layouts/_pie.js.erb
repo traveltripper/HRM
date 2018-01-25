@@ -36,13 +36,13 @@ FusionCharts.ready(function () {
                 "value": <%=current_employee.leave_used%>
             }, {
                 "label": "Leaves Available",
-                "value": <%=current_employee.days_of_leave - current_employee.leave_used%>
+                "value": <%=32 - current_employee.leave_used%>
             }, {
                 "label": "WFH Used",
                 "value": <%=current_employee.work_from_home_used%>
             }, {
                 "label": "WFH Available",
-                "value": <%=current_employee.days_of_leave - current_employee.work_from_home_used%>
+                "value": <%=32 - current_employee.work_from_home_used%>
             }]
         }
     });

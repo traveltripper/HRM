@@ -46,7 +46,7 @@ class CreateEmployees < ActiveRecord::Migration
       t.string :skype_id
       t.integer :leave_used, :default => 0
       t.integer :work_from_home_used, :default => 0
-      t.boolean :welcome_email_sent, :default: false
+      t.boolean :welcome_email_sent, :default => false
       t.boolean :password_changed
       t.integer :days_of_available_leave
       t.string :previous_employer
