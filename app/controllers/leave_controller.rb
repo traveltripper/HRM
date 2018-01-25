@@ -8,15 +8,15 @@ class LeaveController < ApplicationController
     @leave_from_date = 3.month.ago.beginning_of_month
     @leave_to_date = Time.now
     # Employee Leaves
-    @leave_used = @emp.leave_used
-    @available_leave = @emp.days_of_leave - @leave_used   
+    @leave_used = @emp.leave_used  
+    @available_leave = ( @emp.sick_leaves_available + @emp.casual_leaves_available ) - @leave_used
     @request_pending = @emp.leave.where("status IS ? and leave_cancel =? and work_from_home =?", nil, false, false).count
     @emp_leaves = @emp.leave.where(:created_at => @leave_from_date..@leave_to_date, work_from_home: false)       
     @leave_approved = @emp_leaves.status_true_or_false | @emp_leaves.where("status IS ? and leave_cancel =?", nil, true)
     @leave_waiting_for_approve = @emp_leaves.where(status: nil, leave_cancel:false).limit(15)
     # Employee Work From Home
     @work_from_home_used = @emp.work_from_home_used
-    @available_work_from_home = @emp.days_of_leave - @work_from_home_used
+    @available_work_from_home = 32 - @work_from_home_used
     @emp_work_from_home = @emp.leave.where(:created_at => @leave_from_date..@leave_to_date, work_from_home: true)    
     @work_from_home_approved = @emp_work_from_home.status_true_or_false | @emp_work_from_home.where("status IS ? and leave_cancel =?", nil, true)  
     @work_from_home_waiting_for_approve = @emp_work_from_home.where(status: nil, leave_cancel:false).limit(15)
@@ -42,21 +42,53 @@ class LeaveController < ApplicationController
     end
   end
 
-  def create    
+  def create 
     @emp = current_employee
-    @leave = current_employee.leave.new(leave_params)    
-    if @leave.save
-      @leave.work_from_home == false ? @type = "leave" : @type = "work from home"
-      flash[:success] = "You have applied #{@type} successfully and an e-mail will be sent to HR and Manager. Waiting for approval." 
-      redirect_to leave_index_path
-      LeaveMailer.employee_leave_request_email(@emp, @leave).deliver_later      
-      LeaveMailer.leave_request_email_to_hr(@emp, @leave).deliver_later
-      if @emp.manager 
-        LeaveMailer.team_leave_request_email(@emp, @leave).deliver_later
+    @leave = current_employee.leave.new(leave_params)
+    if @leave.work_from_home == false
+      current_leavetype = leave_params[:leavetype_id].to_i
+      limit = Leavetype.where(:id => current_leavetype).first.limit
+      leave_type_name = Leavetype.where(:id => current_leavetype).first.name
+      # @available_leaves = 0
+      if leave_type_name == "Sick"
+        @available_leaves = @emp.sick_leaves_available
+      elsif leave_type_name == "Casual/Privilege"
+        @available_leaves = @emp.casual_leaves_available
+      elsif leave_type_name == "Maternity"
+        @available_leaves = 0
+      elsif leave_type_name == "Paternity"
+         @available_leaves = 0
+      end 
+
+      if @available_leaves <= limit && @available_leaves > 0
+        if @leave.save
+          flash[:flash] = "You have applied #{leave_type_name} successfully and an e-mail will be sent to HR and Manager. Waiting for approval." 
+          redirect_to leave_index_path
+          LeaveMailer.employee_leave_request_email(@emp, @leave).deliver_later      
+          LeaveMailer.leave_request_email_to_hr(@emp, @leave).deliver_later
+          if @emp.manager 
+            LeaveMailer.team_leave_request_email(@emp, @leave).deliver_later
+          end
+        else
+          render 'edit'
+        end
+      else
+          flash[:error] ="the #{@leave_type_name} type exceeded limit, so apply another type of leave"
+          redirect_to leave_index_path
       end
     else
-      render 'edit'
-    end       
+      if @leave.save
+          flash[:flash] = "You have applied Work From Home successfully and an e-mail will be sent to HR and Manager. Waiting for approval." 
+          redirect_to leave_index_path
+          LeaveMailer.employee_leave_request_email(@emp, @leave).deliver_later      
+          LeaveMailer.leave_request_email_to_hr(@emp, @leave).deliver_later
+          if @emp.manager 
+            LeaveMailer.team_leave_request_email(@emp, @leave).deliver_later
+          end
+      else
+        render 'edit'
+      end
+    end  
   end
 
   def update
@@ -122,6 +154,9 @@ class LeaveController < ApplicationController
       leave_used = @emp.leave_used
       leave_used = leave_used - requested_leave_days
       @emp.update_attribute(:leave_used, leave_used)
+      sick_leaves_available = @emp.sick_leaves_available
+      sick_leaves_available = sick_leaves_available  + requested_leave_days
+      @emp.update_attribute(:sick_leaves_available, sick_leaves_available)
     else
       work_from_home_used = @emp.work_from_home_used
       work_from_home_used = work_from_home_used - requested_leave_days
@@ -177,9 +212,11 @@ class LeaveController < ApplicationController
     @requested_leave = @leave.no_of_days
     params[:leaveStatus] == "approve" ? status = true : status = false
     if @leave.work_from_home == false
-      @leave_used = @emp.leave_used      
-      status == true ? @leave_used = (@leave_used + @requested_leave) : @leave_used  
+      @leave_used = @emp.leave_used    
+      status == true ? @leave_used = (@leave_used + @requested_leave) : @leave_used
       @emp.update_attribute(:leave_used, @leave_used)
+      status == true ? @sick_leaves_available = (@sick_leaves_available - @requested_leave) : @sick_leaves_available 
+      @emp.update_attribute(:sick_leaves_available, @sick_leaves_available)
     else
       @work_from_home_used = @emp.work_from_home_used
       status == true ? @work_from_home_used = (@work_from_home_used + @requested_leave) : @work_from_home_used  
@@ -211,6 +248,9 @@ class LeaveController < ApplicationController
       @leave_used = @emp.leave_used
       @leave_used = (@leave_used + @requested_leave)
       @emp.update_attribute(:leave_used, @leave_used)
+      @sick_leaves_available = @emp.sick_leaves_available
+      @sick_leaves_available = (@sick_leaves_available - @requested_leave)
+      @emp.update_attribute(:sick_leaves_available, @sick_leaves_available)
     else
       @work_from_home_used = @emp.work_from_home_used
       @work_from_home_used = (@work_from_home_used + @requested_leave)
@@ -267,7 +307,7 @@ class LeaveController < ApplicationController
   def find_leave_type
     @leave.work_from_home == false ? @type = "leave" : @type = "work from home"
   end
-
+  
   def leave_params
       params.require(:leave).permit(:employee_id, :no_of_days, :status, :leavetype_id, :fromdate, :todate, :reason, :reject_reason, :work_from_home)
   end  
