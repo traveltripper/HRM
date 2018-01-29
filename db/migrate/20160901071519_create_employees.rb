@@ -52,10 +52,10 @@ class CreateEmployees < ActiveRecord::Migration
       t.string :previous_employer
       t.string :passport_no
       t.string :pancard_no
-      t.integer :sick_leaves_available
-      t.integer :casual_leaves_available
-      t.boolean :maternity_leaves
-      t.boolean :paternity_leaves
+      t.integer :sick_leaves_available, :default => 0
+      t.integer :casual_leaves_available, :default => 0
+      t.boolean :maternity_leave, :default => false
+      t.boolean :paternity_leaves, :default => false
 
       t.timestamps null: false
     end

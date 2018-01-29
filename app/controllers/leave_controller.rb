@@ -9,7 +9,7 @@ class LeaveController < ApplicationController
     @leave_to_date = Time.now
     # Employee Leaves
     @leave_used = @emp.leave_used  
-    @available_leave = ( @emp.sick_leaves_available + @emp.casual_leaves_available ) - @leave_used
+    @available_leave = 32 - @leave_used
     @request_pending = @emp.leave.where("status IS ? and leave_cancel =? and work_from_home =?", nil, false, false).count
     @emp_leaves = @emp.leave.where(:created_at => @leave_from_date..@leave_to_date, work_from_home: false)       
     @leave_approved = @emp_leaves.status_true_or_false | @emp_leaves.where("status IS ? and leave_cancel =?", nil, true)
@@ -154,9 +154,16 @@ class LeaveController < ApplicationController
       leave_used = @emp.leave_used
       leave_used = leave_used - requested_leave_days
       @emp.update_attribute(:leave_used, leave_used)
-      sick_leaves_available = @emp.sick_leaves_available
-      sick_leaves_available = sick_leaves_available  + requested_leave_days
-      @emp.update_attribute(:sick_leaves_available, sick_leaves_available)
+      if @leave.leavetype.name == "Sick"
+        sick_leaves_available = @emp.sick_leaves_available
+        sick_leaves_available = sick_leaves_available  + requested_leave_days
+        @emp.update_attribute(:sick_leaves_available, sick_leaves_available)
+      elsif @leave.leavetype.name == "Casual/Privilege"
+        casual_leaves_available = @emp.casual_leaves_available
+        casual_leaves_available = casual_leaves_available  + requested_leave_days
+        @emp.update_attribute(:casual_leaves_available, casual_leaves_available)
+      end
+      binding.pry
     else
       work_from_home_used = @emp.work_from_home_used
       work_from_home_used = work_from_home_used - requested_leave_days
@@ -215,8 +222,14 @@ class LeaveController < ApplicationController
       @leave_used = @emp.leave_used    
       status == true ? @leave_used = (@leave_used + @requested_leave) : @leave_used
       @emp.update_attribute(:leave_used, @leave_used)
-      status == true ? @sick_leaves_available = (@sick_leaves_available - @requested_leave) : @sick_leaves_available 
-      @emp.update_attribute(:sick_leaves_available, @sick_leaves_available)
+      if @leave.leavetype.name == "Sick"
+        status == true ? @sick_leaves_available = (@sick_leaves_available - @requested_leave) : @sick_leaves_available 
+        @emp.update_attribute(:sick_leaves_available, @sick_leaves_available)
+      elsif @leave.leavetype.name == "Casual/Privilege"
+        status == true ? @casual_leaves_available = (@casual_leaves_available - @requested_leave) : @casual_leaves_available 
+        @emp.update_attribute(:casual_leaves_available, @casual_leaves_available)
+      end
+      binding.pry
     else
       @work_from_home_used = @emp.work_from_home_used
       status == true ? @work_from_home_used = (@work_from_home_used + @requested_leave) : @work_from_home_used  
@@ -248,9 +261,16 @@ class LeaveController < ApplicationController
       @leave_used = @emp.leave_used
       @leave_used = (@leave_used + @requested_leave)
       @emp.update_attribute(:leave_used, @leave_used)
-      @sick_leaves_available = @emp.sick_leaves_available
-      @sick_leaves_available = (@sick_leaves_available - @requested_leave)
-      @emp.update_attribute(:sick_leaves_available, @sick_leaves_available)
+      if @leave.leavetype.name == "Sick"
+        @sick_leaves_available = @emp.sick_leaves_available
+        @sick_leaves_available = (@sick_leaves_available - @requested_leave)
+        @emp.update_attribute(:sick_leaves_available, @sick_leaves_available)
+      elsif @leave.leavetype.name == "Casual/Privilege"
+        @casual_leaves_available = @emp.casual_leaves_available
+        @casual_leaves_available = (@casual_leaves_available - @requested_leave)
+        @emp.update_attribute(:casual_leaves_available, @casual_leaves_available)
+      end
+      binding.pry
     else
       @work_from_home_used = @emp.work_from_home_used
       @work_from_home_used = (@work_from_home_used + @requested_leave)

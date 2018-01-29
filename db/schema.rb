@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171212061311) do
+ActiveRecord::Schema.define(version: 20161221062006) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -49,14 +49,12 @@ ActiveRecord::Schema.define(version: 20171212061311) do
   create_table "announcements", force: :cascade do |t|
     t.string   "title",       limit: 255
     t.text     "message",     limit: 65535
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
     t.integer  "employee_id", limit: 4
     t.string   "slug",        limit: 255
     t.boolean  "active",                    default: true
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
-
-  add_index "announcements", ["slug"], name: "index_announcements_on_slug", unique: true, using: :btree
 
   create_table "conference_rooms", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -67,9 +65,9 @@ ActiveRecord::Schema.define(version: 20171212061311) do
 
   create_table "cpps", force: :cascade do |t|
     t.text     "description", limit: 65535
+    t.string   "designation", limit: 255
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
-    t.string   "designation", limit: 255
   end
 
   create_table "departments", force: :cascade do |t|
@@ -83,18 +81,6 @@ ActiveRecord::Schema.define(version: 20171212061311) do
     t.string   "last_name",                     limit: 255
     t.integer  "manager_id",                    limit: 4
     t.integer  "role_id",                       limit: 4
-    t.datetime "created_at",                                                  null: false
-    t.datetime "updated_at",                                                  null: false
-    t.string   "email",                         limit: 255,   default: "",    null: false
-    t.string   "encrypted_password",            limit: 255,   default: "",    null: false
-    t.string   "reset_password_token",          limit: 255
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                 limit: 4,     default: 0,     null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",            limit: 255
-    t.string   "last_sign_in_ip",               limit: 255
     t.string   "phone",                         limit: 255
     t.string   "middle_name",                   limit: 255
     t.string   "ttid",                          limit: 255
@@ -104,14 +90,12 @@ ActiveRecord::Schema.define(version: 20171212061311) do
     t.datetime "certificate_dob"
     t.string   "emergency_name",                limit: 255
     t.string   "emergency_contact_no",          limit: 255
-    t.datetime "doj"
     t.integer  "prev_years_of_exp",             limit: 4
+    t.datetime "doj"
     t.string   "pg",                            limit: 255
     t.string   "graduation",                    limit: 255
     t.text     "address",                       limit: 65535
     t.string   "source_of_hire",                limit: 255
-    t.string   "pancard_no",                    limit: 255
-    t.string   "passport_no",                   limit: 255
     t.integer  "department_id",                 limit: 4
     t.string   "status",                        limit: 255
     t.datetime "lwd"
@@ -129,20 +113,39 @@ ActiveRecord::Schema.define(version: 20171212061311) do
     t.text     "current_address",               limit: 65535
     t.string   "father_or_spouse",              limit: 255
     t.string   "health_insurance_card_no",      limit: 255
+    t.datetime "date_of_joining"
+    t.integer  "days_of_leave",                 limit: 4
+    t.boolean  "password_changed"
+    t.string   "no_of_health_ins_cards_issued", limit: 255
+    t.text     "about_me",                      limit: 65535
+    t.string   "designation",                   limit: 255
+    t.string   "skype_id",                      limit: 255
+    t.integer  "leave_used",                    limit: 4,     default: 0
+    t.integer  "work_from_home_used",           limit: 4,     default: 0
+    t.boolean  "welcome_email_sent",                          default: false
+    t.integer  "days_of_available_leave",       limit: 4
+    t.string   "passport_no",                   limit: 255
+    t.string   "pancard_no",                    limit: 255
+    t.integer  "sick_leaves_available",         limit: 4,     default: 0
+    t.integer  "casual_leaves_available",       limit: 4,     default: 0
+    t.boolean  "maternity_leave",                             default: false
+    t.boolean  "paternity_leaves",                            default: false
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
+    t.string   "email",                         limit: 255,   default: "",    null: false
+    t.string   "encrypted_password",            limit: 255,   default: "",    null: false
+    t.string   "reset_password_token",          limit: 255
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",                 limit: 4,     default: 0,     null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip",            limit: 255
+    t.string   "last_sign_in_ip",               limit: 255
     t.string   "profile_picture_file_name",     limit: 255
     t.string   "profile_picture_content_type",  limit: 255
     t.integer  "profile_picture_file_size",     limit: 4
     t.datetime "profile_picture_updated_at"
-    t.datetime "date_of_joining"
-    t.integer  "days_of_leave",                 limit: 4
-    t.integer  "leave_used",                    limit: 4,     default: 0
-    t.string   "skype_id",                      limit: 255
-    t.string   "designation",                   limit: 255
-    t.text     "about_me",                      limit: 65535
-    t.string   "no_of_health_ins_cards_issued", limit: 255
-    t.boolean  "password_changed"
-    t.boolean  "welcome_email_sent",                          default: false
-    t.integer  "work_from_home_used",           limit: 4,     default: 0
   end
 
   add_index "employees", ["email"], name: "index_employees_on_email", unique: true, using: :btree
@@ -152,19 +155,17 @@ ActiveRecord::Schema.define(version: 20171212061311) do
     t.string   "title",                limit: 255
     t.datetime "start"
     t.datetime "end_date"
+    t.text     "reason",               limit: 65535
+    t.integer  "employee_id",          limit: 4
+    t.boolean  "publish",                            default: true
+    t.string   "slug",                 limit: 255
     t.datetime "created_at",                                        null: false
     t.datetime "updated_at",                                        null: false
-    t.text     "reason",               limit: 65535
     t.string   "picture_file_name",    limit: 255
     t.string   "picture_content_type", limit: 255
     t.integer  "picture_file_size",    limit: 4
     t.datetime "picture_updated_at"
-    t.integer  "employee_id",          limit: 4
-    t.boolean  "publish",                            default: true
-    t.string   "slug",                 limit: 255
   end
-
-  add_index "events", ["slug"], name: "index_events_on_slug", unique: true, using: :btree
 
   create_table "healthinsurances", force: :cascade do |t|
     t.string   "name",              limit: 255
@@ -186,19 +187,19 @@ ActiveRecord::Schema.define(version: 20171212061311) do
     t.boolean  "status"
     t.integer  "no_of_days",     limit: 4
     t.integer  "leavetype_id",   limit: 4
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
     t.integer  "leave_balance",  limit: 4
     t.text     "reject_reason",  limit: 65535
     t.boolean  "leave_cancel",                 default: false
     t.boolean  "work_from_home",               default: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
   end
 
   create_table "leavetypes", force: :cascade do |t|
     t.string   "name",       limit: 255
-    t.integer  "limit",      limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "limit",      limit: 4,   default: 0
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   create_table "nominations", force: :cascade do |t|
@@ -235,9 +236,9 @@ ActiveRecord::Schema.define(version: 20171212061311) do
   create_table "polls", force: :cascade do |t|
     t.integer  "employee_id",     limit: 4
     t.integer  "pollanswer_id",   limit: 4
+    t.integer  "pollquestion_id", limit: 4
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
-    t.integer  "pollquestion_id", limit: 4
   end
 
   create_table "roles", force: :cascade do |t|
