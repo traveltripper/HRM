@@ -163,7 +163,6 @@ class LeaveController < ApplicationController
         casual_leaves_available = casual_leaves_available  + requested_leave_days
         @emp.update_attribute(:casual_leaves_available, casual_leaves_available)
       end
-      binding.pry
     else
       work_from_home_used = @emp.work_from_home_used
       work_from_home_used = work_from_home_used - requested_leave_days
@@ -229,7 +228,6 @@ class LeaveController < ApplicationController
         status == true ? @casual_leaves_available = (@casual_leaves_available - @requested_leave) : @casual_leaves_available 
         @emp.update_attribute(:casual_leaves_available, @casual_leaves_available)
       end
-      binding.pry
     else
       @work_from_home_used = @emp.work_from_home_used
       status == true ? @work_from_home_used = (@work_from_home_used + @requested_leave) : @work_from_home_used  
@@ -270,7 +268,6 @@ class LeaveController < ApplicationController
         @casual_leaves_available = (@casual_leaves_available - @requested_leave)
         @emp.update_attribute(:casual_leaves_available, @casual_leaves_available)
       end
-      binding.pry
     else
       @work_from_home_used = @emp.work_from_home_used
       @work_from_home_used = (@work_from_home_used + @requested_leave)
