@@ -27,6 +27,7 @@
                 <%=link_to announcement.title, announcement%>
               </span>
               <br /><%=truncate(announcement.message, :length => 250, escape: false).html_safe%><%= link_to "Read More", announcement %>
+              <%=image_tag announcement.image.url(:medium), class:'hrm_announcement_images'%>
             </td>
             <% if can? :edit, @announcement %>            
             <td><%= link_to '', edit_announcement_path(announcement), remote:true, :class=>"fa fa-pencil-square-o btn " %></td>

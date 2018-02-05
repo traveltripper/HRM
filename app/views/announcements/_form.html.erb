@@ -11,10 +11,12 @@
                     <%= f.text_field :title, class:"form-control", required: true%><br/>
                     <%=f.label :message%><br/>
                     <%= f.text_area :message, class:"form-control tinymce", size: "30x10", require:true %>
-                    <br/>                    
+                    <br/>      
+                    <%=f.label :image, "Select Picture"%>
+                    <%=f.file_field :image %>  
+                    <br/>              
                     <%=f.label :active, "Status"%>
-                    <%= f.select :active, [['active', 1], ['inactive', 0]], {}, class: "form-control" %>
-                
+                    <%= f.select :active, [['active', 1], ['inactive', 0]], {}, class: "form-control" %>          
                 </div>
                 
                 <div class="form-submit-buttons">                   

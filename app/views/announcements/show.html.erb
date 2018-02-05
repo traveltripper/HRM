@@ -26,6 +26,7 @@
 							<%=link_to announcement.title, announcement%>
 						</span>
 						<br /><%=truncate(announcement.message, :length => 250, escape: false).html_safe%><%= link_to "..Read More", announcement %>
+						<%=image_tag announcement.image.url(:medium), class:'hrm_announcement_images'%>
 					</td>
 				</tr>
 			<%end%>		

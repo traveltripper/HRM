@@ -14,7 +14,11 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	        <ul class="nav navbar-nav navbar-right">
 				<!-- <li><a  href="#" class="notification"><span class="badge">19</span></a></li> -->
-            	<li><a class="userName" href="/employees">Hi <%=current_employee.first_name.capitalize%></a></li>
+				<%if current_employee.role.name.in?(["HR", "Admin"])%>
+            		<li><a class="userName" href="/employees">Hi <%=current_employee.first_name.capitalize%></a></li>
+            	<%else%>
+            		<li><a class="userName">Hi <%=current_employee.first_name.capitalize%></a></li>
+            	<%end%>
             	<li><a  href="/password/edit" class="support">Change Password</a></li>
 				<li><a  href="/logout" class="logout">Logout</a></li>
 	        </ul>

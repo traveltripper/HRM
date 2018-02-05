@@ -58,6 +58,8 @@ class LeaveController < ApplicationController
         @available_leaves = 0
       elsif leave_type_name == "Paternity"
          @available_leaves = 0
+      elsif leave_type_name == "Bereavement"
+         @available_leaves = 2
       end 
 
       if @available_leaves <= limit && @available_leaves > 0
