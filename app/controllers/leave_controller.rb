@@ -16,7 +16,7 @@ class LeaveController < ApplicationController
     @leave_waiting_for_approve = @emp_leaves.where(status: nil, leave_cancel:false).limit(15)
     # Employee Work From Home
     @work_from_home_used = @emp.work_from_home_used
-    @available_work_from_home = 32 - @work_from_home_used
+    # @available_work_from_home = 32 - @work_from_home_used
     @emp_work_from_home = @emp.leave.where(:created_at => @leave_from_date..@leave_to_date, work_from_home: true)    
     @work_from_home_approved = @emp_work_from_home.status_true_or_false | @emp_work_from_home.where("status IS ? and leave_cancel =?", nil, true)  
     @work_from_home_waiting_for_approve = @emp_work_from_home.where(status: nil, leave_cancel:false).limit(15)
