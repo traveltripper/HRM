@@ -49,7 +49,7 @@ class LeaveController < ApplicationController
       current_leavetype = leave_params[:leavetype_id].to_i
       limit = Leavetype.where(:id => current_leavetype).first.limit
       leave_type_name = Leavetype.where(:id => current_leavetype).first.name
-      # @available_leaves = 0
+      @requested_leave = @leave.no_of_days
       if leave_type_name == "Sick"
         @available_leaves = @emp.sick_leaves_available
       elsif leave_type_name == "Casual/Privilege"
@@ -61,8 +61,8 @@ class LeaveController < ApplicationController
       elsif leave_type_name == "Bereavement"
          @available_leaves = 2
       end 
-
-      if @available_leaves <= limit && @available_leaves > 0
+    if @requested_leave <= @available_leaves 
+      if @available_leaves <= limit
         if @leave.save
           flash[:flash] = "You have applied #{leave_type_name} successfully and an e-mail will be sent to HR and Manager. Waiting for approval." 
           redirect_to leave_index_path
@@ -78,6 +78,10 @@ class LeaveController < ApplicationController
           flash[:error] ="the #{@leave_type_name} type exceeded limit, so apply another type of leave"
           redirect_to leave_index_path
       end
+    else
+          flash[:error] ="the available leave type exceeded limit, so apply another type of leave"
+          redirect_to leave_index_path
+    end
     else
       if @leave.save
           flash[:flash] = "You have applied Work From Home successfully and an e-mail will be sent to HR and Manager. Waiting for approval." 
