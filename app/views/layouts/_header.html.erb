@@ -16,6 +16,9 @@
 				<!-- <li><a  href="#" class="notification"><span class="badge">19</span></a></li> -->
 				<%if current_employee.role.name.in?(["HR", "Admin"])%>
             		<li><a class="userName" href="/employees">Hi <%=current_employee.first_name.capitalize%></a></li>
+            		<%if current_employee.role.name.in?(["HR"])%>
+	            		<li><a class="userName" href="/dashboard1">Dashboard</a></li>
+	            	<%end%>
             	<%else%>
             		<li><a class="userName">Hi <%=current_employee.first_name.capitalize%></a></li>
             	<%end%>

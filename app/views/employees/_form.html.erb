@@ -135,11 +135,11 @@
       </div>
     </div>
     <div class="col-md-4">
-      <div class="form-group">
-        <%= f.label :about_me, 'About Me' %><br>
-        <%= f.text_area :about_me, :class=>"form-control" %>
-      </div>
-    </div>    
+       <div class="form-group">
+        <%= f.label :date_of_joining, 'Date of Joining' %><br>
+        <%= f.text_field :date_of_joining, :id=> "datepicker1", :class=>"form-control datepicker", required: true %>
+       </div>
+    </div>
   </div>
 
   <div class="row">
@@ -156,11 +156,11 @@
      </div>
     </div>
     <div class="col-md-4">
-       <div class="form-group">
-        <%= f.label :date_of_joining, 'Date of Joining' %><br>
-        <%= f.text_field :date_of_joining, :class=>"form-control datepicker", required: true %>
-       </div>
-    </div>
+      <div class="form-group">
+        <%= f.label :leave_count, 'Leaves Count' %><br>
+        <%=f.text_field :leave_count, :class=>"form-control dt2"%>
+      </div>
+    </div>    
   </div>
 
   <div class="row">
@@ -328,12 +328,21 @@
         </div>
     </div>
     <div class="col-md-4">
-        <div class="form-group">
-          <%= f.label :profile_picture %><br>
-          <%= f.file_field :profile_picture, :class=>"btn btn-primary" %>
-        </div>
-    </div>     
+      <div class="form-group">
+        <%= f.label :about_me, 'About Me' %><br>
+        <%= f.text_area :about_me, :class=>"form-control" %>
+      </div>
+    </div>   
   </div>      
+
+  <div class="row">  
+    <div class="col-md-4">
+          <div class="form-group">
+            <%= f.label :profile_picture %><br>
+            <%= f.file_field :profile_picture, :class=>"btn btn-primary" %>
+          </div>
+      </div> 
+    </div>
 
   <div class="row">          
     <% if f.object.new_record?%>
@@ -361,6 +370,26 @@
   </div>
 </div>
 
-
-
+<script>
+$(document).ready(function(){
+    $( "#datepicker1" ).datepicker();
+    $("#datepicker1").on("change",function(){
+        var startdate = $(this).datepicker('getDate'),
+            day  = startdate.getDate(),  
+            month = startdate.getMonth()+1,              
+            year =  startdate.getFullYear();
+        var enddate = new Date("March 31, 2019");
+        var months = ((enddate.getMonth()+1) - month) + (12 * (enddate.getFullYear() - year));
+        var count = months * 2;
+        if (day <= 15) {
+            count+=1;
+            $(".dt2").val(count);
+        } else{
+            count+=2;
+            $(".dt2").val(count);
+        } 
+    });
+});
+</script>
+ 
 

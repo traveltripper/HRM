@@ -1,0 +1,111 @@
+<%if current_employee.role.name.in?(["HR"])%>
+	<div class="col-md-12">
+    <h4>Today's Employees Leave List</h4>
+    <%= form_tag indexhr_path, :method => 'get' do %>
+      <div class="row">                        
+            <div class="col-md-5">
+                <div class="form-group">
+                <%= label_tag :fromdate%>
+                <%= text_field_tag :fromdate, params[:fromdate], class: 'form-control form-height40 datepicker', :id=>"datepicker", :required=>true%>
+                
+                </div> 
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                <%= label_tag :todate%>                           
+                <%= text_field_tag :todate, params[:todate], class: 'form-control form-height40 datepicker', :id=>"datepicker1", :required=>true%>
+               
+                </div> 
+            </div> 
+           <div class="col-md-2">
+              <div class="form-submit-buttons">
+            <%= submit_tag "submit", :class=>"btn btn-primary form-control form-height40"%>
+        </div> 
+      </div>               
+        </div>    
+    <%end%> 
+		<div class="col-md-12 nullPadding bg-color-white myteam">    
+		    <ul> 
+				  <table class="table table-hover-color table-white-background table-bordered table-color", id="my-table">
+				    <thead>
+				    	<h4>Employees leave Today</h4>
+				      <tr>
+				        <th>S.No</th>
+				        <th>Emp. Name</th>
+				        <th>Department</th>      
+				        <th>Leave Type</th>
+				        <th>From Date</th>
+				        <th>To Date</th>
+				        <th>Days</th>
+				        <th>Actions</th>
+				      </tr>
+				    </thead>
+				   	<tbody>
+				    <% @emp_leaves_approved_recently.each_with_index do |leave, index| %>
+				      <tr>
+				        <td><%= index+1 %></td>
+				        <td><%=link_to leave.employee.fullname, team_path(:params => { :employee_id => leave.employee.id })%></td>
+				        <td><%=@emp.department.name%></td>
+				        <td><%=leave.leavetype.name%></td>
+				        <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
+				        <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
+				        <td><%=leave.no_of_days%></td>
+				        <td><%=link_to 'View Details', leave, :style=>"font-weight:600;"%></td>         
+				      </tr>
+				    <% end %>
+				  </tbody>
+				  </table>
+				  <p align="right">
+					Download:
+					<%= link_to "CSV", export_leaves_path(format: "csv") %> |
+					<%= link_to "Excel", export_leaves_path(format: "xls") %>
+				  </p>
+
+				  <table class="table table-hover-color table-white-background table-bordered table-color", id="my-table1">
+				    <thead>
+				    	<h4>Employees WFH Today</h4>
+				      <tr>
+				        <th>S.No</th>
+				        <th>Emp. Name</th>
+				        <th>Department</th>  
+				        <th>From Date</th>
+				        <th>To Date</th>
+				        <th>Days</th>
+				        <th>Actions</th>
+				      </tr>
+				    </thead>
+				   	<tbody>
+				    <% @emp_wfh_approved_recently.each_with_index do |leave, index| %>
+				      <tr>
+				        <td><%= index+1 %></td>
+				        <td><%=link_to leave.employee.fullname, team_path(:params => { :employee_id => leave.employee.id })%></td>
+				        <td><%=@emp.department.name%></td>
+				        <td><%=leave.fromdate.strftime('%d-%b-%Y')%></td>
+				        <td><%=leave.todate.strftime('%d-%b-%Y')%></td>
+				        <td><%=leave.no_of_days%></td>
+				        <td><%=link_to 'View Details', leave, :style=>"font-weight:600;"%></td>         
+				      </tr>
+				    <% end %>
+				  </tbody>
+				  </table>
+				  <p align="right">
+					Download:
+					<%= link_to "CSV", employees_path(format: "csv") %> |
+					<%= link_to "Excel", employees_path(format: "xls") %>
+				  </p>
+		    </ul>	    
+		</div>
+<% end %>
+<script>
+$(document).ready(function(){
+	$( "#datepicker" ).datepicker();
+	$("#datepicker").on("change",function(){
+	    var selected = $(this).val();
+	});
+	$( "#datepicker1" ).datepicker();
+	$("#datepicker1").on("change",function(){
+	    var selected = $(this).val();
+	});
+});
+</script>
+

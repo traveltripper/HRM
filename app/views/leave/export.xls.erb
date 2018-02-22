@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">S.No</Data></Cell>
+        <Cell><Data ss:Type="String">Emp. Name</Data></Cell>
+        <Cell><Data ss:Type="String">Department</Data></Cell>
+        <Cell><Data ss:Type="String">Leave Type</Data></Cell>
+        <Cell><Data ss:Type="String">From Date</Data></Cell>
+        <Cell><Data ss:Type="String">To Date</Data></Cell>
+        <Cell><Data ss:Type="String">Days</Data></Cell>
+      </Row>
+    <% @leaves.each do |leave| %>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= leave.id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= leave.employee.fullname %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= leave.employee.fullname %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= leave.leavetype_id %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= leave.fromdate.strftime('%d-%b-%Y') %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= leave.todate.strftime('%d-%b-%Y') %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= leave.no_of_days %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

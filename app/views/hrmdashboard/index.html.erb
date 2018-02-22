@@ -1,20 +1,19 @@
-<div class="col-md-7">
-	<h4>My Team</h4>
-	<div class="col-md-12 nullPadding bg-color-white myteam">    
-	    <ul> 
-	    	<% @team.each_with_index do |emp, index| %>
-	    		<li class="viewteam">
-	    		<%= link_to team_path(:params => { :employee_id => emp.id }) do %>		    
-				    			    
-					    <%=image_tag emp.profile_picture.url(:thumb), class:'img-circle'%>
-					    <h6><%= emp.fullname  %></h6>
-					    <p><%= emp.designation  %></p>				    
-			    <%end%>
-			    </li>
-		    <%end%>	    
-	    </ul>	    
-	</div>
-
+ <div class="col-md-7">
+		<h4>My Team</h4>
+		<div class="col-md-12 nullPadding bg-color-white myteam">    
+		    <ul> 
+		    	<% @team.each_with_index do |emp, index| %>
+		    		<li class="viewteam">
+		    		<%= link_to team_path(:params => { :employee_id => emp.id }) do %>		    
+					    			    
+						    <%=image_tag emp.profile_picture.url(:thumb), class:'img-circle'%>
+						    <h6><%= emp.fullname  %></h6>
+						    <p><%= emp.designation  %></p>				    
+				    <%end%>
+				    </li>
+			    <%end%>	    
+		    </ul>	    
+		</div>
 </div>
 
 <div class="col-md-5">
@@ -47,7 +46,6 @@
 	    </div>
 	</div>
 </div>
-
 <div class="col-md-12">
 	<h4>Announcements</h4>
     <div class="Announcements bg-color-white">
@@ -71,8 +69,3 @@
 		</table>
     </div>
 </div>
-
-
-
-
-

@@ -75,8 +75,11 @@ Rails.application.routes.draw do
       #get 'team'   
     end
   end
+
+  get '/export_leaves' => 'leave#export'
   
   get '/dashboard' => 'hrmdashboard#index'
+  get '/dashboard1' => 'hrmdashboard#indexhr'
 
   #get 'profile' => 'employees#profile'
   get '/profile' => 'hrmdashboard#profile'
@@ -85,6 +88,7 @@ Rails.application.routes.draw do
 
   #get '/team' => 'employees#team'
   get '/team' => 'hrmdashboard#team'
+  get '/indexhr' => 'hrmdashboard#indexhr'
   get '/team_leave' => 'leave#leave_applied_by_team'
   get '/employees_leave' => 'leave#leave_applied_by_employees'  
   get '/birthdays' => 'employees#birthdays'

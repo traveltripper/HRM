@@ -9,7 +9,7 @@ class LeaveController < ApplicationController
     @leave_to_date = Time.now
     # Employee Leaves
     @leave_used = @emp.leave_used  
-    @available_leave = 32 - @leave_used
+    @available_leave = @emp.leave_count - @leave_used
     @request_pending = @emp.leave.where("status IS ? and leave_cancel =? and work_from_home =?", nil, false, false).count
     @emp_leaves = @emp.leave.where(:created_at => @leave_from_date..@leave_to_date, work_from_home: false)       
     @leave_approved = @emp_leaves.status_true_or_false | @emp_leaves.where("status IS ? and leave_cancel =?", nil, true)
@@ -318,6 +318,15 @@ class LeaveController < ApplicationController
     #@leave = Leave.find(params[:id])
     unless (([@leave.employee , @leave.employee.manager].include? current_employee) || current_employee.role.name.in?(['HR', 'Admin']))
       redirect_to root_path
+    end
+  end
+
+  def export
+    @leaves = Leave.all
+    respond_to do |format|
+      format.html
+      format.csv { send_data @leaves.to_csv }
+      format.xls # { send_data @products.to_csv(col_sep: "\t") }
     end
   end
   
