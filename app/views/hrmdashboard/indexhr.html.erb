@@ -3,27 +3,26 @@
     <h4>Today's Employees Leave List</h4>
     <%= form_tag indexhr_path, :method => 'get' do %>
       <div class="row">                        
-            <div class="col-md-5">
+            <div class="col-md-3">
                 <div class="form-group">
                 <%= label_tag :fromdate%>
-                <%= text_field_tag :fromdate, params[:fromdate], class: 'form-control form-height40 datepicker', :id=>"datepicker", :required=>true%>
-                
+                <%= text_field_tag :fromdate, params[:fromdate], class: 'form-control form-height20 datepicker', :id=>"datepicker", :required=>true%>
                 </div> 
             </div>
-            <div class="col-md-5">
+            <div class="col-md-3">
                 <div class="form-group">
                 <%= label_tag :todate%>                           
-                <%= text_field_tag :todate, params[:todate], class: 'form-control form-height40 datepicker', :id=>"datepicker1", :required=>true%>
-               
+                <%= text_field_tag :todate, params[:todate], class: 'form-control form-height20 datepicker', :id=>"datepicker1", :required=>true%>
                 </div> 
             </div> 
-           <div class="col-md-2">
+            <div class="col-md-2 pull-right">
               <div class="form-submit-buttons">
-            <%= submit_tag "submit", :class=>"btn btn-primary form-control form-height40"%>
-        </div> 
-      </div>               
-        </div>    
+            	<%= submit_tag "go!", class: "btn1-primary form-control form-height20"%>
+        	  </div> 
+      		</div>               
+      </div>    
     <%end%> 
+   	</div>
 		<div class="col-md-12 nullPadding bg-color-white myteam">    
 		    <ul> 
 				  <table class="table table-hover-color table-white-background table-bordered table-color", id="my-table">
@@ -88,11 +87,6 @@
 				    <% end %>
 				  </tbody>
 				  </table>
-				  <p align="right">
-					Download:
-					<%= link_to "CSV", employees_path(format: "csv") %> |
-					<%= link_to "Excel", employees_path(format: "xls") %>
-				  </p>
 		    </ul>	    
 		</div>
 <% end %>

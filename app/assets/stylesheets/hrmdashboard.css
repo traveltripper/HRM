@@ -163,7 +163,18 @@ h4{
 	font:14px;
 	}
 	
-	
+	.btn1-primary{
+	color:#FFF;
+	width: 60px;
+	height: 33px;
+	margin-top: 24px;
+	margin-left: 34px;
+    background-color: #0092b3;
+    border: 1px solid #0092b3;
+	padding:5px 5px;
+	font-weight:400;
+	font:14px;
+	}
 	
 	
 	/*Myteam*/
@@ -635,6 +646,17 @@ i.fa{
 .import_employees{
 	float: left;
 }
+
+.import_attendances input[type=file] {
+    display: inline;
+    width: 200px;
+}
+
+.import_attendances{
+	float: left;
+}
+
+
 
 .form-top-bottom-padding{
 	padding-bottom: 15px;
